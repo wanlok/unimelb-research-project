@@ -12,10 +12,27 @@ def get_json(url_string, is_array=True):
         response = urlopen(request)
         # response.info()["X-RateLimit-Remaining"]
         json_response = json.loads(response.read())
-    except HTTPError as err:
-        print(f'error: {err.reason}')
+    except HTTPError as error:
+        print(f'error: {error.reason}')
         json_response = {} if is_array else []
     return json_response
+
+
+def directory(name, repository_name, files, writer):
+    if name in files:
+        contents = get_json(f'https://api.github.com/repos/{repository_name}/contents/{name}')
+        write(repository_name, list(map(lambda j: j['name'], contents)), writer, name)
+
+
+def write(repository_name, files, writer, path=None):
+    if len(files) > 0:
+        try:
+            if path is None:
+                writer.writerow([repository_name, '', files])
+            else:
+                writer.writerow([repository_name, path, files])
+        except UnicodeEncodeError as error:
+            print(f'error: {error.reason}')
 
 
 if __name__ == '__main__':
@@ -43,7 +60,10 @@ if __name__ == '__main__':
     print(f'new - old: {len(repository_names)}')
     for repository_name in repository_names:
         contents = get_json(f'https://api.github.com/repos/{repository_name}/contents')
-        file_names = list(map(lambda j: j['name'], contents))
-        if len(file_names) > 0:
-            writer.writerow([repository_name, file_names])
+        files = list(map(lambda j: j['name'], contents))
+        write(repository_name, files, writer)
+        directory('doc', repository_name, files, writer)
+        directory('docs', repository_name, files, writer)
+        directory('.github', repository_name, files, writer)
+
 
