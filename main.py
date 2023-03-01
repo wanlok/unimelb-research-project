@@ -5,6 +5,14 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 
+def read_csv_file(file_path, column):
+    reader = csv.reader(open(csv_file_path), delimiter=',')
+    s = set()
+    for row in reader:
+        s.add(row[column])
+    return s
+
+
 def get_json(url_string, is_array=True):
     request = Request(url_string)
     try:
@@ -35,19 +43,16 @@ def write(repository_name, files, writer, path=None):
             print(f'error: {error.reason}')
 
 
+# https://api.github.com/repositories?since=178709752
+# https://api.github.com/users/wanlok/repos
+# https://api.github.com/repos/wanlok/chatbot-web
+# https://api.github.com/repos/wanlok/chatbot-web/contents
+
+
 if __name__ == '__main__':
-    # https://api.github.com/repositories?since=178709752
-    # https://api.github.com/users/wanlok/repos
-    # https://api.github.com/repos/wanlok/chatbot-web
-    # https://api.github.com/repos/wanlok/chatbot-web/contents
     csv_file_path = 'C:\\Files\\Projects\\unimelb-research-project\\repositories.csv'
-    read_file = open(csv_file_path)
-    reader = csv.reader(read_file, delimiter=',')
-    old_repository_names = set()
-    for row in reader:
-        old_repository_names.add(row[0])
-    write_file = open(csv_file_path, 'a', newline='')
-    writer = csv.writer(write_file)
+    old_repository_names = read_csv_file(csv_file_path, 0)
+    writer = csv.writer(open(csv_file_path, 'a', newline=''))
     if len(old_repository_names) == 0:
         writer.writerow(['Name', 'Files'])
     since = random.randint(320000000, 330000000)
@@ -65,5 +70,3 @@ if __name__ == '__main__':
         directory('doc', repository_name, files, writer)
         directory('docs', repository_name, files, writer)
         directory('.github', repository_name, files, writer)
-
-
