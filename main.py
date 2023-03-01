@@ -10,13 +10,12 @@ def get_json(url_string, is_array=True):
     try:
         print(f'url: {url_string}')
         response = urlopen(request)
-        rate_limit_remaining = response.info()["X-RateLimit-Remaining"]
+        # response.info()["X-RateLimit-Remaining"]
         json_response = json.loads(response.read())
     except HTTPError as err:
         print(f'error: {err.reason}')
-        rate_limit_remaining = 1
         json_response = {} if is_array else []
-    return rate_limit_remaining, json_response
+    return json_response
 
 
 if __name__ == '__main__':
@@ -36,17 +35,15 @@ if __name__ == '__main__':
         writer.writerow(['Name', 'Files'])
     since = random.randint(320000000, 330000000)
     print(f'since: {since}')
-    _, repositories = get_json(f'https://api.github.com/repositories?since={since}')
+    repositories = get_json(f'https://api.github.com/repositories?since={since}')
     new_repository_names = set(map(lambda j: j['full_name'], repositories))
     repository_names = new_repository_names - old_repository_names
     print(f'new: {len(new_repository_names)}')
     print(f'old: {len(old_repository_names)}')
     print(f'new - old: {len(repository_names)}')
     for repository_name in repository_names:
-        count, contents = get_json(f'https://api.github.com/repos/{repository_name}/contents')
+        contents = get_json(f'https://api.github.com/repos/{repository_name}/contents')
         file_names = list(map(lambda j: j['name'], contents))
         if len(file_names) > 0:
             writer.writerow([repository_name, file_names])
-        if count == 0:
-            break
 
