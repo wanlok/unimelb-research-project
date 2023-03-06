@@ -13,19 +13,6 @@ def read_csv_file(file_path, column):
     return s
 
 
-def get_json(url_string, is_array=True):
-    request = Request(url_string)
-    try:
-        print(f'url: {url_string}')
-        response = urlopen(request)
-        # response.info()["X-RateLimit-Remaining"]
-        json_response = json.loads(response.read())
-    except HTTPError as error:
-        print(f'error: {error.reason}')
-        json_response = {} if is_array else []
-    return json_response
-
-
 def directory(name, repository_name, files, writer):
     if name in files:
         contents = get_json(f'https://api.github.com/repos/{repository_name}/contents/{name}')

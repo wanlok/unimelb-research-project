@@ -1,0 +1,9 @@
+repo,url
+dec0dOS/amazing-github-template,https://github.com/dec0dOS/amazing-github-template/blob/689d4df2e0948b11150e648732906c9026044f78/%7B%7Bcookiecutter.repo_slug%7D%7D/docs/SECURITY.md
+google/oss-vulnerability-guide,https://github.com/google/oss-vulnerability-guide/blob/59271d24f0130730d8cf53b459311ed5278cede7/templates/security_policies/github_security_policy.md
+microsoft/repo-templates,https://github.com/microsoft/repo-templates/blob/3fc245352990aa9cdec901aa7e2e4793d1eb6bf2/SECURITY.md
+microsoft/repo-templates,https://github.com/microsoft/repo-templates/blob/57e76e9013b68fe8c90c0efc87708d903469d164/projections/dnfmit/SECURITY.md
+microsoft/repo-templates,https://github.com/microsoft/repo-templates/blob/57e76e9013b68fe8c90c0efc87708d903469d164/shared/SECURITY.md
+zawzawaung-prog/security.md,https://github.com/zawzawaung-prog/security.md/blob/5b8c861d44bccef3cbfca17291b72affe51cdd9f/security.md
+zawzawaung-prog/security.md,https://github.com/zawzawaung-prog/security.md/blob/dce5996a172523dddc1994b3ba8a9e0d8f15539d/SECURITY.md
+botasylum/SECURITY.md,https://github.com/botasylum/SECURITY.md/blob/8037a85da67c2ba699952a44e8e0527b700f95f6/SECURITY.md
