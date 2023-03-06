@@ -18,6 +18,10 @@ def get_json(url_string, token=None):
     return json_object
 
 
+def get_secret():
+    json.load(open('secret.json'))
+
+
 def read_csv_file(reader):
     rows = []
     for row in reader:
@@ -30,7 +34,14 @@ def csv_reader(file_path):
 
 
 def csv_writer(file_path):
-    return csv.writer(open(file_path, 'a', newline=''))
+    return csv.writer(open(file_path, 'a', newline='', encoding='utf-8'))
+
+
+def prepare_csv_file(reader, writer, header):
+    rows = read_csv_file(reader)
+    if len(rows) == 0:
+        writer.writerow(header)
+    return rows
 
 
 def extract(rows, index):
@@ -39,12 +50,6 @@ def extract(rows, index):
             rows[i] = rows[i][index]
         else:
             rows[i] = None
-
-
-def prepare_csv_file(reader, writer, header):
-    rows = read_csv_file(reader)
-    if len(rows) == 0:
-        writer.writerow(header)
 
 
 def prepare_repo_mapping(repo_csv_reader, repo_csv_writer, mapping_csv_reader, mapping_csv_writer):
