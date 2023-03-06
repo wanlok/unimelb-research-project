@@ -15,9 +15,9 @@ def get_json(url_string):
     return json_object
 
 
-def read_csv_file(file_path):
+def read_csv_file(reader):
     rows = []
-    for row in csv_reader(file_path):
+    for row in reader:
         rows.append(row)
     return rows
 
