@@ -3,10 +3,13 @@ import json
 from urllib.request import Request, urlopen
 
 
-def get_json(url_string):
+def get_json(url_string, token=None):
     try:
         print(f'url: {url_string}')
-        response = urlopen(Request(url_string))
+        request = Request(url_string)
+        if token is not None:
+            request.add_header('Authorization', f'token {token}')
+        response = urlopen(request)
         # response.info()["X-RateLimit-Remaining"]
         json_object = json.loads(response.read())
     except Exception as e:
@@ -36,3 +39,23 @@ def extract(rows, index):
             rows[i] = rows[i][index]
         else:
             rows[i] = None
+
+
+def prepare_csv_file(reader, writer, header):
+    rows = read_csv_file(reader)
+    if len(rows) == 0:
+        writer.writerow(header)
+
+
+def prepare_repo_mapping(repo_csv_reader, repo_csv_writer, mapping_csv_reader, mapping_csv_writer):
+    prepare_csv_file(repo_csv_reader, repo_csv_writer, ['repo'])
+    prepare_csv_file(mapping_csv_reader, mapping_csv_writer, ['repo', 'url'])
+    repo_csv_rows = read_csv_file(repo_csv_reader)
+    extract(repo_csv_rows, 0)
+    return repo_csv_rows
+
+
+def append_csv(row, rows, writer):
+    if row not in rows:
+        writer.writerow(row)
+        rows.append(row)
