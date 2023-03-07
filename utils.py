@@ -18,8 +18,14 @@ def get_json(url_string, token=None):
     return json_object
 
 
+def get_content(url_string):
+    request = Request(url_string)
+    response = urlopen(request)
+    return response.read()
+
+
 def get_secret():
-    json.load(open('secret.json'))
+    return json.load(open('secret.json'))
 
 
 def read_csv_file(reader):
@@ -30,7 +36,7 @@ def read_csv_file(reader):
 
 
 def csv_reader(file_path):
-    return csv.reader(open(file_path), delimiter=',')
+    return csv.reader(open(file_path, encoding='utf-8'), delimiter=',')
 
 
 def csv_writer(file_path):
@@ -64,3 +70,17 @@ def append_csv(row, rows, writer):
     if row not in rows:
         writer.writerow(row)
         rows.append(row)
+
+
+def get_csv_start_index(full_list, sub_list, number_of_matches):
+    start_index = 1
+    number_of_header_rows = 1
+    for i in range(number_of_header_rows, len(full_list)):
+        for j in range(number_of_header_rows, len(sub_list)):
+            valid = True
+            for k in range(number_of_matches):
+                if full_list[i][k] != sub_list[j][k]:
+                    valid = False
+            if valid:
+                start_index = i
+    return start_index + 1

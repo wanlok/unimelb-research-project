@@ -24,7 +24,7 @@ if __name__ == '__main__':
         url_string = f'https://github.com/search?q=SECURITY.md&type=commits&p={page}'
         print(f'url: {url_string}')
         driver.get(url_string)
-        repositories = driver.find_elements(By.CLASS_NAME, 'Link--secondary')
+        repositories = driver.find_element(By.ID, 'commit_search_results').find_elements(By.CLASS_NAME, 'Link--secondary')
         for repository in repositories:
             row = [repository.get_attribute('innerHTML').strip()]
             if row not in repo_csv_rows:

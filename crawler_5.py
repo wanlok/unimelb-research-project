@@ -1,6 +1,6 @@
 import time
 
-from utils import csv_reader, csv_writer, prepare_csv_file, get_json
+from utils import csv_reader, csv_writer, prepare_csv_file, get_json, get_csv_start_index
 
 if __name__ == '__main__':
     repo_csv_file_path = 'C:\\Files\\Projects\\unimelb-research-project\\repo.csv'
@@ -13,9 +13,9 @@ if __name__ == '__main__':
     files_csv_rows = prepare_csv_file(files_csv_reader, files_csv_writer, ['repo', 'path', 'url'])
     file_name = 'security.md'
     time_limit = 60 + 3
-    i = 1
-    while i < len(repo_csv_rows):
-        repo = repo_csv_rows[i][0]
+    start_index = get_csv_start_index(repo_csv_rows, files_csv_rows, 1)
+    while start_index < len(repo_csv_rows):
+        repo = repo_csv_rows[start_index][0]
         codes = get_json(f'https://api.github.com/search/code?q=repo:{repo}+filename:{file_name}')
         if codes is not None:
             for code in codes['items']:
@@ -23,6 +23,6 @@ if __name__ == '__main__':
                 if row not in files_csv_rows:
                     files_csv_writer.writerow(row)
                     files_csv_rows.append(row)
-            i = i + 1
+            start_index = start_index + 1
         else:
             time.sleep(time_limit)
