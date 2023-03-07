@@ -1534,3 +1534,4 @@ itayychand/Terraform-Labs,vendor/github.com/ulikunitz/xz/SECURITY.md,https://git
 itayychand/Terraform-Labs,vendor/google.golang.org/grpc/SECURITY.md,https://github.com/itayychand/Terraform-Labs/blob/c994addc462cf7da964962c4c0d4481c46663b36/vendor/google.golang.org/grpc/SECURITY.md
 itayychand/Terraform-Labs,vendor/cloud.google.com/go/SECURITY.md,https://github.com/itayychand/Terraform-Labs/blob/c994addc462cf7da964962c4c0d4481c46663b36/vendor/cloud.google.com/go/SECURITY.md
 umairhameed236/Terraform-Azure,vendor/google.golang.org/grpc/SECURITY.md,https://github.com/umairhameed236/Terraform-Azure/blob/9d7ca98a087feed3580f87c3dc5b9a1beb65b348/vendor/google.golang.org/grpc/SECURITY.md
+Azure/aml-template,SECURITY.md,https://github.com/Azure/aml-template/blob/e4f3712e4f27f618065229cb1d2cf9f7f8f2cef9/SECURITY.md
