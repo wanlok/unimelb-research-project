@@ -3,10 +3,10 @@ import time
 from utils import csv_reader, csv_writer, get_json, prepare_repo_mapping
 
 if __name__ == '__main__':
-    repo_csv_file_path = 'C:\\Files\\Projects\\unimelb-research-project\\repo.csv'
+    repo_csv_file_path = 'repo.csv'
     repo_csv_writer = csv_writer(repo_csv_file_path)
     repo_csv_reader = csv_reader(repo_csv_file_path)
-    mapping_csv_file_path = 'C:\\Files\\Projects\\unimelb-research-project\\mapping.csv'
+    mapping_csv_file_path = 'mapping.csv'
     mapping_csv_writer = csv_writer(mapping_csv_file_path)
     mapping_csv_reader = csv_reader(mapping_csv_file_path)
     q = 'security.md'
