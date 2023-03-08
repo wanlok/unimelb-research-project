@@ -39,8 +39,8 @@ def csv_reader(file_path):
     return csv.reader(open(file_path, encoding='utf-8'), delimiter=',')
 
 
-def csv_writer(file_path):
-    return csv.writer(open(file_path, 'a', newline='', encoding='utf-8'))
+def csv_writer(file_path, mode='a'):
+    return csv.writer(open(file_path, mode, newline='', encoding='utf-8'))
 
 
 def prepare_csv_file(reader, writer, header):
