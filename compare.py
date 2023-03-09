@@ -11,7 +11,7 @@ if __name__ == '__main__':
         compare_csv_file_path = 'compare.csv'
         compare_csv_writer = csv_writer(compare_csv_file_path, mode='w')
         compare_csv_reader = csv_reader(compare_csv_file_path)
-        compare_csv_rows = prepare_csv_file(compare_csv_reader, compare_csv_writer, ['dominant_content', 'content', 'levenshtein_distance', 'occurrence'])
+        compare_csv_rows = prepare_csv_file(compare_csv_reader, compare_csv_writer, ['dominant_content', 'content', 'levenshtein_distance', 'occurrence', 'largest'])
         content_dict = {}
         i = 0
         for row in content_csv_reader:
@@ -29,8 +29,8 @@ if __name__ == '__main__':
                 if largest is None or content_dict[key] > largest:
                     largest = content_dict[key]
                     dominant_content = key
-            dominant_content = dominant_content.replace('\\n', '\n')
+            dominant_content = eval(dominant_content).decode('utf-8')
         for key in content_dict:
-            content = key.replace('\\n', '\n')
+            content = eval(key).decode('utf-8')
             if content != dominant_content:
-                compare_csv_writer.writerow([dominant_content, content, distance(dominant_content, content), content_dict[key]])
+                compare_csv_writer.writerow([dominant_content, content, distance(dominant_content, content), content_dict[key], largest])
