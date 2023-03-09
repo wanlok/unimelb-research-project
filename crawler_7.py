@@ -1,21 +1,21 @@
 import time
 
-from utils import get_secret, csv_reader, csv_writer, prepare_csv_file, get_json
+from utils import get_secret, csv_writer, csv_reader, prepare_csv_file, get_json
 
 if __name__ == '__main__':
     secret = get_secret()
     files_csv_file_path = 'files.csv'
-    files_csv_writer = csv_writer(files_csv_file_path)
-    files_csv_reader = csv_reader(files_csv_file_path)
-    files_csv_rows = prepare_csv_file(files_csv_reader, files_csv_writer, ['repo', 'path', 'url'])
     q = 'security+in:path+language:markdown'
     per_page = 100
-    page = 1
     size_limit = 1000
     time_limit = 60 + 3
     first = True
     while True:
+        page = 1
         while page * per_page <= size_limit:
+            files_csv_writer = csv_writer(files_csv_file_path)
+            files_csv_reader = csv_reader(files_csv_file_path)
+            files_csv_rows = prepare_csv_file(files_csv_reader, files_csv_writer, ['repo', 'path', 'url'])
             if not first:
                 time.sleep(time_limit)
             first = False
