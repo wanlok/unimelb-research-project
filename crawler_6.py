@@ -15,7 +15,7 @@ if __name__ == '__main__':
     start_index = get_csv_start_index(files_csv_rows, content_csv_rows, 2)
     print(f'{start_index} {len(files_csv_rows)}')
     # size_limit = len(files_csv_rows)
-    size_limit = 60
+    size_limit = start_index + 60
     while start_index < size_limit:
         repo = quote(files_csv_rows[start_index][0])
         path = quote(files_csv_rows[start_index][1])
