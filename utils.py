@@ -1,5 +1,6 @@
 import csv
 import json
+import sys
 from urllib.request import Request, urlopen
 
 
@@ -36,6 +37,13 @@ def read_csv_file(reader):
 
 
 def csv_reader(file_path):
+    max_int = sys.maxsize
+    while True:
+        try:
+            csv.field_size_limit(max_int)
+            break
+        except OverflowError:
+            max_int = int(max_int / 10)
     return csv.reader(open(file_path, encoding='utf-8'), delimiter=',')
 
 
