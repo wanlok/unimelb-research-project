@@ -14,7 +14,9 @@ if __name__ == '__main__':
     content_csv_rows = prepare_csv_file(content_csv_reader, content_csv_writer, ['repo', 'path', 'content'])
     start_index = get_csv_start_index(files_csv_rows, content_csv_rows, 2)
     print(f'{start_index} {len(files_csv_rows)}')
-    while start_index < len(files_csv_rows):
+    # size_limit = len(files_csv_rows)
+    size_limit = 60
+    while start_index < size_limit:
         repo = quote(files_csv_rows[start_index][0])
         path = quote(files_csv_rows[start_index][1])
         content = get_json(f'https://api.github.com/repos/{repo}/contents/{path}')
