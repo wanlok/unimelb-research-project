@@ -1,1 +1,0 @@
-# SECURITY.md in docs folder
