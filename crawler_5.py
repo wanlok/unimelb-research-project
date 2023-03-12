@@ -23,8 +23,8 @@ if __name__ == '__main__':
     else:
         repo_start_index = get_csv_start_index(repo_csv_rows, files_csv_rows, 1)
         repo_end_index = len(repo_csv_rows)
-    print(f'{repo_start_index} {repo_end_index}')
     while repo_start_index < repo_end_index:
+        print(f'{repo_start_index} {repo_end_index}')
         if len(sys.argv) > 1:
             repo = sys.argv[repo_start_index]
         else:
