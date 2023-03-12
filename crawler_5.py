@@ -8,6 +8,10 @@ if __name__ == '__main__':
     repo_csv_writer = csv_writer(repo_csv_file_path)
     repo_csv_reader = csv_reader(repo_csv_file_path)
     repo_csv_rows = prepare_csv_file(repo_csv_reader, repo_csv_writer, ['repo'])
+    skipped_repo_csv_file_path = 'skipped_repo.csv'
+    skipped_repo_csv_writer = csv_writer(skipped_repo_csv_file_path)
+    skipped_repo_csv_reader = csv_reader(skipped_repo_csv_file_path)
+    skipped_repo_csv_rows = prepare_csv_file(skipped_repo_csv_reader, skipped_repo_csv_writer, ['repo'])
     files_csv_file_path = 'files.csv'
     files_csv_writer = csv_writer(files_csv_file_path)
     files_csv_reader = csv_reader(files_csv_file_path)
@@ -24,13 +28,14 @@ if __name__ == '__main__':
         repo_start_index = get_csv_start_index(repo_csv_rows, files_csv_rows, 1)
         repo_end_index = len(repo_csv_rows)
     while repo_start_index < repo_end_index:
-        print(f'{repo_start_index} {repo_end_index}')
         if len(sys.argv) > 1:
             repo = sys.argv[repo_start_index]
         else:
             repo = repo_csv_rows[repo_start_index][0]
         file_index = 0
         while file_index < len(file_names):
+            if get_count == 0:
+                print(f'{repo_start_index} {repo_end_index}')
             if get_count < 10:
                 codes, error = get_json(f'https://api.github.com/search/code?q=repo:{repo}+filename:{file_names[file_index]}&per_page={per_page}')
                 get_count = get_count + 1
@@ -44,6 +49,7 @@ if __name__ == '__main__':
                                 files_csv_rows.append(row)
                     file_index = file_index + 1
                 elif error == 'Unprocessable Entity':
+                    skipped_repo_csv_writer.writerow([repo])
                     file_index = file_index + 1
                 else:
                     time.sleep(time_limit)
