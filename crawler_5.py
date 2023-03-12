@@ -23,6 +23,7 @@ if __name__ == '__main__':
     else:
         repo_start_index = get_csv_start_index(repo_csv_rows, files_csv_rows, 1)
         repo_end_index = len(repo_csv_rows)
+    print(f'{repo_start_index} {repo_end_index}')
     while repo_start_index < repo_end_index:
         if len(sys.argv) > 1:
             repo = sys.argv[repo_start_index]
@@ -35,10 +36,12 @@ if __name__ == '__main__':
                 get_count = get_count + 1
                 if codes is not None:
                     for code in codes['items']:
-                        row = [repo, code['path'], code['html_url']]
-                        if row not in files_csv_rows:
-                            files_csv_writer.writerow(row)
-                            files_csv_rows.append(row)
+                        path = code['path'].lower()
+                        if path == 'security.md' or path == '.github/security.md' or path == 'docs/security.md':
+                            row = [repo, code['path'], code['html_url']]
+                            if row not in files_csv_rows:
+                                files_csv_writer.writerow(row)
+                                files_csv_rows.append(row)
                     file_index = file_index + 1
                 elif error == 'Unprocessable Entity':
                     file_index = file_index + 1
