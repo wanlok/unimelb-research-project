@@ -13,13 +13,13 @@ def get_json(url_string, token=None):
             request.add_header('Authorization', f'token {token}')
         response = urlopen(request)
         # response.info()["X-RateLimit-Remaining"]
-        json_response = json.loads(response.read())
+        data = json.loads(response.read())
         error = None
     except Exception as e:
         print(f'error: {e.reason}')
-        json_response = None
+        data = None
         error = e.reason
-    return json_response, error
+    return data, error
 
 
 def get_content(url_string):
