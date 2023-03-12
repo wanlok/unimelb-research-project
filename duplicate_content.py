@@ -11,23 +11,19 @@ if __name__ == '__main__':
     #     print(f'{date} {message}')
 
     content_csv_file_path = 'content.csv'
-    content_csv_writer = csv_writer(content_csv_file_path)
     content_csv_reader = csv_reader(content_csv_file_path)
+    content_csv_writer = csv_writer(content_csv_file_path)
     content_csv_rows = prepare_csv_file(content_csv_reader, content_csv_writer, ['repo', 'path', 'content'])
 
-    content_dict = dict()
+    row_dict = dict()
 
     for row in content_csv_rows:
         key = f'{row[0]} {row[1]}'
-        if key in content_dict:
-            content_dict[key] = content_dict[key] + 1
+        if key in row_dict:
+            row_dict[key] = row_dict[key] + 1
         else:
-            content_dict[key] = 1
+            row_dict[key] = 1
 
-    for key in content_dict:
-        if content_dict[key] > 1:
+    for key in row_dict:
+        if row_dict[key] > 1:
             print(key)
-
-
-
-
