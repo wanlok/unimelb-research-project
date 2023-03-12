@@ -1,7 +1,7 @@
 import re
 import sys
 
-from utils import csv_reader, sort_by_descending_values
+from utils import csv_reader, sort_by_descending_values, csv_writer, prepare_csv_file
 
 path = 'C:\\Files\Projects\\allitems.csv'
 domain_name = 'https://github.com/'
@@ -26,6 +26,11 @@ if __name__ == '__main__':
                 i = i + 1
                 print(f'{i} {row[0]} {date_strings[0]} {url_strings}')
     elif sys.argv[1] == 'count':
+        if len(sys.argv) > 3:
+            repo_csv_file_path = sys.argv[3]
+            repo_csv_writer = csv_writer(repo_csv_file_path, mode='w')
+            repo_csv_reader = csv_reader(repo_csv_file_path)
+            repo_csv_rows = prepare_csv_file(repo_csv_reader, repo_csv_writer, ['repo'])
         count_dict = dict()
         for row in csv_reader(path, encoding='latin-1'):
             repos = set()
@@ -40,10 +45,11 @@ if __name__ == '__main__':
                     count_dict[repo] = 1
         i = 0
         for repo in sort_by_descending_values(count_dict):
-            if i < int(sys.argv[2]):
-                print(f'{count_dict[repo]} {repo}')
-                # print(f'{repo}')
             i = i + 1
+            if len(sys.argv) < 3 or i <= int(sys.argv[2]):
+                print(f'{i} {repo} {count_dict[repo]}')
+                if len(sys.argv) > 3:
+                    repo_csv_writer.writerow([repo])
     elif sys.argv[1] == 'a':
         for row in csv_reader(path, encoding='latin-1'):
             print(get_url_strings(row))

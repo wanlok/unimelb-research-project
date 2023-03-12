@@ -1,5 +1,6 @@
 import csv
 import json
+import operator
 import sys
 from urllib.request import Request, urlopen
 
@@ -12,11 +13,13 @@ def get_json(url_string, token=None):
             request.add_header('Authorization', f'token {token}')
         response = urlopen(request)
         # response.info()["X-RateLimit-Remaining"]
-        json_object = json.loads(response.read())
+        json_response = json.loads(response.read())
+        error = None
     except Exception as e:
         print(f'error: {e.reason}')
-        json_object = None
-    return json_object
+        json_response = None
+        error = e.reason
+    return json_response, error
 
 
 def get_content(url_string):
@@ -36,7 +39,7 @@ def read_csv_file(reader):
     return rows
 
 
-def csv_reader(file_path):
+def csv_reader(file_path, encoding='utf-8'):
     max_int = sys.maxsize
     while True:
         try:
@@ -44,7 +47,7 @@ def csv_reader(file_path):
             break
         except OverflowError:
             max_int = int(max_int / 10)
-    return csv.reader(open(file_path, encoding='utf-8'), delimiter=',')
+    return csv.reader(open(file_path, encoding=encoding), delimiter=',')
 
 
 def csv_writer(file_path, mode='a'):
@@ -92,3 +95,7 @@ def get_csv_start_index(full_list, sub_list, number_of_matches):
             if valid:
                 start_index = i
     return start_index + 1
+
+
+def sort_by_descending_values(input_dict):
+    return dict(sorted(input_dict.items(), key=operator.itemgetter(1), reverse=True))
