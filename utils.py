@@ -84,7 +84,7 @@ def append_csv(row, rows, writer):
 
 
 def get_csv_start_index(full_list, sub_list, number_of_matches):
-    start_index = 1
+    start_index = 0
     number_of_header_rows = 1
     for i in range(number_of_header_rows, len(full_list)):
         for j in range(number_of_header_rows, len(sub_list)):
