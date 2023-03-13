@@ -14,7 +14,11 @@ if __name__ == '__main__':
     i = 0
     for row in content_csv_reader:
         if i > 0:
-            content = eval(row[2]).decode('utf-8')
+            try:
+                content = eval(row[2]).decode('utf-8')
+            except Exception as e:
+                print(f'{row[0]} {row[1]} {e.reason}')
+                continue
             headings = re.findall(r'[b\'|b\"|\\n]#+ *(.*?) *\\n', row[2])
             cve_count = content.lower().count('cve')
             language = langid.classify(content)[0].upper()
