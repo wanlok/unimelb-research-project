@@ -13,7 +13,7 @@ def get_url_strings(row):
 
 if __name__ == '__main__':
     if sys.argv[1] == 'list':
-        i = 0
+        targets = []
         for row in csv_reader(path, encoding='latin-1'):
             url_strings = get_url_strings(row)
             date_strings = re.findall(r'\d+', row[4])
@@ -23,8 +23,21 @@ if __name__ == '__main__':
                     exists = True
                     break
             if exists and len(date_strings) > 0:
-                i = i + 1
-                print(f'{i} {row[0]} {date_strings[0]} {url_strings}')
+                date_string = int(date_strings[0])
+                length = len(targets)
+                index = length
+                for j in range(length):
+                    if date_string < targets[j][1]:
+                        index = j
+                        break
+                targets.insert(index, [row[0], date_string, url_strings])
+        for i in range(len(targets)):
+            row = targets[i]
+            if len(sys.argv) > 3:
+                if sys.argv[3] == 'no-urls':
+                    print(f'{i + 1} {row[0]} {row[1]}')
+            else:
+                print(f'{i + 1} {row[0]} {row[1]} {row[2]}')
     elif sys.argv[1] == 'count':
         if len(sys.argv) > 3:
             repo_csv_file_path = sys.argv[3]
@@ -49,7 +62,10 @@ if __name__ == '__main__':
             if len(sys.argv) < 3 or i <= int(sys.argv[2]):
                 print(f'{i} {repo} {count_dict[repo]}')
                 if len(sys.argv) > 3:
-                    repo_csv_writer.writerow([repo])
+                    if len(sys.argv) > 4 and sys.argv[4] == 'count':
+                        repo_csv_writer.writerow([repo, count_dict[repo]])
+                    else:
+                        repo_csv_writer.writerow([repo])
     elif sys.argv[1] == 'a':
         for row in csv_reader(path, encoding='latin-1'):
             print(get_url_strings(row))

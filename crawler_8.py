@@ -17,7 +17,7 @@ if __name__ == '__main__':
     while start_index < end_index:
         if get_count == 0:
             print(f'{start_index} {end_index}')
-        if get_count < 10:
+        if get_count < 60:
             repo, path, _ = files_csv_rows[start_index]
             commits, error = get_json(f'https://api.github.com/repos/{repo}/commits?path={path}')
             get_count = get_count + 1
