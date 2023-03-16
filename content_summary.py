@@ -6,8 +6,8 @@ from nltk.corpus import stopwords
 
 from utils import csv_reader, csv_writer, prepare_csv_file, sort_by_descending_values
 
-email_regex = r'[\w\.-]+@[\w\.-]+'
-url_regex = r'https?://[^\s)]+(?!\s)'
+email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+url_regex = r'\[(.*?)\]\((.*?)\)|\[(.*?)\]\[(.*?)\]'
 
 
 def write_content_summary(writer, repo, path, section, emails, urls, number_of_code_blocks):
@@ -59,12 +59,18 @@ if __name__ == '__main__':
         urls = []
         number_of_code_blocks = 0
         count_dict = {}
+        previous_line = None
         for line in content.split('\n'):
             line = line.strip()
-            if line.startswith('#'):
+            is_section_1 = line.startswith('#')
+            is_section_2 = previous_line is not None and (line.startswith('=') or line.startswith('-')) and len(line) == len(previous_line)
+            if is_section_1 or is_section_2:
                 write_content_summary(content_summary_writer, repo, path, section, emails, urls, number_of_code_blocks)
                 write_content_summary_word(content_summary_word_writer, repo, path, section, count_dict)
-                section = line.replace('#', '').strip()
+                if is_section_1:
+                    section = line.replace('#', '').strip()
+                elif is_section_2:
+                    section = previous_line
                 emails = []
                 urls = []
                 number_of_code_blocks = 0
@@ -73,6 +79,6 @@ if __name__ == '__main__':
             urls.extend(re.findall(url_regex, line))
             number_of_code_blocks = number_of_code_blocks + line.count('```')
             tokenize(line, count_dict)
+            previous_line = line
         write_content_summary(content_summary_writer, repo, path, section, emails, urls, number_of_code_blocks)
         write_content_summary_word(content_summary_word_writer, repo, path, section, count_dict)
-

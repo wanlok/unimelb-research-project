@@ -32,7 +32,7 @@ if __name__ == '__main__':
         while start_index < end_index:
             repo = quote(files_csv_rows[start_index][0])
             path = quote(files_csv_rows[start_index][1])
-            content = get_json(f'https://api.github.com/repos/{repo}/contents/{path}')
+            content, error = get_json(f'https://api.github.com/repos/{repo}/contents/{path}')
             if content is not None:
                 download_url = content['download_url']
                 row = [repo, path, get_content(download_url)]
