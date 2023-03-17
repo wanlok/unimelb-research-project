@@ -1,0 +1,3279 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+centreon/.github,SECURITY.md,d59f560ddea38a8e174a7a058741dfbbc6a3f8c0,2022-08-22 11:53:28+00:00,,"# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+SL4taAGY0BDuA3zhB7p5tP8=
+=YBvx
+-----END PGP PUBLIC KEY BLOCK-----
+```
+",8220
+centreon/.github,SECURITY.md,a30db37ae7e31491d33854a5a4fe9e0a7c3fc5d4,2022-08-22 12:04:52+00:00,"# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+SL4taAGY0BDuA3zhB7p5tP8=
+=YBvx
+-----END PGP PUBLIC KEY BLOCK-----
+```
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - [Alexandru Cucea](https://acucea.github.io/)
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBF5Cei0BEADhmq8U5rvapCD4AtG0dMpdILACNXfDeU9egywe6eP23fia+RDZ
+umlCGqPeBny3zU+wcE4Kik6nsCmqy61rgHsgTVbWEEeu1AJoJfq0GneBBwWI5sWV
+QwAUTmJSEJgYB9oRyHErhhxuBdjfbLqHRV2fMZjyQOqTRQtZ1PuJHbbzB29Plj1q
+K0VYfO5q2RLWDol5TbtiBEDiF1Wl3UcPF2jmlgHWS/iCpmFKz2ABOkKgUBpn83Sa
+E+PYY/CMOL8YAd77oV47a0yA9kuLgEcQITviB7lU2Yq9URVSWG1I3SxFFU6/IEn6
+HFj3vbs8zWEn/LN1mCW5MlDPH2VlHp8QTdUGrrKSM0mEv/xddkZx6QFZ7K0bVzNB
+1fGRTcn8hxbw0YVsJyUAMpZORhnKJS5VLSyZAU7y+EGVy9Q7VurjZN51HBgtuArl
+ZorLscu8FS6XLFXzGiePKUyJ2RN+c8o78FsB+QZ6Zgxwx/F06zRYXpgZM1ONMTnu
+MTeg1ea5w7m8DQCQAElk5EQBTqtk+XCRoKz4Bb4BuqFrqbx1MoFHY6QXi+5ThNXI
+4xIja2r6KpfKSFE6ewLU0ew521eBbA4i/ib+DMPRQ1xORiuTTJWgxqMX1jL7tnYi
+A78LF+3PfHwiMRM6c+csLE/aw9aVGlpyULj/9LVpyqdQeEYoBes0SiDcGwARAQAB
+tClDZW50cmVvbiBTZWN1cml0eSA8c2VjdXJpdHlAY2VudHJlb24uY29tPokCVAQT
+AQgAPgIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBMN36dUtXBN9PdVztb6v
+br9jEQb5BQJf/utABQkDnY0fAAoJEL6vbr9jEQb5X78QAKK+b7AtsamAMldUrA5A
+GcTNtzxq6NlcCq2gy469juEuKp2lDag+jabzcZj3Sydi2oFxKZ4cSIFuErPNLQFl
+/BAVZefjeSCHWeDNREedIVCsRHbba3Jwnl+GicycrcZGtvXjUw1xj2lDjO02fBbn
+Do4yrjtaGfUkyJh2mXotcMQiqAd8vTnV1aKkESjcpS/ADcw/A0y8/4YJiX+4l+Lw
+hBQgZF97bFzTuRFP8cYtUoobjZI4wUiJUV9N+ZfODUTxtm69htK2QDmMbGQs91xK
+wYdIOTXyU8HtvDD/YuB+qI5WVjJlljTu9maX7QqfRSNdeQEl4Uh8NJoLjvA6Eu7O
++g0C095YzgKHObEefACUXMT2BOu8p07aPDtwAAc1XVHLgMViRgAH459oJD4IPhKq
+J9QkWeX+o8cZTufZcejRtc2A5OgfPsvCOM5o2Hf0tLXOdHzVz0exRl/Ect2e4ctm
+ZMnpUPVDnWyXQIQT5Ulh5z33d4l4/+JydsYpD7Ry82aru6z8yKxvWSjIkTCd72C2
+LS9whUMlptPuvOj6vejg/yzUE3OcxoEQlSv6nJ/idBRuJ1QHUAMo08rnKznAdNRU
+UrqfbqdPmtojDLTXP9NHDsxxzHLwe2Fy+OXqKyTpM6T4bvdbNjn2qmm0d616JYKv
+dthB+4f+0WxZqJotU/0wQXBHuQINBF5CgfMBEADmxcDYgg+sI1f9SkdRZY/cVzWQ
+0kmSRMQ5Q1wABc07uXeFQlpubZEWzeB13v0puI4A0WGjSNnWD0JBJZSxqFiKlytZ
+q+xJnO1eLjN3A4RlvIxFnjmtZXW2x3bGS/t9TbWIDvgFs4RfiyOsVimFRdvB3YEE
+UtrcLnb5cmxLznDQwpJTStevuWuoVhc8bfiGepiAzXhdOlJ85keH8Hq3Ujgqs/dx
+mBa68hokTTMt33SwQ9KAoTQvrKNu1B+fTSQBmN3yBzKiZEX3JzapK70TfR9mc1CJ
+JiLoJyKqDhyY0IaMCqd5mdA5Q2TdXtn/iwFrxiyUi+1QF5I4c19hUoZchn5I+exw
+anLabHP6EsM2kHeO8J1nHiNJ2b58lxVcUBTMkkoQLxN1shOozkYiapX33Cxv+Smy
+57Pw8SpbZfZqDfmazUgF/aboJY9vcQ1+fK6VzmXK42GAYu968Z9Vvxi6+qNPIz1P
+cCC6t+Yzlrv3EadFUTAeXiHjpxjef3Lv7BWLZDr5psaCgvRzO0Ffn4hniUiKqTTb
+wHJxDA1iP9vfEAh61kpBQ8p+C6h4+hn5OWCbz6GBp+wEG1Rswrz734K7Aiywr8pH
+la1+oXYkRrAZop9Oagh9weimbR0ZZ76kD4duSq3blV6mhh7Cs94e4HINB6NzMfXg
+YYk4Dwr6aiW2Np5MLQARAQABiQI8BBgBCAAmAhsMFiEEw3fp1S1cE3091XO1vq9u
+v2MRBvkFAl/+0/AFCQV+uP0ACgkQvq9uv2MRBvlNgRAAmU5cxvP38BbCdlhN9gyH
+wZwHi2kSeROFeKc2GCL2ixVGS0dANmMPZEV/jNj75shF4tK0NDZWWWDFZm/2bsFI
+M5QvNJm8OYTcTCfcbFj7uHG1wYRGKRq0PxYKJ5WY1RAqgAjuGNBME/16z5E042Co
+puh2z1PvV/CKhIOFBMTjofCVWYkDMg1iUQN3pS55FuIz6sw8DZPfnxHUaCKNYX3a
+we7rooia1dUl2yXkSqwo99IMqrDqFyLye1kISh/Kg83zocVLdNnbaNvpj/FgXYII
+xXxsvGXEE463/Rr+rpCyuMY8L+VnCQWFFoammrgN86L5iHh9sY5q7YRWnwqrra78
+BsWm+QjKxlY+UpjZTm+rppijBsRU00DpfnKds0a9zLAZCaTBJ6UGpIW4nsjV7rDj
+5t420dOe5LfqIgS/zUw8K3gGgvyOJbm8D4E4fCMn5A5/mOSkAIiWzx2+hzhfmbFt
+omSMCHOCNQbSF/7PoU6Z4J6sq5AkZOf9qQU+UHszAHtqW9A5iSIsjJEW7Poplsd1
+QpaRONGuU0UPk6MQEDMq8YYYINpNHwU3ZxgQuq5PrUVZd48NdAPFhssRjwZ3rYsQ
+3Nl02J4RHppsPsDjxkmvMc4X2uCfgenTG/Vc/gNTQhPSozSKG8yFoClMlb3onsOF
+SL4taAGY0BDuA3zhB7p5tP8=
+=YBvx
+-----END PGP PUBLIC KEY BLOCK-----
+```
+",1891
+centreon/.github,SECURITY.md,e96896ecd5b38cb31afea5d938c66533cf8bea7c,2022-08-23 14:56:27+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - [Alexandru Cucea](https://acucea.github.io/)
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBF5Cei0BEADhmq8U5rvapCD4AtG0dMpdILACNXfDeU9egywe6eP23fia+RDZ
+umlCGqPeBny3zU+wcE4Kik6nsCmqy61rgHsgTVbWEEeu1AJoJfq0GneBBwWI5sWV
+QwAUTmJSEJgYB9oRyHErhhxuBdjfbLqHRV2fMZjyQOqTRQtZ1PuJHbbzB29Plj1q
+K0VYfO5q2RLWDol5TbtiBEDiF1Wl3UcPF2jmlgHWS/iCpmFKz2ABOkKgUBpn83Sa
+E+PYY/CMOL8YAd77oV47a0yA9kuLgEcQITviB7lU2Yq9URVSWG1I3SxFFU6/IEn6
+HFj3vbs8zWEn/LN1mCW5MlDPH2VlHp8QTdUGrrKSM0mEv/xddkZx6QFZ7K0bVzNB
+1fGRTcn8hxbw0YVsJyUAMpZORhnKJS5VLSyZAU7y+EGVy9Q7VurjZN51HBgtuArl
+ZorLscu8FS6XLFXzGiePKUyJ2RN+c8o78FsB+QZ6Zgxwx/F06zRYXpgZM1ONMTnu
+MTeg1ea5w7m8DQCQAElk5EQBTqtk+XCRoKz4Bb4BuqFrqbx1MoFHY6QXi+5ThNXI
+4xIja2r6KpfKSFE6ewLU0ew521eBbA4i/ib+DMPRQ1xORiuTTJWgxqMX1jL7tnYi
+A78LF+3PfHwiMRM6c+csLE/aw9aVGlpyULj/9LVpyqdQeEYoBes0SiDcGwARAQAB
+tClDZW50cmVvbiBTZWN1cml0eSA8c2VjdXJpdHlAY2VudHJlb24uY29tPokCVAQT
+AQgAPgIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBMN36dUtXBN9PdVztb6v
+br9jEQb5BQJf/utABQkDnY0fAAoJEL6vbr9jEQb5X78QAKK+b7AtsamAMldUrA5A
+GcTNtzxq6NlcCq2gy469juEuKp2lDag+jabzcZj3Sydi2oFxKZ4cSIFuErPNLQFl
+/BAVZefjeSCHWeDNREedIVCsRHbba3Jwnl+GicycrcZGtvXjUw1xj2lDjO02fBbn
+Do4yrjtaGfUkyJh2mXotcMQiqAd8vTnV1aKkESjcpS/ADcw/A0y8/4YJiX+4l+Lw
+hBQgZF97bFzTuRFP8cYtUoobjZI4wUiJUV9N+ZfODUTxtm69htK2QDmMbGQs91xK
+wYdIOTXyU8HtvDD/YuB+qI5WVjJlljTu9maX7QqfRSNdeQEl4Uh8NJoLjvA6Eu7O
++g0C095YzgKHObEefACUXMT2BOu8p07aPDtwAAc1XVHLgMViRgAH459oJD4IPhKq
+J9QkWeX+o8cZTufZcejRtc2A5OgfPsvCOM5o2Hf0tLXOdHzVz0exRl/Ect2e4ctm
+ZMnpUPVDnWyXQIQT5Ulh5z33d4l4/+JydsYpD7Ry82aru6z8yKxvWSjIkTCd72C2
+LS9whUMlptPuvOj6vejg/yzUE3OcxoEQlSv6nJ/idBRuJ1QHUAMo08rnKznAdNRU
+UrqfbqdPmtojDLTXP9NHDsxxzHLwe2Fy+OXqKyTpM6T4bvdbNjn2qmm0d616JYKv
+dthB+4f+0WxZqJotU/0wQXBHuQINBF5CgfMBEADmxcDYgg+sI1f9SkdRZY/cVzWQ
+0kmSRMQ5Q1wABc07uXeFQlpubZEWzeB13v0puI4A0WGjSNnWD0JBJZSxqFiKlytZ
+q+xJnO1eLjN3A4RlvIxFnjmtZXW2x3bGS/t9TbWIDvgFs4RfiyOsVimFRdvB3YEE
+UtrcLnb5cmxLznDQwpJTStevuWuoVhc8bfiGepiAzXhdOlJ85keH8Hq3Ujgqs/dx
+mBa68hokTTMt33SwQ9KAoTQvrKNu1B+fTSQBmN3yBzKiZEX3JzapK70TfR9mc1CJ
+JiLoJyKqDhyY0IaMCqd5mdA5Q2TdXtn/iwFrxiyUi+1QF5I4c19hUoZchn5I+exw
+anLabHP6EsM2kHeO8J1nHiNJ2b58lxVcUBTMkkoQLxN1shOozkYiapX33Cxv+Smy
+57Pw8SpbZfZqDfmazUgF/aboJY9vcQ1+fK6VzmXK42GAYu968Z9Vvxi6+qNPIz1P
+cCC6t+Yzlrv3EadFUTAeXiHjpxjef3Lv7BWLZDr5psaCgvRzO0Ffn4hniUiKqTTb
+wHJxDA1iP9vfEAh61kpBQ8p+C6h4+hn5OWCbz6GBp+wEG1Rswrz734K7Aiywr8pH
+la1+oXYkRrAZop9Oagh9weimbR0ZZ76kD4duSq3blV6mhh7Cs94e4HINB6NzMfXg
+YYk4Dwr6aiW2Np5MLQARAQABiQI8BBgBCAAmAhsMFiEEw3fp1S1cE3091XO1vq9u
+v2MRBvkFAl/+0/AFCQV+uP0ACgkQvq9uv2MRBvlNgRAAmU5cxvP38BbCdlhN9gyH
+wZwHi2kSeROFeKc2GCL2ixVGS0dANmMPZEV/jNj75shF4tK0NDZWWWDFZm/2bsFI
+M5QvNJm8OYTcTCfcbFj7uHG1wYRGKRq0PxYKJ5WY1RAqgAjuGNBME/16z5E042Co
+puh2z1PvV/CKhIOFBMTjofCVWYkDMg1iUQN3pS55FuIz6sw8DZPfnxHUaCKNYX3a
+we7rooia1dUl2yXkSqwo99IMqrDqFyLye1kISh/Kg83zocVLdNnbaNvpj/FgXYII
+xXxsvGXEE463/Rr+rpCyuMY8L+VnCQWFFoammrgN86L5iHh9sY5q7YRWnwqrra78
+BsWm+QjKxlY+UpjZTm+rppijBsRU00DpfnKds0a9zLAZCaTBJ6UGpIW4nsjV7rDj
+5t420dOe5LfqIgS/zUw8K3gGgvyOJbm8D4E4fCMn5A5/mOSkAIiWzx2+hzhfmbFt
+omSMCHOCNQbSF/7PoU6Z4J6sq5AkZOf9qQU+UHszAHtqW9A5iSIsjJEW7Poplsd1
+QpaRONGuU0UPk6MQEDMq8YYYINpNHwU3ZxgQuq5PrUVZd48NdAPFhssRjwZ3rYsQ
+3Nl02J4RHppsPsDjxkmvMc4X2uCfgenTG/Vc/gNTQhPSozSKG8yFoClMlb3onsOF
+SL4taAGY0BDuA3zhB7p5tP8=
+=YBvx
+-----END PGP PUBLIC KEY BLOCK-----
+```
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - [Alexandru Cucea](https://acucea.github.io/)
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",3168
+centreon/.github,SECURITY.md,2b29fecef08dedd910eb9dfb39927f7874e67a8c,2022-09-05 08:57:57+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - [Alexandru Cucea](https://acucea.github.io/)
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",29
+centreon/.github,SECURITY.md,64d3344ed7900682c3cb2641a7fbe5f4b1000c14,2022-09-22 09:42:33+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",35
+centreon/.github,SECURITY.md,7ba44e4dbf7251f98720de284422d8f942874f82,2022-09-26 07:49:32+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",70
+centreon/.github,SECURITY.md,195d9453d6efcc6b2708f2c9409e8a9fff0e40d9,2022-10-04 15:08:53+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+To report a security vulnerability, follow this link: [Security Policy](SECURITY.md).
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",66
+centreon/.github,SECURITY.md,683bbfe3d6eeddff240230c0ed4f9b4758df1e52,2022-10-06 09:40:33+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/09/06 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",70
+centreon/.github,SECURITY.md,a8c73c4d84ac1974dd9c9c2d9dd3235861bfa332,2023-01-16 10:57:24+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/09/06 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/10/05 - [Héctor Morales](mailto:hmorales@centreon.com)
+* 2022/09/06 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",62
+centreon/.github,SECURITY.md,76ecba5b1123d736c5cde83f3834b19a7e166e4b,2023-01-17 09:59:26+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/10/05 - [Héctor Morales](mailto:hmorales@centreon.com)
+* 2022/09/06 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/11/16 - Vladimir TOUTAIN from [DSecBypass](https://www.dsecbypass.com)
+* 2022/10/05 - [Héctor Morales](mailto:hmorales@centreon.com)
+* 2022/09/06 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+",78
+centreon/.github,SECURITY.md,4098e83ea8f4fbdc61cfed5ae4cc29e2af3635e1,2023-02-14 09:04:50+00:00,"# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/11/16 - Vladimir TOUTAIN from [DSecBypass](https://www.dsecbypass.com)
+* 2022/10/05 - [Héctor Morales](mailto:hmorales@centreon.com)
+* 2022/09/06 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | F92686A9EC269C1A |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2022-12-28 |
+| Expires | 2023-01-22 |
+| Fingerprint | 3552 91EA 7DAF 9E2A 192C 62B6 F926 86A9 EC26 9C1A |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGHLO4IBEADB5ZlFUNNH/Y5TEVHAAHIMjHEt63M5hA+C94EYv89R2+swz212
+Hla4f5sVl5wPNSwiIAed+bJNKnGiaDM/508aMcTHurGRu3x5/MyvuxpXmzOSY1Mt
+JZxLBBkonL1iX0tCytWriOhgAty9gi58DPKA6f7sVDgt3Hm/NtIEULSbXy6xfDYo
+m+Sz39+hb0PcKKEkacRGzOGDIR0UgOAUGDBEbDoLPxjM6flHjXcjs4fZNY2HHQXO
+AB65qM9my4ALxxsrIbsKfu25HY52qSZoqZD90AxKdNtRFlnkXClWN0l26fVqiGjv
+oCPMYGPp80OYvymE2QhtlD+jRAepwyWx1YY96VFIA9LsZtjmoRxw/KLghdeP4Q7p
+/BUCVkT393OOTayNhoNa7iCqbK0lmB6mequi7KV3vNXn79WP0Hm8AQ9/9bEJaY8x
+oNTKAxsR6gLP1fc7S/zg9iIHUuTj6XU9CbW45ADrCJRel5LoM+MZ3DWXh+kd0Iuw
+yANU+XVgC1fXQOf76BJeYSalZS8Ln1vpYjDwEZBSmLdyefCYBjspxjDNzpCAy+wH
+gc/vpQbjmFxgkbZ3AroGDaNu1JVhA3yy8oXAEwAxl8BzsYye2YbhAUb2RgZhIndd
+TCcWkwhEWey3XYMCtnFWxsXnteA1cvWD8PvCiWy53yc/Ng59H3XyB3sJbQARAQAB
+tJJDZW50cmVvbiBTZWN1cml0eSAoRW1haWwgdXNlZCB0byByZXBvcnQgYSB2dWxu
+ZXJhYmlsaXR5IG9uIENlbnRyZW9uJ3MgcHJvZHVjdHMgb3IgdG8gY29udGFjdCB0
+aGUgQ2VudHJlb24ncyBzZWN1cml0eSB0ZWFtKSA8c2VjdXJpdHlAY2VudHJlb24u
+Y29tPokCVAQTAQoAPhYhBPSiLqQfofMIpmrARo99hgxsMlQ6BQJhyzuCAhsDBQkC
+AikABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEI99hgxsMlQ6Ms0P/1lJfoaj
+5/mRIKvaWZnTZm6OCpJtRT/9WrBGxbVi0TfyFb8M5OHeoz2oXc7WEPDJNNW9aRat
+i40oHfQExW0UBsMvpfGlhPc5nwIxzpvFuckPrSTU3Y9ZLQvCoyxPIWMsXlghwwHD
+OFW5oYg+rAvtmFuLyM18MdkH3YmrUHs7wyZczvi5hqdv5yB92kEjDTRbCYG8k9ep
+P1rr3U/WyQ6u5BEZLTFNceK//VQsEfN7l8QLQV5CtG7PtdnLh5V4lkDHV7DW3PCg
+TXyy8A5IatLh7z+ODQ/GDwCw7NNQm5M8dB1T/tLZn7+kTf8KqjHz4Qbh2PFBu5R7
+sDPEM81EMSAN/dfuZyQKbABnJk0JalvZeuZYUQYZWTgK6mSFJ3Rac8aX4TX7fwfS
+kjh0ivG/FWzKaDa/dGfpH0J69IE2SACLRF+022hPLz7dRmSyNQSFZ4McXC+ihQps
+mDJrqLmBPSNIRkfTwczINPSAX051w3GsJDSoAID+X0iqmoZTPYuf9XJO689vx+5B
+g4FwhFwETkCqq6sZLzBI8+8dHKCn7imCtmrJ7JN8uy4mPS4Y2yVTBr1sZiAuvHzN
+4314o3N30OZeqG61OuE6XO67mlw5Rk5Kay7P/s3uu5wXEL01z5+VKH/hjzVV+GXq
+9J+VKYfXOcvu9PDhVBzlXgtP5xNuhh/IlvoDuQINBGHLPM4BEADdN4QbeuBSFts7
+9iIJXBmYiwcfDUOyZYaam6tI1fi1MbWCTAwpDpR0e8wdAon5yrF5jF6f6PIzqSfV
+jc1rtLfdftVlzCMobXyjPxO9LkwChSm+b1tR6R7FyxfkUu5Og7TdrTpzzbTPN6TA
+0BReEy20NpU6b3xC96BdaxE2ePlDOm26C5ygmAWszGD29ztxVtbBq7w0M+q7MO5Q
+UH286bNQXKL5C5wZuA18li/hk7Cri4XwtRyMMh0dlT7hYYuKKJN5d8swx793JdlP
+uYxmL93bM7rlka+W9fHYEbW5Zr7KUKwGygju/R2kx567iZyNwhFdeNsMFXFRIxCL
+sEqNBc6EexafaxoJc4Ms0FD5WXiy9Je5+c5ue5Qb3SzavRu8u/z4bnjmpXqodBOS
+jB4KPPGp4iCZPIOD98HyQ4XlYPSFc4hFEDxM6JGjfiKzFGaSmroSqwoKYYUjLsI+
+SuFPciOnH73KvwGX0uDYOKKZp5kmhKwu+AWaOfjoMGC2j+aOCQswziYBwr32bgyf
+S/CM4uha7XhY4vi5IaRgXrSSsCRFwskTRQwtAHtu8m17D0CH7K5blKXtx+pHB+6x
+cYTX9u2N2rqnOTma6+KEXFzVj0JiXsT3OwFmAFRvDU+erGSlAF3bQkZcu0hoFZmh
+XBeRV+vA3D/rkwXal8vMRcn2V+XZ5wARAQABiQI8BBgBCgAmFiEE9KIupB+h8wim
+asBGj32GDGwyVDoFAmHLPM4CGwwFCQICKQAACgkQj32GDGwyVDqkbg/+NVEZw2A4
+Uk6h4Exo9T0+ttd/ywi8P5aGnoiJ9Fw92RHgmSNUwIwgdeGKrgBbhVaO/V4CDGJp
+iiwIAxzU/xCNibEGTUkH79AZvFHXxXwRKf/vWW1w3gyh9ppRLBlUw3S2DdEkxlzJ
+5R1ryYTeV4yFAVK1Ln1v/UCA2WHho3IN/PIgDt701zONUEn1OOxHrMlKsgHIBAAk
+NA6IQ1Tr8RW9abK3uAtJxxnyOqEMkiE03sJfd1dAUtvirGxr7g3t1Gfi8BPnQR5T
+ZNqDOblM6fiY05AngPOLtV0n6LazK/buNenvUUhT0R9noMX6ZcApGpS4fFhADw1q
+vrFYSG/4rLSGKvLqw5pQ7PzLDHPfn/HIME//SPuBnYrTYjiupzdmgtjGOc1iMV0X
+YVXuA1yj+aJFaObLnVD31v2GIKvVS4WMsG74Mf5vMiMkbc0Zg2ULGun3sXscW0Yh
+2MnvI5oYQcKmzjmhPdKHrmkiy9QC4442PbE8Bn9KUpcVoxCtFr/Zsc18iUVHYyIG
+rrmZBE8MF1tGGBsdFC4Aktujuj3EevBo26QLozyfOLXXATHhmGh4SWsH68iyzynw
+ARzB/pCyvB1Y/QbRn3ClFIksAyjrMxiNkSQXgToc8Ph+vLnHS3Y4399c74WZCHCH
+i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
+=8Gny
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### Revoked Public key
+
+**_Kindly use the new key instead_**
+
+| Tag | Value |
+| -- | -- |
+| ID | BEAF6EBF631106F9 |
+| Type | RSA |
+| Size | 4096 |
+| Created | 2020-02-11 |
+| Expires | 2022-01-13 |
+| Cipher |AES-256|
+| Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
+","# Security Acknowledgement
+
+Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
+
+We acknowledge that Centreon users and security researchers following our Centreon Security Policy to report vulnerabilities are key to the success of this commitment.
+If you are the first to report a confirmed vulnerability, we would like to recognize your contribution by listing your name, or the name of your organization on this page.
+You may obviously choose to remain anonymous.
+
+For more details on how to report a security vulnerability, kindly check below.
+
+Centreon reserves the right to make final decisions regarding publishing acknowledgments. Also, please be aware that only reports following our Security Policy may qualify for acknowledgement on this page.
+
+---
+
+## 2022
+
+* 2022/11/16 - Vladimir TOUTAIN from [DSecBypass](https://www.dsecbypass.com)
+* 2022/10/05 - [Héctor Morales](mailto:hmorales@centreon.com)
+* 2022/09/06 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/08/24 - Anonymous working with Trend Micro Zero Day Initiative
+* 2022/06/29 - Marcus Lichtenstern
+* 2022/05/23 - Lucas Carmo and Daniel França Lima from [Hakaï Security](https://www.hakaioffensivesecurity.com/)
+* 2022/02/16 - Anonymous working with Trend Micro Zero Day Initiative
+
+## 2021
+
+* 2021/08/09 - [Amammad](https://huntr.dev/users/amammad) from [huntr-dev](https://huntr.dev/)
+* 2021/07/13 - [Gaurang Maheta](https://www.linkedin.com/in/gaurang883)
+* 2021/06/21 - [Bao Chau](https://www.linkedin.com/in/nhubaochau/) / CyRadar
+* 2021/04/07 - [Synacktiv](https://www.synacktiv.com/), Guillaume André and Théo Louis-Tisserand
+* 2021/03/23 - [Benoit Poulet](https://twitter.com/poulet_benoit)
+* 2021/02/22 - [Cody Sixteen](https://twitter.com/CodySixteen)
+* 2021/02/16 - [Sick Codes](https://twitter.com/sickcodes), [wabaf3t](https://twitter.com/wabafet1) and [d0rkerdevil](https://twitter.com/d0rkerdevil)
+* 2021/02/12 - Alexandru Cucea
+
+## 2020
+
+* 2020/05/20 - [WELAN](https://welan.fr/)
+* 2020/01/06 - Matthew Bach / [TheCyberGeek](https://thecybergeek.co.uk/)
+
+---
+
+# Security Policy
+
+Centreon takes the security of our software products seriously.
+
+If you believe you have found a security vulnerability, please report it to us as described below.
+
+## Reporting a Vulnerability
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Send an email to security@centreon.com. If possible, encrypt your message with our PGP key below.
+
+You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+
+To help us better understand the nature and scope of the possible issue, please describe as much as you can: 
+
+* Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+* Full paths of source file(s) related to the manifestation of the issue
+* The location of the affected source code (tag/branch/commit or direct URL)
+* Any special configuration required to reproduce the issue
+* Step-by-step instructions to reproduce the issue
+* Proof-of-concept or exploit code (if possible)
+* Impact of the issue, including how an attacker might exploit the issue
+
+## Bug bounty
+
+We don't have a bug bounty program but this is something we are thinking about.
+
+## PGP information
+
+### Public key
+
+| Tag | Value |
+| -- | -- |
+| ID | C0C80F0275378FBC |
+| Type | RSA |
+| Size | 3072 |
+| Created | 2023-02-13 |
+| Expires | 2024-02-13 |
+| Fingerprint | 5CC5 ED3E DA9B C9BC E438 E9E8 C0C8 0F02 7537 8FBC |
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+BCUHrt8R6d1/xMe53upLfg==
+=sWVu
+-----END PGP PUBLIC KEY BLOCK-----
+```
+",3172

@@ -1,0 +1,124 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+jgraph/drawio,SECURITY.md,3671669002802c5dfee88a4cc43226cc6173ecbb,2022-03-24 13:44:31+00:00,,"# Security Policy
+
+## Supported Versions
+
+Use this section to tell people about which versions of your project are
+currently being supported with security updates.
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+Email support@diagrams.net. If you do not wish to submit by email, please 
+ask for an alternative via email or Github issue.
+",457
+jgraph/drawio,SECURITY.md,8d854152c1559fe9f893d446d499f58ddfc33432,2022-03-24 13:44:47+00:00,"# Security Policy
+
+## Supported Versions
+
+Use this section to tell people about which versions of your project are
+currently being supported with security updates.
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+Email support@diagrams.net. If you do not wish to submit by email, please 
+ask for an alternative via email or Github issue.
+","# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+Email support@diagrams.net. If you do not wish to submit by email, please 
+ask for an alternative via email or Github issue.
+",123
+jgraph/drawio,SECURITY.md,2ae8c9ae871b4ad6d1574390b711e2dfb0c0c2a6,2022-03-24 17:59:20+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+Email support@diagrams.net. If you do not wish to submit by email, please 
+ask for an alternative via email or Github issue.
+","# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+Email support@diagrams.net. If you do not wish to submit by email, please 
+ask for an alternative via email or Github issue.",1
+jgraph/drawio,SECURITY.md,4e9d5ec7e285b078c8cd8c10bf6c2b37e7f3d6af,2022-09-02 12:29:15+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+Email support@diagrams.net. If you do not wish to submit by email, please 
+ask for an alternative via email or Github issue.","# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability in axios please disclose it via our [huntr page](https://huntr.dev/repos/jgraph/drawio/). Bounty eligibility, CVE assignment, response times and past reports are all there.
+",169
+jgraph/drawio,SECURITY.md,b5dfeb238369d664fb06a95e2179236b0e75f366,2022-09-07 15:38:41+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability in axios please disclose it via our [huntr page](https://huntr.dev/repos/jgraph/drawio/). Bounty eligibility, CVE assignment, response times and past reports are all there.
+","# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| Latest   | :white_check_mark: |
+| Older    | :x:                |
+
+## Reporting a Vulnerability
+
+Email support@diagrams.net. If you do not wish to submit by email, please 
+ask for an alternative via email or Github issue.",169

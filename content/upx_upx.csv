@@ -1,0 +1,17 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+upx/upx,.github/security.md,79e9b0762c49c2222ea023519ca8b26894242e8e,2022-09-16 11:26:10+00:00,,"# Security Context
+
+IMPORTANT NOTE: UPX inherits the security context of any files it handles.
+
+This means that packing, unpacking, or even testing or listing a file requires
+the same security considerations as actually executing the file.
+
+Use UPX on trusted files only!
+
+## Supported Versions
+
+| Version   | Supported          |
+| --------- | ------------------ |
+| git HEAD  | :white_check_mark: |
+| any other | :x:                |
+",436

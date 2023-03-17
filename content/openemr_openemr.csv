@@ -1,0 +1,17 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+openemr/openemr,.github/SECURITY.md,c0c74f38082f4f2e8236d7a4afe7f002d93e9c92,2021-09-25 02:40:16+00:00,,"### Reporting Security Vulnerabilities
+
+Send an email to brady.g.miller@gmail.com . If possible, please encrypt your email via PGP with this [public key](https://keybase.io/bradymiller/pgp_keys.asc?fingerprint=8a93ddec0e320d5eb8a7994827def05b1a8a6d4f).
+",253
+openemr/openemr,.github/SECURITY.md,4fb16b8da5612145b1e7ad18f88fbf543da38817,2022-07-26 15:06:14+00:00,"### Reporting Security Vulnerabilities
+
+Send an email to brady.g.miller@gmail.com . If possible, please encrypt your email via PGP with this [public key](https://keybase.io/bradymiller/pgp_keys.asc?fingerprint=8a93ddec0e320d5eb8a7994827def05b1a8a6d4f).
+","# Reporting Security Vulnerabilities
+If you discover a security vulnerability in OpenEMR, there are 2 options for reporting the vulnerability to the OpenEMR security group.
+
+## Option 1. Report via huntr
+- Report via [our huntr page](https://huntr.dev/repos/openemr/openemr/). Bounty eligibility, CVE assignment, response times and past reports are all there.
+
+## Option 2. Email security@open-emr.org
+- Send an email to security@open-emr.org . If possible, please encrypt your email via PGP with this [public key](https://www.open-emr.org/files/openemr-security-pgp-key.asc).
+",448

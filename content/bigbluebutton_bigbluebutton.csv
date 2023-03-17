@@ -1,0 +1,268 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+bigbluebutton/bigbluebutton,SECURITY.md,46d2104343d65639d19b92dea7584f63534be7a2,2020-07-23 00:30:51+00:00,,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :white_check_mark: |
+| 2.3-dev   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",625
+bigbluebutton/bigbluebutton,SECURITY.md,2061e61c6dd956f46009c406c772bab5924b7962,2021-05-05 16:05:28+00:00,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :white_check_mark: |
+| 2.3-dev   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+","# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :white_check_mark: |
+| 2.3.x   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",4
+bigbluebutton/bigbluebutton,SECURITY.md,1f85117d8a7b618f62a75d3100689090e2f22492,2021-05-10 17:10:15+00:00,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :white_check_mark: |
+| 2.3.x   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+","# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+
+We have released 2.3 to the community and all our support efforts are now moving to 2.3.  Alos, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we highly recommend that all administrators deploy 2.3 going forward as it is built upon Ubunty 18.04.  You'll find [many improvements](/2.3/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",349
+bigbluebutton/bigbluebutton,SECURITY.md,8a2bf78f2f8cab8b0ebc290c0cede20f1808603d,2021-05-10 17:12:23+00:00,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+
+We have released 2.3 to the community and all our support efforts are now moving to 2.3.  Alos, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we highly recommend that all administrators deploy 2.3 going forward as it is built upon Ubunty 18.04.  You'll find [many improvements](/2.3/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+","# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+
+We have released 2.3 to the community and all our support efforts are now transitioned to 2.3.  Also, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we highly recommend that all administrators deploy 2.3 going forward as it is built upon Ubuntu 18.04.  You'll find [many improvements](/2.3/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",13
+bigbluebutton/bigbluebutton,SECURITY.md,6b79aa490156ce7192a01baac750373959b8da0c,2021-11-20 08:33:14+00:00,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+
+We have released 2.3 to the community and all our support efforts are now transitioned to 2.3.  Also, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we highly recommend that all administrators deploy 2.3 going forward as it is built upon Ubuntu 18.04.  You'll find [many improvements](/2.3/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+","# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+
+We have released 2.3 to the community and all our support efforts are now transitioned to 2.3.  Also, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we highly recommend that all administrators deploy 2.3 going forward as it is built upon Ubuntu 18.04.  You'll find [many improvements](https://docs.bigbluebutton.org/2.3/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",30
+bigbluebutton/bigbluebutton,SECURITY.md,1eb49be737f01d99b4e7f8f36976be82efdd95fa,2021-12-20 15:42:10+00:00,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+
+We have released 2.3 to the community and all our support efforts are now transitioned to 2.3.  Also, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we highly recommend that all administrators deploy 2.3 going forward as it is built upon Ubuntu 18.04.  You'll find [many improvements](https://docs.bigbluebutton.org/2.3/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+","# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+| 2.4.x   | :white_check_mark: |
+
+We have released 2.4 to the community and are going to support both 2.4 and 2.3 together for the coming months (while we're actively developing the next release).  Also, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we recommend that all administrators deploy 2.4 going forward.  You'll find [many improvements](https://docs.bigbluebutton.org/2.4/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",166
+bigbluebutton/bigbluebutton,SECURITY.md,e1c0a104865c6ee787836eb29638b712db537a6d,2022-06-15 14:10:27+00:00,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.0.x (or earlier)  | :x:                |
+| 2.2.x   | :x:  |
+| 2.3.x   | :white_check_mark: |
+| 2.4.x   | :white_check_mark: |
+
+We have released 2.4 to the community and are going to support both 2.4 and 2.3 together for the coming months (while we're actively developing the next release).  Also, BigBlueButton 2.2 is running on Ubuntu 16.04 which is now end of life.
+
+As such, we recommend that all administrators deploy 2.4 going forward.  You'll find [many improvements](https://docs.bigbluebutton.org/2.4/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+","# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.3.x (or earlier)  | :x:    |
+| 2.4.x   | :white_check_mark: |
+| 2.5.x   | :white_check_mark: |
+| 2.6.x   | :x: |
+
+We have released 2.5 to the community and are going to support both 2.4 and 2.5 together for the coming months (while we're actively developing the next release).  Also, BigBlueButton 2.3 is now end of life.
+
+As such, we recommend that all administrators deploy 2.5 going forward.  You'll find [many improvements](https://docs.bigbluebutton.org/2.5/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",86

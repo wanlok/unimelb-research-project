@@ -1,0 +1,79 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+FasterXML/jackson-databind,SECURITY.md,c1a2d7fdeb6de81f1627db46df32f450d7c7d88c,2020-03-21 17:18:53+00:00,,"# Security Policy
+
+Last Updated: 2019-11-26
+
+## Supported Versions
+
+Current status of open branches, with new releases, can be found from [Jackson Releases](https://github.com/FasterXML/jackson/wiki/Jackson-Releases)
+wiki page
+
+## Reporting a Vulnerability
+
+The recommended mechanism for reporting possible security vulnerabilities follows
+so-called ""Coordinated Disclosure Plan"" (see [definition of DCP](https://vuls.cert.org/confluence/display/Wiki/Coordinated+Vulnerability+Disclosure+Guidance)
+for general idea). The first step is to file a [Tidelift security contact](https://tidelift.com/security):
+Tidelift will route all reports via their system to maintainers of relevant package(s), and start the
+process that will evaluate concern and issue possible fixes, send update notices and so on.
+Note that you do not need to be a Tidelift subscriber to file a security contact.
+
+Alternatively you may also report possible vulnerabilities to `info` at fasterxml dot com
+mailing address. Note that filing an issue to go with report is fine, but if you do that please
+DO NOT include details of security problem in the issue but only in email contact.
+This is important to give us time to provide a patch, if necessary, for the problem.
+",1236
+FasterXML/jackson-databind,SECURITY.md,6bbdaf4e173423a68b6058753b4ca9b70cef6456,2022-09-20 23:25:51+00:00,"# Security Policy
+
+Last Updated: 2019-11-26
+
+## Supported Versions
+
+Current status of open branches, with new releases, can be found from [Jackson Releases](https://github.com/FasterXML/jackson/wiki/Jackson-Releases)
+wiki page
+
+## Reporting a Vulnerability
+
+The recommended mechanism for reporting possible security vulnerabilities follows
+so-called ""Coordinated Disclosure Plan"" (see [definition of DCP](https://vuls.cert.org/confluence/display/Wiki/Coordinated+Vulnerability+Disclosure+Guidance)
+for general idea). The first step is to file a [Tidelift security contact](https://tidelift.com/security):
+Tidelift will route all reports via their system to maintainers of relevant package(s), and start the
+process that will evaluate concern and issue possible fixes, send update notices and so on.
+Note that you do not need to be a Tidelift subscriber to file a security contact.
+
+Alternatively you may also report possible vulnerabilities to `info` at fasterxml dot com
+mailing address. Note that filing an issue to go with report is fine, but if you do that please
+DO NOT include details of security problem in the issue but only in email contact.
+This is important to give us time to provide a patch, if necessary, for the problem.
+","# Security Policy
+
+Last Updated: 2022-09-20
+
+## Supported Versions
+
+Current status of open branches, with new releases, can be found from [Jackson Releases](https://github.com/FasterXML/jackson/wiki/Jackson-Releases)
+wiki page
+
+## Reporting a Vulnerability
+
+The recommended mechanism for reporting possible security vulnerabilities follows
+so-called ""Coordinated Disclosure Plan"" (see [definition of DCP](https://vuls.cert.org/confluence/display/Wiki/Coordinated+Vulnerability+Disclosure+Guidance)
+for general idea). The first step is to file a [Tidelift security contact](https://tidelift.com/security):
+Tidelift will route all reports via their system to maintainers of relevant package(s), and start the
+process that will evaluate concern and issue possible fixes, send update notices and so on.
+Note that you do not need to be a Tidelift subscriber to file a security contact.
+
+Alternatively you may also report possible vulnerabilities to `info` at fasterxml dot com
+mailing address. Note that filing an issue to go with report is fine, but if you do that please
+DO NOT include details of security problem in the issue but only in email contact.
+This is important to give us time to provide a patch, if necessary, for the problem.
+
+## Verifying Artifact signatures
+
+(for more in-depth explanation, see [Apache Release Signing](https://infra.apache.org/release-signing#keys-policy) document)
+
+To verify that any given Jackson artifact has been signed with a valid key, have a look at `KEYS` file of the main Jackson repo:
+
+https://github.com/FasterXML/jackson/blob/master/KEYS
+
+which lists all known valid keys in use.
+",392

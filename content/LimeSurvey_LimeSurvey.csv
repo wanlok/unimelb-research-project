@@ -1,0 +1,24 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+LimeSurvey/LimeSurvey,SECURITY.md,233253e992b8dae08c425a41305d39ff77c8a1d9,2021-11-09 11:38:58+00:00,,"# Security Policy
+
+## Reporting a Vulnerability
+
+Please report (suspected) security vulnerabilities to support@limesurvey.org or create a bug report and mark it as private. Marking it as private will make the bug report visible to only users who have access.
+
+You will receive a response from us within 48 hours. If the issue is confirmed, we will release a patch as soon as possible depending on complexity but historically within a few days.
+",444
+LimeSurvey/LimeSurvey,SECURITY.md,3a8a5c21cc05e148b81dae56f986e26db90be918,2022-02-18 13:54:20+00:00,"# Security Policy
+
+## Reporting a Vulnerability
+
+Please report (suspected) security vulnerabilities to support@limesurvey.org or create a bug report and mark it as private. Marking it as private will make the bug report visible to only users who have access.
+
+You will receive a response from us within 48 hours. If the issue is confirmed, we will release a patch as soon as possible depending on complexity but historically within a few days.
+","# Security Policy
+
+## Reporting a Vulnerability
+
+Please report (suspected) security vulnerabilities by creating a bug report on https://bugs.limesurvey.org and mark it as private. Marking it as private will make the bug report visible to only users who have access. Another option would be to send the information to support@limesurvey.org, directly.
+
+You will receive a response from us within 48 hours. If the issue is confirmed, we will release a patch as soon as possible depending on complexity but historically within a few days.
+",128

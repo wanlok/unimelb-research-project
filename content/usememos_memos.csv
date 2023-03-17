@@ -1,0 +1,9 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+usememos/memos,SECURITY.md,89179f78c2ae1b0eb2b241723dca4d7537c2d9f9,2022-11-25 01:05:52+00:00,,"# Security Policy
+
+## Reporting a bug
+
+Report security bugs via GitHub [issues](https://github.com/usememos/memos/issues).
+
+For more information, please contact [stevenlgtm@gmail.com](stevenlgtm@gmail.com).
+",207

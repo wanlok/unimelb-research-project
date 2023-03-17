@@ -1,0 +1,11 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+LibreDWG/libredwg,SECURITY.md,f4ffcbfe7ef9a4dd094a05e3f80881716612899e,2022-05-03 10:17:05+00:00,,"# Security Policy
+
+## Supported Versions
+
+The last 2 releases.
+
+## Reporting a Vulnerability
+
+Report a vulnerability by email to the maintainer.
+",145

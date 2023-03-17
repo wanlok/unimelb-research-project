@@ -1,0 +1,5 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+xwiki/xwiki-platform,SECURITY.md,88d3cab95d0a4f0cdacad4a0163c63b89abe6f7d,2020-11-18 15:10:56+00:00,,"# Security Policy
+
+XWiki security policy is detailed on the following document: https://dev.xwiki.org/xwiki/bin/view/Community/SecurityPolicy/.
+",144

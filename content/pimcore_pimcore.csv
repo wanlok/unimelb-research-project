@@ -1,0 +1,306 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+pimcore/pimcore,SECURITY.md,ba2325f59c23ef3a6872d81bfce27770f0a2d0dc,2020-11-09 14:07:27+00:00,,"# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 6.8.x   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via [this form](https://pimcorehq.wufoo.com/forms/pimcore-security-report/).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by the core-team by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+",836
+pimcore/pimcore,SECURITY.md,1dbbc2ba1c73f8f12d235ffdc13b63971aaa7ad4,2021-03-10 09:40:38+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 6.8.x   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via [this form](https://pimcorehq.wufoo.com/forms/pimcore-security-report/).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by the core-team by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+","# Security Policy
+
+## Supported Versions
+see [suppored versions here](https://github.com/pimcore/pimcore#supported-versions). 
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via [this form](https://pimcorehq.wufoo.com/forms/pimcore-security-report/).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by the core-team by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+",84
+pimcore/pimcore,SECURITY.md,e9a21c62353ef83e6bc3390804bf41ccdfe5fc24,2021-08-02 11:59:31+00:00,"# Security Policy
+
+## Supported Versions
+see [suppored versions here](https://github.com/pimcore/pimcore#supported-versions). 
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via [this form](https://pimcorehq.wufoo.com/forms/pimcore-security-report/).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by the core-team by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+","# Security Policy
+
+## Supported Versions
+see [suppored versions here](https://github.com/pimcore/pimcore#supported-versions). 
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via [this form](https://pimcorehq.wufoo.com/forms/pimcore-security-report/).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+",17
+pimcore/pimcore,SECURITY.md,581d29894649f52e9def59e616eaa500b39f7896,2021-08-02 12:14:56+00:00,"# Security Policy
+
+## Supported Versions
+see [suppored versions here](https://github.com/pimcore/pimcore#supported-versions). 
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via [this form](https://pimcorehq.wufoo.com/forms/pimcore-security-report/).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+","# Security Policy
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via 📫 to security-issue📧pimcore.com .
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+",166
+pimcore/pimcore,SECURITY.md,1c5bebde7bb79e638365e33a06cbf3b2f5a5be03,2021-08-02 12:17:11+00:00,"# Security Policy
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue in Pimcore, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via 📫 to security-issue📧pimcore.com .
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+","# Security Policy
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via 📫 to security-issue📧pimcore.com .
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+",11
+pimcore/pimcore,SECURITY.md,50d11b8c6f370767d7b142036ed29c3982c0215d,2021-08-13 11:16:46+00:00,"# Security Policy
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via 📫 to security-issue📧pimcore.com .
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+","# Security Policy
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via 📫 to [security-issue@pimcore.com](mailto:security-issue@pimcore.com).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+",38
+pimcore/pimcore,SECURITY.md,c272a7d2869c3ed199b0fffd3c3ab164a53c8720,2023-02-01 10:03:13+00:00,"# Security Policy
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via 📫 to [security-issue@pimcore.com](mailto:security-issue@pimcore.com).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+","# Security Policy
+
+## Reporting a Vulnerability
+
+If you think that you have found a security issue, 
+don’t use the bug tracker and don’t publish it publicly. 
+Instead, all security issues must be reported via 📫 to [security-issue@pimcore.com](mailto:security-issue@pimcore.com).
+Additionally, we also check issues reported via [huntr.dev](https://huntr.dev/repos/pimcore/pimcore/).
+
+
+## Resolving Process
+Every submitted security issue is handled with top priority by following these steps: 
+
+1. Confirm the vulnerability
+2. Determine the severity
+3. Contact reporter
+4. Work on a patch
+5. Get a CVE identification number (may be done by the reporter or a security service provider)
+6. Patch reviewing 
+7. Tagging a new release for supported versions
+8. Publish security announcement
+
+",103

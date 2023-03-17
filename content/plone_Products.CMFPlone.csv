@@ -1,0 +1,66 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+plone/Products.CMFPlone,.github/SECURITY.md,2d7bfd45acf310fb10ebd15c727c875fc5ecf9dc,2021-09-13 08:50:53+00:00,,"# Security Policy
+
+The most up to date information about Plone security is on https://plone.org/security
+
+## Supported Versions
+
+For supported versions, see the [security update policy](https://plone.org/security/update-policy)
+
+The [release schedule](https://plone.org/download/release-schedule) also has helpful information.
+
+There may be hotfixes available to increase the security of your version of Plone. Please check the [available hotfixes](https://plone.org/security/hotfixes).
+
+## Reporting a Vulnerability
+
+Please do **NOT** create a public bug report if you think this may be a security issue.
+Instead, please contact the Plone Security Team via email: security@plone.org.
+See also https://plone.org/security/report
+
+Only bug reports submitted directly to the security team email will be treated as responsible disclosure.
+Any offered for sale to third parties or submitted to public bug bounty programmes will be treated as irresponsible public disclosure.
+We will not confirm any submissions on third party platforms such as ""huntr"" or ""hackerone"" and do not give permission for those systems to accept reports on our behalf or to represent themselves as a conduit for vulnerability reports.
+",1206
+plone/Products.CMFPlone,.github/SECURITY.md,4a402f36858814d851932bb3defef6161cfc1b8b,2022-08-07 10:49:34+00:00,"# Security Policy
+
+The most up to date information about Plone security is on https://plone.org/security
+
+## Supported Versions
+
+For supported versions, see the [security update policy](https://plone.org/security/update-policy)
+
+The [release schedule](https://plone.org/download/release-schedule) also has helpful information.
+
+There may be hotfixes available to increase the security of your version of Plone. Please check the [available hotfixes](https://plone.org/security/hotfixes).
+
+## Reporting a Vulnerability
+
+Please do **NOT** create a public bug report if you think this may be a security issue.
+Instead, please contact the Plone Security Team via email: security@plone.org.
+See also https://plone.org/security/report
+
+Only bug reports submitted directly to the security team email will be treated as responsible disclosure.
+Any offered for sale to third parties or submitted to public bug bounty programmes will be treated as irresponsible public disclosure.
+We will not confirm any submissions on third party platforms such as ""huntr"" or ""hackerone"" and do not give permission for those systems to accept reports on our behalf or to represent themselves as a conduit for vulnerability reports.
+","# Security Policy
+
+The most up to date information about Plone security is on https://plone.org/security
+
+## Supported Versions
+
+For supported versions, see the [security update policy](https://plone.org/security/update-policy)
+
+The [release schedule](https://plone.org/download/release-schedule) also has helpful information.
+
+There may be hotfixes available to increase the security of your version of Plone. Please check the [available hotfixes](https://plone.org/security/hotfixes).
+
+## Reporting a Vulnerability
+
+Please do **NOT** create a public bug report if you think this may be a security issue.
+Instead, please contact the Plone Security Team via email: security@plone.org.
+See also https://plone.org/security/report
+
+Only bug reports submitted directly to the security team email will be treated as responsible disclosure.
+Any offered for sale to third parties or submitted to public bug bounty programs will be treated as irresponsible public disclosure.
+We will not confirm any submissions on third party platforms such as ""huntr"" or ""hackerone"" and do not give permission for those systems to accept reports on our behalf or to represent themselves as a conduit for vulnerability reports.
+",2

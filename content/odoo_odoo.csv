@@ -1,0 +1,366 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+odoo/odoo,SECURITY.md,3845e0ff61fb6075d1ed6c6c5cd3c26ce5f6d510,2019-05-24 13:14:41+00:00,,"# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 12.0    | :white_check_mark: |
+| 11.0    | :white_check_mark: |
+| 10.0    | :white_check_mark: |
+| <=9.0   | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+",1734
+odoo/odoo,SECURITY.md,41c434cd5d05561c725bfc0f9df99271fe2e49d7,2019-10-03 12:48:09+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 12.0    | :white_check_mark: |
+| 11.0    | :white_check_mark: |
+| 10.0    | :white_check_mark: |
+| <=9.0   | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+","# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 13.0    | :white_check_mark: |
+| 12.0    | :white_check_mark: |
+| 11.0    | :white_check_mark: |
+| <=10.0  | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+",6
+odoo/odoo,SECURITY.md,c4fa804cc63684be81d1eb7a567646d849e648e6,2020-09-28 14:07:25+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 13.0    | :white_check_mark: |
+| 12.0    | :white_check_mark: |
+| 11.0    | :white_check_mark: |
+| <=10.0  | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+","# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 14.0    | :white_check_mark: |
+| 13.0    | :white_check_mark: |
+| 12.0    | :white_check_mark: |
+| <=11.0  | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+",4
+odoo/odoo,SECURITY.md,cbe1e8e5a5f7fff087343376191cf7fc1d00c218,2021-10-07 17:59:53+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 14.0    | :white_check_mark: |
+| 13.0    | :white_check_mark: |
+| 12.0    | :white_check_mark: |
+| <=11.0  | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+","# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 15.0    | :white_check_mark: |
+| 14.0    | :white_check_mark: |
+| 13.0    | :white_check_mark: |
+| <=12.0  | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+",4
+odoo/odoo,SECURITY.md,3eebe6e13477918122d0d1f15181a403bceaa013,2022-10-17 08:41:52+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 15.0    | :white_check_mark: |
+| 14.0    | :white_check_mark: |
+| 13.0    | :white_check_mark: |
+| <=12.0  | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+","# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 16.0    | :white_check_mark: |
+| 15.0    | :white_check_mark: |
+| 14.0    | :white_check_mark: |
+| <=13.0  | :x:                |
+
+## Reporting a Vulnerability
+
+Please share privately the details of your security vulnerability by contacting our Security Team:
+[Contact Info](https://www.odoo.com/security-report)
+
+Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
+the versions that are affected, the expected results and actual results, and any other information that
+might help us react faster and more efficiently.
+
+We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
+than screenshots and videos.
+
+Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
+process, including:
+
+ - Our Incident Response Procedure (what will happen after you report an issue)
+ - Our Rules (what you can and cannot do while researching security issues)
+ - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
+   (what kind of issues will be accepted/rejected)
+
+
+## Important note
+
+We receive a majority of security reports that have little to no impact on the security of Odoo or
+the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
+contacting us, please try to put together a proof-of-concept attack and take a critical look at
+what's really at risk.
+If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
+Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+",4

@@ -1,0 +1,7 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+libgd/libgd,SECURITY.md,2f76f48837dfa53b21aa8b492bb5b725a6f8e831,2022-01-23 06:31:55+00:00,,"# Security Policy
+
+## Reporting a Vulnerability
+
+Please report security issues to `pierre@php.net`
+",99

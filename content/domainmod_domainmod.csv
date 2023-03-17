@@ -1,0 +1,14 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+domainmod/domainmod,SECURITY.md,6721f01050aec0cd127aafa2812e4a8068a9a5d4,2022-04-16 08:44:08+00:00,,"[![DomainMOD](https://domainmod.org/images/logo.png)](https://domainmod.org)
+
+Project Home:   
+Project Demo:   
+Documentation:   
+Source Code: 
+
+# Security Policy
+
+## Reporting a Vulnerability
+
+If you find a vulnerability in DomainMOD, please contact me directly at my personal email address, greg@chetcuti.com. This will ensure the best chance of me seeing your email in a timely manner.
+",389

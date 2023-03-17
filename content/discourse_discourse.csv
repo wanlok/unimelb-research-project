@@ -1,0 +1,1700 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+discourse/discourse,docs/SECURITY.md,3186535537f3d43d0a65a4f54015d26c8ed61ff0,2013-07-29 06:26:49+00:00,,"##Discourse Security Guide
+
+The following guide covers security regarding your Discourse installation
+
+###Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. There is an in-depth discussion about its merits in http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage.
+
+**options you can customise in your production.rb file**
+
+pbkdf2_algorithm: the hashing algorithm used (default ""sha256"")
+pbkdf2_iterations: the number of iterations to run (default is: 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the ""composer"", as we allow users to generate rather rich markdown we need to protect against poison markdown.
+
+For the composer there are 2 main scenarios we protect against:
+
+1. Markdown preview invokes an XSS. This is severe cause an admin may edit a user's post and a malicious user may then run JavaScript in the context of an admin.
+
+2. Markdown displayed on the page invokes an XSS.
+
+To protect against client side ""preview"" XSS, Discourse uses Google Caja https://code.google.com/p/google-caja/ in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the Sanitize gem https://github.com/rgrove/sanitize see: https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb
+
+In addition, titles and all other places where non-admins can enter code is protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+CSRF allows malicious sites to perform HTTP requests pretending to be an end-user (without their knowledge) more at: http://en.wikipedia.org/wiki/Cross-site_request_forgery
+
+Discourse extends the built-in Rails CSRF protection in a couple of ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",2030
+discourse/discourse,docs/SECURITY.md,0e494c73036baecae16976b81c3d3c8c42018181,2013-07-29 06:42:49+00:00,"##Discourse Security Guide
+
+The following guide covers security regarding your Discourse installation
+
+###Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. There is an in-depth discussion about its merits in http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage.
+
+**options you can customise in your production.rb file**
+
+pbkdf2_algorithm: the hashing algorithm used (default ""sha256"")
+pbkdf2_iterations: the number of iterations to run (default is: 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the ""composer"", as we allow users to generate rather rich markdown we need to protect against poison markdown.
+
+For the composer there are 2 main scenarios we protect against:
+
+1. Markdown preview invokes an XSS. This is severe cause an admin may edit a user's post and a malicious user may then run JavaScript in the context of an admin.
+
+2. Markdown displayed on the page invokes an XSS.
+
+To protect against client side ""preview"" XSS, Discourse uses Google Caja https://code.google.com/p/google-caja/ in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the Sanitize gem https://github.com/rgrove/sanitize see: https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb
+
+In addition, titles and all other places where non-admins can enter code is protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+CSRF allows malicious sites to perform HTTP requests pretending to be an end-user (without their knowledge) more at: http://en.wikipedia.org/wiki/Cross-site_request_forgery
+
+Discourse extends the built-in Rails CSRF protection in a couple of ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","##Discourse Security Guide
+
+The following guide covers security regarding your Discourse installation
+
+###Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. There is an in-depth discussion about its merits in http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage.
+
+**options you can customise in your production.rb file**
+
+pbkdf2_algorithm: the hashing algorithm used (default ""sha256"")  
+pbkdf2_iterations: the number of iterations to run (default is: 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the ""composer"", as we allow users to generate rather rich markdown we need to protect against poison markdown.
+
+For the composer there are 2 main scenarios we protect against:
+
+1. Markdown preview invokes an XSS. This is severe cause an admin may edit a user's post and a malicious user may then run JavaScript in the context of an admin.
+
+2. Markdown displayed on the page invokes an XSS.
+
+To protect against client side ""preview"" XSS, Discourse uses Google Caja https://code.google.com/p/google-caja/ in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the Sanitize gem https://github.com/rgrove/sanitize see: https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb
+
+In addition, titles and all other places where non-admins can enter code is protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+CSRF allows malicious sites to perform HTTP requests pretending to be an end-user (without their knowledge) more at: http://en.wikipedia.org/wiki/Cross-site_request_forgery
+
+Discourse extends the built-in Rails CSRF protection in a couple of ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",2
+discourse/discourse,docs/SECURITY.md,c3f3c1a23fa2e984a391854872e7ec38926ae77e,2013-07-30 20:57:15+00:00,"##Discourse Security Guide
+
+The following guide covers security regarding your Discourse installation
+
+###Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. There is an in-depth discussion about its merits in http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage.
+
+**options you can customise in your production.rb file**
+
+pbkdf2_algorithm: the hashing algorithm used (default ""sha256"")  
+pbkdf2_iterations: the number of iterations to run (default is: 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the ""composer"", as we allow users to generate rather rich markdown we need to protect against poison markdown.
+
+For the composer there are 2 main scenarios we protect against:
+
+1. Markdown preview invokes an XSS. This is severe cause an admin may edit a user's post and a malicious user may then run JavaScript in the context of an admin.
+
+2. Markdown displayed on the page invokes an XSS.
+
+To protect against client side ""preview"" XSS, Discourse uses Google Caja https://code.google.com/p/google-caja/ in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the Sanitize gem https://github.com/rgrove/sanitize see: https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb
+
+In addition, titles and all other places where non-admins can enter code is protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+CSRF allows malicious sites to perform HTTP requests pretending to be an end-user (without their knowledge) more at: http://en.wikipedia.org/wiki/Cross-site_request_forgery
+
+Discourse extends the built-in Rails CSRF protection in a couple of ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","##Discourse Security Guide
+
+If you are reporting a security issue with Discourse, please email `team@discourse.org` -- we take security reports very seriously and will investigate ASAP.
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to make sure that nobody's Discourse forum is ever compromised or hacked. 
+
+Here are a few specific ways Discourse is as secure as we could make it:
+
+###Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. *Markdown preview invokes an XSS.* This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. *Markdown displayed on the page invokes an XSS.* To protect against client side preview XSS, Discourse uses [Google Caja](https://code.google.com/p/google-caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests pretending to be an end-user (without their knowledge), mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",917
+discourse/discourse,docs/SECURITY.md,d688ef1b496b4c5e9f874c3dfe11dd893e3ac1af,2013-07-30 20:59:30+00:00,"##Discourse Security Guide
+
+If you are reporting a security issue with Discourse, please email `team@discourse.org` -- we take security reports very seriously and will investigate ASAP.
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to make sure that nobody's Discourse forum is ever compromised or hacked. 
+
+Here are a few specific ways Discourse is as secure as we could make it:
+
+###Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. *Markdown preview invokes an XSS.* This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. *Markdown displayed on the page invokes an XSS.* To protect against client side preview XSS, Discourse uses [Google Caja](https://code.google.com/p/google-caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests pretending to be an end-user (without their knowledge), mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to make sure that nobody's Discourse forum is ever compromised or hacked. 
+
+Here are a few specific ways Discourse is as secure as we could make it:
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. *Markdown preview invokes an XSS.* This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. *Markdown displayed on the page invokes an XSS.* To protect against client side preview XSS, Discourse uses [Google Caja](https://code.google.com/p/google-caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",344
+discourse/discourse,docs/SECURITY.md,4c8a3370dac9393323dd1db851e399955c9493bf,2013-07-30 21:00:37+00:00,"### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to make sure that nobody's Discourse forum is ever compromised or hacked. 
+
+Here are a few specific ways Discourse is as secure as we could make it:
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. *Markdown preview invokes an XSS.* This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. *Markdown displayed on the page invokes an XSS.* To protect against client side preview XSS, Discourse uses [Google Caja](https://code.google.com/p/google-caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to make sure that nobody's Discourse forum is ever compromised or hacked. 
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. *Markdown preview invokes an XSS.* This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. *Markdown displayed on the page invokes an XSS.* To protect against client side preview XSS, Discourse uses [Google Caja](https://code.google.com/p/google-caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",476
+discourse/discourse,docs/SECURITY.md,028cd348e1d9145944e20a443c5656d02c67f4ab,2013-07-30 21:08:15+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to make sure that nobody's Discourse forum is ever compromised or hacked. 
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+
+### XSS
+
+The main vector for XSS attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. *Markdown preview invokes an XSS.* This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. *Markdown displayed on the page invokes an XSS.* To protect against client side preview XSS, Discourse uses [Google Caja](https://code.google.com/p/google-caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked. 
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",85
+discourse/discourse,docs/SECURITY.md,a6b4b5dbf29bb51f551ec293086642f365cffb44,2013-08-14 19:39:40+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked. 
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")  
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).  
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",5
+discourse/discourse,docs/SECURITY.md,03e51b1a3a8d6ff6084f6897447857432d50c970,2014-04-25 14:52:36+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",0
+discourse/discourse,docs/SECURITY.md,20ba6e4b19956b6eec56b8ef398ac94f151f8365,2014-05-09 23:36:39+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",0
+discourse/discourse,docs/SECURITY.md,ea1f4a002158c1cb59e21dbe29cd5ab91f264e5b,2017-01-07 07:51:12+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",201
+discourse/discourse,docs/SECURITY.md,02f582eca0958870f8466407aa28d4faac3ac323,2018-09-11 19:43:52+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",177
+discourse/discourse,docs/SECURITY.md,358fbeba1434a23f2da16955b4f753afd23c39f4,2018-12-20 00:54:45+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. [**CSP is on by default** for all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",238
+discourse/discourse,docs/SECURITY.md,bd6d482d111244c516b0a96135a4ed6d22373961,2018-12-20 00:55:54+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 2 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. [**CSP is on by default** for all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",3
+discourse/discourse,docs/SECURITY.md,24b3494660971bbfc17930eee1c3e20d5859f6cd,2019-02-22 15:29:27+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",2
+discourse/discourse,docs/SECURITY.md,db39eae68323f33c3a397e06fb40f98f1d4f5187,2019-07-25 07:08:03+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?utf8=%E2%9C%93&q=SECURITY&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",30
+discourse/discourse,docs/SECURITY.md,e0d9232259f6fb0f76bca471c4626178665ca24a,2020-07-27 00:23:54+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a whitelist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",5
+discourse/discourse,docs/SECURITY.md,8517b6f386b1e73bd264c28d1cda660d8147147b,2021-04-28 09:32:55+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [Google Caja](https://developers.google.com/caja/) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [xss.js](https://jsxss.com/en/index.html) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",35
+discourse/discourse,docs/SECURITY.md,59097b207f75eab1dd39281b55a91e678142b37b,2021-05-21 01:43:47+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customise in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [xss.js](https://jsxss.com/en/index.html) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cachable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customize in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [xss.js](https://jsxss.com/en/index.html) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`",2
+discourse/discourse,docs/SECURITY.md,5f7e60d9dc25f8bd9b53e925d49ad3eeae4760e3,2021-07-19 15:46:15+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customize in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [xss.js](https://jsxss.com/en/index.html) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/master/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customize in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [xss.js](https://jsxss.com/en/index.html) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/main/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`",4
+discourse/discourse,docs/SECURITY.md,a29b133d33d82668a217f509e0a882be8b82c2cd,2022-03-09 02:02:20+00:00,"## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you prefer not to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customize in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [xss.js](https://jsxss.com/en/index.html) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/main/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`","## Discourse Security
+
+We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
+
+### Where should I report security issues?
+
+In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please use our [vulnerability disclosure program at Hacker One](https://hackerone.com/discourse) to provide details and repro steps and we will respond ASAP. If you are unable to use Hacker One, email us directly at `team@discourse.org` with details and repro steps. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
+
+**Please note:** Due to a significant number of low quality security reports sent via email, we are unlikely to act on security reports sent to us via email unless they come from a trusted source, and include details on the vulnerability and step by step instructions to reproduce it. Theoretical reports without a proof of concept are not accepted. We strongly recommend you follow the Hacker One submission protocols.
+
+For a list of recent security commits, check [our GitHub commits prefixed with SECURITY](https://github.com/discourse/discourse/search?o=desc&q=SECURITY&s=committer-date&type=Commits).
+
+### Password Storage
+
+Discourse uses the PBKDF2 algorithm to encrypt salted passwords. This algorithm is blessed by NIST. Security experts on the web [tend to agree that PBKDF2 is a secure choice](https://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage).
+
+**options you can customize in your production.rb file**
+
+- `pbkdf2_algorithm`: the hashing algorithm used (default ""sha256"")
+- `pbkdf2_iterations`: the number of iterations to run (default 64000)
+
+### XSS
+
+The main vector for [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks is via the post composer, as we allow users to enter Markdown, HTML (a safe subset thereof), and BBCode to format posts.
+
+There are 3 main scenarios we protect against:
+
+1. **Markdown preview invokes an XSS.** This is possibly severe in one specific case: when a forum staff member edits a user's post, seeing the raw markup, where a malicious user may have inserted code to run JavaScript. This code would only show up in the preview, but it would run in the context of a forum staff member, which is *very* bad.
+
+2. **Markdown displayed on the page invokes an XSS.** To protect against client side preview XSS, Discourse uses [xss.js](https://jsxss.com/en/index.html) in the preview window.
+
+3. **CSP is on by default** for [all Discourse installations](https://meta.discourse.org/t/mitigate-xss-attacks-with-content-security-policy/104243) as of Discourse 2.2. It can be switched off in the site settings, but it is default on.
+
+On the server side we run a allowlist based sanitizer, implemented using the [Sanitize gem](https://github.com/rgrove/sanitize). See the [relevant Discourse code](https://github.com/discourse/discourse/blob/main/lib/pretty_text.rb).
+
+In addition, titles and all other places where non-admins can enter code are protected either using the Handlebars library or standard Rails XSS protection.
+
+### CSRF
+
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) allows malicious sites to perform HTTP requests in the context of a forum user without their knowledge -- mostly by getting users who already hold a valid forum login cookie to click a specific link in their web browser.
+
+Discourse extends the built-in Rails CSRF protection in the following ways:
+
+1. By default any non GET requests ALWAYS require a valid CSRF token. If a CSRF token is missing Discourse will raise an exception.
+
+2. API calls using the secret API bypass CSRF checks.
+
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`",429

@@ -1,0 +1,9 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+openssl/.github,SECURITY.md,bdd0e1a964db9521f669525892728e06489be1e0,2022-01-17 15:23:35+00:00,,"# Security Policy
+
+[OpenSSL Security Policy](https://www.openssl.org/policies/secpolicy.html)
+
+## Reporting a Vulnerability
+
+To report a new vulnerability you have discovered please follow the [OpenSSL reporting process](https://www.openssl.org/community/#securityreports).
+",274

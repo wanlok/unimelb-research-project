@@ -1,0 +1,350 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+zulip/zulip,SECURITY.md,ab918c139b054dbfe3b9202a86ae6301fa1eb416,2020-06-25 22:23:22+00:00,,"# Security Policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a Vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com.  Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security
+model](https://zulip.readthedocs.io/en/latest/production/security-model.html)
+document may be a helpful resource.
+
+## Supported Versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make
+[upgrades](https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release)
+reliable, so that there's no reason to run older major releases.
+",985
+zulip/zulip,SECURITY.md,72d6ff3c3be73fc6c28acd64f5740e3bd2cb78de,2020-10-23 18:46:55+00:00,"# Security Policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a Vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com.  Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security
+model](https://zulip.readthedocs.io/en/latest/production/security-model.html)
+document may be a helpful resource.
+
+## Supported Versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make
+[upgrades](https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release)
+reliable, so that there's no reason to run older major releases.
+","# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com.  Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security
+model](https://zulip.readthedocs.io/en/latest/production/security-model.html)
+document may be a helpful resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make
+[upgrades](https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release)
+reliable, so that there's no reason to run older major releases.
+",3
+zulip/zulip,SECURITY.md,d7d79b57b7ecc2f9c8ecee4097929d9605125cc9,2021-05-05 16:08:43+00:00,"# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com.  Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security
+model](https://zulip.readthedocs.io/en/latest/production/security-model.html)
+document may be a helpful resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make
+[upgrades](https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release)
+reliable, so that there's no reason to run older major releases.
+","# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com.  Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security model][security-model] document may be a helpful
+resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make [upgrades][upgrades] reliable, so that there's no
+reason to run older major releases.
+
+See also our documentation on the [Zulip release lifecycle][release-lifecycle]
+
+[security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
+[upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
+[release-cycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
+",385
+zulip/zulip,SECURITY.md,35c1c8d41b937f7a444fea3866ce88375e7400e2,2021-09-08 19:06:24+00:00,"# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com.  Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security model][security-model] document may be a helpful
+resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make [upgrades][upgrades] reliable, so that there's no
+reason to run older major releases.
+
+See also our documentation on the [Zulip release lifecycle][release-lifecycle]
+
+[security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
+[upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
+[release-cycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
+","# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com. Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security model][security-model] document may be a helpful
+resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make [upgrades][upgrades] reliable, so that there's no
+reason to run older major releases.
+
+See also our documentation on the [Zulip release lifecycle][release-lifecycle]
+
+[security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
+[upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
+[release-cycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
+",1
+zulip/zulip,SECURITY.md,c5a427c79e0ad6b753dec55b552ae8b9fad272e5,2022-01-07 22:37:42+00:00,"# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com. Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security model][security-model] document may be a helpful
+resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make [upgrades][upgrades] reliable, so that there's no
+reason to run older major releases.
+
+See also our documentation on the [Zulip release lifecycle][release-lifecycle]
+
+[security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
+[upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
+[release-cycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
+","# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com. Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security model][security-model] document may be a helpful
+resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make [upgrades][upgrades] reliable, so that there's no
+reason to run older major releases.
+
+See also our documentation on the [Zulip release
+lifecycle][release-lifecycle].
+
+[security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
+[upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
+[release-lifecycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
+",6
+zulip/zulip,SECURITY.md,8fe47e8878c20693555891e556674baf80db8f4f,2022-01-07 23:56:26+00:00,"# Security policy
+
+Security announcements are sent to zulip-announce@googlegroups.com,
+so you should subscribe if you are running Zulip in production.
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com. Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security model][security-model] document may be a helpful
+resource.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make [upgrades][upgrades] reliable, so that there's no
+reason to run older major releases.
+
+See also our documentation on the [Zulip release
+lifecycle][release-lifecycle].
+
+[security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
+[upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
+[release-lifecycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
+","# Security policy
+
+## Reporting a vulnerability
+
+We love responsible reports of (potential) security issues in Zulip,
+whether in the latest release or our development branch.
+
+Our security contact is security@zulip.com. Reporters should expect a
+response within 24 hours.
+
+Please include details on the issue and how you'd like to be credited
+in our release notes when we publish the fix.
+
+Our [security model][security-model] document may be a helpful
+resource.
+
+## Security announcements
+
+We send security announcements to our [announcement mailing
+list](https://groups.google.com/g/zulip-announce). If you are running
+Zulip in production, you should subscribe, by clicking ""Join group"" at
+the top of that page.
+
+## Supported versions
+
+Zulip provides security support for the latest major release, in the
+form of minor security/maintenance releases.
+
+We work hard to make [upgrades][upgrades] reliable, so that there's no
+reason to run older major releases.
+
+See also our documentation on the [Zulip release
+lifecycle][release-lifecycle].
+
+[security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
+[upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
+[release-lifecycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
+",384

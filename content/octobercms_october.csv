@@ -1,0 +1,101 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+octobercms/october,SECURITY.md,1a75020efa324b84001f090dea365676d86593be,2019-08-15 15:05:13+00:00,,"# Security Policy
+
+**PLEASE DON'T DISCLOSE SECURITY-RELATED ISSUES PUBLICLY, [SEE BELOW](#reporting-a-vulnerability).**
+
+## Supported Versions
+
+October is evergreen, no one version is singled out for security fixes because there is no way to update just one version. Builds are continually released and security fixes will always be available in the latest build.
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within OctoberCMS, please send an email to Samuel Georges at hello@octobercms.com and Luke Towers at octobercms@luketowers.ca. All security vulnerabilities will be promptly addressed.
+",620
+octobercms/october,SECURITY.md,0718d04a7f3df0e3e40771ae96b8627a18cb7f1d,2020-12-09 17:35:51+00:00,"# Security Policy
+
+**PLEASE DON'T DISCLOSE SECURITY-RELATED ISSUES PUBLICLY, [SEE BELOW](#reporting-a-vulnerability).**
+
+## Supported Versions
+
+October is evergreen, no one version is singled out for security fixes because there is no way to update just one version. Builds are continually released and security fixes will always be available in the latest build.
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within OctoberCMS, please send an email to Samuel Georges at hello@octobercms.com and Luke Towers at octobercms@luketowers.ca. All security vulnerabilities will be promptly addressed.
+","# Security Policy
+
+**PLEASE DON'T DISCLOSE SECURITY-RELATED ISSUES PUBLICLY, [SEE BELOW](#reporting-a-vulnerability).**
+
+## Supported Versions
+
+October is evergreen, no one version is singled out for security fixes because there is no way to update just one version. Builds are continually released and security fixes will always be available in the latest build.
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within OctoberCMS, please send an email to Luke Towers at octobercms@luketowers.ca and Samuel Georges at hello@octobercms.com. All security vulnerabilities will be promptly addressed.
+",56
+octobercms/october,SECURITY.md,def99f6902c6ea9721b2b25e02075e8f60a4ba98,2021-03-04 01:33:16+00:00,"# Security Policy
+
+**PLEASE DON'T DISCLOSE SECURITY-RELATED ISSUES PUBLICLY, [SEE BELOW](#reporting-a-vulnerability).**
+
+## Supported Versions
+
+October is evergreen, no one version is singled out for security fixes because there is no way to update just one version. Builds are continually released and security fixes will always be available in the latest build.
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within OctoberCMS, please send an email to Luke Towers at octobercms@luketowers.ca and Samuel Georges at hello@octobercms.com. All security vulnerabilities will be promptly addressed.
+","# Security Policy
+
+**Please do NOT disclose security-related issues in public, [see instructions below](#reporting-a-vulnerability).**
+
+## Supported Versions
+
+October CMS is an evergreen product, no one version is singled out for security fixes because there is no way to update just one version. Builds are continually released and security fixes will always be available in the latest build. We encourage all users to upgrade their websites to the latest version.
+
+In cases where there are platform versioning constraints, such as old version of Laravel or PHP, we will make a best effort to backport security fixes to these compatible versions.
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within October CMS, please send an email the security team at hello@octobercms.com. All security vulnerabilities will be promptly addressed.
+",385
+octobercms/october,SECURITY.md,1f1c0a3b8e2af6db9b8d7ff8f271dda4efec1a32,2021-04-15 22:19:53+00:00,"# Security Policy
+
+**Please do NOT disclose security-related issues in public, [see instructions below](#reporting-a-vulnerability).**
+
+## Supported Versions
+
+October CMS is an evergreen product, no one version is singled out for security fixes because there is no way to update just one version. Builds are continually released and security fixes will always be available in the latest build. We encourage all users to upgrade their websites to the latest version.
+
+In cases where there are platform versioning constraints, such as old version of Laravel or PHP, we will make a best effort to backport security fixes to these compatible versions.
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within October CMS, please send an email the security team at hello@octobercms.com. All security vulnerabilities will be promptly addressed.
+","# Security Policy
+
+**Please do NOT disclose security-related issues in public, [see instructions below](#reporting-a-vulnerability).**
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within October CMS, please send an email the security team at hello@octobercms.com. All security vulnerabilities will be promptly addressed.
+",513
+octobercms/october,SECURITY.md,dfc701a71adedd36af5f472e35ad0aa65b710402,2021-04-15 22:29:23+00:00,"# Security Policy
+
+**Please do NOT disclose security-related issues in public, [see instructions below](#reporting-a-vulnerability).**
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within October CMS, please send an email the security team at hello@octobercms.com. All security vulnerabilities will be promptly addressed.
+","# Security Policy
+
+**PLEASE DO NOT DISCLOSE SECURITY-RELATED ISSUES PUBLICLY, [SEE BELOW](#reporting-a-vulnerability).**
+
+## Supported Versions
+
+October CMS is an evergreen product, no one version is singled out for security fixes because there is no way to update just one version. Builds are continually released and security fixes will always be available in the latest build.
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within October CMS, please send an email to the team at hello@octobercms.com. All security vulnerabilities will be promptly addressed.
+",306

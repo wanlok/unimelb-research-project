@@ -1,0 +1,12 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+shopware/platform,SECURITY.md,ed7a822dde8b233f4a6d5827f6baa2355f728604,2019-09-12 12:17:54+00:00,,"## Reporting a vulnerability
+
+Visit our [issue tracker](https://issues.shopware.com/createissue) to report security vulnerabilities. 
+Please make sure to use the issue type ""Security Issue"".",190
+shopware/platform,SECURITY.md,751d7a37e30381a3f1bcb7fec6bf31f4a58283d4,2022-12-08 12:44:11+00:00,"## Reporting a vulnerability
+
+Visit our [issue tracker](https://issues.shopware.com/createissue) to report security vulnerabilities. 
+Please make sure to use the issue type ""Security Issue"".","## Reporting a vulnerability
+
+Visit our [security reporting](https://www.shopware.com/en/contact/security-reporting) form to report security vulnerabilities and to take part in our bug bounty program.
+",92

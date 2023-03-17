@@ -1,0 +1,6 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+mz-automation/libiec61850,SECURITY.md,d2b36449c2bbedd8803cf58a2a023c08c5441c85,2022-05-25 19:19:05+00:00,,"# Security Policy
+
+## Reporting a Vulnerability
+
+Please report security issues to `info@libiec61850.com`",104

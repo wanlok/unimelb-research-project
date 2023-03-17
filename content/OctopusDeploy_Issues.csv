@@ -1,0 +1,61 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+OctopusDeploy/.github,SECURITY.md,b8eb6538b5d2a26c44bc8b0868dc689372378edf,2020-08-31 07:50:19+00:00,,"# Reporting security issues
+We treat disclosure with care and respect as per our [security disclosure policy on our website](https://octopus.com/security/disclosure).
+
+## What do we consider a 'security issue'?
+We use sources such as CVSS metrics and the Bugcrowd VRT to qualify the severity of security issues. We will prioritize higher impact issues over lower impact issues.
+
+## Reporting a Vulnerability
+If you have found a vulnerability, please do not file a public issue. Please follow the [security disclosure policy on our website](https://octopus.com/security/disclosure) and send us your report privately via email to [security@octopus.com](mailto:security@octopus.com) and we'll triage the issue from there. When it is safe to do so, we will create a public issue to notify other consumers of this repository.
+
+## Is there a bounty if I find an issue?
+We don't currently offer bounty rewards for finding security issues in this repository.",950
+OctopusDeploy/.github,SECURITY.md,324159c7b633b22458f73ff4ed4e230605293619,2020-08-31 08:04:32+00:00,"# Reporting security issues
+We treat disclosure with care and respect as per our [security disclosure policy on our website](https://octopus.com/security/disclosure).
+
+## What do we consider a 'security issue'?
+We use sources such as CVSS metrics and the Bugcrowd VRT to qualify the severity of security issues. We will prioritize higher impact issues over lower impact issues.
+
+## Reporting a Vulnerability
+If you have found a vulnerability, please do not file a public issue. Please follow the [security disclosure policy on our website](https://octopus.com/security/disclosure) and send us your report privately via email to [security@octopus.com](mailto:security@octopus.com) and we'll triage the issue from there. When it is safe to do so, we will create a public issue to notify other consumers of this repository.
+
+## Is there a bounty if I find an issue?
+We don't currently offer bounty rewards for finding security issues in this repository.","# Reporting security issues
+We treat disclosure with care and respect as per the [security disclosure policy on our website](https://octopus.com/security/disclosure).
+
+## What do we consider a 'security issue'?
+We consider security bugs to be those that impact the confidentiality, integrity or availability of our applications.
+
+We use various sources such as [CVSS metrics](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator) and the [Bugcrowd Vulnerability Rating Taxonomy](https://bugcrowd.com/vulnerability-rating-taxonomy) to qualify the severity of security issues. We will prioritize higher impact issues over lower impact issues.
+
+## Reporting a Vulnerability
+If you have found a vulnerability, please do not file a public issue. Please follow the [security disclosure policy on our website](https://octopus.com/security/disclosure) and send us your report privately via email to [security@octopus.com](mailto:security@octopus.com) and we'll triage the issue from there. When it is safe to do so, we will create a public issue to notify other consumers of this repository.
+
+## Is there a bounty if I find an issue?
+We don't currently offer bounty rewards for finding security issues in this repository.",266
+OctopusDeploy/.github,SECURITY.md,274f0aab6e616d55cf9d9ac0fc2b80386729d6aa,2020-09-02 05:45:48+00:00,"# Reporting security issues
+We treat disclosure with care and respect as per the [security disclosure policy on our website](https://octopus.com/security/disclosure).
+
+## What do we consider a 'security issue'?
+We consider security bugs to be those that impact the confidentiality, integrity or availability of our applications.
+
+We use various sources such as [CVSS metrics](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator) and the [Bugcrowd Vulnerability Rating Taxonomy](https://bugcrowd.com/vulnerability-rating-taxonomy) to qualify the severity of security issues. We will prioritize higher impact issues over lower impact issues.
+
+## Reporting a Vulnerability
+If you have found a vulnerability, please do not file a public issue. Please follow the [security disclosure policy on our website](https://octopus.com/security/disclosure) and send us your report privately via email to [security@octopus.com](mailto:security@octopus.com) and we'll triage the issue from there. When it is safe to do so, we will create a public issue to notify other consumers of this repository.
+
+## Is there a bounty if I find an issue?
+We don't currently offer bounty rewards for finding security issues in this repository.","# Reporting security issues
+We treat disclosure with care and respect as per the [security disclosure policy on our website](https://g.octopushq.com/disclosure).
+
+## What do we consider a 'security issue'?
+We consider security bugs to be those that impact the confidentiality, integrity or availability of our applications.
+
+We use various sources such as [CVSS metrics](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator) and the [Bugcrowd Vulnerability Rating Taxonomy](https://bugcrowd.com/vulnerability-rating-taxonomy) to qualify the severity of security issues. We will prioritize higher impact issues over lower impact issues.
+
+## Reporting a Vulnerability
+If you have found a vulnerability, please do not file a public issue. Please follow the [security disclosure policy on our website](https://g.octopushq.com/disclosure) and send us your report privately via email to [security@octopus.com](mailto:security@octopus.com) and we'll triage the issue from there. When it is safe to do so, we will create a public issue to notify other consumers of this repository.
+
+## Is there a bounty if I find an issue?
+We don't currently offer bounty rewards for finding security issues in this repository.
+",27

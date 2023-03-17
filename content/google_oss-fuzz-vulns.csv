@@ -1,0 +1,31 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+google/.github,SECURITY.md,7c53bbf0267cb2b851e6a11723ed8ded0b6ed0e4,2021-07-29 20:22:02+00:00,,"To report a security issue, please use http://g.co/vulnz. We use
+http://g.co/vulnz for our intake, and do coordination and disclosure here on
+GitHub (including using GitHub Security Advisory). The Google Security Team will
+respond within 5 working days of your report on g.co/vulnz.
+
+",284
+google/.github,SECURITY.md,e9cf71ad5dc2d34b4675d2d4e375a36eacd46658,2021-08-02 17:42:24+00:00,"To report a security issue, please use http://g.co/vulnz. We use
+http://g.co/vulnz for our intake, and do coordination and disclosure here on
+GitHub (including using GitHub Security Advisory). The Google Security Team will
+respond within 5 working days of your report on g.co/vulnz.
+
+","To report a security issue, please use https://g.co/vulnz. We use
+https://g.co/vulnz for our intake, and do coordination and disclosure here on
+GitHub (including using GitHub Security Advisory). The Google Security Team will
+respond within 5 working days of your report on g.co/vulnz.
+
+",2
+google/.github,SECURITY.md,220624c8c785040ad55823b65dc05bcd24764718,2021-08-03 04:52:55+00:00,"To report a security issue, please use https://g.co/vulnz. We use
+https://g.co/vulnz for our intake, and do coordination and disclosure here on
+GitHub (including using GitHub Security Advisory). The Google Security Team will
+respond within 5 working days of your report on g.co/vulnz.
+
+","Please use https://g.co/vulnz to report security vulnerabilities.
+
+We use https://g.co/vulnz for our intake and triage. For valid issues we will do coordination and disclosure here on
+GitHub (including using a GitHub Security Advisory when necessary).
+
+The Google Security Team will process your report within a day, and respond within a week (although it will depend on the severity of your report).
+
+",198

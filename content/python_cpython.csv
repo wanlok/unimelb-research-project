@@ -1,0 +1,163 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+python/cpython,.github/SECURITY.md,af570745fe3852a9ded0e723a7232e4cc0451e95,2019-05-25 10:03:45+00:00,,"# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table in
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](
+https://www.python.org/news/security/#reporting-security-issues-in-python
+) for instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`. 
+",533
+python/cpython,.github/SECURITY.md,a8e814db96ebfeb1f58bc471edffde2176c0ae05,2019-05-27 17:45:24+00:00,"# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table in
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](
+https://www.python.org/news/security/#reporting-security-issues-in-python
+) for instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`. 
+","# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](
+https://www.python.org/news/security/#reporting-security-issues-in-python
+) for instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`. 
+",3
+python/cpython,.github/SECURITY.md,4d396e7d79bd1152f991147718dc5f094a3cc957,2021-05-20 01:52:25+00:00,"# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](
+https://www.python.org/news/security/#reporting-security-issues-in-python
+) for instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`. 
+","# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](https://www.python.org/dev/security/) for
+instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`. 
+",42
+python/cpython,.github/SECURITY.md,058fb35b57ca8c5063d16ec818e668b3babfea65,2021-08-09 18:32:54+00:00,"# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](https://www.python.org/dev/security/) for
+instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`. 
+","# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](https://www.python.org/dev/security/) for
+instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`.
+",1
+python/cpython,.github/SECURITY.md,175247f364f76e0a7e466e967a2af75a90e74473,2022-10-25 16:59:19+00:00,"# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table
+in [the devguide](
+https://devguide.python.org/#status-of-python-branches
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](https://www.python.org/dev/security/) for
+instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`.
+","# Security Policy
+
+## Supported Versions
+
+The Python team applies security fixes according to the table
+in [the devguide](
+https://devguide.python.org/versions/#supported-versions
+).
+
+## Reporting a Vulnerability
+
+Please read the guidelines on reporting security issues [on the
+official website](https://www.python.org/dev/security/) for
+instructions on how to report a security-related problem to
+the Python team responsibly.
+
+To reach the response team, email `security at python dot org`.
+",24

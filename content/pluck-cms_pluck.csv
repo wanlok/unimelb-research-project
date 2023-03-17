@@ -1,0 +1,6 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+pluck-cms/pluck,SECURITY.md,69a4c5e66970ec29d07d041356c14a81389ca1dc,2021-12-24 16:29:37+00:00,,"Reporting a Vulnerability
+
+Please report (suspected) security vulnerabilities to security@pluck-cms.org. You will receive a response from us within 7 days. 
+If the issue is confirmed, we will release a patch as soon as possible depending on complexity but historically within a few days.
+",288

@@ -1,0 +1,9 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+facebook/hhvm,SECURITY.md,ad1b5cd071864ad2e38f36b78823480db1704b3e,2019-05-28 21:10:06+00:00,,"# Reporting and Fixing Security Issues
+
+Please do not open GitHub issues or pull requests - this makes the problem immediately visible to everyone, including malicious actors. Security issues in HHVM can be safely reported via HHVM's Whitehat Bug Bounty program:
+
+[facebook.com/whitehat](https://www.facebook.com/whitehat)
+
+Facebook's security team will triage your report and determine whether or not is it eligible for a bounty under our program.
+",449

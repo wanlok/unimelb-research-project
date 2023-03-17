@@ -1,0 +1,5 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+nextcloud/security-advisories,SECURITY.md,a1a99d3f12f42d50ccf3e3ac5336dcf891775e95,2021-06-01 16:19:08+00:00,,"# Security Policy
+
+See https://github.com/nextcloud/server/blob/master/SECURITY.md
+",83

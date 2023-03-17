@@ -1,0 +1,15 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+nilsteampassnet/TeamPass,SECURITY.md,433d8dfa14d675eb2886eece6b9eecd8815d5619,2023-02-05 17:39:02+00:00,,"# Security Policy
+
+## Supported Versions
+
+This project is currently being supported with security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 3.x     | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+For any vulnerability or potential security issue, please provide complete description by email to nils@teampass.net.
+",356

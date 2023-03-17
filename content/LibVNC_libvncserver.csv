@@ -1,0 +1,39 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+LibVNC/libvncserver,SECURITY.md,6073771eed1caf72f196e410182471e0dfd32149,2019-11-17 15:47:16+00:00,,"# Security Policy
+
+## Supported Versions
+
+We fix security problems on the master branch. Downstream packagers are
+advised to cherry-pick those onto release versions. Currently, no point
+releases of already-released versions are made due to low development
+team head count.
+
+## Reporting a Vulnerability
+
+Mail in to dontmind@sdf.org.
+",333
+LibVNC/libvncserver,SECURITY.md,52859bcef780ec667b8b4503348096420cd8bf84,2023-02-13 10:26:38+00:00,"# Security Policy
+
+## Supported Versions
+
+We fix security problems on the master branch. Downstream packagers are
+advised to cherry-pick those onto release versions. Currently, no point
+releases of already-released versions are made due to low development
+team head count.
+
+## Reporting a Vulnerability
+
+Mail in to dontmind@sdf.org.
+","# Security Policy
+
+## Supported Versions
+
+We fix security problems on the master branch. Downstream packagers are
+advised to cherry-pick those onto release versions. Currently, no point
+releases of already-released versions are made due to low development
+team head count.
+
+## Reporting a Vulnerability
+
+Please use [this form](https://github.com/LibVNC/libvncserver/security/advisories/new).
+",72

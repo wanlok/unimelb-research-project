@@ -1,0 +1,136 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+systemd/systemd,docs/SECURITY.md,153d5975751aab58c3c4cdfdbe13ea7187c16e28,2019-08-30 09:45:42+00:00,,"---
+title: Reporting of security vulnerabilities
+---
+
+# Reporting of security vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+",574
+systemd/systemd,docs/SECURITY.md,4cdca0af114904a51f7ae2091b0c10a37c5e1046,2019-12-11 09:53:00+00:00,"---
+title: Reporting of security vulnerabilities
+---
+
+# Reporting of security vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+","---
+title: Reporting of security vulnerabilities
+category: Contributing
+---
+
+# Reporting of security vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+",23
+systemd/systemd,docs/SECURITY.md,b41a3f66c97e3d861faed04b727daf929383b827,2019-12-11 16:04:20+00:00,"---
+title: Reporting of security vulnerabilities
+category: Contributing
+---
+
+# Reporting of security vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+","---
+title: Reporting of security vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of security vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+",16
+systemd/systemd,docs/SECURITY.md,b35ec8ded2da2b7a127bb1c831cd6b79c3ecb97a,2020-01-14 09:14:11+00:00,"---
+title: Reporting of security vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of security vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+","---
+title: Reporting of Security Vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of Security Vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+",4
+systemd/systemd,docs/SECURITY.md,f20078df0b568cf365eea8278e98170e59ce2b2d,2020-04-29 15:20:37+00:00,"---
+title: Reporting of Security Vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of Security Vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public. If you need to reach systemd developers in a non-public way, report the issue to the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list. The disclosure will be coordinated with distributions.
+","---
+title: Reporting of Security Vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of Security Vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. systemd developers can be contacted privately on the **[systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list**. The disclosure will be coordinated with distributions.
+
+(The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public.)
+",312
+systemd/systemd,docs/SECURITY.md,154962d3480475da0c225bfdc57a02c19f6108a9,2020-05-15 18:40:58+00:00,"---
+title: Reporting of Security Vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of Security Vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. systemd developers can be contacted privately on the **[systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list**. The disclosure will be coordinated with distributions.
+
+(The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public.)
+","---
+title: Reporting of Security Vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of Security Vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. systemd developers can be contacted privately on the **[systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list**. The disclosure will be coordinated with distributions.
+
+(The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public.)
+
+Subscription to the systemd-security mailing list is open to **regular systemd contributors and people working in the security teams of various distributions**. Those conditions should be backed by publicly accessible information (ideally, a track of posts and commits from the mail address in question). If you fall into one of those categories and wish to be subscribed, submit a **[subscription request](https://www.redhat.com/mailman/listinfo/systemd-security)**.
+",469
+systemd/systemd,docs/SECURITY.md,0aff7b7584112ec34b05930a43c5e3b3c331c4fc,2021-09-27 07:19:02+00:00,"---
+title: Reporting of Security Vulnerabilities
+category: Contributing
+layout: default
+---
+
+# Reporting of Security Vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. systemd developers can be contacted privately on the **[systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list**. The disclosure will be coordinated with distributions.
+
+(The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public.)
+
+Subscription to the systemd-security mailing list is open to **regular systemd contributors and people working in the security teams of various distributions**. Those conditions should be backed by publicly accessible information (ideally, a track of posts and commits from the mail address in question). If you fall into one of those categories and wish to be subscribed, submit a **[subscription request](https://www.redhat.com/mailman/listinfo/systemd-security)**.
+","---
+title: Reporting of Security Vulnerabilities
+category: Contributing
+layout: default
+SPDX-License-Identifier: LGPL-2.1-or-later
+---
+
+# Reporting of Security Vulnerabilities
+
+If you discover a security vulnerability, we'd appreciate a non-public disclosure. systemd developers can be contacted privately on the **[systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list**. The disclosure will be coordinated with distributions.
+
+(The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public.)
+
+Subscription to the systemd-security mailing list is open to **regular systemd contributors and people working in the security teams of various distributions**. Those conditions should be backed by publicly accessible information (ideally, a track of posts and commits from the mail address in question). If you fall into one of those categories and wish to be subscribed, submit a **[subscription request](https://www.redhat.com/mailman/listinfo/systemd-security)**.
+",43

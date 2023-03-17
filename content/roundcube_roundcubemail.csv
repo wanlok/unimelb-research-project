@@ -1,0 +1,57 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+roundcube/roundcubemail,SECURITY.md,e3817a673c1ee86126631e676b6226dcbd35d860,2020-12-19 12:28:19+00:00,,"# Security Policy
+
+## Supported Versions
+
+Check our website's [download page](https://roundcube.net/download/) to see which versions are still supported and will receive security updates.
+
+## Reporting a Vulnerability
+
+If you found a security issue or vulnerability of the software, please report with direct and encrypted email to *thomas[at]roundcube.net*
+and *alec[at]alec.pl*. You can find the according PGP public keys on the major public keyservers like [pgp.key-server.io](https://pgp.key-server.io).
+
+Your report should include clear steps for reproduction and a classification of the found vulnerability.
+
+## Publishing and Credits
+
+We're dedicated to analyze and fix the reported issues as fast a possible. Usually within days we'll have an update ready.
+Together with the reporter we plan the releasing and the disclousure of the found and fixed vulnerability.
+Credits to the reporter are granted and can be included in all public communication if desired.
+",968
+roundcube/roundcubemail,SECURITY.md,203f45662067f783e1675fe8df04b924b55b8236,2021-04-18 06:43:18+00:00,"# Security Policy
+
+## Supported Versions
+
+Check our website's [download page](https://roundcube.net/download/) to see which versions are still supported and will receive security updates.
+
+## Reporting a Vulnerability
+
+If you found a security issue or vulnerability of the software, please report with direct and encrypted email to *thomas[at]roundcube.net*
+and *alec[at]alec.pl*. You can find the according PGP public keys on the major public keyservers like [pgp.key-server.io](https://pgp.key-server.io).
+
+Your report should include clear steps for reproduction and a classification of the found vulnerability.
+
+## Publishing and Credits
+
+We're dedicated to analyze and fix the reported issues as fast a possible. Usually within days we'll have an update ready.
+Together with the reporter we plan the releasing and the disclousure of the found and fixed vulnerability.
+Credits to the reporter are granted and can be included in all public communication if desired.
+","# Security Policy
+
+## Supported Versions
+
+Check our website's [download page](https://roundcube.net/download/) to see which versions are still supported and will receive security updates.
+
+## Reporting a Vulnerability
+
+If you found a security issue or vulnerability of the software, please report with direct and encrypted email to *thomas[at]roundcube.net*
+and *alec[at]alec.pl*. You can find the according PGP public keys on the major public keyservers like [pgp.key-server.io](https://pgp.key-server.io).
+
+Your report should include clear steps for reproduction and a classification of the found vulnerability.
+
+## Publishing and Credits
+
+We're dedicated to analyze and fix the reported issues as fast a possible. Usually within days we'll have an update ready.
+Together with the reporter we plan the releasing and the disclosure of the found and fixed vulnerability.
+Credits to the reporter are granted and can be included in all public communication if desired.
+",1

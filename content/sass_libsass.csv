@@ -1,0 +1,12 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+sass/libsass,SECURITY.md,cc4181f0ba6ecb1800b1fcace7553f2e266562b8,2015-06-09 01:38:37+00:00,,"Serious about security
+======================
+
+The LibSass team recognizes the important contributions the security research
+community can make. We therefore encourage reporting security issues with the
+code contained in this repository.
+
+If you believe you have discovered a security vulnerability, please report it at
+https://hackerone.com/libsass instead of GitHub.
+
+",370

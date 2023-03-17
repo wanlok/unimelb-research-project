@@ -1,0 +1,48 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+owncloud/core,.github/SECURITY.md,a318734e7b8b5d8da74bda39d8b11023f7d57e74,2020-06-24 05:57:02+00:00,,"# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| >= 10.x  | :white_check_mark: |
+| <= 9.0.x | :x:                |
+
+## Reporting a Vulnerability
+
+When you've encountered a security vulnerability, please disclose it securely.
+
+The security process is described at: 
+[https://owncloud.org/security/](https://owncloud.org/security/)
+",393
+owncloud/core,.github/SECURITY.md,6c9ab5d50057b0d33f1af74bd05bb97103d11ab3,2021-07-17 16:22:19+00:00,"# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| >= 10.x  | :white_check_mark: |
+| <= 9.0.x | :x:                |
+
+## Reporting a Vulnerability
+
+When you've encountered a security vulnerability, please disclose it securely.
+
+The security process is described at: 
+[https://owncloud.org/security/](https://owncloud.org/security/)
+","# Security Policy
+
+## Supported Versions
+
+| Version  | Supported          |
+| -------- | ------------------ |
+| >= 10.x  | :white_check_mark: |
+| <= 9.0.x | :x:                |
+
+## Reporting a Vulnerability
+
+When you've encountered a security vulnerability, please disclose it securely.
+
+The security process is described at: 
+[https://owncloud.com/security/](https://owncloud.com/security/)
+",6

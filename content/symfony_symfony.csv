@@ -1,0 +1,33 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+symfony/symfony,.github/SECURITY.md,35811ed22dc31a8d1d33c9336615088640e2e068,2019-05-24 16:51:24+00:00,,"Security Policy
+===============
+
+If you found any issues that might have security implications,
+please send a report to security[at]symfony.com
+DO NOT PUBLISH SECURITY REPORTS PUBLICLY.
+
+The full [Security Policy][1] is described in the official documentation.
+
+  [1]: https://symfony.com/security
+",298
+symfony/symfony,.github/SECURITY.md,56194a45354d99b110a41a69aa523fa45a680a06,2021-02-23 10:03:30+00:00,"Security Policy
+===============
+
+If you found any issues that might have security implications,
+please send a report to security[at]symfony.com
+DO NOT PUBLISH SECURITY REPORTS PUBLICLY.
+
+The full [Security Policy][1] is described in the official documentation.
+
+  [1]: https://symfony.com/security
+","Security Policy
+===============
+
+If you found any issues that might have security implications,
+please send a report to security[at]symfony.com
+DO NOT PUBLISH SECURITY REPORTS PUBLICLY.
+
+The full [Security Policy][1] is described in the official documentation.
+
+  [1]: https://symfony.com/security
+",0

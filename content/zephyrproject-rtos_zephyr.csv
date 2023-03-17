@@ -1,0 +1,294 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+zephyrproject-rtos/zephyr,.github/SECURITY.md,911ba334a06ac55e28856e49a694083974196f8c,2021-03-20 10:06:57+00:00,,"# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v2.5.0, the supported
+versions are:
+
+  - 1.14.x: Current LTS
+  - v2.4.0: Prior release
+  - v2.5.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+",528
+zephyrproject-rtos/zephyr,.github/SECURITY.md,84b165967520dd2d4ecfbd2dc4e73ddaec95d223,2021-04-26 14:44:02+00:00,"# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v2.5.0, the supported
+versions are:
+
+  - 1.14.x: Current LTS
+  - v2.4.0: Prior release
+  - v2.5.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+","# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v2.5.0, the supported
+versions are:
+
+  - 1.14.2: Current LTS
+  - v2.4.0: Prior release
+  - v2.5.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+",1
+zephyrproject-rtos/zephyr,.github/SECURITY.md,3d3c831563f68af88d65474d58ec86f6b96bc8d1,2021-08-17 13:43:19+00:00,"# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v2.5.0, the supported
+versions are:
+
+  - 1.14.2: Current LTS
+  - v2.4.0: Prior release
+  - v2.5.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+","# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v2.5.0, the supported
+versions are:
+
+  - 1.14.2: Current LTS
+  - v2.5.0: Prior release
+  - v2.6.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+",2
+zephyrproject-rtos/zephyr,.github/SECURITY.md,ae0297e8de1f94b050de0afecc9e2150006e3ec6,2022-01-28 21:32:02+00:00,"# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v2.5.0, the supported
+versions are:
+
+  - 1.14.2: Current LTS
+  - v2.5.0: Prior release
+  - v2.6.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+","# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v3.0.0, the supported
+versions are:
+
+  - v2.7.0: Current LTS
+  - v2.7.0: Prior release
+  - v3.0.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+",10
+zephyrproject-rtos/zephyr,.github/SECURITY.md,9ec0116ce30c8b6898d555f8538770e77f940580,2022-10-01 10:50:17+00:00,"# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v3.0.0, the supported
+versions are:
+
+  - v2.7.0: Current LTS
+  - v2.7.0: Prior release
+  - v3.0.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+","# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v3.2.0, the supported
+versions are:
+
+  - v2.7.0: Current LTS
+  - v3.1.0: Prior release
+  - v3.2.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+",4
+zephyrproject-rtos/zephyr,.github/SECURITY.md,fe8c1fb8bae366f71687d9701b0e5956ed52e111,2023-02-22 17:06:17+00:00,"# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v3.2.0, the supported
+versions are:
+
+  - v2.7.0: Current LTS
+  - v3.1.0: Prior release
+  - v3.2.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+","# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v3.3, the supported
+versions are:
+
+  - v2.7: Current LTS
+  - v3.2: Prior release
+  - v3.3: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+",11
+zephyrproject-rtos/zephyr,.github/SECURITY.md,1e8fa9b0cbd54016d2918e6f2268e8e2c36147e4,2023-02-22 17:06:17+00:00,"# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v3.3, the supported
+versions are:
+
+  - v2.7: Current LTS
+  - v3.2: Prior release
+  - v3.3: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+","# Security Policy
+
+## Supported versions
+
+The Zephyr project supports the following versions with security
+updates:
+
+  - The most recent release, and the release prior to that.
+  - Active LTS releases.
+
+At this time, with the latest release of v3.3.0, the supported
+versions are:
+
+  - v2.7.0: Current LTS
+  - v3.2.0: Prior release
+  - v3.3.0: Current release
+
+## Reporting process
+
+Please see our [Security Vulnerability
+Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
+page for details on the process.
+",8

@@ -1,0 +1,7 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+matrix-org/.github,SECURITY.md,89cd0dcbc228ae2b79b928b90c4c1475317fd1eb,2020-09-08 20:31:18+00:00,,"# Reporting a Vulnerability
+
+**If you've found a security vulnerability, please report it to security@matrix.org**
+
+For more information on our security disclosure policy, visit https://www.matrix.org/security-disclosure-policy/
+",229

@@ -1,0 +1,8 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+revive-adserver/revive-adserver,SECURITY.md,7ae0f61802b26e9638c490ae27a7ffd8f31abd7f,2020-01-09 08:15:24+00:00,,"# Security Policy
+
+
+## Reporting a Vulnerability
+
+For responsible disclosure of security concerns, see our program page at https://hackerone.com/revive_adserver
+",161

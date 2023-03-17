@@ -1,0 +1,39 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+wolfSSL/wolfssl,.github/SECURITY.md,0f50ffb2efed95f771edbae9029b59adf3fe4d37,2022-01-19 18:36:01+00:00,,"# Security Policy
+
+## Reporting a Vulnerability
+
+If you discover a vulnerability, please report it to support@wolfssl.com
+
+ 1. Include a detailed description
+ 2. Include method to reproduce and/or method of discovery
+ 3. We will evaulate the report promptly and respond to you with findings.
+ 4. We will credit you with the report if you would like.
+
+**Please keep the vulnerability private** until a fix has been released.
+",424
+wolfSSL/wolfssl,.github/SECURITY.md,023db01aca24698d3b26e2c9ca46457d2dd06bce,2023-01-03 18:59:59+00:00,"# Security Policy
+
+## Reporting a Vulnerability
+
+If you discover a vulnerability, please report it to support@wolfssl.com
+
+ 1. Include a detailed description
+ 2. Include method to reproduce and/or method of discovery
+ 3. We will evaulate the report promptly and respond to you with findings.
+ 4. We will credit you with the report if you would like.
+
+**Please keep the vulnerability private** until a fix has been released.
+","# Security Policy
+
+## Reporting a Vulnerability
+
+If you discover a vulnerability, please report it to support@wolfssl.com
+
+ 1. Include a detailed description
+ 2. Include method to reproduce and/or method of discovery
+ 3. We will evaluate the report promptly and respond to you with findings.
+ 4. We will credit you with the report if you would like.
+
+**Please keep the vulnerability private** until a fix has been released.
+",2

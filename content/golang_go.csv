@@ -1,0 +1,69 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+golang/go,SECURITY.md,b84e0bc61a1742309f57deace17e5b8748c33fd7,2019-05-23 21:22:44+00:00,,"# Security Policy
+
+## Supported Versions
+
+We support the past two Go releases (for example, Go 1.11.x and Go 1.12.x).
+
+See https://golang.org/wiki/Go-Release-Cycle and in particular the
+[Release Maintenance](https://github.com/golang/go/wiki/Go-Release-Cycle#release-maintenance)
+part of that page.
+
+## Reporting a Vulnerability
+
+See https://golang.org/security for how to report a vulnerability.
+",397
+golang/go,SECURITY.md,f7a00c99064d0cb367908a2bc6dea0bb007089de,2019-09-26 15:34:57+00:00,"# Security Policy
+
+## Supported Versions
+
+We support the past two Go releases (for example, Go 1.11.x and Go 1.12.x).
+
+See https://golang.org/wiki/Go-Release-Cycle and in particular the
+[Release Maintenance](https://github.com/golang/go/wiki/Go-Release-Cycle#release-maintenance)
+part of that page.
+
+## Reporting a Vulnerability
+
+See https://golang.org/security for how to report a vulnerability.
+","# Security Policy
+
+## Supported Versions
+
+We support the past two Go releases (for example, Go 1.12.x and Go 1.13.x).
+
+See https://golang.org/wiki/Go-Release-Cycle and in particular the
+[Release Maintenance](https://github.com/golang/go/wiki/Go-Release-Cycle#release-maintenance)
+part of that page.
+
+## Reporting a Vulnerability
+
+See https://golang.org/security for how to report a vulnerability.
+",2
+golang/go,SECURITY.md,a0f77e56b7a7ecb92dca3e2afdd56ee773c2cb07,2022-04-26 19:59:47+00:00,"# Security Policy
+
+## Supported Versions
+
+We support the past two Go releases (for example, Go 1.12.x and Go 1.13.x).
+
+See https://golang.org/wiki/Go-Release-Cycle and in particular the
+[Release Maintenance](https://github.com/golang/go/wiki/Go-Release-Cycle#release-maintenance)
+part of that page.
+
+## Reporting a Vulnerability
+
+See https://golang.org/security for how to report a vulnerability.
+","# Security Policy
+
+## Supported Versions
+
+We support the past two Go releases (for example, Go 1.17.x and Go 1.18.x when Go 1.18.x is the latest stable release).
+
+See https://go.dev/wiki/Go-Release-Cycle and in particular the
+[Release Maintenance](https://go.dev/wiki/Go-Release-Cycle#release-maintenance)
+part of that page.
+
+## Reporting a Vulnerability
+
+See https://go.dev/security for how to report a vulnerability.
+",78

@@ -1,0 +1,141 @@
+repo,path,sha,date_time,previous_content,content,levenshtein_distance
+ARMmbed/mbedtls,SECURITY.md,a21abf249cdfd12ef71fb72e69ff06372e81bbe3,2021-02-25 11:50:42+00:00,,"## Reporting Vulneratibilities
+
+If you think you have found an Mbed TLS security vulnerability, then please
+send an email to the security team at
+.
+
+## Security Incident Handling Process
+
+Our security process is detailled in our [security
+center](https://developer.trustedfirmware.org/w/mbed-tls/security-center/).
+
+Its primary goal is to ensure fixes are ready to be deployed when the issue
+goes public.
+
+## Maintained branches
+
+Only the maintained branches, as listed in BRANCHES.md, get security fixes.
+Users are urged to always use the latest version of a maintained branch.
+",579
+ARMmbed/mbedtls,SECURITY.md,a23df13e52aa13afae947fad6cc2be1470d1f41c,2021-03-16 11:04:44+00:00,"## Reporting Vulneratibilities
+
+If you think you have found an Mbed TLS security vulnerability, then please
+send an email to the security team at
+.
+
+## Security Incident Handling Process
+
+Our security process is detailled in our [security
+center](https://developer.trustedfirmware.org/w/mbed-tls/security-center/).
+
+Its primary goal is to ensure fixes are ready to be deployed when the issue
+goes public.
+
+## Maintained branches
+
+Only the maintained branches, as listed in BRANCHES.md, get security fixes.
+Users are urged to always use the latest version of a maintained branch.
+","## Reporting Vulneratibilities
+
+If you think you have found an Mbed TLS security vulnerability, then please
+send an email to the security team at
+.
+
+## Security Incident Handling Process
+
+Our security process is detailled in our
+[security
+center](https://developer.trustedfirmware.org/w/mbed-tls/security-center/).
+
+Its primary goal is to ensure fixes are ready to be deployed when the issue
+goes public.
+
+## Maintained branches
+
+Only the maintained branches, as listed in [`BRANCHES.md`](BRANCHES.md),
+get security fixes.
+Users are urged to always use the latest version of a maintained branch.
+",19
+ARMmbed/mbedtls,SECURITY.md,8b0ecbccf465c5c795e6d2898e6af2b9af14b83c,2022-05-11 20:25:51+00:00,"## Reporting Vulneratibilities
+
+If you think you have found an Mbed TLS security vulnerability, then please
+send an email to the security team at
+.
+
+## Security Incident Handling Process
+
+Our security process is detailled in our
+[security
+center](https://developer.trustedfirmware.org/w/mbed-tls/security-center/).
+
+Its primary goal is to ensure fixes are ready to be deployed when the issue
+goes public.
+
+## Maintained branches
+
+Only the maintained branches, as listed in [`BRANCHES.md`](BRANCHES.md),
+get security fixes.
+Users are urged to always use the latest version of a maintained branch.
+","## Reporting Vulneratibilities
+
+If you think you have found an Mbed TLS security vulnerability, then please
+send an email to the security team at
+.
+
+## Security Incident Handling Process
+
+Our security process is detailed in our
+[security
+center](https://developer.trustedfirmware.org/w/mbed-tls/security-center/).
+
+Its primary goal is to ensure fixes are ready to be deployed when the issue
+goes public.
+
+## Maintained branches
+
+Only the maintained branches, as listed in [`BRANCHES.md`](BRANCHES.md),
+get security fixes.
+Users are urged to always use the latest version of a maintained branch.
+",1
+ARMmbed/mbedtls,SECURITY.md,0b86ac19572566896f3cd0cc0518d95d3d1bfdb3,2022-07-29 12:44:01+00:00,"## Reporting Vulneratibilities
+
+If you think you have found an Mbed TLS security vulnerability, then please
+send an email to the security team at
+.
+
+## Security Incident Handling Process
+
+Our security process is detailed in our
+[security
+center](https://developer.trustedfirmware.org/w/mbed-tls/security-center/).
+
+Its primary goal is to ensure fixes are ready to be deployed when the issue
+goes public.
+
+## Maintained branches
+
+Only the maintained branches, as listed in [`BRANCHES.md`](BRANCHES.md),
+get security fixes.
+Users are urged to always use the latest version of a maintained branch.
+","## Reporting Vulnerabilities
+
+If you think you have found an Mbed TLS security vulnerability, then please
+send an email to the security team at
+.
+
+## Security Incident Handling Process
+
+Our security process is detailed in our
+[security
+center](https://developer.trustedfirmware.org/w/mbed-tls/security-center/).
+
+Its primary goal is to ensure fixes are ready to be deployed when the issue
+goes public.
+
+## Maintained branches
+
+Only the maintained branches, as listed in [`BRANCHES.md`](BRANCHES.md),
+get security fixes.
+Users are urged to always use the latest version of a maintained branch.
+",2
