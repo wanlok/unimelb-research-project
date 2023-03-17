@@ -11,6 +11,23 @@ def get_url_strings(row):
     return list(set(filter(lambda x: x.lower().startswith(domain_name), map(lambda x: re.sub(r'URL:|MISC:|CONFIRM:', '', x).strip(), row[3].split('|')))))
 
 
+def dummy_list(repo):
+        targets = []
+        for row in csv_reader(path, encoding='latin-1'):
+            exists = repo in row[3]
+            date_strings = re.findall(r'\d+', row[4])
+            if exists and len(date_strings) > 0:
+                date_string = int(date_strings[0])
+                length = len(targets)
+                index = length
+                for j in range(length):
+                    if date_string < targets[j][1]:
+                        index = j
+                        break
+                targets.insert(index, [row[0], date_string])
+        return targets
+
+
 if __name__ == '__main__':
     if sys.argv[1] == 'list':
         targets = []
