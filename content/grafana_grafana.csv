@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 grafana/grafana,SECURITY.md,70b4fc8483921a69006e243d75ab48618e21b567,2019-06-22 22:25:29+00:00,,"Reporting Security Issues
 ------------------
 
@@ -16,7 +16,7 @@ Grafana Labs will send you a response indicating the next steps in handling your
 
 We maintain a category on the community site called [Security Announcements](https://community.grafana.com/c/security-announcements),
 where we will post a summary, remediation, and mitigation details for any patch containing security fixes. You can also subscribe to email updates to this category if you have a grafana.com account and sign on to the community site or track updates via an [RSS feed](https://community.grafana.com/c/security-announcements.rss).
-",1739
+",1739,b grafana/grafana 70b4fc8483921a69006e243d75ab48618e21b567
 grafana/grafana,SECURITY.md,a3008ffb057c66e827239c57a8d8bf83e8cfb9f1,2019-09-26 10:42:23+00:00,"Reporting Security Issues
 ------------------
 
@@ -54,7 +54,7 @@ We maintain a category on the community site called [Security Announcements](htt
 where we will post a summary, remediation, and mitigation details for any patch containing security fixes. 
 
 You can also subscribe to email updates to this category if you have a grafana.com account and sign on to the community site or track updates via an [RSS feed](https://community.grafana.com/c/security-announcements.rss).
-",59
+",59,b grafana/grafana a3008ffb057c66e827239c57a8d8bf83e8cfb9f1
 grafana/grafana,SECURITY.md,4a30c65a5e6a49e57699061dcca1eee65c54b6f3,2020-06-18 12:08:26+00:00,"# Reporting security issues
 
 If you think you have found a security vulnerability, please send a report to [security@grafana.com](mailto:security@grafana.com). This address can be used for all of Grafana Labs's open source and commercial products (including but not limited to Grafana, Grafana Cloud, Grafana Enterprise, and grafana.com). We can accept only vulnerability reports at this address. 
@@ -95,7 +95,7 @@ We maintain a category on the community site called [Security Announcements](htt
 where we will post a summary, remediation, and mitigation details for any patch containing security fixes. 
 
 You can also subscribe to email updates to this category if you have a grafana.com account and sign on to the community site or track updates via an [RSS feed](https://community.grafana.com/c/security-announcements.rss).
-",106
+",106,b grafana/grafana 4a30c65a5e6a49e57699061dcca1eee65c54b6f3
 grafana/grafana,SECURITY.md,bc01c9cdbc3916b847c66d0ad79abb3bee80e298,2021-09-29 12:34:40+00:00,"# Reporting security issues
 
 If you think you have found a security vulnerability, please send a report to [security@grafana.com](mailto:security@grafana.com). This address can be used for all of Grafana Labs's open source and commercial products (including but not limited to Grafana, Grafana Cloud, Grafana Enterprise, and grafana.com). We can accept only vulnerability reports at this address. 
@@ -136,7 +136,7 @@ We maintain a category on the community site called [Security Announcements](htt
 where we will post a summary, remediation, and mitigation details for any patch containing security fixes.
 
 You can also subscribe to email updates to this category if you have a grafana.com account and sign on to the community site or track updates via an [RSS feed](https://community.grafana.com/c/security-announcements.rss).
-",3
+",3,b grafana/grafana bc01c9cdbc3916b847c66d0ad79abb3bee80e298
 grafana/grafana,SECURITY.md,09c849eb08e04c2ac581ddce723b7d4d28a0d01b,2021-11-24 13:06:18+00:00,"# Reporting security issues
 
 If you think you have found a security vulnerability, please send a report to [security@grafana.com](mailto:security@grafana.com). This address can be used for all of Grafana Labs's open source and commercial products (including but not limited to Grafana, Grafana Cloud, Grafana Enterprise, and grafana.com). We can accept only vulnerability reports at this address.
@@ -177,7 +177,7 @@ We maintain a category on the community site called [Security Announcements](htt
 where we will post a summary, remediation, and mitigation details for any patch containing security fixes.
 
 You can also subscribe to email updates to this category if you have a grafana.com account and sign on to the community site or track updates via an [RSS feed](https://community.grafana.com/c/support/security-announcements.rss).
-",16
+",16,b grafana/grafana 09c849eb08e04c2ac581ddce723b7d4d28a0d01b
 grafana/grafana,SECURITY.md,c1eabb893fca88f503bb3f1da910ce30885b68ea,2022-11-22 09:07:59+00:00,"# Reporting security issues
 
 If you think you have found a security vulnerability, please send a report to [security@grafana.com](mailto:security@grafana.com). This address can be used for all of Grafana Labs's open source and commercial products (including but not limited to Grafana, Grafana Cloud, Grafana Enterprise, and grafana.com). We can accept only vulnerability reports at this address.
@@ -217,4 +217,4 @@ Grafana Labs will send you a response indicating the next steps in handling your
 We will post a summary, remediation, and mitigation details for any patch containing security fixes on the Grafana blog. The security announcement blog posts will be tagged with the [security tag](https://grafana.com/tags/security/).
 
 You can also track security announcements via the [RSS feed](https://grafana.com/tags/security/index.xml).
-",315
+",315,b grafana/grafana c1eabb893fca88f503bb3f1da910ce30885b68ea

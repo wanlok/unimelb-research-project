@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 github/.github,SECURITY.md,1fc0fbb63e6d3ee6a74265bde9079e8eb9ef8e9d,2019-10-16 14:29:36+00:00,,"# GitHub Security Policy
 
 Software security researchers are increasingly engaging with Internet companies to hunt down vulnerabilities. Our bounty program gives a tip of the hat to these researchers and provides rewards of $30,000 or more for critical vulnerabilities.
@@ -6,7 +6,7 @@ Software security researchers are increasingly engaging with Internet companies 
 If you’ve found a vulnerability, [submit it here](https://hackerone.com/github).
 
 You can find useful information in our [rules](https://bounty.github.com/#rules), [scope](https://bounty.github.com/#scope), [targets](https://bounty.github.com/#scope) and [FAQ](https://bounty.github.com/#faqs).
-",565
+",565,b github/securitylab 1fc0fbb63e6d3ee6a74265bde9079e8eb9ef8e9d
 github/.github,SECURITY.md,d0ad28a1395595902a999cb8b0888bff72bcd870,2021-03-19 18:38:56+00:00,"# GitHub Security Policy
 
 Software security researchers are increasingly engaging with Internet companies to hunt down vulnerabilities. Our bounty program gives a tip of the hat to these researchers and provides rewards of $30,000 or more for critical vulnerabilities.
@@ -21,7 +21,7 @@ GitHub's [Bug Bounty program](https://bounty.github.com) rewards researchers for
 If the repository is eligible for rewards, you can submit a report via [HackerOne](https://hackerone.com/github). You can find more useful information in our [rules](https://bounty.github.com/#rules) and [FAQ](https://bounty.github.com/#faqs).
 
 For repositories not covered by the Bug Bounty program, please open an issue.
-",366
+",366,b github/securitylab d0ad28a1395595902a999cb8b0888bff72bcd870
 github/.github,SECURITY.md,5540da02378e7802915ed8af460ed0d03546a64d,2022-01-05 19:44:17+00:00,"# GitHub Security Policy
 
 GitHub's [Bug Bounty program](https://bounty.github.com) rewards researchers for discovering security vulnerabilities in a number of repositories. The full list of projects that are eligible for rewards are [available on our Bug Bounty site](https://bounty.github.com/#scope).
@@ -60,7 +60,7 @@ This information will help us triage your report more quickly.
 ## Policy
 
 See [GitHub's Safe Harbor Policy](https://docs.github.com/en/github/site-policy/github-bug-bounty-program-legal-safe-harbor#1-safe-harbor-terms)
-",1364
+",1364,b github/securitylab 5540da02378e7802915ed8af460ed0d03546a64d
 github/.github,SECURITY.md,0b9abf27f2186f94c6020d7989398a206ca11b42,2022-03-10 18:36:20+00:00,"Thanks for helping make GitHub safe for everyone.
 
 ## Security
@@ -123,7 +123,7 @@ This information will help us triage your report more quickly.
 ## Policy
 
 See [GitHub's Safe Harbor Policy](https://docs.github.com/en/github/site-policy/github-bug-bounty-program-legal-safe-harbor#1-safe-harbor-terms)
-",2
+",2,b github/securitylab 0b9abf27f2186f94c6020d7989398a206ca11b42
 github/.github,SECURITY.md,1a2a884ebf605af1e86d760f17fed3af781d539c,2022-04-19 18:50:32+00:00,"Thanks for helping make GitHub safe for everyone.
 
 ## Security
@@ -186,4 +186,4 @@ This information will help us triage your report more quickly.
 ## Policy
 
 See [GitHub's Safe Harbor Policy](https://docs.github.com/en/site-policy/security-policies/github-bug-bounty-program-legal-safe-harbor)
-",37
+",37,b github/securitylab 1a2a884ebf605af1e86d760f17fed3af781d539c

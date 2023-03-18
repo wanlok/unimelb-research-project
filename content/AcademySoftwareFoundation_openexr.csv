@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 AcademySoftwareFoundation/openexr,SECURITY.md,8f483c2552070f3d9dd2df98f6500dfa1c051dcc,2019-07-13 19:22:50+00:00,,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -16,7 +16,7 @@ post patches as quickly as possible.
 See the [release notes](CHANGES.md) for a listing of known CVEs and
 the releases in which they have been addressed.
 
-",639
+",639,b AcademySoftwareFoundation/openexr 8f483c2552070f3d9dd2df98f6500dfa1c051dcc
 AcademySoftwareFoundation/openexr,SECURITY.md,8dd9112733ae15f1c108b64124e6c77a11f3eb83,2019-09-21 21:39:04+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -66,7 +66,7 @@ post patches as quickly as possible.
 
 See the [release notes](CHANGES.md) for more information.
 
-",1567
+",1567,b AcademySoftwareFoundation/openexr 8dd9112733ae15f1c108b64124e6c77a11f3eb83
 AcademySoftwareFoundation/openexr,SECURITY.md,33d1ac61d46c075171cb37cccc21736ab4cf03d8,2019-09-21 21:39:04+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -135,7 +135,7 @@ post patches as quickly as possible.
 
 See the [release notes](CHANGES.md) for more information.
 
-",358
+",358,b AcademySoftwareFoundation/openexr 33d1ac61d46c075171cb37cccc21736ab4cf03d8
 AcademySoftwareFoundation/openexr,SECURITY.md,fbe08034eebf9eff192d4068ffbdb807351a3c46,2020-01-24 17:44:58+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -204,7 +204,7 @@ post patches as quickly as possible.
 
 See the [release notes](CHANGES.md) for more information.
 
-",361
+",361,b AcademySoftwareFoundation/openexr fbe08034eebf9eff192d4068ffbdb807351a3c46
 AcademySoftwareFoundation/openexr,SECURITY.md,a2392101e8101bed90fc3370e8840d208dd88c02,2020-04-16 21:21:49+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -277,7 +277,7 @@ post patches as quickly as possible.
 
 See the [release notes](CHANGES.md) for more information.
 
-",792
+",792,b AcademySoftwareFoundation/openexr a2392101e8101bed90fc3370e8840d208dd88c02
 AcademySoftwareFoundation/openexr,SECURITY.md,70202128342b5daf0e97b227c923cb573edecff5,2020-04-30 21:42:57+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -360,7 +360,7 @@ These vulnerabilities are present in the given versions:
 
 See the [release notes](CHANGES.md) for more information.
 
-",394
+",394,b AcademySoftwareFoundation/openexr 70202128342b5daf0e97b227c923cb573edecff5
 AcademySoftwareFoundation/openexr,SECURITY.md,7c619a9f7e1e80161bc3c1b44c356ae8b3cd5868,2020-07-08 17:13:44+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -448,7 +448,7 @@ These vulnerabilities are present in the given versions:
 
 See the [release notes](CHANGES.md) for more information.
 
-",456
+",456,b AcademySoftwareFoundation/openexr 7c619a9f7e1e80161bc3c1b44c356ae8b3cd5868
 AcademySoftwareFoundation/openexr,SECURITY.md,b174a14766a1c928340bd64e4a8bf3e812727474,2021-01-13 20:38:48+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -542,7 +542,7 @@ These vulnerabilities are present in the given versions:
 
 See the [release notes](CHANGES.md) for more information.
 
-",369
+",369,b AcademySoftwareFoundation/openexr b174a14766a1c928340bd64e4a8bf3e812727474
 AcademySoftwareFoundation/openexr,SECURITY.md,744cdecc87ff3489cc47204411d7903ceeb80be4,2021-05-06 00:16:31+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -646,7 +646,7 @@ These vulnerabilities are present in the given versions:
 
 See the [release notes](CHANGES.md) for more information.
 
-",807
+",807,b AcademySoftwareFoundation/openexr 744cdecc87ff3489cc47204411d7903ceeb80be4
 AcademySoftwareFoundation/openexr,SECURITY.md,9126f0c7fca119c37709673efc9c803a3b1b4255,2022-01-27 22:20:01+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -758,7 +758,7 @@ These vulnerabilities are present in the given versions:
 
 See the [release notes](CHANGES.md) for more information.
 
-",95
+",95,b AcademySoftwareFoundation/openexr 9126f0c7fca119c37709673efc9c803a3b1b4255
 AcademySoftwareFoundation/openexr,SECURITY.md,635f0b7805f3493345889e31164b34132982ca59,2022-08-01 19:17:43+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -871,7 +871,7 @@ These vulnerabilities are present in the given versions:
 
 See the [release notes](CHANGES.md) for more information.
 
-",2
+",2,b AcademySoftwareFoundation/openexr 635f0b7805f3493345889e31164b34132982ca59
 AcademySoftwareFoundation/openexr,SECURITY.md,b36688cb66c7c5c77cde5971a481e236f91049a2,2023-02-16 00:12:08+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -984,4 +984,4 @@ These vulnerabilities are present in the given versions:
 
 See the [release notes](CHANGES.md) for more information.
 
-",0
+",0,b AcademySoftwareFoundation/openexr b36688cb66c7c5c77cde5971a481e236f91049a2

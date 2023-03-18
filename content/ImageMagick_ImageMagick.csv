@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 ImageMagick/ImageMagick,SECURITY.md,0e2fe461831a7877459dcae3debe24082a6c9446,2020-06-07 13:53:07+00:00,,"
 
 
@@ -615,7 +615,7 @@ You signed out in another tab or window. Reload to refresh your session.
 
 
 
-",3313
+",3313,b ImageMagick/ImageMagick 0e2fe461831a7877459dcae3debe24082a6c9446
 ImageMagick/ImageMagick,SECURITY.md,dc134b48e86b0df5b755aa1f0bb7d217cbf176a1,2020-06-07 13:53:54+00:00,"
 
 
@@ -1243,7 +1243,7 @@ We encourage users to upgrade to the lastest ImageMagick release to ensure that 
 ## Reporting a Vulnerability
 
 Post any vulnerability as an [issue](https://github.com/ImageMagick/ImageMagick/issues).  Or you can post privately to the ImageMagick development [team](https://imagemagick.org/script/contact.php).  Most vulnerabilities are fixed within 48 hours.
-",2780
+",2780,b ImageMagick/ImageMagick dc134b48e86b0df5b755aa1f0bb7d217cbf176a1
 ImageMagick/ImageMagick,SECURITY.md,196f03c5e35bd27bd4a04c9a2ed782538ebc0a28,2020-06-09 11:27:40+00:00,"# Security Policy
 
 ImageMagick best practices **strongly** encourages you to configure a [security policy](https://imagemagick.org/script/security-policy.php) that suits your local environment.
@@ -1268,7 +1268,7 @@ We encourage users to upgrade to the lastest ImageMagick release to ensure that 
 Post any vulnerability as an [issue](https://github.com/ImageMagick/ImageMagick/issues). Or you can post privately to the ImageMagick development [team](https://imagemagick.org/script/contact.php). Most vulnerabilities are fixed within 48 hours.
 
 In addition, request a [CVE](https://cve.mitre.org/cve/request_id.html).  We rely on you to post CVE's so our development team can concentrate on delivering a robust security patch.
-",185
+",185,b ImageMagick/ImageMagick 196f03c5e35bd27bd4a04c9a2ed782538ebc0a28
 ImageMagick/ImageMagick,SECURITY.md,eeaef151ae47e3f888d8d8c40ea0e8a8b96671d8,2020-11-21 18:58:43+00:00,"# Security Policy
 
 ImageMagick best practices **strongly** encourages you to configure a [security policy](https://imagemagick.org/script/security-policy.php) that suits your local environment.
@@ -1295,7 +1295,7 @@ We encourage users to upgrade to the lastest ImageMagick release to ensure that 
 Post any vulnerability as an [issue](https://github.com/ImageMagick/ImageMagick/issues). Or you can post privately to the ImageMagick development [team](https://imagemagick.org/script/contact.php). Most vulnerabilities are fixed within 48 hours.
 
 In addition, request a [CVE](https://cve.mitre.org/cve/request_id.html).  We rely on you to post CVE's so our development team can concentrate on delivering a robust security patch.
-",10
+",10,b ImageMagick/ImageMagick eeaef151ae47e3f888d8d8c40ea0e8a8b96671d8
 ImageMagick/ImageMagick,SECURITY.md,6708d4f2f577dcc835779df5c6f28732ccba44e0,2022-04-03 19:08:24+00:00,"# Security Policy
 
 ImageMagick recommended practices **strongly** encourages you to configure a [security policy](https://imagemagick.org/script/security-policy.php) that suits your local environment.
@@ -1322,7 +1322,7 @@ We encourage users to upgrade to the lastest ImageMagick release to ensure that 
 Post any vulnerability as an [issue](https://github.com/ImageMagick/ImageMagick/issues). Or you can post privately to the ImageMagick development [team](https://imagemagick.org/script/contact.php). Most vulnerabilities are fixed within 48 hours.
 
 In addition, request a [CVE](https://www.cve.org/ResourcesSupport/ReportRequest).  We rely on you to post CVE's so our development team can concentrate on delivering a robust security patch.
-",32
+",32,b ImageMagick/ImageMagick 6708d4f2f577dcc835779df5c6f28732ccba44e0
 ImageMagick/ImageMagick,SECURITY.md,6bcfc4813644ce1450b7ebc9b7cedbd0ff172d71,2022-04-27 06:48:53+00:00,"# Security Policy
 
 ImageMagick recommended practices **strongly** encourages you to configure a [security policy](https://imagemagick.org/script/security-policy.php) that suits your local environment.
@@ -1349,7 +1349,7 @@ We encourage users to upgrade to the latest ImageMagick release to ensure that a
 Post any vulnerability as an [issue](https://github.com/ImageMagick/ImageMagick/issues). Or you can post privately to the ImageMagick development [team](https://imagemagick.org/script/contact.php). Most vulnerabilities are fixed within 48 hours.
 
 In addition, request a [CVE](https://www.cve.org/ResourcesSupport/ReportRequest).  We rely on you to post CVE's so our development team can concentrate on delivering a robust security patch.
-",1
+",1,b ImageMagick/ImageMagick 6bcfc4813644ce1450b7ebc9b7cedbd0ff172d71
 ImageMagick/ImageMagick,SECURITY.md,431944147432e6facbfe20eff4074780172a5ab8,2023-02-05 03:03:00+00:00,"# Security Policy
 
 ImageMagick recommended practices **strongly** encourages you to configure a [security policy](https://imagemagick.org/script/security-policy.php) that suits your local environment.
@@ -1376,7 +1376,7 @@ We encourage users to upgrade to the latest ImageMagick release to ensure that a
 Post any vulnerability as an [issue](https://github.com/ImageMagick/ImageMagick/issues). Or you can post privately to the ImageMagick development [team](https://imagemagick.org/script/contact.php). Most vulnerabilities are fixed within 48 hours.
 
 In addition, request a [CVE](https://www.cve.org/ResourcesSupport/ReportRequest).  We rely on you to post CVE's so our development team can concentrate on delivering a robust security patch.
-",13
+",13,b ImageMagick/ImageMagick 431944147432e6facbfe20eff4074780172a5ab8
 ImageMagick/ImageMagick,SECURITY.md,a8668be21f6976f9306462cf84f17f0351b71f53,2023-02-11 18:26:13+00:00,"# Security Policy
 
 ImageMagick recommended practices **strongly** encourages you to configure a [security policy](https://imagemagick.org/script/security-policy.php) that suits your local environment.
@@ -1403,4 +1403,4 @@ We encourage users to upgrade to the latest ImageMagick release to ensure that a
 Before you post a vulnerability, first determine if the vulnerability can be mitigated by the security policy.  ImageMagick, by default, is open. Use the security policy to add constraints to meet the requirements of your local security governance.  If you feel confident that the security policy does not address the vulnerability, post the vulnerability as an [issue](https://github.com/ImageMagick/ImageMagick/issues). Or you can post privately to the ImageMagick development [team](https://imagemagick.org/script/contact.php). Most vulnerabilities are fixed within 48 hours.
 
 In addition, request a [CVE](https://www.cve.org/ResourcesSupport/ReportRequest).  We rely on you to post CVE's so our development team can concentrate on delivering a robust security patch.
-",427
+",427,b ImageMagick/ImageMagick a8668be21f6976f9306462cf84f17f0351b71f53

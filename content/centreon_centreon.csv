@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 centreon/.github,SECURITY.md,d59f560ddea38a8e174a7a058741dfbbc6a3f8c0,2022-08-22 11:53:28+00:00,,"# Security Policy
 
 Centreon takes the security of our software products seriously.
@@ -165,7 +165,7 @@ SL4taAGY0BDuA3zhB7p5tP8=
 =YBvx
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",8220
+",8220,b centreon/centreon d59f560ddea38a8e174a7a058741dfbbc6a3f8c0
 centreon/.github,SECURITY.md,a30db37ae7e31491d33854a5a4fe9e0a7c3fc5d4,2022-08-22 12:04:52+00:00,"# Security Policy
 
 Centreon takes the security of our software products seriously.
@@ -535,7 +535,7 @@ SL4taAGY0BDuA3zhB7p5tP8=
 =YBvx
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",1891
+",1891,b centreon/centreon a30db37ae7e31491d33854a5a4fe9e0a7c3fc5d4
 centreon/.github,SECURITY.md,e96896ecd5b38cb31afea5d938c66533cf8bea7c,2022-08-23 14:56:27+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -887,7 +887,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",3168
+",3168,b centreon/centreon e96896ecd5b38cb31afea5d938c66533cf8bea7c
 centreon/.github,SECURITY.md,2b29fecef08dedd910eb9dfb39927f7874e67a8c,2022-09-05 08:57:57+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -1184,7 +1184,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",29
+",29,b centreon/centreon 2b29fecef08dedd910eb9dfb39927f7874e67a8c
 centreon/.github,SECURITY.md,64d3344ed7900682c3cb2641a7fbe5f4b1000c14,2022-09-22 09:42:33+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -1482,7 +1482,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",35
+",35,b centreon/centreon 64d3344ed7900682c3cb2641a7fbe5f4b1000c14
 centreon/.github,SECURITY.md,7ba44e4dbf7251f98720de284422d8f942874f82,2022-09-26 07:49:32+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -1782,7 +1782,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",70
+",70,b centreon/centreon 7ba44e4dbf7251f98720de284422d8f942874f82
 centreon/.github,SECURITY.md,195d9453d6efcc6b2708f2c9409e8a9fff0e40d9,2022-10-04 15:08:53+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -2083,7 +2083,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",66
+",66,b centreon/centreon 195d9453d6efcc6b2708f2c9409e8a9fff0e40d9
 centreon/.github,SECURITY.md,683bbfe3d6eeddff240230c0ed4f9b4758df1e52,2022-10-06 09:40:33+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -2385,7 +2385,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",70
+",70,b centreon/centreon 683bbfe3d6eeddff240230c0ed4f9b4758df1e52
 centreon/.github,SECURITY.md,a8c73c4d84ac1974dd9c9c2d9dd3235861bfa332,2023-01-16 10:57:24+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -2689,7 +2689,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",62
+",62,b centreon/centreon a8c73c4d84ac1974dd9c9c2d9dd3235861bfa332
 centreon/.github,SECURITY.md,76ecba5b1123d736c5cde83f3834b19a7e166e4b,2023-01-17 09:59:26+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -2995,7 +2995,7 @@ i51yIfcTAPmxOst/YN5WXOxWHZjZ/STVi0Y=
 | Expires | 2022-01-13 |
 | Cipher |AES-256|
 | Fingerprint | C377 E9D5 2D5C 137D 3DD5 73B5 BEA F6EBF 6311 06F9 |
-",78
+",78,b centreon/centreon 76ecba5b1123d736c5cde83f3834b19a7e166e4b
 centreon/.github,SECURITY.md,4098e83ea8f4fbdc61cfed5ae4cc29e2af3635e1,2023-02-14 09:04:50+00:00,"# Security Acknowledgement
 
 Centreon is committed to the security of its product and services and is continuously improving policies, processes, and products to meet the highest standards.
@@ -3276,4 +3276,4 @@ BCUHrt8R6d1/xMe53upLfg==
 =sWVu
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",3172
+",3172,b centreon/centreon 4098e83ea8f4fbdc61cfed5ae4cc29e2af3635e1

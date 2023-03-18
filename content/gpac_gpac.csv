@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 gpac/gpac,SECURITY.md,09fec722ff20802471a4884222dbaf476632fe37,2022-01-06 16:40:40+00:00,,"# Security Policy
 
 ## Email Contact
@@ -21,7 +21,7 @@ Please include all information needed to reproduce the issue, including a sample
 Sample files can be joined directly via github (preferred way) or uploaded to the [GPAC file drop](https://www.mediafire.com/filedrop/filedrop_hosted.php?drop=eec9e058a9486fe4e99c33021481d9e1826ca9dbc242a6cfaab0fe95da5e5d95).
 
 However if public disclosure seems unreasonable, or if confidential information needs to be shared, you can contact securiy@gpac.io for private disclosure.
-",1044
+",1044,b gpac/gpac 09fec722ff20802471a4884222dbaf476632fe37
 gpac/gpac,SECURITY.md,6dcc08d5f59f0e8014103501930b321bac458ff2,2022-01-06 16:57:23+00:00,"# Security Policy
 
 ## Email Contact
@@ -66,7 +66,7 @@ Please include all information needed to reproduce the issue, including a sample
 Sample files can be joined directly via github (preferred way) or uploaded to the [GPAC file drop](https://www.mediafire.com/filedrop/filedrop_hosted.php?drop=eec9e058a9486fe4e99c33021481d9e1826ca9dbc242a6cfaab0fe95da5e5d95).
 
 However if public disclosure seems unreasonable, or if confidential information needs to be shared, you can contact security@gpac.io for private disclosure.
-",1
+",1,b gpac/gpac 6dcc08d5f59f0e8014103501930b321bac458ff2
 gpac/gpac,SECURITY.md,0bd9eca02a7e0462590f9c1ec86843e2c5e6b0df,2022-03-14 15:18:43+00:00,"# Security Policy
 
 ## Email Contact
@@ -113,7 +113,7 @@ Please include all information needed to reproduce the issue, including a sample
 Sample files can be joined directly via github (preferred way) or uploaded to the [GPAC file drop](https://www.mediafire.com/filedrop/filedrop_hosted.php?drop=eec9e058a9486fe4e99c33021481d9e1826ca9dbc242a6cfaab0fe95da5e5d95).
 
 However if public disclosure seems unreasonable, or if confidential information needs to be shared, you can contact security@gpac.io for private disclosure.
-",151
+",151,b gpac/gpac 0bd9eca02a7e0462590f9c1ec86843e2c5e6b0df
 gpac/gpac,SECURITY.md,d2543a400074b7acfef1103903e2e555f54baa21,2022-04-10 15:43:01+00:00,"# Security Policy
 
 ## Email Contact
@@ -162,4 +162,4 @@ Please include all information needed to reproduce the issue, including a sample
 Sample files can be joined directly via github (preferred way) or uploaded to the [GPAC file drop](https://www.mediafire.com/filedrop/filedrop_hosted.php?drop=eec9e058a9486fe4e99c33021481d9e1826ca9dbc242a6cfaab0fe95da5e5d95).
 
 However if public disclosure seems unreasonable, or if confidential information needs to be shared, you can contact security@gpac.io for private disclosure.
-",145
+",145,b gpac/gpac d2543a400074b7acfef1103903e2e555f54baa21

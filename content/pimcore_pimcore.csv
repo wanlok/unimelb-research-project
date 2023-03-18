@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 pimcore/pimcore,SECURITY.md,ba2325f59c23ef3a6872d81bfce27770f0a2d0dc,2020-11-09 14:07:27+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -26,7 +26,7 @@ Every submitted security issue is handled with top priority by the core-team by 
 7. Tagging a new release for supported versions
 8. Publish security announcement
 
-",836
+",836,b pimcore/pimcore ba2325f59c23ef3a6872d81bfce27770f0a2d0dc
 pimcore/pimcore,SECURITY.md,1dbbc2ba1c73f8f12d235ffdc13b63971aaa7ad4,2021-03-10 09:40:38+00:00,"# Security Policy
 
 ## Supported Versions
@@ -78,7 +78,7 @@ Every submitted security issue is handled with top priority by the core-team by 
 7. Tagging a new release for supported versions
 8. Publish security announcement
 
-",84
+",84,b pimcore/pimcore 1dbbc2ba1c73f8f12d235ffdc13b63971aaa7ad4
 pimcore/pimcore,SECURITY.md,e9a21c62353ef83e6bc3390804bf41ccdfe5fc24,2021-08-02 11:59:31+00:00,"# Security Policy
 
 ## Supported Versions
@@ -127,7 +127,7 @@ Every submitted security issue is handled with top priority by following these s
 7. Tagging a new release for supported versions
 8. Publish security announcement
 
-",17
+",17,b pimcore/pimcore e9a21c62353ef83e6bc3390804bf41ccdfe5fc24
 pimcore/pimcore,SECURITY.md,581d29894649f52e9def59e616eaa500b39f7896,2021-08-02 12:14:56+00:00,"# Security Policy
 
 ## Supported Versions
@@ -173,7 +173,7 @@ Every submitted security issue is handled with top priority by following these s
 7. Tagging a new release for supported versions
 8. Publish security announcement
 
-",166
+",166,b pimcore/pimcore 581d29894649f52e9def59e616eaa500b39f7896
 pimcore/pimcore,SECURITY.md,1c5bebde7bb79e638365e33a06cbf3b2f5a5be03,2021-08-02 12:17:11+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -216,7 +216,7 @@ Every submitted security issue is handled with top priority by following these s
 7. Tagging a new release for supported versions
 8. Publish security announcement
 
-",11
+",11,b pimcore/pimcore 1c5bebde7bb79e638365e33a06cbf3b2f5a5be03
 pimcore/pimcore,SECURITY.md,50d11b8c6f370767d7b142036ed29c3982c0215d,2021-08-13 11:16:46+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -259,7 +259,7 @@ Every submitted security issue is handled with top priority by following these s
 7. Tagging a new release for supported versions
 8. Publish security announcement
 
-",38
+",38,b pimcore/pimcore 50d11b8c6f370767d7b142036ed29c3982c0215d
 pimcore/pimcore,SECURITY.md,c272a7d2869c3ed199b0fffd3c3ab164a53c8720,2023-02-01 10:03:13+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -303,4 +303,4 @@ Every submitted security issue is handled with top priority by following these s
 7. Tagging a new release for supported versions
 8. Publish security announcement
 
-",103
+",103,b pimcore/pimcore c272a7d2869c3ed199b0fffd3c3ab164a53c8720

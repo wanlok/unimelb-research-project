@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 envoyproxy/envoy,SECURITY.md,27b41b888d5ba624f2a6098c8b9f395e8ef95cbf,2019-07-26 16:54:57+00:00,,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -382,7 +382,7 @@ CrashOverride will vouch for the ""Seven"" distribution joining the distribution
 | envoy-security@solo.io                    | solo.io       |
 | envoy-security@tetrate.io                 | Tetrate       |
 | security@vmware.com                       | VMware        |
-",21101
+",21101,b envoyproxy/envoy 27b41b888d5ba624f2a6098c8b9f395e8ef95cbf
 envoyproxy/envoy,SECURITY.md,3eedc793f1b47ec5d737d399103c287fe59ff650,2019-07-31 20:38:25+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -1151,7 +1151,7 @@ CrashOverride will vouch for the ""Seven"" distribution joining the distribution
 | envoy-security@solo.io                    | solo.io       |
 | envoy-security@tetrate.io                 | Tetrate       |
 | security@vmware.com                       | VMware        |
-",185
+",185,b envoyproxy/envoy 3eedc793f1b47ec5d737d399103c287fe59ff650
 envoyproxy/envoy,SECURITY.md,6ddfb94655d03aabeec42dc5ffe129e42bb43edb,2019-08-06 23:37:32+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -1922,7 +1922,7 @@ CrashOverride will vouch for the ""Seven"" distribution joining the distribution
 | envoy-security@solo.io                                | solo.io       |
 | envoy-security@tetrate.io                             | Tetrate       |
 | security@vmware.com                                   | VMware        |
-",198
+",198,b envoyproxy/envoy 6ddfb94655d03aabeec42dc5ffe129e42bb43edb
 envoyproxy/envoy,SECURITY.md,c5050773a959e907dd21a26c6221d11b17d7042d,2019-08-21 02:11:49+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -2707,7 +2707,7 @@ CrashOverride will vouch for the ""Seven"" distribution joining the distribution
 | envoy-security@solo.io                                | solo.io       |
 | envoy-security@tetrate.io                             | Tetrate       |
 | security@vmware.com                                   | VMware        |
-",1062
+",1062,b envoyproxy/envoy c5050773a959e907dd21a26c6221d11b17d7042d
 envoyproxy/envoy,SECURITY.md,90d1094b32aa017f90cc8efcd379aeb143acabfc,2019-11-11 22:03:21+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -3488,7 +3488,7 @@ CrashOverride will vouch for the ""Seven"" distribution joining the distribution
 | envoy-security@solo.io                                | solo.io       |
 | envoy-security@tetrate.io                             | Tetrate       |
 | security@vmware.com                                   | VMware        |
-",1466
+",1466,b envoyproxy/envoy 90d1094b32aa017f90cc8efcd379aeb143acabfc
 envoyproxy/envoy,SECURITY.md,a90aefca2c4175e7acc102bc3f810b020c780602,2019-12-04 03:58:20+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -4292,7 +4292,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@solo.io                                | solo.io       | No       | 12/19       |
 | envoy-security@tetrate.io                             | Tetrate       | No       | 12/19       |
 | security@vmware.com                                   | VMware        | No       | 12/19       |
-",3126
+",3126,b envoyproxy/envoy a90aefca2c4175e7acc102bc3f810b020c780602
 envoyproxy/envoy,SECURITY.md,75e768bc77fcf6494f8facf962dd06b8033c1187,2019-12-09 23:22:22+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -5138,7 +5138,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@tetrate.io                             | Tetrate       | No       | 12/19       |
 | security@vmware.com                                   | VMware        | No       | 12/19       |
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
-",99
+",99,b envoyproxy/envoy 75e768bc77fcf6494f8facf962dd06b8033c1187
 envoyproxy/envoy,SECURITY.md,73fc168bd43243036b76619b4879a5b3ad7dbb14,2020-01-02 14:35:36+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -5987,7 +5987,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@tetrate.io                             | Tetrate       | No       | 12/19       |
 | security@vmware.com                                   | VMware        | No       | 12/19       |
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
-",162
+",162,b envoyproxy/envoy 73fc168bd43243036b76619b4879a5b3ad7dbb14
 envoyproxy/envoy,SECURITY.md,a092fb3964eb3adb3863c57af591cf0af9ea976a,2020-01-16 18:52:46+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -6839,7 +6839,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | security@vmware.com                                   | VMware        | No       | 12/19       |
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01 /20      |
-",99
+",99,b envoyproxy/envoy a092fb3964eb3adb3863c57af591cf0af9ea976a
 envoyproxy/envoy,SECURITY.md,8c8b8b3f5886198c9ba8a2d7e2e8fbdaacff2324,2020-01-28 19:07:27+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -7693,7 +7693,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",99
+",99,b envoyproxy/envoy 8c8b8b3f5886198c9ba8a2d7e2e8fbdaacff2324
 envoyproxy/envoy,SECURITY.md,afaedbb2cb81810be055dde445aa6755a7c7853c,2020-05-13 14:26:06+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -8548,7 +8548,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",356
+",356,b envoyproxy/envoy afaedbb2cb81810be055dde445aa6755a7c7853c
 envoyproxy/envoy,SECURITY.md,a691438153d70c5af357923f686ff590384f3cb2,2020-05-19 21:27:19+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -9427,7 +9427,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",1048
+",1048,b envoyproxy/envoy a691438153d70c5af357923f686ff590384f3cb2
 envoyproxy/envoy,SECURITY.md,f556b410a3f57c6c7fd5780e0a957edb2f113700,2020-07-20 22:57:31+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -10331,7 +10331,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",71
+",71,b envoyproxy/envoy f556b410a3f57c6c7fd5780e0a957edb2f113700
 envoyproxy/envoy,SECURITY.md,20c32d2db78168249f47cc781ed25f999ef13a52,2020-07-24 18:18:12+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -11239,7 +11239,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",195
+",195,b envoyproxy/envoy 20c32d2db78168249f47cc781ed25f999ef13a52
 envoyproxy/envoy,SECURITY.md,8312c1f78dc4fd660ef77f12062157cc14722b4d,2020-09-01 21:08:20+00:00,"# Security Release Process
 
 Envoy is a large growing community of volunteers, users, and vendors. The Envoy community has
@@ -12156,7 +12156,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",223
+",223,b envoyproxy/envoy 8312c1f78dc4fd660ef77f12062157cc14722b4d
 envoyproxy/envoy,SECURITY.md,17e815122ff53d0ac6cb2d64cdbf1bfc547bb7e8,2021-01-16 03:43:43+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -13079,7 +13079,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",29
+",29,b envoyproxy/envoy 17e815122ff53d0ac6cb2d64cdbf1bfc547bb7e8
 envoyproxy/envoy,SECURITY.md,4334b8ea880bc053cdc508731ab87345b3d43ef5,2021-02-12 12:54:51+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -14003,7 +14003,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",99
+",99,b envoyproxy/envoy 4334b8ea880bc053cdc508731ab87345b3d43ef5
 envoyproxy/envoy,SECURITY.md,25b64a9c66bd7a21e2a144cf86983f8b44b1d8bd,2021-04-11 23:29:16+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -14935,7 +14935,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@pinterest.com                          | Pinterest     | Yes      | 12/19       |
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
-",478
+",478,b envoyproxy/envoy 25b64a9c66bd7a21e2a144cf86983f8b44b1d8bd
 envoyproxy/envoy,SECURITY.md,537deb4a1e3f24d8bc9a5e7a7ce58d66b3c68862,2021-05-21 18:24:12+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -15875,7 +15875,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | envoy-security@dropbox.com                            | Dropbox       | Yes      | 01/20       |
 | envoy-security-predisclosure@stripe.com               | Stripe        | Yes      | 01/20       |
 | envoy-security@squareup.com                           | Square        | Yes      | 05/21       |
-",99
+",99,b envoyproxy/envoy 537deb4a1e3f24d8bc9a5e7a7ce58d66b3c68862
 envoyproxy/envoy,SECURITY.md,a261f3337e45d38f3e1c3a681c7925a72c863389,2021-05-26 22:52:01+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -16816,7 +16816,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Dropbox       | Yes      | 01/20       |
 | Stripe        | Yes      | 01/20       |
 | Square        | Yes      | 05/21       |
-",1064
+",1064,b envoyproxy/envoy a261f3337e45d38f3e1c3a681c7925a72c863389
 envoyproxy/envoy,SECURITY.md,b090faec7b8b59daad7b00788dbaa8a08a9ccfd7,2021-05-27 02:15:31+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -17758,7 +17758,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Stripe        | Yes      | 01/20       |
 | Square        | Yes      | 05/21       |
 | Apple         | Yes      | 05/21       |
-",43
+",43,b envoyproxy/envoy b090faec7b8b59daad7b00788dbaa8a08a9ccfd7
 envoyproxy/envoy,SECURITY.md,728ff42cc466a4ab74ff6f70728e48dbabf9fb99,2021-06-02 16:00:34+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -18702,7 +18702,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Square        | Yes      | 05/21       |
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
-",43
+",43,b envoyproxy/envoy 728ff42cc466a4ab74ff6f70728e48dbabf9fb99
 envoyproxy/envoy,SECURITY.md,2258ae9097aa239654df601eeebaf10cd6cfdc82,2021-06-08 02:57:36+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -19647,7 +19647,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Square        | Yes      | 05/21       |
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
-",52
+",52,b envoyproxy/envoy 2258ae9097aa239654df601eeebaf10cd6cfdc82
 envoyproxy/envoy,SECURITY.md,e385e016e941b6c2d91096b0b792aa6940d4b38c,2021-08-13 01:03:52+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -20594,7 +20594,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Square        | Yes      | 05/21       |
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
-",81
+",81,b envoyproxy/envoy e385e016e941b6c2d91096b0b792aa6940d4b38c
 envoyproxy/envoy,SECURITY.md,741b8c08d3de1650fc45d5c9a75e418867a10fa9,2022-05-12 17:03:19+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -21544,7 +21544,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Square        | Yes      | 05/21       |
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
-",187
+",187,b envoyproxy/envoy 741b8c08d3de1650fc45d5c9a75e418867a10fa9
 envoyproxy/envoy,SECURITY.md,f43b5cf37c6f10e2d17257c974a122b441895d1c,2022-06-30 14:55:31+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -22496,7 +22496,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
 | Netflix       | Yes      | 06/22       |
-",43
+",43,b envoyproxy/envoy f43b5cf37c6f10e2d17257c974a122b441895d1c
 envoyproxy/envoy,SECURITY.md,25c2d5189fc53d4e9d61a8db6f2a9b74bc04171b,2022-07-21 14:51:18+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -23454,7 +23454,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
 | Netflix       | Yes      | 06/22       |
-",475
+",475,b envoyproxy/envoy 25c2d5189fc53d4e9d61a8db6f2a9b74bc04171b
 envoyproxy/envoy,SECURITY.md,dfdc8251e2e774eb870c72d023668d84869b2830,2022-08-08 22:00:10+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -24422,7 +24422,7 @@ and security team to ensure they still qualify for inclusion on the list.
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
 | Netflix       | Yes      | 06/22       |
-",474
+",474,b envoyproxy/envoy dfdc8251e2e774eb870c72d023668d84869b2830
 envoyproxy/envoy,SECURITY.md,851458668a15c740e581c85acf7e382268d26deb,2022-08-10 13:30:29+00:00,"# Security Reporting Process
 
 Please report any security issue or Envoy crash report to
@@ -25395,4 +25395,4 @@ and security team to ensure they still qualify for inclusion on the list.
 | Apple         | Yes      | 05/21       |
 | Spotify       | Yes      | 06/21       |
 | Netflix       | Yes      | 06/22       |
-",1
+",1,b envoyproxy/envoy 851458668a15c740e581c85acf7e382268d26deb

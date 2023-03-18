@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 parse-community/parse-server,SECURITY.md,8fd5f310891d5d86a18626ed4752463dfcd49a82,2017-12-05 13:52:13+00:00,,"# Parse Community Vulnerability Disclosure Program
 If you believe you have found a security vulnerability on one of parse-community maintained packages,
 we encourage you to let us know right away. 
@@ -74,7 +74,7 @@ Co6fHPyjrvmE5DtU5Vp8O68ZpOYrkM6X22dIQpPi6atm
 =o7Nx
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",5043
+",5043,b parse-community/parse-server 8fd5f310891d5d86a18626ed4752463dfcd49a82
 parse-community/parse-server,SECURITY.md,54ba9a0f00eaeb7d8c0938dd555f913d58a5fdcd,2019-06-12 17:33:21+00:00,"# Parse Community Vulnerability Disclosure Program
 If you believe you have found a security vulnerability on one of parse-community maintained packages,
 we encourage you to let us know right away. 
@@ -225,7 +225,7 @@ Co6fHPyjrvmE5DtU5Vp8O68ZpOYrkM6X22dIQpPi6atm
 =o7Nx
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",68
+",68,b parse-community/parse-server 54ba9a0f00eaeb7d8c0938dd555f913d58a5fdcd
 parse-community/parse-server,SECURITY.md,4998135fa759f1be2f44d93ecffeea38180c100a,2019-10-02 03:35:18+00:00,"# Parse Community Vulnerability Disclosure Program
 If you believe you have found a security vulnerability on one of parse-community maintained packages,
 we encourage you to let us know right away. 
@@ -402,7 +402,7 @@ dkoPBN52k7VhS3vUIQhA1P1sLSEtPMuJ8SDq0CuA008WpU/xHdm1b+xcBxrabuoz
 =paxU
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",4124
+",4124,b parse-community/parse-server 4998135fa759f1be2f44d93ecffeea38180c100a
 parse-community/parse-server,SECURITY.md,25fb576776fefee631b457e358a2f567867c9c80,2021-01-29 17:37:38+00:00,"# Parse Community Vulnerability Disclosure Program
 If you believe you have found a security vulnerability on one of parse-community maintained packages,
 we encourage you to let us know right away. 
@@ -523,4 +523,4 @@ We ask that:
 # Communicating with us
 
 All vulnerabilities should be privately reported to us by going to [https://report.parseplatform.org](https://report.parseplatform.org). Alternatively, you can send an email to [security@parseplatform.org](mailto:security@parseplatform.org).
-",4915
+",4915,b parse-community/parse-server 25fb576776fefee631b457e358a2f567867c9c80
