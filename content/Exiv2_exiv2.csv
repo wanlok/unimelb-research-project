@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 Exiv2/exiv2,SECURITY.md,062177d09220c78be5ed11701c15ee5059670962,2021-03-09 18:21:14+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -38,7 +38,7 @@ Users can register on GitHub.com to receive release notices for RC and GM Releas
 |:--                |:--                              |:--        |:--    |
 | [CVE-2019-9144](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9144)     | Crash in BigTiffImage::printIFD | Remove src/bigtiffimage.cpp | [#1331](https://github.com/Exiv2/exiv2/pull/1331) |
 | to be continued   | | | |
-",2849
+",2849,b Exiv2/exiv2 062177d09220c78be5ed11701c15ee5059670962
 Exiv2/exiv2,SECURITY.md,f11675c7a7f0c86c83c219934ba63da3b1b44005,2021-04-17 16:01:38+00:00,"# Security Policy
 
 ## Supported Versions
@@ -123,7 +123,7 @@ Users can register on GitHub.com to receive release notices for RC and GM Releas
 | v0.27.3.29 | Exiv2 v0.27.3.29 | Development  | Should never be installed for production. |
 | v0.27.4.9  | Exiv2 v0.27.4.9  | Development  | Should never be installed for production. |
 | v0.27.99   | Exiv2 v0.28      | Development  | Should never be installed for production. |
-",1735
+",1735,b Exiv2/exiv2 f11675c7a7f0c86c83c219934ba63da3b1b44005
 Exiv2/exiv2,SECURITY.md,ad5bac98632ffb76a2e09804bdc6555cfcdd1985,2021-04-24 11:09:15+00:00,"# Security Policy
 
 ## Supported Versions
@@ -216,7 +216,7 @@ Users can register on GitHub.com to receive release notices for RC and GM Releas
 | v0.27.3.29 | Exiv2 v0.27.3.29 | Development  | Should never be installed for production. |
 | v0.27.4.9  | Exiv2 v0.27.4.9  | Development  | Should never be installed for production. |
 | v0.27.99   | Exiv2 v0.28      | Development  | Should never be installed for production. |
-",440
+",440,b Exiv2/exiv2 ad5bac98632ffb76a2e09804bdc6555cfcdd1985
 Exiv2/exiv2,SECURITY.md,e1cbe3ed588338f9960d7b417f01570d88a700f9,2021-09-04 10:50:10+00:00,"# Security Policy
 
 ## Supported Versions
@@ -315,7 +315,7 @@ Users can register on GitHub.com to receive release notices for RC and GM Releas
 | v0.27.3.29 | Exiv2 v0.27.3.29 | Development  | Should never be installed for production. |
 | v0.27.4.9  | Exiv2 v0.27.4.9  | Development  | Should never be installed for production. |
 | v0.27.99   | Exiv2 v0.28      | Development  | Should never be installed for production. |
-",682
+",682,b Exiv2/exiv2 e1cbe3ed588338f9960d7b417f01570d88a700f9
 Exiv2/exiv2,SECURITY.md,bea66d61e4a2f042400ff1efe5f4e28481f78caa,2021-12-21 13:46:59+00:00,"# Security Policy
 
 ## Supported Versions
@@ -420,7 +420,7 @@ Users can register on GitHub.com to receive release notices for RC and GM Releas
 | v0.27.3.29 | Exiv2 v0.27.3.29 | Development  | Should never be installed for production. |
 | v0.27.4.9  | Exiv2 v0.27.4.9  | Development  | Should never be installed for production. |
 | v0.27.99   | Exiv2 v0.28      | Development  | Should never be installed for production. |
-",547
+",547,b Exiv2/exiv2 bea66d61e4a2f042400ff1efe5f4e28481f78caa
 Exiv2/exiv2,SECURITY.md,e56abfa10aec2ab1172b99debf1d15feb4cc4184,2022-02-04 07:53:04+00:00,"# Security Policy
 
 ## Supported Versions
@@ -527,4 +527,4 @@ Users can register on GitHub.com to receive release notices for RC and GM Releas
 | v0.27.3.29 | Exiv2 v0.27.3.29 | Development  | Should never be installed for production. |
 | v0.27.4.9  | Exiv2 v0.27.4.9  | Development  | Should never be installed for production. |
 | v0.27.99   | Exiv2 v0.28      | Development  | Should never be installed for production. |
-",1
+",1,b Exiv2/exiv2 e56abfa10aec2ab1172b99debf1d15feb4cc4184

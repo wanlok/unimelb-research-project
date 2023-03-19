@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 Dolibarr/dolibarr,SECURITY.md,a2591bafa0eb8836f43fd7769ca7f0607c44eedb,2020-09-17 07:51:28+00:00,,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -112,7 +112,7 @@ Scope is the web application (back office) and the APIs.
 * Software version disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 
-",5938
+",5938,b Dolibarr/dolibarr a2591bafa0eb8836f43fd7769ca7f0607c44eedb
 Dolibarr/dolibarr,SECURITY.md,ab5ac6a629a1fd39d622c73ea2356e95859c5310,2020-09-17 09:39:41+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -340,7 +340,7 @@ Scope is the web application (back office) and the APIs.
 * Software version disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 
-",67
+",67,b Dolibarr/dolibarr ab5ac6a629a1fd39d622c73ea2356e95859c5310
 Dolibarr/dolibarr,SECURITY.md,08f4b4f64a67d6b0c48b713f1274e659e1d6174b,2020-09-17 15:05:03+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -569,7 +569,7 @@ Scope is the web application (back office) and the APIs.
 * Software version disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 
-",2
+",2,b Dolibarr/dolibarr 08f4b4f64a67d6b0c48b713f1274e659e1d6174b
 Dolibarr/dolibarr,SECURITY.md,bb55572abf1f7f735351d4607abbf37cd4a5f8a5,2020-09-18 03:11:29+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -798,7 +798,7 @@ Scope is the web application (back office) and the APIs.
 * Software version disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 
-",394
+",394,b Dolibarr/dolibarr bb55572abf1f7f735351d4607abbf37cd4a5f8a5
 Dolibarr/dolibarr,SECURITY.md,05d85ee4c1f032886d3c0ed9a30947e8f1cbc336,2020-09-18 03:34:50+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -1028,7 +1028,7 @@ Scope is the web application (back office) and the APIs.
 * Software version disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 
-",179
+",179,b Dolibarr/dolibarr 05d85ee4c1f032886d3c0ed9a30947e8f1cbc336
 Dolibarr/dolibarr,SECURITY.md,ca2e79395c0b574bbe58bca4fb3522f4ccec27b5,2020-09-18 03:35:37+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -1259,7 +1259,7 @@ Scope is the web application (back office) and the APIs.
 * Software version disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 
-",12
+",12,b Dolibarr/dolibarr ca2e79395c0b574bbe58bca4fb3522f4ccec27b5
 Dolibarr/dolibarr,SECURITY.md,f066da181170bf724d5967a1192c4a2f03880b91,2020-09-24 14:19:24+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -1490,7 +1490,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",325
+",325,b Dolibarr/dolibarr f066da181170bf724d5967a1192c4a2f03880b91
 Dolibarr/dolibarr,SECURITY.md,d8d5524766d8c4c68e058d6fc2ed8af319503d24,2020-12-07 18:51:22+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -1720,7 +1720,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",98
+",98,b Dolibarr/dolibarr d8d5524766d8c4c68e058d6fc2ed8af319503d24
 Dolibarr/dolibarr,SECURITY.md,4013eaa2398910d75aa8d5988b03d55c67e3e467,2020-12-12 14:28:52+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -1937,7 +1937,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",689
+",689,b Dolibarr/dolibarr 4013eaa2398910d75aa8d5988b03d55c67e3e467
 Dolibarr/dolibarr,SECURITY.md,fa05982a8b9a6528827abc54fd5fe9a981b53494,2020-12-12 17:37:51+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -2142,7 +2142,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",9
+",9,b Dolibarr/dolibarr fa05982a8b9a6528827abc54fd5fe9a981b53494
 Dolibarr/dolibarr,SECURITY.md,b5731290c77e7815341b8e094ba6f906b2bc8f21,2020-12-23 12:33:33+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -2349,7 +2349,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",169
+",169,b Dolibarr/dolibarr b5731290c77e7815341b8e094ba6f906b2bc8f21
 Dolibarr/dolibarr,SECURITY.md,87da0a276d236529052b071aed3bd0d5eb9ef279,2020-12-29 15:13:03+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -2557,7 +2557,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",96
+",96,b Dolibarr/dolibarr 87da0a276d236529052b071aed3bd0d5eb9ef279
 Dolibarr/dolibarr,SECURITY.md,75e9e1ff59a5921261730b0f8693b548243628f7,2021-02-19 13:29:43+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -2764,7 +2764,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",67
+",67,b Dolibarr/dolibarr 75e9e1ff59a5921261730b0f8693b548243628f7
 Dolibarr/dolibarr,SECURITY.md,16056941fb00fadef24f66e1876652feefc6021a,2021-03-24 13:17:51+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -2971,7 +2971,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",55
+",55,b Dolibarr/dolibarr 16056941fb00fadef24f66e1876652feefc6021a
 Dolibarr/dolibarr,SECURITY.md,5f8599ebc9050c805af0b50fe396a3eac94ec5bc,2021-03-24 13:19:07+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -3178,7 +3178,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",40
+",40,b Dolibarr/dolibarr 5f8599ebc9050c805af0b50fe396a3eac94ec5bc
 Dolibarr/dolibarr,SECURITY.md,9072fea939d6744b23eaeb1adf18116b2e619fec,2021-03-25 03:04:52+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -3385,7 +3385,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",226
+",226,b Dolibarr/dolibarr 9072fea939d6744b23eaeb1adf18116b2e619fec
 Dolibarr/dolibarr,SECURITY.md,38505427334205f52701ba6a248dd3ace652dd67,2021-09-10 17:20:19+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -3592,7 +3592,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",11
+",11,b Dolibarr/dolibarr 38505427334205f52701ba6a248dd3ace652dd67
 Dolibarr/dolibarr,SECURITY.md,6c37836b3e1e86ceb847ce7e7df6fe0cf613c2e9,2021-09-18 16:28:02+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -3798,7 +3798,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",69
+",69,b Dolibarr/dolibarr 6c37836b3e1e86ceb847ce7e7df6fe0cf613c2e9
 Dolibarr/dolibarr,SECURITY.md,663fe098f966102e976c36f18ba18c9a0441674e,2021-09-19 11:55:22+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -4003,7 +4003,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",70
+",70,b Dolibarr/dolibarr 663fe098f966102e976c36f18ba18c9a0441674e
 Dolibarr/dolibarr,SECURITY.md,bf9f007c98f4526e4b2ba070bc914d72fb98facf,2021-09-19 12:57:14+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -4208,7 +4208,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",2
+",2,b Dolibarr/dolibarr bf9f007c98f4526e4b2ba070bc914d72fb98facf
 Dolibarr/dolibarr,SECURITY.md,6a6678438f5cd719d39bf858d98927bbad1a92bb,2021-10-03 17:30:51+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -4413,7 +4413,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 
-",135
+",135,b Dolibarr/dolibarr 6a6678438f5cd719d39bf858d98927bbad1a92bb
 Dolibarr/dolibarr,SECURITY.md,0a3a0862ffaf4c63396f4d96f765238e9f3e92cf,2021-11-08 12:33:24+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -4612,7 +4612,7 @@ Scope is the web application (back office) and the APIs.
 * Software version or private IP disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
-",143
+",143,b Dolibarr/dolibarr 0a3a0862ffaf4c63396f4d96f765238e9f3e92cf
 Dolibarr/dolibarr,SECURITY.md,4a82210fa63494866992e70ed9d3d0edf30b1d35,2022-01-11 14:17:46+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -4805,7 +4805,7 @@ Scope is the web application (back office) and the APIs.
 * Software version or private IP disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
-",2
+",2,b Dolibarr/dolibarr 4a82210fa63494866992e70ed9d3d0edf30b1d35
 Dolibarr/dolibarr,SECURITY.md,92585399edce77b88ee3a895f54b956785ee8b7a,2022-01-11 15:04:04+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -4999,7 +4999,7 @@ Scope is the web application (back office) and the APIs.
 * Software version or private IP disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
-",27
+",27,b Dolibarr/dolibarr 92585399edce77b88ee3a895f54b956785ee8b7a
 Dolibarr/dolibarr,SECURITY.md,0a8eb3ee00b4e2aa607660b661160705ffcf60e0,2022-01-20 19:03:24+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -5194,7 +5194,7 @@ Scope is the web application (back office) and the APIs.
 * Software version or private IP disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
-",59
+",59,b Dolibarr/dolibarr 0a8eb3ee00b4e2aa607660b661160705ffcf60e0
 Dolibarr/dolibarr,SECURITY.md,6003a93f0d333902c50fde8af851cc1020f58faf,2022-03-29 17:55:56+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -5389,7 +5389,7 @@ Scope is the web application (back office) and the APIs.
 * Software version or private IP disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
-",13
+",13,b Dolibarr/dolibarr 6003a93f0d333902c50fde8af851cc1020f58faf
 Dolibarr/dolibarr,SECURITY.md,049799c2e615e7c5ebacb7b245af2cf839fb9254,2022-05-16 18:28:00+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -5585,7 +5585,7 @@ Scope is the web application (back office) and the APIs.
 * Software version or private IP disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
-",44
+",44,b Dolibarr/dolibarr 049799c2e615e7c5ebacb7b245af2cf839fb9254
 Dolibarr/dolibarr,SECURITY.md,f49fd274d1bf7f67d3f395551827955b72eda4f4,2022-12-10 10:57:47+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -5781,7 +5781,7 @@ Scope is the web application (back office) and the APIs.
 * Software version or private IP disclosure when logged user is admin
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
-",58
+",58,b Dolibarr/dolibarr f49fd274d1bf7f67d3f395551827955b72eda4f4
 Dolibarr/dolibarr,SECURITY.md,4637f8a65e900a61e3f64bcc796e7ad882a004cf,2023-01-18 18:11:15+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -5978,7 +5978,7 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 * Brute force attacks on login page, password forgotten page or any public pages (/public/*) are not qualified if the fail2ban recommended fail2ban rules were not installed.  
-",708
+",708,b Dolibarr/dolibarr 4637f8a65e900a61e3f64bcc796e7ad882a004cf
 Dolibarr/dolibarr,SECURITY.md,f7f3f130aa5121718e653245920166d60a0dc9e0,2023-03-12 15:56:25+00:00,"# Security Policy
 
 This file contains some policies about the security reports on Dolibarr ERP CRM project, one of the most popular Open Source ERP and CRM in the world.
@@ -6177,4 +6177,4 @@ Scope is the web application (back office) and the APIs.
 * Stack traces or path disclosure when logged user is admin
 * Any vulnerabilities due to a configuration different than the one defined into chapter ""Scope for qualified vulnerabilities"".
 * Brute force attacks on login page, password forgotten page or any public pages (/public/*) are not qualified if the fail2ban recommended fail2ban rules were not installed.  
-",132
+",132,b Dolibarr/dolibarr f7f3f130aa5121718e653245920166d60a0dc9e0

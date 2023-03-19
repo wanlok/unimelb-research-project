@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 php/php-src,SECURITY.md,d62968cd12a8e0db5083dadef46c1bbeedd4ad1e,2023-02-16 03:56:03+00:00,,"# Vulnerability Disclosure Policy
 
 *This document was originally published at .*
@@ -167,7 +167,7 @@ yield agreement we'd rather do more fixing and less arguing.
 ### Do you pay bounties for security issues?
 
 PHP is a volunteer project. We have no money, thus we can't pay bounties.
-",6480
+",6480,b php/php-src d62968cd12a8e0db5083dadef46c1bbeedd4ad1e
 php/php-src,SECURITY.md,bbc1f821ddc274e81ba7999c6eb1d531936a8d7b,2023-02-16 03:56:03+00:00,"# Vulnerability Disclosure Policy
 
 *This document was originally published at .*
@@ -501,7 +501,7 @@ yield agreement we'd rather do more fixing and less arguing.
 
 Q. Do you pay bounties for security issues?\
 A. PHP is a volunteer project. We have no money, thus we can't pay them.
-",647
+",647,b php/php-src bbc1f821ddc274e81ba7999c6eb1d531936a8d7b
 php/php-src,SECURITY.md,5845a52973ba8f34c2329cc5d85acf0b05b574bb,2023-02-16 03:56:03+00:00,"# Security Classification Document
 
 *The canonical version of this document is located at .
@@ -832,4 +832,4 @@ yield agreement we'd rather do more fixing and less arguing.
 
 Q. Do you pay bounties for security issues?\
 A. PHP is a volunteer project. We have no money, thus we can't pay them.
-",0
+",0,b php/php-src 5845a52973ba8f34c2329cc5d85acf0b05b574bb

@@ -1,10 +1,10 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 mruby/mruby,SECURITY.md,dd0caf87280b6fd1a7c5f43b65ed9ea73e833317,2021-09-20 10:44:41+00:00,,"# Security Policy
 
 ## Reporting a Vulnerability
 
 If you have any security concern, contact .
-",93
+",93,b mruby/mruby dd0caf87280b6fd1a7c5f43b65ed9ea73e833317
 mruby/mruby,SECURITY.md,4e504eaca13ec6b24de0e10068afc43f0bee39d5,2021-10-01 10:13:07+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -28,7 +28,7 @@ We *don't* consider following issues as vulnerabilities:
 * Runtime C undefined behavior (including integer overflow)
 * Crash caused by misused API
 * Crash caused by tweaked compiled binary
-",314
+",314,b mruby/mruby 4e504eaca13ec6b24de0e10068afc43f0bee39d5
 mruby/mruby,SECURITY.md,ce3b1c4780df195134d91442708d2f118e554556,2022-02-20 09:39:34+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -67,7 +67,7 @@ We *don't* consider following issues as vulnerabilities:
 * Crash caused by modified compiled binary
 * ASAN/Valgrind warning for too big memory allocation
   mruby assumes `malloc(3)` returns `NULL` for too big allocations
-",127
+",127,b mruby/mruby ce3b1c4780df195134d91442708d2f118e554556
 mruby/mruby,SECURITY.md,9521e4e974e2deccee9823e6a3a596d99817f29f,2022-07-29 06:30:46+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -108,7 +108,7 @@ We *don't* consider the following issues as vulnerabilities:
 * Crash caused by modified compiled binary
 * ASAN/Valgrind warning for too big memory allocation
   mruby assumes `malloc(3)` returns `NULL` for too big allocations
-",8
+",8,b mruby/mruby 9521e4e974e2deccee9823e6a3a596d99817f29f
 mruby/mruby,SECURITY.md,696226a60e9aa3d16abf3061d37705dc13d67f75,2022-10-26 03:09:41+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -149,4 +149,4 @@ We *don't* consider the following issues as vulnerabilities:
 - Crash caused by modified compiled binary
 - ASAN/Valgrind warning for too big memory allocation
   mruby assumes `malloc(3)` returns `NULL` for too big allocations
-",6
+",6,b mruby/mruby 696226a60e9aa3d16abf3061d37705dc13d67f75

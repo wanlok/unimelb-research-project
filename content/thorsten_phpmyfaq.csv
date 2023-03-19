@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 thorsten/phpmyfaq,SECURITY.md,e2bf1ac97cfc5eebfe10bb165655ec3f140153e7,2019-07-28 11:39:20+00:00,,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a security vulnerability in phpMyFAQ, we appreciate your help in disclosing it to us in a responsible manner.
@@ -18,7 +18,7 @@ We seriously take care about any security issues found in phpMyFAQ or bundled co
 Publicly disclosing a vulnerability can put the entire community at risk. If you’ve discovered a security concern, please email us at security@phpmyfaq.de. We’ll work with you to make sure that we understand the scope of the issue, and that we fully address your concern. We consider correspondence sent to security@phpmyfaq.de our highest priority, and work to address any issues that arise as quickly as possible.
 
 Please act in good faith towards our users’ privacy and data during your disclosure. We won’t take legal action against you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
-",1119
+",1119,b thorsten/phpmyfaq e2bf1ac97cfc5eebfe10bb165655ec3f140153e7
 thorsten/phpmyfaq,SECURITY.md,76198ef9acaa23a0779a8e52b2741defffa52e2d,2020-02-16 18:35:35+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a security vulnerability in phpMyFAQ, we appreciate your help in disclosing it to us in a responsible manner.
@@ -59,7 +59,7 @@ and work to address any issues that arise as quickly as possible.
 
 Please act in good faith towards our users’ privacy and data during your disclosure. We won’t take legal action against
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
-",41
+",41,b thorsten/phpmyfaq 76198ef9acaa23a0779a8e52b2741defffa52e2d
 thorsten/phpmyfaq,SECURITY.md,f10b7b68d6698f241dea466112452c8369448607,2020-04-17 10:19:27+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -103,7 +103,7 @@ and work to address any issues that arise as quickly as possible.
 
 Please act in good faith towards our users’ privacy and data during your disclosure. We won’t take legal action against
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
-",37
+",37,b thorsten/phpmyfaq f10b7b68d6698f241dea466112452c8369448607
 thorsten/phpmyfaq,SECURITY.md,38591c2b783392cf499a63963312da85b66c2c53,2020-09-06 14:23:12+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -148,7 +148,7 @@ and work to address any issues that arise as quickly as possible.
 
 Please act in good faith towards our users’ privacy and data during your disclosure. We won’t take legal action against
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
-",10
+",10,b thorsten/phpmyfaq 38591c2b783392cf499a63963312da85b66c2c53
 thorsten/phpmyfaq,SECURITY.md,6a18a5653fbf19b73a70b1bcbf2a70234e335c3b,2020-11-07 10:46:47+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -193,7 +193,7 @@ and work to address any issues that arise as quickly as possible.
 
 Please act in good faith towards our users’ privacy and data during your disclosure. We won’t take legal action against
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
-",13
+",13,b thorsten/phpmyfaq 6a18a5653fbf19b73a70b1bcbf2a70234e335c3b
 thorsten/phpmyfaq,SECURITY.md,9f937652e41ba6b473b919c98ac92a8ebf9cf6da,2020-11-13 09:24:00+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -238,7 +238,7 @@ and work to address any issues that arise as quickly as possible.
 
 Please act in good faith towards our users’ privacy and data during your disclosure. We won’t take legal action against
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
-",8
+",8,b thorsten/phpmyfaq 9f937652e41ba6b473b919c98ac92a8ebf9cf6da
 thorsten/phpmyfaq,SECURITY.md,faa42e5fe8cb91d03c7d276fe2fcd64406b0d952,2021-01-01 11:16:19+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -286,7 +286,7 @@ Please act in good faith towards our users’ privacy and data during your discl
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
 
 Copyright © 2001 - 2021 Thorsten Rinne and the phpMyFAQ Team
-",210
+",210,b thorsten/phpmyfaq faa42e5fe8cb91d03c7d276fe2fcd64406b0d952
 thorsten/phpmyfaq,SECURITY.md,80a63a378a186fb7297b63ae624b4725e111f9ec,2022-01-01 09:56:03+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -337,7 +337,7 @@ Please act in good faith towards our users’ privacy and data during your discl
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
 
 Copyright © 2001 - 2022 Thorsten Rinne and the phpMyFAQ Team
-",1
+",1,b thorsten/phpmyfaq 80a63a378a186fb7297b63ae624b4725e111f9ec
 thorsten/phpmyfaq,SECURITY.md,7d5693c9886de971b662aece1b0380bc947a3c7c,2022-01-23 14:43:33+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -388,7 +388,7 @@ Please act in good faith towards our users’ privacy and data during your discl
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
 
 Copyright © 2001 - 2022 Thorsten Rinne and the phpMyFAQ Team
-",4
+",4,b thorsten/phpmyfaq 7d5693c9886de971b662aece1b0380bc947a3c7c
 thorsten/phpmyfaq,SECURITY.md,034ec7a881087835219c9b22ca8a2973b98fb25e,2022-02-14 07:33:38+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -439,7 +439,7 @@ Please act in good faith towards our users’ privacy and data during your discl
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
 
 Copyright © 2001 - 2022 Thorsten Rinne and the phpMyFAQ Team
-",16
+",16,b thorsten/phpmyfaq 034ec7a881087835219c9b22ca8a2973b98fb25e
 thorsten/phpmyfaq,SECURITY.md,d771290252bf9fe338d56ad313c71c8aa8d0ef59,2022-07-27 05:02:05+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -496,7 +496,7 @@ Copyright © 2001 - 2022 Thorsten Rinne and the phpMyFAQ Team
 
 If you discover a security vulnerability in phpmyfaq please disclose it via [our huntr page](https://huntr.dev/repos/thorsten/phpmyfaq/). Bounty eligibility, CVE assignment, response times and past reports are all there.
 
-Thank you for improving the security of phpmyfaq.",302
+Thank you for improving the security of phpmyfaq.",302,b thorsten/phpmyfaq d771290252bf9fe338d56ad313c71c8aa8d0ef59
 thorsten/phpmyfaq,SECURITY.md,82c9f9db267cd614a0d356498b713335e4baab01,2022-07-27 05:04:54+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -559,7 +559,7 @@ you or administrative action against your account if you act accordingly: White 
 Thank you for improving the security of phpMyFAQ.
 
 Copyright © 2001 - 2022 Thorsten Rinne and the phpMyFAQ Team
-",493
+",493,b thorsten/phpmyfaq 82c9f9db267cd614a0d356498b713335e4baab01
 thorsten/phpmyfaq,SECURITY.md,273f8899f45d48ea43451dacfa860fa9d4f38209,2022-12-11 13:02:12+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -616,7 +616,7 @@ Please act in good faith towards our users’ privacy and data during your discl
 you or administrative action against your account if you act accordingly: White hat researchers are always appreciated.
 
 Copyright © 2001 - 2022 Thorsten Rinne and the phpMyFAQ Team
-",293
+",293,b thorsten/phpmyfaq 273f8899f45d48ea43451dacfa860fa9d4f38209
 thorsten/phpmyfaq,SECURITY.md,8494e89b4ffc71c5fc878c9a488c59a40c7de41f,2022-12-11 14:38:00+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -673,7 +673,7 @@ you or administrative action against your account if you act accordingly: White 
 Thank you for improving the security of phpMyFAQ.
 
 Copyright © 2001 - 2022 Thorsten Rinne and the phpMyFAQ Team
-",291
+",291,b thorsten/phpmyfaq 8494e89b4ffc71c5fc878c9a488c59a40c7de41f
 thorsten/phpmyfaq,SECURITY.md,5bd0f79d085feb255d893a67d2fcdac51f4cd2ec,2023-01-01 11:25:32+00:00,"# Security Policy
 
 We seriously take care about any security issues found in phpMyFAQ or bundled components. If you’ve discovered a
@@ -736,4 +736,4 @@ you or administrative action against your account if you act accordingly: White 
 Thank you for improving the security of phpMyFAQ.
 
 Copyright © 2001 - 2023 Thorsten Rinne and the phpMyFAQ Team
-",61
+",61,b thorsten/phpmyfaq 5bd0f79d085feb255d893a67d2fcdac51f4cd2ec

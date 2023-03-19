@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 gradle/.github,SECURITY.md,5354937042c350510081794173135dd0f61aa888,2019-07-30 21:15:45+00:00,,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -6,7 +6,7 @@ gradle/.github,SECURITY.md,5354937042c350510081794173135dd0f61aa888,2019-07-30 2
 Please do not report security issues to the public issue tracker.
 Please send security issues to [security@gradle.com](mailto:security@gradle.com).
 We do our best to get back to you by the end of the next buisness day.
-",268
+",268,b gradle/gradle 5354937042c350510081794173135dd0f61aa888
 gradle/.github,SECURITY.md,d4617c618d8a3ef8008dad66c6f0f6f3421265a3,2019-07-30 22:14:29+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -21,7 +21,7 @@ We do our best to get back to you by the end of the next buisness day.
 Please do not report security issues to the public issue tracker.
 Please send security issues to [security@gradle.com](mailto:security@gradle.com).
 We do our best to get back to you by the end of the next business day.
-",2
+",2,b gradle/gradle d4617c618d8a3ef8008dad66c6f0f6f3421265a3
 gradle/.github,SECURITY.md,839a765b23a1638f49f5cc82758afcd63273b445,2021-04-14 21:02:05+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -41,7 +41,7 @@ We do our best to get back to you by the end of the next business day.
 
 For the Gradle Build Tool, it's our intention to fix security issues in our next release.
 We will only backport security fixes to earlier major versions in extenuating circumstances.
-",210
+",210,b gradle/gradle 839a765b23a1638f49f5cc82758afcd63273b445
 gradle/.github,SECURITY.md,1f84716fdb37ed388ba9ee7690ea6fd0ce1ead24,2022-01-12 14:49:30+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -188,7 +188,7 @@ Suggestions of useful information include:
  - Links to source code if the project is open source.
  - Proof of concepts demonstrating the vulnerability.
 A list of impacted endpoints or resources.
-",10862
+",10862,b gradle/gradle 1f84716fdb37ed388ba9ee7690ea6fd0ce1ead24
 gradle/.github,SECURITY.md,1ebdc17ecd2d635a052088e41fd3b38f90c75745,2022-01-12 16:34:54+00:00,"# Gradle Vulnerability Disclosure Policy
 
 ## Introduction
@@ -457,7 +457,7 @@ Suggestions of useful information include:
  - Links to source code if the project is open source.
  - Proof of concepts demonstrating the vulnerability.
 A list of impacted endpoints or resources.
-",1
+",1,b gradle/gradle 1ebdc17ecd2d635a052088e41fd3b38f90c75745
 gradle/.github,SECURITY.md,5c423282f0ac99df095a9d2fe448efb3250467d6,2022-01-12 17:55:58+00:00,"# Gradle Vulnerability Disclosure Policy
 
 ## Introduction
@@ -726,7 +726,7 @@ Suggestions of useful information include:
  - Links to source code if the project is open source.
  - Proof of concepts demonstrating the vulnerability.
 A list of impacted endpoints or resources.
-",180
+",180,b gradle/gradle 5c423282f0ac99df095a9d2fe448efb3250467d6
 gradle/.github,SECURITY.md,87d953c52b9265179d8a09bac0350867eb240dcd,2022-01-14 23:57:37+00:00,"# Gradle Vulnerability Disclosure Policy
 
 ## Introduction
@@ -995,4 +995,4 @@ Suggestions of useful information include:
  - Links to source code if the project is open source.
  - Proof of concepts demonstrating the vulnerability.
 A list of impacted endpoints or resources.
-",3
+",3,b gradle/gradle 87d953c52b9265179d8a09bac0350867eb240dcd

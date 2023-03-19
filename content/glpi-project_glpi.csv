@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 glpi-project/glpi,SECURITY.md,36b164876b132c02911c92b8cfa074afa768ad00,2019-09-13 06:43:33+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -24,7 +24,7 @@ You may also provide a script that can be used to check the issue exists.
 Once the report will be handled, and if the issue is not yet fixed (or in progress)
 we'll add it to the GitHub security tab, and add you as observer. Meanwhile,
 you will reserve a CVE for the issue.
-",856
+",856,b glpi-project/glpi 36b164876b132c02911c92b8cfa074afa768ad00
 glpi-project/glpi,SECURITY.md,a2a02d49487cef5aecaf78dd2df6709cd7b5cb97,2020-07-29 11:16:33+00:00,"# Security Policy
 
 ## Supported Versions
@@ -76,7 +76,7 @@ You may also provide a script that can be used to check the issue exists.
 Once the report will be handled, and if the issue is not yet fixed (or in progress)
 we'll add it to the GitHub security tab, and add you as observer. Meanwhile,
 you will reserve a CVE for the issue.
-",34
+",34,b glpi-project/glpi a2a02d49487cef5aecaf78dd2df6709cd7b5cb97
 glpi-project/glpi,SECURITY.md,7a7488b75ea400d2b00eb027e37313115eb1d985,2022-09-16 09:28:03+00:00,"# Security Policy
 
 ## Supported Versions
@@ -130,7 +130,7 @@ You may also provide a script that can be used to check the issue exists.
 Once the report will be handled, and if the issue is not yet fixed (or in progress)
 we'll add it to the GitHub security tab, and add you as observer. Meanwhile,
 you will reserve a CVE for the issue.
-",60
+",60,b glpi-project/glpi 7a7488b75ea400d2b00eb027e37313115eb1d985
 glpi-project/glpi,SECURITY.md,56844ff16aeaeec349efb9acc00f7bd41a050c8f,2022-09-28 08:47:35+00:00,"# Security Policy
 
 ## Supported Versions
@@ -188,7 +188,7 @@ Once the report will be handled, and if the issue is not yet fixed (or in progre
 we'll add it to the GitHub security tab, and add you as observer. Meanwhile,
 you will reserve a CVE for the issue.
 
-Thank you for improving the security of glpi.",115
+Thank you for improving the security of glpi.",115,b glpi-project/glpi 56844ff16aeaeec349efb9acc00f7bd41a050c8f
 glpi-project/glpi,SECURITY.md,cecf0f6fbe8ba2745c62f4507e1a4fc2650cc3bd,2022-11-23 09:38:55+00:00,"# Security Policy
 
 ## Supported Versions
@@ -249,4 +249,4 @@ Thank you for improving the security of glpi.
 | 9.3.x   | :x:                |
 | 9.2.x   | :x:                |
 | < 9.2   | :x:                |
-",721
+",721,b glpi-project/glpi cecf0f6fbe8ba2745c62f4507e1a4fc2650cc3bd

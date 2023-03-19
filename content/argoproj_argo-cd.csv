@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 argoproj/argo-cd,SECURITY.md,24b18a83a6ee1d137bee72aa22383cea14282776,2021-02-27 07:41:20+00:00,,"# Security Policy for Argo CD
 
 Version: **v1.0 (2020-02-26)**
@@ -46,7 +46,7 @@ Please report vulnerabilities by e-mail to all of the following people:
 * Jesse_Suen@intuit.com
 * Alexander_Matyushentsev@intuit.com
 * Edward_Lee@intuit.com
-",2013
+",2013,b argoproj/argo-cd 24b18a83a6ee1d137bee72aa22383cea14282776
 argoproj/argo-cd,SECURITY.md,1d0b5fc7ecabfd511829f81df0b0e9cc0ca29a7f,2021-06-29 14:52:56+00:00,"# Security Policy for Argo CD
 
 Version: **v1.0 (2020-02-26)**
@@ -162,7 +162,7 @@ Please report vulnerabilities by e-mail to all of the following people:
 * Jesse_Suen@intuit.com
 * Alexander_Matyushentsev@intuit.com
 * Edward_Lee@intuit.com
-",1180
+",1180,b argoproj/argo-cd 1d0b5fc7ecabfd511829f81df0b0e9cc0ca29a7f
 argoproj/argo-cd,SECURITY.md,c22d8321cc6c5ffd7fedeacbf0754a5c3fba53e5,2021-08-08 00:58:21+00:00,"# Security Policy for Argo CD
 
 Version: **v1.1 (2020-06-29)**
@@ -297,7 +297,7 @@ findings (unless you prefer to stay anonymous, of course).
 Please report vulnerabilities by e-mail to the following address: 
 
 * cncf-argo-security@lists.cncf.io
-",187
+",187,b argoproj/argo-cd c22d8321cc6c5ffd7fedeacbf0754a5c3fba53e5
 argoproj/argo-cd,SECURITY.md,e15c8a58a656219fc5613ec38a1179537af2bf53,2021-12-19 18:53:08+00:00,"# Security Policy for Argo CD
 
 Version: **v1.2 (2020-08-07)**
@@ -436,7 +436,7 @@ Please report vulnerabilities by e-mail to the following address:
 See the [operator manual security page](docs/operator-manual/security.md) for 
 additional information about Argo CD's security features and how to make your 
 Argo CD production ready.
-",225
+",225,b argoproj/argo-cd e15c8a58a656219fc5613ec38a1179537af2bf53
 argoproj/argo-cd,SECURITY.md,4c7651b5f8c99d8ebb274c7650067a8be2279d29,2022-01-25 06:56:15+00:00,"# Security Policy for Argo CD
 
 Version: **v1.3 (2021-12-08)**
@@ -585,7 +585,7 @@ Please report vulnerabilities by e-mail to the following address:
 See the [operator manual security page](docs/operator-manual/security.md) for 
 additional information about Argo CD's security features and how to make your 
 Argo CD production ready.
-",329
+",329,b argoproj/argo-cd 4c7651b5f8c99d8ebb274c7650067a8be2279d29
 argoproj/argo-cd,SECURITY.md,87d771017581162718d936351bc9f9c96f8e3ea8,2022-04-22 15:19:16+00:00,"# Security Policy for Argo CD
 
 Version: **v1.4 (2022-01-23)**
@@ -738,7 +738,7 @@ Please report vulnerabilities by e-mail to the following address:
 See the [operator manual security page](docs/operator-manual/security.md) for
 additional information about Argo CD's security features and how to make your
 Argo CD production ready.
-",5
+",5,b argoproj/argo-cd 87d771017581162718d936351bc9f9c96f8e3ea8
 argoproj/argo-cd,SECURITY.md,335af2e92037de98290acabc9050a57235d32efd,2023-02-20 00:36:36+00:00,"# Security Policy for Argo CD
 
 Version: **v1.4 (2022-01-23)**
@@ -891,7 +891,7 @@ Please report vulnerabilities by e-mail to the following address:
 See the [operator manual security page](docs/operator-manual/security.md) for
 additional information about Argo CD's security features and how to make your
 Argo CD production ready.
-",4
+",4,b argoproj/argo-cd 335af2e92037de98290acabc9050a57235d32efd
 argoproj/argo-cd,SECURITY.md,1803f64676541a8eb60c463f602c9eea2393d0f8,2023-03-06 19:53:46+00:00,"# Security Policy for Argo CD
 
 Version: **v1.4 (2022-01-23)**
@@ -1058,4 +1058,4 @@ claiming a bounty, and also on how to claim it.
 See the [operator manual security page](docs/operator-manual/security.md) for
 additional information about Argo CD's security features and how to make your
 Argo CD production ready.
-",645
+",645,b argoproj/argo-cd 1803f64676541a8eb60c463f602c9eea2393d0f8

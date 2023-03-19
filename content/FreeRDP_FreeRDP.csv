@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 FreeRDP/FreeRDP,SECURITY.md,6d2b44843ee94e1936f21ef48bec32568ea43e2b,2021-04-12 08:21:13+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -70,7 +70,7 @@ Vw2F8gu/fHiadawxWIhUH+plFVQZc1KwgPcIMW3S
 =O0kP
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",3773
+",3773,b FreeRDP/FreeRDP 6d2b44843ee94e1936f21ef48bec32568ea43e2b
 FreeRDP/FreeRDP,SECURITY.md,3ae79bd72e41cdec66eaba7522a0f9c0b3703dc6,2022-11-16 17:06:37+00:00,"# Security Policy
 
 ## Supported Versions
@@ -255,4 +255,4 @@ Vw2F8gu/fHiadawxWIhUH+plFVQZc1KwgPcIMW3S
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 [^1]: https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability
-",2423
+",2423,b FreeRDP/FreeRDP 3ae79bd72e41cdec66eaba7522a0f9c0b3703dc6

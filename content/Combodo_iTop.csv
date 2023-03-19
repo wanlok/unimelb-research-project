@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 Combodo/iTop,SECURITY.md,dd620022a85e51a5209e36a82660aadfe3cfed98,2019-07-16 06:47:30+00:00,,"# 🔒 Reporting vulnerabilities
 
 We take all security bugs seriously. Thank you for improving the security of iTop! We appreciate your efforts and
@@ -35,7 +35,7 @@ Then, a Combodo developer will be assigned to the reported issue and will:
 Security issues always take precedence over bug fixes and feature work.
 
 The assignee will keep you informed of the resolution progress, and may ask you for additional information or guidance.
-",1494
+",1494,b Combodo/iTop dd620022a85e51a5209e36a82660aadfe3cfed98
 Combodo/iTop,SECURITY.md,3a276715d6867af32beebf76a97f7fb51e30eb2b,2020-08-18 07:18:37+00:00,"# 🔒 Reporting vulnerabilities
 
 We take all security bugs seriously. Thank you for improving the security of iTop! We appreciate your efforts and
@@ -108,7 +108,7 @@ Then, a Combodo developer will be assigned to the reported issue and will:
 Security issues always take precedence over bug fixes and feature work.
 
 The assignee will keep you informed of the resolution progress, and may ask you for additional information or guidance.
-",2
+",2,b Combodo/iTop 3a276715d6867af32beebf76a97f7fb51e30eb2b
 Combodo/iTop,SECURITY.md,fde6cac7a2e893caa56a36db6d3a03d7538084f8,2022-12-13 17:15:25+00:00,"# 🔒 Reporting vulnerabilities
 
 We take all security bugs seriously. Thank you for improving the security of iTop! We appreciate your efforts and
@@ -189,4 +189,4 @@ Mind we have at least 2 active branches (LTS and STS, see [iTop Community Releas
 The release communications will include the information of the vulnerability fix.
 
 Corresponding GitHub advisories and CVE will be published 3 months after the iTop version release date so that iTop instances can be updated.  
-",562
+",562,b Combodo/iTop fde6cac7a2e893caa56a36db6d3a03d7538084f8

@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 saltstack/salt,SECURITY.md,44c317b6f0c0258a1c308cab5542cb8fec75f5c0,2020-10-08 14:25:37+00:00,,"# SaltStack's Security Disclosure Policy
 
 **Email**
@@ -119,7 +119,7 @@ quickly and safely as is possible.
 
 The fastest place to receive security announcements is via the [salt-announce](https://groups.google.com/forum/#!forum/salt-announce)
 mailing list. This list is low-traffic.
-",6222
+",6222,b saltstack/salt 44c317b6f0c0258a1c308cab5542cb8fec75f5c0
 saltstack/salt,SECURITY.md,101290335226e3af36de02dc12e39a33504be1b9,2021-02-01 11:13:53+00:00,"# SaltStack's Security Disclosure Policy
 
 **Email**
@@ -369,7 +369,7 @@ implemented in your infrastructure:
 - [Docs: Hardening Salt](https://docs.saltproject.io/en/latest/topics/hardening.html)
 - [Docs: Salt Best Practices](https://docs.saltproject.io/en/latest/topics/best_practices.html)
 - [Blog: How I Hardened My Salt Environment](https://saltproject.io/blog/how-i-hardened-my-salt-environment/)
-",457
+",457,b saltstack/salt 101290335226e3af36de02dc12e39a33504be1b9
 saltstack/salt,SECURITY.md,2d3af7aa2804d2b16391d0abea664473d0500b34,2021-02-01 11:13:53+00:00,"# SaltStack's Security Disclosure Policy
 
 **Email**
@@ -628,7 +628,7 @@ implemented in your infrastructure:
 - [Docs: Hardening Salt](https://docs.saltproject.io/en/latest/topics/hardening.html)
 - [Docs: Salt Best Practices](https://docs.saltproject.io/en/latest/topics/best_practices.html)
 - [Blog: How I Hardened My Salt Environment](https://www.saltstack.com/blog/how-i-hardened-my-salt-environment/)
-",12
+",12,b saltstack/salt 2d3af7aa2804d2b16391d0abea664473d0500b34
 saltstack/salt,SECURITY.md,d1ae33a76d7268d7db2fd86b9507c7d370105862,2021-02-23 09:12:30+00:00,"# SaltStack's Security Disclosure Policy
 
 **Email**
@@ -887,4 +887,4 @@ implemented in your infrastructure:
 - [Docs: Hardening Salt](https://docs.saltproject.io/en/master/topics/hardening.html)
 - [Docs: Salt Best Practices](https://docs.saltproject.io/en/master/topics/best_practices.html)
 - [Blog: How I Hardened My Salt Environment](https://saltproject.io/blog/how-i-hardened-my-salt-environment/)
-",20
+",20,b saltstack/salt d1ae33a76d7268d7db2fd86b9507c7d370105862

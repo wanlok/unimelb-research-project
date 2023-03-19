@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 discourse/discourse,docs/SECURITY.md,3186535537f3d43d0a65a4f54015d26c8ed61ff0,2013-07-29 06:26:49+00:00,,"##Discourse Security Guide
 
 The following guide covers security regarding your Discourse installation
@@ -39,7 +39,7 @@ Discourse extends the built-in Rails CSRF protection in a couple of ways:
 
 2. API calls using the secret API bypass CSRF checks
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",2030
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",2030,b discourse/discourse 3186535537f3d43d0a65a4f54015d26c8ed61ff0
 discourse/discourse,docs/SECURITY.md,0e494c73036baecae16976b81c3d3c8c42018181,2013-07-29 06:42:49+00:00,"##Discourse Security Guide
 
 The following guide covers security regarding your Discourse installation
@@ -120,7 +120,7 @@ Discourse extends the built-in Rails CSRF protection in a couple of ways:
 
 2. API calls using the secret API bypass CSRF checks
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",2
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",2,b discourse/discourse 0e494c73036baecae16976b81c3d3c8c42018181
 discourse/discourse,docs/SECURITY.md,c3f3c1a23fa2e984a391854872e7ec38926ae77e,2013-07-30 20:57:15+00:00,"##Discourse Security Guide
 
 The following guide covers security regarding your Discourse installation
@@ -203,7 +203,7 @@ Discourse extends the built-in Rails CSRF protection:
 
 2. API calls using the secret API bypass CSRF checks
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",917
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",917,b discourse/discourse c3f3c1a23fa2e984a391854872e7ec38926ae77e
 discourse/discourse,docs/SECURITY.md,d688ef1b496b4c5e9f874c3dfe11dd893e3ac1af,2013-07-30 20:59:30+00:00,"##Discourse Security Guide
 
 If you are reporting a security issue with Discourse, please email `team@discourse.org` -- we take security reports very seriously and will investigate ASAP.
@@ -290,7 +290,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",344
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",344,b discourse/discourse d688ef1b496b4c5e9f874c3dfe11dd893e3ac1af
 discourse/discourse,docs/SECURITY.md,4c8a3370dac9393323dd1db851e399955c9493bf,2013-07-30 21:00:37+00:00,"### Where should I report security issues?
 
 In order to give the community time to respond and upgrade we strongly urge you report all security issues privately. Please email us at `team@discourse.org` with details and we will respond ASAP. Security issues *always* take precedence over bug fixes and feature work. We can and do mark releases as ""urgent"" if they contain serious security fixes.
@@ -377,7 +377,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",476
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",476,b discourse/discourse 4c8a3370dac9393323dd1db851e399955c9493bf
 discourse/discourse,docs/SECURITY.md,028cd348e1d9145944e20a443c5656d02c67f4ab,2013-07-30 21:08:15+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to make sure that nobody's Discourse forum is ever compromised or hacked. 
@@ -461,7 +461,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",85
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",85,b discourse/discourse 028cd348e1d9145944e20a443c5656d02c67f4ab
 discourse/discourse,docs/SECURITY.md,a6b4b5dbf29bb51f551ec293086642f365cffb44,2013-08-14 19:39:40+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked. 
@@ -544,7 +544,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",5
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",5,b discourse/discourse a6b4b5dbf29bb51f551ec293086642f365cffb44
 discourse/discourse,docs/SECURITY.md,03e51b1a3a8d6ff6084f6897447857432d50c970,2014-04-25 14:52:36+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -627,7 +627,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",0
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",0,b discourse/discourse 03e51b1a3a8d6ff6084f6897447857432d50c970
 discourse/discourse,docs/SECURITY.md,20ba6e4b19956b6eec56b8ef398ac94f151f8365,2014-05-09 23:36:39+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -710,7 +710,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",0
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",0,b discourse/discourse 20ba6e4b19956b6eec56b8ef398ac94f151f8365
 discourse/discourse,docs/SECURITY.md,ea1f4a002158c1cb59e21dbe29cd5ab91f264e5b,2017-01-07 07:51:12+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -793,7 +793,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",201
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",201,b discourse/discourse ea1f4a002158c1cb59e21dbe29cd5ab91f264e5b
 discourse/discourse,docs/SECURITY.md,02f582eca0958870f8466407aa28d4faac3ac323,2018-09-11 19:43:52+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -878,7 +878,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",177
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",177,b discourse/discourse 02f582eca0958870f8466407aa28d4faac3ac323
 discourse/discourse,docs/SECURITY.md,358fbeba1434a23f2da16955b4f753afd23c39f4,2018-12-20 00:54:45+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -967,7 +967,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",238
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",238,b discourse/discourse 358fbeba1434a23f2da16955b4f753afd23c39f4
 discourse/discourse,docs/SECURITY.md,bd6d482d111244c516b0a96135a4ed6d22373961,2018-12-20 00:55:54+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1058,7 +1058,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",3
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",3,b discourse/discourse bd6d482d111244c516b0a96135a4ed6d22373961
 discourse/discourse,docs/SECURITY.md,24b3494660971bbfc17930eee1c3e20d5859f6cd,2019-02-22 15:29:27+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1149,7 +1149,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",2
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",2,b discourse/discourse 24b3494660971bbfc17930eee1c3e20d5859f6cd
 discourse/discourse,docs/SECURITY.md,db39eae68323f33c3a397e06fb40f98f1d4f5187,2019-07-25 07:08:03+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1240,7 +1240,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",30
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",30,b discourse/discourse db39eae68323f33c3a397e06fb40f98f1d4f5187
 discourse/discourse,docs/SECURITY.md,e0d9232259f6fb0f76bca471c4626178665ca24a,2020-07-27 00:23:54+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1331,7 +1331,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",5
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",5,b discourse/discourse e0d9232259f6fb0f76bca471c4626178665ca24a
 discourse/discourse,docs/SECURITY.md,8517b6f386b1e73bd264c28d1cda660d8147147b,2021-04-28 09:32:55+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1422,7 +1422,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cachable"", we do not render the CSRF token (`",35
+3. Certain pages are ""cachable"", we do not render the CSRF token (`",35,b discourse/discourse 8517b6f386b1e73bd264c28d1cda660d8147147b
 discourse/discourse,docs/SECURITY.md,59097b207f75eab1dd39281b55a91e678142b37b,2021-05-21 01:43:47+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1513,7 +1513,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cacheable"", we do not render the CSRF token (`",2
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`",2,b discourse/discourse 59097b207f75eab1dd39281b55a91e678142b37b
 discourse/discourse,docs/SECURITY.md,5f7e60d9dc25f8bd9b53e925d49ad3eeae4760e3,2021-07-19 15:46:15+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1604,7 +1604,7 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cacheable"", we do not render the CSRF token (`",4
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`",4,b discourse/discourse 5f7e60d9dc25f8bd9b53e925d49ad3eeae4760e3
 discourse/discourse,docs/SECURITY.md,a29b133d33d82668a217f509e0a882be8b82c2cd,2022-03-09 02:02:20+00:00,"## Discourse Security
 
 We take security very seriously at Discourse. We welcome any peer review of our 100% open source code to ensure nobody's Discourse forum is ever compromised or hacked.
@@ -1697,4 +1697,4 @@ Discourse extends the built-in Rails CSRF protection in the following ways:
 
 2. API calls using the secret API bypass CSRF checks.
 
-3. Certain pages are ""cacheable"", we do not render the CSRF token (`",429
+3. Certain pages are ""cacheable"", we do not render the CSRF token (`",429,b discourse/discourse a29b133d33d82668a217f509e0a882be8b82c2cd

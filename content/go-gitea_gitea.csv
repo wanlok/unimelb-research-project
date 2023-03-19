@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 go-gitea/gitea,SECURITY.md,1ca652c826c1053b86d5e4d4509b27c5f2beaf8a,2020-08-19 16:15:55+00:00,,"# Reporting security issues
 
 The Gitea maintainers take security seriously.  
@@ -9,7 +9,7 @@ If you discover a security issue, please bring it to their attention right away!
 Please **DO NOT** file a public issue, instead send your report privately to `security@gitea.io`.
 
 Security reports are greatly appreciated and we will publicly thank you for it, although we keep your name confidential if you request it.
-",429
+",429,b go-gitea/gitea 1ca652c826c1053b86d5e4d4509b27c5f2beaf8a
 go-gitea/gitea,SECURITY.md,8575050ebab2e038882f7adce786502ff9ea3495,2022-06-24 09:40:01+00:00,"# Reporting security issues
 
 The Gitea maintainers take security seriously.  
@@ -98,7 +98,7 @@ zgS/ZdziCvdAutqnGA==
 ```
 
 Security reports are greatly appreciated and we will publicly thank you for it, although we keep your name confidential if you request it.
-",3514
+",3514,b go-gitea/gitea 8575050ebab2e038882f7adce786502ff9ea3495
 go-gitea/gitea,SECURITY.md,1f7c717b590963e25d4ea37f25d3cdf5b695b77c,2022-06-27 05:20:29+00:00,"# Reporting security issues
 
 The Gitea maintainers take security seriously.  
@@ -255,7 +255,7 @@ zgS/ZdziCvdAutqnGA==
 ```
 
 Security reports are greatly appreciated and we will publicly thank you for it, although we keep your name confidential if you request it.
-",13
+",13,b go-gitea/gitea 1f7c717b590963e25d4ea37f25d3cdf5b695b77c
 go-gitea/gitea,SECURITY.md,ae52df6a64477bcd5076ddddbee64bb22b3897a0,2022-07-28 01:22:47+00:00,"# Reporting security issues
 
 The Gitea maintainers take security seriously.  
@@ -417,4 +417,4 @@ zgS/ZdziCvdAutqnGA==
 ```
 
 Security reports are greatly appreciated and we will publicly thank you for it, although we keep your name confidential if you request it.
-",20
+",20,b go-gitea/gitea ae52df6a64477bcd5076ddddbee64bb22b3897a0

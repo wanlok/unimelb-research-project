@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 WordPress/wordpress-develop,SECURITY.md,a2b561e08e5741fc738787c442eb15b45add0a92,2019-11-15 23:44:17+00:00,,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -84,7 +84,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",6534
+",6534,b WordPress/wordpress-develop a2b561e08e5741fc738787c442eb15b45add0a92
 WordPress/wordpress-develop,SECURITY.md,81f92c66c66c06070c28357a4c2fdd778e488d9c,2019-11-16 11:17:42+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -256,7 +256,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop 81f92c66c66c06070c28357a4c2fdd778e488d9c
 WordPress/wordpress-develop,SECURITY.md,55b3866749c642f5d5b2e6dfc57605ad31bdb820,2020-03-04 01:18:56+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -430,7 +430,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop 55b3866749c642f5d5b2e6dfc57605ad31bdb820
 WordPress/wordpress-develop,SECURITY.md,7aae3c7bbf02aed99012a4925ce610fc94c70272,2020-07-28 20:54:37+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -606,7 +606,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop 7aae3c7bbf02aed99012a4925ce610fc94c70272
 WordPress/wordpress-develop,SECURITY.md,1f5ff2f169079bd7f4f0d9099ffbfd7239695bf6,2020-11-17 22:55:11+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -784,7 +784,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop 1f5ff2f169079bd7f4f0d9099ffbfd7239695bf6
 WordPress/wordpress-develop,SECURITY.md,facb9c7c33741104cdad71bd1b5b8d1469292f9e,2021-02-23 21:36:58+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -964,7 +964,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop facb9c7c33741104cdad71bd1b5b8d1469292f9e
 WordPress/wordpress-develop,SECURITY.md,41c00084dc4853fcf9ee1f5da586c18fcfe7d867,2021-06-30 04:01:48+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -1146,7 +1146,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop 41c00084dc4853fcf9ee1f5da586c18fcfe7d867
 WordPress/wordpress-develop,SECURITY.md,1ba5187119c688b09509d61f8c0b1facb55e249b,2022-01-04 20:52:38+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -1330,7 +1330,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop 1ba5187119c688b09509d61f8c0b1facb55e249b
 WordPress/wordpress-develop,SECURITY.md,469bcedbcc1fa8e84d53fbfc281c5898ad3c2b71,2022-05-03 17:32:25+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -1516,7 +1516,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop 469bcedbcc1fa8e84d53fbfc281c5898ad3c2b71
 WordPress/wordpress-develop,SECURITY.md,e0f63b46d44c476192c3aa38dbb38f31a57c450e,2022-10-18 20:03:57+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -1704,7 +1704,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",33
+",33,b WordPress/wordpress-develop e0f63b46d44c476192c3aa38dbb38f31a57c450e
 WordPress/wordpress-develop,SECURITY.md,16699c386804d699a5e5482641a0f6286e1823f5,2022-10-19 18:18:45+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -1893,7 +1893,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",3
+",3,b WordPress/wordpress-develop 16699c386804d699a5e5482641a0f6286e1823f5
 WordPress/wordpress-develop,SECURITY.md,82a3016a677401d4a97d91b07f83d73c8c231566,2022-11-30 22:31:53+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -2078,7 +2078,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",134
+",134,b WordPress/wordpress-develop 82a3016a677401d4a97d91b07f83d73c8c231566
 WordPress/wordpress-develop,SECURITY.md,63df8812d4c6322347d46643c0842a78b092bd53,2022-11-30 22:52:34+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -2259,7 +2259,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",384
+",384,b WordPress/wordpress-develop 63df8812d4c6322347d46643c0842a78b092bd53
 WordPress/wordpress-develop,SECURITY.md,8a211be915f3078371a583b1ff4edc5cb5ffea6d,2022-12-05 21:23:32+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -2440,7 +2440,7 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",0
+",0,b WordPress/wordpress-develop 8a211be915f3078371a583b1ff4edc5cb5ffea6d
 WordPress/wordpress-develop,SECURITY.md,898ff9868d2068306244ee41101bcfbaa3144836,2023-03-09 21:36:06+00:00,"# Security Policy
 
 Full details of the WordPress Security Policy can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
@@ -2622,4 +2622,4 @@ We're committed to working with security researchers to resolve the vulnerabilit
 *   Be Patient - Give us a reasonable time to correct the issue before you disclose the vulnerability. We care deeply about security, but we're an open-source project and our team is mostly comprised of volunteers. WordPress powers over 30% of the Web, so changes must undergo multiple levels of peer-review and testing, to make sure that they don't break millions of websites when they're installed automatically.
 
 We also expect you to comply with all applicable laws. You're responsible to pay any taxes associated with your bounties.
-",24
+",24,b WordPress/wordpress-develop 898ff9868d2068306244ee41101bcfbaa3144836

@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 mautic/mautic,SECURITY.md,6033e09a27f80791f1e3675820d58dfcee4c2cf7,2020-04-15 07:14:11+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -20,7 +20,7 @@ Lost passwords, lost access, additional features, or random bugs are not conside
 
 2. Report the issue
 Please email security [at] mautic.org with as many of the details as possible. Typically you should be able to explain what the security hole is, how it can be manipulated, and how a tester can verify the existence of the problem.
-",1264
+",1264,b mautic/mautic 6033e09a27f80791f1e3675820d58dfcee4c2cf7
 mautic/mautic,SECURITY.md,2a28a398086fe3505a0541c8dcaf781477d511f9,2020-06-16 10:21:09+00:00,"# Security Policy
 
 ## Supported Versions
@@ -63,7 +63,7 @@ Lost passwords, lost access, additional features, or random bugs are not conside
 
 2. Report the issue
 Please email security [at] mautic.org with as many of the details as possible. Typically you should be able to explain what the security hole is, how it can be manipulated, and how a tester can verify the existence of the problem.
-",97
+",97,b mautic/mautic 2a28a398086fe3505a0541c8dcaf781477d511f9
 mautic/mautic,SECURITY.md,cd9539c0c81d1343f207f7267fc3b9dfb77bf047,2021-08-17 17:58:00+00:00,"# Security Policy
 
 ## Supported Versions
@@ -186,7 +186,7 @@ Resources and guidance from the [Drupal](https://www.drupal.org/security), [Joom
 
 
 Always [report the issue to the team](https://www.mautic.org/mautic-security-team/how-to-report-a-security-issue) and let them make the decision on whether to handle it in public or private.
-",4998
+",4998,b mautic/mautic cd9539c0c81d1343f207f7267fc3b9dfb77bf047
 mautic/mautic,SECURITY.md,121fb9e4a82364df881820943bf257cf6cb58009,2021-11-12 09:59:45+00:00,"# Security Policy
 
 Goals of the Mautic Security Team
@@ -390,7 +390,7 @@ Resources and guidance from the [Drupal](https://www.drupal.org/security), [Joom
 
 
 Always [report the issue to the team](https://www.mautic.org/mautic-security-team/how-to-report-a-security-issue) and let them make the decision on whether to handle it in public or private.
-",116
+",116,b mautic/mautic 121fb9e4a82364df881820943bf257cf6cb58009
 mautic/mautic,SECURITY.md,304e45b70bac31bbf9d5a1abe576041a2b48dfec,2022-10-06 15:39:04+00:00,"# Security Policy
 
 Goals of the Mautic Security Team
@@ -599,4 +599,4 @@ Resources and guidance from the [Drupal](https://www.drupal.org/security), [Joom
 
 
 Always [report the issue to the team](https://www.mautic.org/mautic-security-team/how-to-report-a-security-issue) and let them make the decision on whether to handle it in public or private.
-",217
+",217,b mautic/mautic 304e45b70bac31bbf9d5a1abe576041a2b48dfec

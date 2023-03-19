@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 tensorflow/tensorflow,SECURITY.md,1c38584cb9793642928bf888be1a98698d3b8c44,2018-03-27 06:36:15+00:00,,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -249,7 +249,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 |--------------------|:-----------------:|-----------------------|-----------------------------|
 | Out Of Bounds Read |             <=1.4 | Blade Team of Tencent | [issue report](https://github.com/tensorflow/tensorflow/issues/14959) |
 
-",13316
+",13316,b tensorflow/tensorflow 1c38584cb9793642928bf888be1a98698d3b8c44
 tensorflow/tensorflow,SECURITY.md,b59833c3fd91511b33255369016868e4ae6cda2e,2018-05-25 02:15:01+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -750,7 +750,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 |--------------------|:-----------------:|-----------------------|-----------------------------|
 | Out Of Bounds Read |             <=1.4 | Blade Team of Tencent | [issue report](https://github.com/tensorflow/tensorflow/issues/14959) |
 
-",3
+",3,b tensorflow/tensorflow b59833c3fd91511b33255369016868e4ae6cda2e
 tensorflow/tensorflow,SECURITY.md,3b743eee0bc6f7d23248b3489d46b578cad67dd6,2018-05-29 18:01:45+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -1254,7 +1254,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 | BMP File Parser Out-of-bounds Read | <= 1.6 | Blade Team of Tencent | [security advisory](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/docs_src/security/advisory/tfsa-2018-001.md) |
 | Out Of Bounds Read |             <=1.4 | Blade Team of Tencent | [issue report](https://github.com/tensorflow/tensorflow/issues/14959) |
 
-",642
+",642,b tensorflow/tensorflow 3b743eee0bc6f7d23248b3489d46b578cad67dd6
 tensorflow/tensorflow,SECURITY.md,20d3228e4efbf55441bf179e668ed52e900dd347,2018-06-06 19:02:49+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -1756,7 +1756,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 (https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/index.md)[click here].
-",824
+",824,b tensorflow/tensorflow 20d3228e4efbf55441bf179e668ed52e900dd347
 tensorflow/tensorflow,SECURITY.md,74655a96b40680b111ae063386c57f3f38262d34,2018-06-13 19:14:52+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -2253,7 +2253,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/index.md).
-",24
+",24,b tensorflow/tensorflow 74655a96b40680b111ae063386c57f3f38262d34
 tensorflow/tensorflow,SECURITY.md,76aec79d60bba44334604d1ebda9e9ee4af6e412,2020-01-28 17:48:50+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -2750,7 +2750,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",6
+",6,b tensorflow/tensorflow 76aec79d60bba44334604d1ebda9e9ee4af6e412
 tensorflow/tensorflow,SECURITY.md,872e950b51edbf3430d547e2fe4ed15ba8b18f77,2020-05-15 11:05:11+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -3247,7 +3247,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",2
+",2,b tensorflow/tensorflow 872e950b51edbf3430d547e2fe4ed15ba8b18f77
 tensorflow/tensorflow,SECURITY.md,7eab1f3bfe796f453b4549a0923ef954c822671c,2020-07-08 17:13:43+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -3744,7 +3744,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",8
+",8,b tensorflow/tensorflow 7eab1f3bfe796f453b4549a0923ef954c822671c
 tensorflow/tensorflow,SECURITY.md,9f0b3c6802e314bb7a17f4ff20807bdbbc0f5187,2021-08-11 18:30:54+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -4244,7 +4244,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",283
+",283,b tensorflow/tensorflow 9f0b3c6802e314bb7a17f4ff20807bdbbc0f5187
 tensorflow/tensorflow,SECURITY.md,a9dc613f5f9b1b9a08820634c22d96547b60cf00,2022-05-06 18:40:15+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -4754,7 +4754,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",729
+",729,b tensorflow/tensorflow a9dc613f5f9b1b9a08820634c22d96547b60cf00
 tensorflow/tensorflow,SECURITY.md,2c443c6b497c15d038d1aeb17bfdefa374e9d939,2022-07-23 14:11:51+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -5271,7 +5271,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",98
+",98,b tensorflow/tensorflow 2c443c6b497c15d038d1aeb17bfdefa374e9d939
 tensorflow/tensorflow,SECURITY.md,fb568f9e292d853e6dfcd426f8047288a040506e,2022-07-26 06:37:36+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -5788,7 +5788,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",18
+",18,b tensorflow/tensorflow fb568f9e292d853e6dfcd426f8047288a040506e
 tensorflow/tensorflow,SECURITY.md,d38cb2f6a7886aaee542031524ac6d8a0cfbc65c,2022-07-26 06:39:12+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -6305,7 +6305,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",11
+",11,b tensorflow/tensorflow d38cb2f6a7886aaee542031524ac6d8a0cfbc65c
 tensorflow/tensorflow,SECURITY.md,8f90da7975ffd2fb5006c81dc180c6f8615e64cf,2022-07-26 06:41:20+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -6822,7 +6822,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",5
+",5,b tensorflow/tensorflow 8f90da7975ffd2fb5006c81dc180c6f8615e64cf
 tensorflow/tensorflow,SECURITY.md,f0d522b51e68f045052cdb0c05ed293ee7abb84f,2022-07-26 06:42:38+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -7339,7 +7339,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",5
+",5,b tensorflow/tensorflow f0d522b51e68f045052cdb0c05ed293ee7abb84f
 tensorflow/tensorflow,SECURITY.md,76a683073c1180f7c9351ad96ab0b8cab364a9e2,2022-07-26 06:45:11+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -7856,7 +7856,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",8
+",8,b tensorflow/tensorflow 76a683073c1180f7c9351ad96ab0b8cab364a9e2
 tensorflow/tensorflow,SECURITY.md,6f7b63cccc7fbd4c45175fb608fd6c99df17a3b8,2022-07-26 06:46:39+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -8373,7 +8373,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",2
+",2,b tensorflow/tensorflow 6f7b63cccc7fbd4c45175fb608fd6c99df17a3b8
 tensorflow/tensorflow,SECURITY.md,7ed2c6f255f5e4e0ff27b3707c807b76d8368755,2022-07-26 06:54:25+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -8890,7 +8890,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",32
+",32,b tensorflow/tensorflow 7ed2c6f255f5e4e0ff27b3707c807b76d8368755
 tensorflow/tensorflow,SECURITY.md,bf8accf550193f7fdb2b94640bde98639c4ee9eb,2022-07-30 05:42:26+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -9407,7 +9407,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",44
+",44,b tensorflow/tensorflow bf8accf550193f7fdb2b94640bde98639c4ee9eb
 tensorflow/tensorflow,SECURITY.md,620ab3e167b0a64b6732dac16fd0edaf8284cb8e,2022-09-12 16:48:29+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -9941,7 +9941,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",1180
+",1180,b tensorflow/tensorflow 620ab3e167b0a64b6732dac16fd0edaf8284cb8e
 tensorflow/tensorflow,SECURITY.md,f4ebcc7602af664f11f839f54d50cc16a3294a60,2022-09-12 17:17:40+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -10491,7 +10491,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",102
+",102,b tensorflow/tensorflow f4ebcc7602af664f11f839f54d50cc16a3294a60
 tensorflow/tensorflow,SECURITY.md,910f69c82a17a9e3d2a81233efbafcfe50448883,2022-09-29 23:07:58+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -11039,7 +11039,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",140
+",140,b tensorflow/tensorflow 910f69c82a17a9e3d2a81233efbafcfe50448883
 tensorflow/tensorflow,SECURITY.md,e6cf7b8653bd3b5adb3640dcd4185a1fd096c80c,2022-10-03 18:57:05+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -11586,7 +11586,7 @@ v//Fw6ZeY+HmRDFdirjD7wXtIuER4vqCryIqR6Xe9X8oJXz9L/Jhslc=
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",76
+",76,b tensorflow/tensorflow e6cf7b8653bd3b5adb3640dcd4185a1fd096c80c
 tensorflow/tensorflow,SECURITY.md,db45b40bd08ee50804a18c76ead4a44a6024b05b,2022-10-11 00:19:50+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -12089,7 +12089,7 @@ to submit vulnerability reports.
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",2327
+",2327,b tensorflow/tensorflow db45b40bd08ee50804a18c76ead4a44a6024b05b
 tensorflow/tensorflow,SECURITY.md,d782a5975a1fea645308aa5f700ec99530845310,2022-10-13 04:28:48+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -12549,7 +12549,7 @@ to submit vulnerability reports.
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",7
+",7,b tensorflow/tensorflow d782a5975a1fea645308aa5f700ec99530845310
 tensorflow/tensorflow,SECURITY.md,e03e43dc1c8969d8ccfd2fa30c2d3075121c0392,2022-10-13 23:56:35+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -13011,7 +13011,7 @@ to submit vulnerability reports.
 
 For a list of known vulnerabilities and security advisories for TensorFlow,
 [click here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/README.md).
-",73
+",73,b tensorflow/tensorflow e03e43dc1c8969d8ccfd2fa30c2d3075121c0392
 tensorflow/tensorflow,SECURITY.md,778662cd5711f41762f3a19a7a83fdde5dd7c68a,2022-10-24 20:54:01+00:00,"# Using TensorFlow Securely
 
 This document discusses how to safely deal with untrusted programs (models or
@@ -13544,7 +13544,7 @@ request it.
 **Note**: Since September 2022, you may also use [the Google OSS VRP
 program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules)
 to submit vulnerability reports. All consideration in this section still apply.
-",6084
+",6084,b tensorflow/tensorflow 778662cd5711f41762f3a19a7a83fdde5dd7c68a
 tensorflow/tensorflow,SECURITY.md,e59fc0739e9228a01e0ad452f5143e4e40430015,2022-11-23 23:46:30+00:00,"# Using TensorFlow Securely
 
 This document discusses the TensorFlow security model. It describes how to
@@ -14141,7 +14141,7 @@ request it.
 **Note**: Since September 2022, you may also use [the Google OSS VRP
 program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules)
 to submit vulnerability reports. All consideration in this section still apply.
-",399
+",399,b tensorflow/tensorflow e59fc0739e9228a01e0ad452f5143e4e40430015
 tensorflow/tensorflow,SECURITY.md,aa8708a8c3d658e675348128118986b0b1f24f40,2023-01-12 00:49:14+00:00,"# Using TensorFlow Securely
 
 This document discusses the TensorFlow security model. It describes how to
@@ -14728,7 +14728,7 @@ request it.
 **Note**: Since September 2022, you may also use [the Google OSS VRP
 program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules)
 to submit vulnerability reports. All consideration in this section still apply.
-",323
+",323,b tensorflow/tensorflow aa8708a8c3d658e675348128118986b0b1f24f40
 tensorflow/tensorflow,SECURITY.md,67b89f3dcd228e0e2e42b87b1793eee62b7ef1e2,2023-02-22 18:26:29+00:00,"# Using TensorFlow Securely
 
 This document discusses the TensorFlow security model. It describes how to
@@ -15307,4 +15307,4 @@ In the future, we might sunset this list and only use GitHub's Security Advisory
 format, to simplify the post-vulnerability-fix process.  We credit reporters for
 identifying security issues, although we keep your name confidential if you
 request it.
-",345
+",345,b tensorflow/tensorflow 67b89f3dcd228e0e2e42b87b1793eee62b7ef1e2
