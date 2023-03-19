@@ -23,6 +23,7 @@ def get_json(url_string, token=None):
 
 
 def get_content(url_string):
+    print(f'url: {url_string}')
     request = Request(url_string)
     response = urlopen(request)
     return response.read()

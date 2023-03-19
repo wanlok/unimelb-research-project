@@ -4,7 +4,7 @@ from Levenshtein import distance
 from bs4 import BeautifulSoup
 from dateutil import parser
 
-from utils import csv_writer, csv_reader, prepare_csv_file, get_json, get_csv_start_index, get_content
+from utils import csv_writer, csv_reader, prepare_csv_file, get_json, get_content
 
 if __name__ == '__main__':
     slices = sys.argv[1].split('/')
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     file_path = f'./content/{file_path}.csv'
     writer = csv_writer(file_path, mode='w')
     reader = csv_reader(file_path)
-    rows = prepare_csv_file(reader, writer, ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'levenshtein_distance'])
+    rows = prepare_csv_file(reader, writer, ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'levenshtein_distance', 'bcompare'])
     valid = False
     for i in range(len(repos)):
         repo = repos[i]
@@ -47,5 +47,5 @@ if __name__ == '__main__':
     previous_content = ''
     for j in range(len(rows)):
         repo, path, sha, date_time, content = rows[j]
-        writer.writerow([repo, path, sha, date_time, previous_content, content, distance(previous_content, content)])
+        writer.writerow([repo, path, sha, date_time, previous_content, content, distance(previous_content, content), f'b {repos[0]} {sha}'])
         previous_content = content

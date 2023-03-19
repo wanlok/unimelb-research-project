@@ -18,7 +18,11 @@ if __name__ == '__main__':
                 f.write(row[4])
             with open(right_file_path, 'w', encoding='utf-8') as f:
                 f.write(row[5])
-            print(row[3])
+            print(f'REPO                 : {row[0]}')
+            print(f'PATH                 : {row[1]}')
+            print(f'SHA                  : {row[2]}')
+            print(f'DATE_TIME            : {row[3]}')
+            print(f'LEVENSHTEIN_DISTANCE : {row[6]}')
             path = 'C:\\Program Files\\Beyond Compare 4\\BCompare.exe'
             subprocess.call([path, left_file_path, right_file_path])
             break
