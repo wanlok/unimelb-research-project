@@ -21,16 +21,15 @@ def get_cve_dict(cves):
     for i in range(len(cves)):
         cve_id, date, cwe_ids, _ = cves[i]
         cwe_ids = eval(cwe_ids)
-        # print(f'{i + 1} {cve_id} {date} {cwe_ids}')
         for cwe_id in cwe_ids:
             if cwe_id in cwe_dict:
                 if date in cwe_dict[cwe_id]:
-                    cwe_dict[cwe_id][date] = cwe_dict[cwe_id][date] + 1
+                    cwe_dict[cwe_id][date].append(cve_id)
                 else:
-                    cwe_dict[cwe_id][date] = 1
+                    cwe_dict[cwe_id][date] = [cve_id]
             else:
                 cwe_dict[cwe_id] = dict()
-                cwe_dict[cwe_id][date] = 1
+                cwe_dict[cwe_id][date] = [cve_id]
     return cwe_dict
 
 
@@ -56,7 +55,9 @@ if __name__ == '__main__':
         length = len(cwe_list)
         index = length
         for i in range(length):
-            if sum(date_dict.values()) < sum(cwe_list[i][1].values()):
+            sum_1 = sum(list(map(lambda x: len(x), date_dict.values())))
+            sum_2 = sum(list(map(lambda x: len(x), cwe_list[i][1].values())))
+            if sum_1 < sum_2:
                 index = i
                 break
         cwe_list.insert(index, [cwe_id, date_dict])
@@ -68,13 +69,15 @@ if __name__ == '__main__':
             if cwe_id == cwe_names[i][0]:
                 cwe_name = cwe_names[i][1]
                 break
-        cwe_sum = sum(cwe_dict[cwe_id].values())
-        cwe_max = max(cwe_dict[cwe_id].values())
-        cwe_max_dates = []
+        cwe_sum = 0
+        cwe_max = None
         for date in cwe_dict[cwe_id]:
-            if cwe_dict[cwe_id][date] == cwe_max:
-                cwe_max_dates.append(date)
+            length = len(cwe_dict[cwe_id][date])
+            cwe_sum = cwe_sum + length
+            if cwe_max is None or length > cwe_max:
+                cwe_max = length
         print(f'{cwe_id} {cwe_name}')
-        print(f'SUM: {cwe_sum}, MAX: {cwe_max} {cwe_max_dates}')
-        print(f'{cwe_dict[cwe_id]}')
+        print(f'SUM: {cwe_sum}, MAX: {cwe_max}')
+        for date in cwe_dict[cwe_id]:
+            print(f'{date} {len(cwe_dict[cwe_id][date])} {cwe_dict[cwe_id][date]}')
         print(f'')

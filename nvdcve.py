@@ -1,8 +1,14 @@
+import itertools
+import json
+import os
+from datetime import datetime
 
+from utils import csv_writer, csv_reader, prepare_csv_file
 
-def list_dummy():
+directory_path = 'C:\\Files\\Projects\\nvdcve\\'
+
+if __name__ == '__main__':
     targets = []
-    directory_path = 'C:\\Files\\Projects\\nvdcve\\'
     for file_name in os.listdir(directory_path):
         slices = file_name.split('.')
         if slices[len(slices) - 1] == 'json':
@@ -11,10 +17,22 @@ def list_dummy():
             f = open(file_path, encoding='latin-1')
             data = json.load(f)
             for item in data['CVE_Items']:
-                # if repo in ''.join():
                 cve_id = item['cve']['CVE_data_meta']['ID']
                 date = datetime.strptime(item['publishedDate'], '%Y-%m-%dT%H:%MZ')
                 date = int(f'{date.year}{"{:02d}".format(date.month)}{"{:02d}".format(date.day)}')
+                impact = item['impact']
+                if 'baseMetricV2' in impact:
+                    cvss_v2_impact_score = impact['baseMetricV2']['impactScore']
+                    cvss_v2_exploitability_score = impact['baseMetricV2']['exploitabilityScore']
+                else:
+                    cvss_v2_impact_score = ''
+                    cvss_v2_exploitability_score = ''
+                if 'baseMetricV3' in impact:
+                    cvss_v3_impact_score = impact['baseMetricV3']['impactScore']
+                    cvss_v3_exploitability_score = impact['baseMetricV3']['exploitabilityScore']
+                else:
+                    cvss_v3_impact_score = ''
+                    cvss_v3_exploitability_score = ''
                 cwe_ids = list(filter(lambda x: x != 'NVD-CWE-noinfo' and x != 'NVD-CWE-Other', list(itertools.chain(*list(map(lambda x: list(map(lambda x: x['value'], x['description'])), item['cve']['problemtype']['problemtype_data']))))))
                 urls = list(map(lambda x: x['url'], item['cve']['references']['reference_data']))
                 length = len(targets)
@@ -23,11 +41,12 @@ def list_dummy():
                     if date < targets[j][1]:
                         index = j
                         break
-                targets.insert(index, [cve_id, date, cwe_ids, urls])
+                row = [cve_id, date, cvss_v2_impact_score, cvss_v2_exploitability_score, cvss_v3_impact_score, cvss_v3_exploitability_score, cwe_ids, urls]
+                targets.insert(index, row)
+            # break
     file_path = f'{directory_path}combine.csv'
     writer = csv_writer(file_path, mode='w')
     reader = csv_reader(file_path)
-    rows = prepare_csv_file(reader, writer, ['cve_id', 'date', 'cwe_ids', 'urls'])
+    prepare_csv_file(reader, writer, ['cve_id', 'date', 'cvss_v2_impact_score', 'cvss_v2_exploitability_score', 'cvss_v3_impact_score', 'cvss_v3_exploitability_score', 'cwe_ids', 'urls'])
     for target in targets:
         writer.writerow(target)
-    return targets
