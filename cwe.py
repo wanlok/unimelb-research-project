@@ -10,7 +10,7 @@ def get_cve_list(repo, on_or_after_date):
     i = 0
     for row in csv_reader(file_path):
         if i > 0:
-            if int(row[1]) >= int(on_or_after_date) and repo.lower() in row[3].lower():
+            if int(row[1]) >= int(on_or_after_date) and repo.lower() in row[7].lower():
                 targets.append(row)
         i = i + 1
     return targets
@@ -19,7 +19,7 @@ def get_cve_list(repo, on_or_after_date):
 def get_cve_dict(cves):
     cwe_dict = dict()
     for i in range(len(cves)):
-        cve_id, date, cwe_ids, _ = cves[i]
+        cve_id, date, _, _, _, _, cwe_ids, _ = cves[i]
         cwe_ids = eval(cwe_ids)
         for cwe_id in cwe_ids:
             if cwe_id in cwe_dict:
