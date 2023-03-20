@@ -3,11 +3,13 @@ import sys
 import nvdcve
 from utils import csv_reader
 
+cwe_csv_file_path = 'C:\\Files\\Projects\\1000.csv'
 
-def get_cwe_dict(cves):
+
+def get_cwe_dict(cve_list):
     cwe_dict = dict()
-    for i in range(len(cves)):
-        cve_id, date, _, _, _, _, cwe_ids, _ = cves[i]
+    for i in range(len(cve_list)):
+        cve_id, date, _, _, _, _, cwe_ids, _ = cve_list[i]
         cwe_ids = eval(cwe_ids)
         for cwe_id in cwe_ids:
             if cwe_id in cwe_dict:
@@ -39,7 +41,6 @@ def get_cwe_sorted_list(cwe_dict):
 
 def get_cwe_names(cwe_ids):
     targets = []
-    cwe_csv_file_path = 'C:\\Files\\Projects\\1000.csv'
     for row in csv_reader(cwe_csv_file_path):
         for cwe_id in cwe_ids:
             if cwe_id[4:] == row[0]:
@@ -57,8 +58,7 @@ def get_cwe_name(cwe_names, cwe_id):
 
 
 if __name__ == '__main__':
-    cve_list = nvdcve.get_list(sys.argv[1], 0)
-    cwe_dict = get_cwe_dict(cve_list)
+    cwe_dict = get_cwe_dict(nvdcve.get_list(sys.argv[1]))
     cwe_names = get_cwe_names(cwe_dict)
     for cwe in get_cwe_sorted_list(cwe_dict):
         cwe_id, dates = cwe
