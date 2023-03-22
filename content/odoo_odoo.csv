@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 odoo/odoo,SECURITY.md,3845e0ff61fb6075d1ed6c6c5cd3c26ce5f6d510,2019-05-24 13:14:41+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -39,7 +39,7 @@ contacting us, please try to put together a proof-of-concept attack and take a c
 what's really at risk.
 If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
 Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
-",1734
+",1734,b odoo/odoo 3845e0ff61fb6075d1ed6c6c5cd3c26ce5f6d510
 odoo/odoo,SECURITY.md,41c434cd5d05561c725bfc0f9df99271fe2e49d7,2019-10-03 12:48:09+00:00,"# Security Policy
 
 ## Supported Versions
@@ -120,7 +120,7 @@ contacting us, please try to put together a proof-of-concept attack and take a c
 what's really at risk.
 If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
 Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
-",6
+",6,b odoo/odoo 41c434cd5d05561c725bfc0f9df99271fe2e49d7
 odoo/odoo,SECURITY.md,c4fa804cc63684be81d1eb7a567646d849e648e6,2020-09-28 14:07:25+00:00,"# Security Policy
 
 ## Supported Versions
@@ -201,7 +201,7 @@ contacting us, please try to put together a proof-of-concept attack and take a c
 what's really at risk.
 If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
 Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
-",4
+",4,b odoo/odoo c4fa804cc63684be81d1eb7a567646d849e648e6
 odoo/odoo,SECURITY.md,cbe1e8e5a5f7fff087343376191cf7fc1d00c218,2021-10-07 17:59:53+00:00,"# Security Policy
 
 ## Supported Versions
@@ -282,7 +282,7 @@ contacting us, please try to put together a proof-of-concept attack and take a c
 what's really at risk.
 If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
 Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
-",4
+",4,b odoo/odoo cbe1e8e5a5f7fff087343376191cf7fc1d00c218
 odoo/odoo,SECURITY.md,3eebe6e13477918122d0d1f15181a403bceaa013,2022-10-17 08:41:52+00:00,"# Security Policy
 
 ## Supported Versions
@@ -363,4 +363,4 @@ contacting us, please try to put together a proof-of-concept attack and take a c
 what's really at risk.
 If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
 Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
-",4
+",4,b odoo/odoo 3eebe6e13477918122d0d1f15181a403bceaa013

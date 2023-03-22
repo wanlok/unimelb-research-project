@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 firefly-iii/firefly-iii,.github/security.md,aa7a35d93d3e2cf65e16f9d4c660304ccbd8ee40,2019-09-06 10:00:42+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -11,7 +11,7 @@ If you find something that compromises the security of Firefly III, you should [
 
 You can use my [GPG key](https://keybase.io/jc5) for extra security. My [GitHub commits](https://github.com/firefly-iii/firefly-iii/commits/master) are almost always signed with this key.
 
-",718
+",718,b firefly-iii/firefly-iii aa7a35d93d3e2cf65e16f9d4c660304ccbd8ee40
 firefly-iii/firefly-iii,.github/security.md,64a6661ea41f059306df42b84e7fd31438533966,2020-02-16 13:00:57+00:00,"# Security Policy
 
 ## Supported Versions
@@ -36,7 +36,7 @@ If you find something that compromises the security of Firefly III, you should [
 
 You can use my [GPG key](https://keybase.io/jc5) for extra security. My [GitHub commits](https://github.com/firefly-iii/firefly-iii/commits/master) are almost always signed with this key.
 
-",24
+",24,b firefly-iii/firefly-iii 64a6661ea41f059306df42b84e7fd31438533966
 firefly-iii/firefly-iii,.github/security.md,4e4b44d41dc752e3e407a8c9005e59143181359b,2020-06-29 04:43:53+00:00,"# Security Policy
 
 ## Supported Versions
@@ -61,7 +61,7 @@ If you find something that compromises the security of Firefly III, you should [
 
 You can use my [GPG key](https://keybase.io/jc5) for extra security. My [GitHub commits](https://github.com/firefly-iii/firefly-iii/commits/main) are almost always signed with this key.
 
-",4
+",4,b firefly-iii/firefly-iii 4e4b44d41dc752e3e407a8c9005e59143181359b
 firefly-iii/firefly-iii,.github/security.md,3782388e456f159b4c6d6ded6eceb69e25e56a34,2020-07-11 05:16:07+00:00,"# Security Policy
 
 ## Supported Versions
@@ -128,7 +128,7 @@ Note that we do not currently consider the default settings for Firefly III to b
 ## Credits
 
 This security policy is based on [Harbor](https://github.com/goharbor/harbor)'s security policy.
-",6068
+",6068,b firefly-iii/firefly-iii 3782388e456f159b4c6d6ded6eceb69e25e56a34
 firefly-iii/firefly-iii,.github/security.md,5cfe02edf6e15fa26f555e720cfe68d208859cfd,2020-07-11 05:18:51+00:00,"# Security Policy
 
 Firefly III is an application to manage your personal finances. As such, the develop has adopted this security disclosure and response policy to ensure that critical issues are responsibly handled.
@@ -237,7 +237,7 @@ Note that we do not currently consider the default settings for Firefly III to b
 ## Credits
 
 This security policy is based on [Harbor](https://github.com/goharbor/harbor)'s security policy.
-",15
+",15,b firefly-iii/firefly-iii 5cfe02edf6e15fa26f555e720cfe68d208859cfd
 firefly-iii/firefly-iii,.github/security.md,704c6055b386999c1cc74b53e622ef0564828e3f,2022-11-09 05:35:42+00:00,"# Security Policy
 
 Firefly III is an application to manage your personal finances. As such, the developer has adopted this security disclosure and response policy to ensure that critical issues are responsibly handled.
@@ -346,7 +346,7 @@ Note that we do not currently consider the default settings for Firefly III to b
 ## Credits
 
 This security policy is based on [Harbor](https://github.com/goharbor/harbor)'s security policy.
-",13
+",13,b firefly-iii/firefly-iii 704c6055b386999c1cc74b53e622ef0564828e3f
 firefly-iii/firefly-iii,.github/security.md,973c175213d67516e922ec1b94c1e8b6e72c6aa0,2023-01-15 14:47:25+00:00,"# Security Policy
 
 Firefly III is an application to manage your personal finances. As such, the developer has adopted this security disclosure and response policy to ensure that critical issues are responsibly handled.
@@ -503,4 +503,4 @@ compatibility.
 ## Credits
 
 This security policy is based on [Harbor](https://github.com/goharbor/harbor)'s security policy.
-",98
+",98,b firefly-iii/firefly-iii 973c175213d67516e922ec1b94c1e8b6e72c6aa0

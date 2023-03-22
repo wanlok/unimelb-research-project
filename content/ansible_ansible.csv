@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 ansible/ansible,.github/SECURITY.md,ab96d22b61716e928cae12fe518f270a5f093093,2019-05-23 19:48:58+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -14,4 +14,4 @@ We encourage responsible disclosure practices for security
 vulnerabilities. Please read our [policies for reporting bugs](
 https://docs.ansible.com/ansible/devel/community/reporting_bugs_and_features.html#reporting-a-bug
 ) if you want to report a security issue that might affect Ansible.
-",593
+",593,b ansible/ansible ab96d22b61716e928cae12fe518f270a5f093093

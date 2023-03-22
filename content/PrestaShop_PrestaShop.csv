@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 PrestaShop/PrestaShop,.github/SECURITY.md,6d0c73795e788ed6211c30c9d69addab304dad72,2019-12-12 14:28:08+00:00,,"# Security Policy
 
 The PrestaShop team and community take security bugs in PrestaShop seriously. We appreciate your efforts to responsibly disclose your findings
@@ -24,7 +24,7 @@ This person will coordinate the fix and release process, involving the following
 ## Disclosure Policy
 
 In general, public disclosure are made after the issue has been fully identified and a patch is ready to be released.
-",1230
+",1230,b PrestaShop/PrestaShop 6d0c73795e788ed6211c30c9d69addab304dad72
 PrestaShop/PrestaShop,.github/SECURITY.md,ecdf31efaf54d70e1ce4f362059e5c73196ad980,2020-07-23 09:33:10+00:00,"# Security Policy
 
 The PrestaShop team and community take security bugs in PrestaShop seriously. We appreciate your efforts to responsibly disclose your findings
@@ -75,4 +75,4 @@ This person will coordinate the fix and release process, involving the following
 ## Disclosure Policy
 
 In general, public disclosure are made after the issue has been fully identified and a patch is ready to be released.
-",86
+",86,b PrestaShop/PrestaShop ecdf31efaf54d70e1ce4f362059e5c73196ad980

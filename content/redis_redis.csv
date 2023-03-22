@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 redis/redis,SECURITY.md,df4d916007c285d01b11193272419ab228916d8a,2021-05-14 04:16:27+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -42,7 +42,7 @@ fix early.
 
 If you believe you should be on the list, please contact us and we will
 consider your request based on the above criteria.
-",1689
+",1689,b redis/redis df4d916007c285d01b11193272419ab228916d8a
 redis/redis,SECURITY.md,b414605285244c453f3fadbbe7a157cd83ed5f59,2022-05-11 13:18:02+00:00,"# Security Policy
 
 ## Supported Versions
@@ -129,4 +129,4 @@ fix early.
 
 If you believe you should be on the list, please contact us and we will
 consider your request based on the above criteria.
-",5
+",5,b redis/redis b414605285244c453f3fadbbe7a157cd83ed5f59

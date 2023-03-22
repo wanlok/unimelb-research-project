@@ -1,10 +1,10 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 ikus060/rdiffweb,SECURITY.md,54c343c72c19ab1261b3ffdd2bb26d458c3f207c,2021-09-20 11:56:06+00:00,,"# Security Policy
 
 ## Reporting a Vulnerability
 
 Please report security issues to `info@ikus-soft.com`
-",103
+",103,b ikus060/rdiffweb 54c343c72c19ab1261b3ffdd2bb26d458c3f207c
 ikus060/rdiffweb,SECURITY.md,c8d69ce2e46f6d9d2852d062e400934e32fe3ed1,2022-09-14 15:40:22+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -17,4 +17,4 @@ If you discover a security vulnerability in Rdiffweb please disclose it via [our
 You may alos contact-us directly by email `info@ikus-soft.com`
 
 Thank you for improving the security of Rdiffweb.
-",287
+",287,b ikus060/rdiffweb c8d69ce2e46f6d9d2852d062e400934e32fe3ed1

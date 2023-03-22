@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 jgraph/drawio,SECURITY.md,3671669002802c5dfee88a4cc43226cc6173ecbb,2022-03-24 13:44:31+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -15,7 +15,7 @@ currently being supported with security updates.
 
 Email support@diagrams.net. If you do not wish to submit by email, please 
 ask for an alternative via email or Github issue.
-",457
+",457,b jgraph/drawio 3671669002802c5dfee88a4cc43226cc6173ecbb
 jgraph/drawio,SECURITY.md,8d854152c1559fe9f893d446d499f58ddfc33432,2022-03-24 13:44:47+00:00,"# Security Policy
 
 ## Supported Versions
@@ -45,7 +45,7 @@ ask for an alternative via email or Github issue.
 
 Email support@diagrams.net. If you do not wish to submit by email, please 
 ask for an alternative via email or Github issue.
-",123
+",123,b jgraph/drawio 8d854152c1559fe9f893d446d499f58ddfc33432
 jgraph/drawio,SECURITY.md,2ae8c9ae871b4ad6d1574390b711e2dfb0c0c2a6,2022-03-24 17:59:20+00:00,"# Security Policy
 
 ## Supported Versions
@@ -71,7 +71,7 @@ ask for an alternative via email or Github issue.
 ## Reporting a Vulnerability
 
 Email support@diagrams.net. If you do not wish to submit by email, please 
-ask for an alternative via email or Github issue.",1
+ask for an alternative via email or Github issue.",1,b jgraph/drawio 2ae8c9ae871b4ad6d1574390b711e2dfb0c0c2a6
 jgraph/drawio,SECURITY.md,4e9d5ec7e285b078c8cd8c10bf6c2b37e7f3d6af,2022-09-02 12:29:15+00:00,"# Security Policy
 
 ## Supported Versions
@@ -96,7 +96,7 @@ ask for an alternative via email or Github issue.","# Security Policy
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability in axios please disclose it via our [huntr page](https://huntr.dev/repos/jgraph/drawio/). Bounty eligibility, CVE assignment, response times and past reports are all there.
-",169
+",169,b jgraph/drawio 4e9d5ec7e285b078c8cd8c10bf6c2b37e7f3d6af
 jgraph/drawio,SECURITY.md,b5dfeb238369d664fb06a95e2179236b0e75f366,2022-09-07 15:38:41+00:00,"# Security Policy
 
 ## Supported Versions
@@ -121,4 +121,4 @@ If you discover a security vulnerability in axios please disclose it via our [hu
 ## Reporting a Vulnerability
 
 Email support@diagrams.net. If you do not wish to submit by email, please 
-ask for an alternative via email or Github issue.",169
+ask for an alternative via email or Github issue.",169,b jgraph/drawio b5dfeb238369d664fb06a95e2179236b0e75f366

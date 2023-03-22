@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 bigbluebutton/bigbluebutton,SECURITY.md,46d2104343d65639d19b92dea7584f63534be7a2,2020-07-23 00:30:51+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -16,7 +16,7 @@ We actively support BigBlueButton through the community forums and through secur
 If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
 
 Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
-",625
+",625,b bigbluebutton/bigbluebutton 46d2104343d65639d19b92dea7584f63534be7a2
 bigbluebutton/bigbluebutton,SECURITY.md,2061e61c6dd956f46009c406c772bab5924b7962,2021-05-05 16:05:28+00:00,"# Security Policy
 
 ## Supported Versions
@@ -51,7 +51,7 @@ We actively support BigBlueButton through the community forums and through secur
 If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
 
 Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
-",4
+",4,b bigbluebutton/bigbluebutton 2061e61c6dd956f46009c406c772bab5924b7962
 bigbluebutton/bigbluebutton,SECURITY.md,1f85117d8a7b618f62a75d3100689090e2f22492,2021-05-10 17:10:15+00:00,"# Security Policy
 
 ## Supported Versions
@@ -90,7 +90,7 @@ As such, we highly recommend that all administrators deploy 2.3 going forward as
 If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
 
 Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
-",349
+",349,b bigbluebutton/bigbluebutton 1f85117d8a7b618f62a75d3100689090e2f22492
 bigbluebutton/bigbluebutton,SECURITY.md,8a2bf78f2f8cab8b0ebc290c0cede20f1808603d,2021-05-10 17:12:23+00:00,"# Security Policy
 
 ## Supported Versions
@@ -133,7 +133,7 @@ As such, we highly recommend that all administrators deploy 2.3 going forward as
 If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
 
 Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
-",13
+",13,b bigbluebutton/bigbluebutton 8a2bf78f2f8cab8b0ebc290c0cede20f1808603d
 bigbluebutton/bigbluebutton,SECURITY.md,6b79aa490156ce7192a01baac750373959b8da0c,2021-11-20 08:33:14+00:00,"# Security Policy
 
 ## Supported Versions
@@ -176,7 +176,7 @@ As such, we highly recommend that all administrators deploy 2.3 going forward as
 If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
 
 Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
-",30
+",30,b bigbluebutton/bigbluebutton 6b79aa490156ce7192a01baac750373959b8da0c
 bigbluebutton/bigbluebutton,SECURITY.md,1eb49be737f01d99b4e7f8f36976be82efdd95fa,2021-12-20 15:42:10+00:00,"# Security Policy
 
 ## Supported Versions
@@ -220,7 +220,7 @@ As such, we recommend that all administrators deploy 2.4 going forward.  You'll 
 If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
 
 Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
-",166
+",166,b bigbluebutton/bigbluebutton 1eb49be737f01d99b4e7f8f36976be82efdd95fa
 bigbluebutton/bigbluebutton,SECURITY.md,e1c0a104865c6ee787836eb29638b712db537a6d,2022-06-15 14:10:27+00:00,"# Security Policy
 
 ## Supported Versions
@@ -265,4 +265,51 @@ As such, we recommend that all administrators deploy 2.5 going forward.  You'll 
 If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
 
 Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
-",86
+",86,b bigbluebutton/bigbluebutton e1c0a104865c6ee787836eb29638b712db537a6d
+bigbluebutton/bigbluebutton,SECURITY.md,b2382713202ad15a56d161dc8813506f3b0315e9,2023-03-20 21:35:25+00:00,"# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.3.x (or earlier)  | :x:    |
+| 2.4.x   | :white_check_mark: |
+| 2.5.x   | :white_check_mark: |
+| 2.6.x   | :x: |
+
+We have released 2.5 to the community and are going to support both 2.4 and 2.5 together for the coming months (while we're actively developing the next release).  Also, BigBlueButton 2.3 is now end of life.
+
+As such, we recommend that all administrators deploy 2.5 going forward.  You'll find [many improvements](https://docs.bigbluebutton.org/2.5/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+","# Security Policy
+
+## Supported Versions
+
+We actively support BigBlueButton through the community forums and through security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.4.x (or earlier)  | :x:    |
+| 2.5.x   | :white_check_mark: |
+| 2.6.x   | :white_check_mark: |
+| 2.7.x   | :x: |
+
+We have released 2.6 to the community and are going to support both 2.5 and 2.6 together for the coming months (while we're actively developing the next release).  Also, BigBlueButton 2.4 is now end of life.
+
+As such, we recommend that all administrators deploy 2.6 going forward.  You'll find [many improvements](https://docs.bigbluebutton.org/2.6/new.html) in this newer version.
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vunerability in BigBlueButton please let us know directly by 
+- using GitHub's ""Report a vulnerability"" functionality on https://github.com/bigbluebutton/bigbluebutton/security/advisories
+- or e-mailing security@bigbluebutton.org with as much detail as possible.
+
+Regards,... [BigBlueButton Team](https://docs.bigbluebutton.org/support/faq.html#bigbluebutton-committer)
+",142,b bigbluebutton/bigbluebutton b2382713202ad15a56d161dc8813506f3b0315e9

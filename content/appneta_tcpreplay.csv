@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 appneta/tcpreplay,docs/SECURITY.md,ff792fdb2a7ae1fa7d76cc4080b5698e1d9c47c9,2022-01-24 23:53:58+00:00,,"- [Security Policy](#security-policy)
   - [Supported Versions](#supported-versions)
   - [Reporting a Vulnerability](#reporting-a-vulnerability)
@@ -22,4 +22,4 @@ receiving such patches depend on the CVSS v3.0 Rating:
 Please report (suspected) security vulnerabilities to
 **[tcpreplay@appneta.com](mailto:appneta.com)**. You will receive a response from
 us within 72 hours. If the issue is confirmed, we will release a patch as soon
-as possible depending on complexity but historically within a few days.",871
+as possible depending on complexity but historically within a few days.",871,b appneta/tcpreplay ff792fdb2a7ae1fa7d76cc4080b5698e1d9c47c9

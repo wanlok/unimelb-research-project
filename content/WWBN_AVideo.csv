@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 WWBN/AVideo,SECURITY.md,04872233af85fe7a05321909a2f92bdb28c90488,2020-05-29 00:33:53+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -20,4 +20,4 @@ Use this section to tell people how to report a vulnerability.
 Tell them where to go, how often they can expect to get an update on a
 reported vulnerability, what to expect if the vulnerability is accepted or
 declined, etc.
-",620
+",620,b WWBN/AVideo 04872233af85fe7a05321909a2f92bdb28c90488
