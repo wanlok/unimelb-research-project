@@ -1,2 +1,2 @@
 @echo off
-py security_md.py %1
+py security_md.py %1 %2
