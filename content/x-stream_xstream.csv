@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 x-stream/xstream,SECURITY.md,9abed524cca207d0bbdc95a3f24ddce973049814,2020-12-30 23:52:54+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -19,4 +19,4 @@ reproduce the problem with the latest XStream version.
 Note, that XStream cares about security issues with XStream itself or in combination with the Java runtime, but not with
 3rd party libraries. It is in the resposibility of each developer who brings those libraries together to setup the
 [XStream Security Framework](https://x-stream.github.io/security.html#framework) properly.
-",873
+",873,b x-stream/xstream 9abed524cca207d0bbdc95a3f24ddce973049814
