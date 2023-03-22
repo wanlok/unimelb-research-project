@@ -24,29 +24,25 @@ def plot(title, x, y, file_path):
     plt.savefig(file_path, dpi=300, bbox_inches='tight')
     plt.close()
 
-def plot2(title, date_list, data, file_path):
+def plot2(title, x, y, legends, colors, file_path):
     weight_counts = dict()
     length = 0
-    for i in range(len(data)):
-        length = sum(data[i])
-        for j in range(10):
+    for i in range(len(y)):
+        length = sum(y[i])
+        for j in range(len(legends)):
             if j in weight_counts:
-                weight_counts[j].append(data[i][j])
+                weight_counts[j].append(y[i][j])
             else:
-                weight_counts[j] = [data[i][j]]
+                weight_counts[j] = [y[i][j]]
     fig = plt.figure()
-    fig.set_size_inches(len(date_list) * 1, 8)
+    fig.set_size_inches(len(x) * 1, 8)
     length = length + (length * 0.04)
     width = 0.56
-    species = list(map(lambda x: f'{x}', date_list))
+    species = list(map(lambda x: f'{x}', x))
     ax = plt.gca()
     bottom = np.zeros(len(species))
-    for j, weight_count in weight_counts.items():
-        if j == 9:
-            label = f'9.0 - 10.0'
-        else:
-            label = f'{j}.0 - {j + 0.9}'
-        ax.bar(species, weight_count, width, label=label, bottom=bottom)
+    for i, weight_count in weight_counts.items():
+        ax.bar(species, weight_count, width, bottom=bottom, label=legends[i], color=colors[i])
         bottom += weight_count
     for container in ax.containers:
         labels = [int(value) if value > 0 else '' for value in container.datavalues]
