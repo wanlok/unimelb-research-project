@@ -1,10 +1,14 @@
-import sys
+from datetime import datetime, timedelta
 
 import chart
+import repository
 import nvdcve
 from utils import csv_writer, csv_reader, prepare_csv_file
 
 rating_names = ['Low', 'Medium', 'High', 'Critical', 'None']
+v2_legends = ['0.0 - 0.9', '1.0 - 1.9', '2.0 - 2.9', '3.0 - 3.9', '4.0 - 4.9', '5.0 - 5.9', '6.0 - 6.9', '7.0 - 7.9', '8.0 - 8.9', '9.0 - 10.0']
+v3_legends = ['0.1 - 0.9', '1.0 - 1.9', '2.0 - 2.9', '3.0 - 3.9', '4.0 - 4.9', '5.0 - 5.9', '6.0 - 6.9', '7.0 - 7.9', '8.0 - 8.9', '9.0 - 10.0']
+colors = ['#2B472B', '#407A52', '#8DB255', '#9FD4A3', 'yellow', '#FFEE75', '#FBE106', 'orange', '#F9690E', '#DC3023']
 
 
 def get_v2_rating(score):
@@ -54,19 +58,19 @@ def number(my_list):
     return my_list
 
 
-def generate_charts(repo):
-    cve_list = nvdcve.get_list(repo)
-    date_dict = dict()
-    for cve in cve_list:
-        date_dict[int(cve[1][:-2])] = 1
-    date_list = list(date_dict.keys())
-    date_list.sort()
+def generate_charts(repo, dates, yesterday_dates):
+    # cve_list = nvdcve.get_list(repo)
+    # date_dict = dict()
+    # for cve in cve_list:
+    #     date_dict[int(cve[1][:-2])] = 1
+    # date_list = list(date_dict.keys())
+    # date_list.sort()
     v2_i = []
     v2_e = []
     v3_i = []
     v3_e = []
-    for date in date_list:
-        cve_list = nvdcve.get_list(repo, f'{date}99')
+    for date in yesterday_dates:
+        cve_list = nvdcve.get_list(repo, date)
         v2_i_rating_list = [0, 0, 0, 0, 0]
         v2_i_number_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         v2_e_rating_list = [0, 0, 0, 0, 0]
@@ -94,23 +98,35 @@ def generate_charts(repo):
         v3_i.append(v3_i_number_list)
         v3_e.append(v3_e_number_list)
     file_name = '_'.join(repo.split('/'))
-    chart.plot2(f'{repo} - CVSS v2 Impact Score Distribution', date_list, v2_i, f'cvss/{file_name}_v2_i.png')
-    chart.plot2(f'{repo} - CVSS v2 Exploitability Score Distribution', date_list, v2_e, f'cvss/{file_name}_v2_e.png')
-    chart.plot2(f'{repo} - CVSS v3 Impact Score Distribution', date_list, v3_i, f'cvss/{file_name}_v3_i.png')
-    chart.plot2(f'{repo} - CVSS v3 Exploitability Score Score Distribution', date_list, v3_e, f'cvss/{file_name}_v3_e.png')
+    chart.plot2(f'{repo} - CVSS v2 Impact Score before SECURITY.md commits', dates, v2_i, v2_legends, colors, f'cvss/v2/impact/{file_name}.png')
+    chart.plot2(f'{repo} - CVSS v2 Exploitability Score before SECURITY.md commits', dates, v2_e, v2_legends, colors, f'cvss/v2/exploitability/{file_name}.png')
+    chart.plot2(f'{repo} - CVSS v3 Impact Score before SECURITY.md commits', dates, v3_i, v3_legends, colors, f'cvss/v3/impact/{file_name}.png')
+    chart.plot2(f'{repo} - CVSS v3 Exploitability Score Score before SECURITY.md commits', dates, v3_e, v3_legends, colors, f'cvss/v3/exploitability/{file_name}.png')
+
+
+def get_dates(repo):
+    dates = []
+    yesterday_dates = []
+    file_path = '_'.join(repo.split('/'))
+    file_path = f'./content/{file_path}.csv'
+    writer = csv_writer(file_path)
+    reader = csv_reader(file_path)
+    rows = prepare_csv_file(reader, writer, ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'levenshtein_distance', 'bcompare'])
+    for i in range(1, len(rows)):
+        date_time = datetime.strptime(rows[i][3], '%Y-%m-%d %H:%M:%S%z')
+        date = int(f'{date_time}'[:10].replace('-', ''))
+        yesterday_date = int(f'{date_time - timedelta(days=1)}'[:10].replace('-', ''))
+        if date not in dates and yesterday_date not in yesterday_dates:
+            dates.append(date)
+            yesterday_dates.append(yesterday_date)
+    return dates, yesterday_dates
 
 
 if __name__ == '__main__':
-    repo_file_path = 'repo.csv'
-    repo_writer = csv_writer(repo_file_path)
-    repo_reader = csv_reader(repo_file_path)
-    repo_rows = prepare_csv_file(repo_reader, repo_writer, ['repo'])
-    length = len(repo_rows)
-    start = 1
-    end = 50
-    if end > length:
-        end = length
-    for i in range(1, len(repo_rows)):
-        repo = repo_rows[i][0]
-        print(f'{i} {repo}')
-        generate_charts(repo)
+    for repo in repository.get_list(2):
+        print(repo)
+        dates, yesterday_dates = get_dates(repo)
+        if len(dates) > 0:
+            generate_charts(repo, dates, yesterday_dates)
+        else:
+            print('no commit history')
