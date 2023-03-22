@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 dotCMS/core,SECURITY.md,b37134a5f762657cb0542dedf4a29935e0088cd9,2021-08-27 18:51:50+00:00,,"# Security Policy
 
 For more information regarding dotCMS security polices and known security issues see our documentation site:
@@ -22,4 +22,4 @@ Wherever possible dotCMS will also provide an osgi/hotfix plugin that can remedi
 
 Please see our responsible disclosure policy here:
 https://dotcms.com/docs/latest/responsible-disclosure-policy
-",840
+",840,b dotCMS/core b37134a5f762657cb0542dedf4a29935e0088cd9

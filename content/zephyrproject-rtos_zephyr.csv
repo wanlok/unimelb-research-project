@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 zephyrproject-rtos/zephyr,.github/SECURITY.md,911ba334a06ac55e28856e49a694083974196f8c,2021-03-20 10:06:57+00:00,,"# Security Policy
 
 ## Supported versions
@@ -21,7 +21,7 @@ versions are:
 Please see our [Security Vulnerability
 Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
 page for details on the process.
-",528
+",528,b zephyrproject-rtos/zephyr 911ba334a06ac55e28856e49a694083974196f8c
 zephyrproject-rtos/zephyr,.github/SECURITY.md,84b165967520dd2d4ecfbd2dc4e73ddaec95d223,2021-04-26 14:44:02+00:00,"# Security Policy
 
 ## Supported versions
@@ -66,7 +66,7 @@ versions are:
 Please see our [Security Vulnerability
 Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
 page for details on the process.
-",1
+",1,b zephyrproject-rtos/zephyr 84b165967520dd2d4ecfbd2dc4e73ddaec95d223
 zephyrproject-rtos/zephyr,.github/SECURITY.md,3d3c831563f68af88d65474d58ec86f6b96bc8d1,2021-08-17 13:43:19+00:00,"# Security Policy
 
 ## Supported versions
@@ -111,7 +111,7 @@ versions are:
 Please see our [Security Vulnerability
 Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
 page for details on the process.
-",2
+",2,b zephyrproject-rtos/zephyr 3d3c831563f68af88d65474d58ec86f6b96bc8d1
 zephyrproject-rtos/zephyr,.github/SECURITY.md,ae0297e8de1f94b050de0afecc9e2150006e3ec6,2022-01-28 21:32:02+00:00,"# Security Policy
 
 ## Supported versions
@@ -156,7 +156,7 @@ versions are:
 Please see our [Security Vulnerability
 Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
 page for details on the process.
-",10
+",10,b zephyrproject-rtos/zephyr ae0297e8de1f94b050de0afecc9e2150006e3ec6
 zephyrproject-rtos/zephyr,.github/SECURITY.md,9ec0116ce30c8b6898d555f8538770e77f940580,2022-10-01 10:50:17+00:00,"# Security Policy
 
 ## Supported versions
@@ -201,7 +201,7 @@ versions are:
 Please see our [Security Vulnerability
 Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
 page for details on the process.
-",4
+",4,b zephyrproject-rtos/zephyr 9ec0116ce30c8b6898d555f8538770e77f940580
 zephyrproject-rtos/zephyr,.github/SECURITY.md,fe8c1fb8bae366f71687d9701b0e5956ed52e111,2023-02-22 17:06:17+00:00,"# Security Policy
 
 ## Supported versions
@@ -246,7 +246,7 @@ versions are:
 Please see our [Security Vulnerability
 Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
 page for details on the process.
-",11
+",11,b zephyrproject-rtos/zephyr fe8c1fb8bae366f71687d9701b0e5956ed52e111
 zephyrproject-rtos/zephyr,.github/SECURITY.md,1e8fa9b0cbd54016d2918e6f2268e8e2c36147e4,2023-02-22 17:06:17+00:00,"# Security Policy
 
 ## Supported versions
@@ -291,4 +291,4 @@ versions are:
 Please see our [Security Vulnerability
 Reporting](https://docs.zephyrproject.org/latest/security/reporting.html)
 page for details on the process.
-",8
+",8,b zephyrproject-rtos/zephyr 1e8fa9b0cbd54016d2918e6f2268e8e2c36147e4

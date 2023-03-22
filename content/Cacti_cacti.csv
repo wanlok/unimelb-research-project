@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 Cacti/cacti,SECURITY.md,5f50f3912620c2476e9679707a304a1de0fafb39,2022-12-05 09:01:07+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -16,7 +16,7 @@ Cacti/cacti,SECURITY.md,5f50f3912620c2476e9679707a304a1de0fafb39,2022-12-05 09:0
 Please use either GitHub's private vulnerability reporting or send an email to developers@cacti.net.  We will aim to respond within a few days and accept any PoC's that demonstrate how to test for the vulnerability.  
 
 We wlil remove an PoC from published advisory's were possible and will advise to this effect when doing so.
-",631
+",631,b Cacti/cacti 5f50f3912620c2476e9679707a304a1de0fafb39
 Cacti/cacti,SECURITY.md,e4d60297fd043d8d4f2ecbbd930dc664601cecb5,2023-01-04 13:36:25+00:00,"# Security Policy
 
 ## Supported Versions
@@ -54,4 +54,4 @@ We wlil remove an PoC from published advisory's were possible and will advise to
 
 ---
 Copyright (c) 2004-2023 - The Cacti Group, Inc.
-",55
+",55,b Cacti/cacti e4d60297fd043d8d4f2ecbbd930dc664601cecb5

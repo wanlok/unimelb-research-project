@@ -1,9 +1,9 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 flatpressblog/flatpress,SECURITY.md,a6d8b80ffc119d6a4168cc8f9c2588b007f4b8d5,2021-10-14 13:50:03+00:00,,"# Security Policy
 
 ## Reporting a Vulnerability
 
-Please report security issues to `hello@flatpress.org`",103
+Please report security issues to `hello@flatpress.org`",103,b flatpressblog/flatpress a6d8b80ffc119d6a4168cc8f9c2588b007f4b8d5
 flatpressblog/flatpress,SECURITY.md,1a5138557b5711f4b555f1e74afe79edfda0c56c,2021-10-20 17:49:46+00:00,"# Security Policy
 
 ## Reporting a Vulnerability
@@ -13,4 +13,4 @@ Thank you for your efforts on the security of the FlatPress software. Feel free 
 
 ## Reporting a vulnerability
 Please report security issues to `hello@flatpress.org`, it's as simple as that. Thanks!
-",162
+",162,b flatpressblog/flatpress 1a5138557b5711f4b555f1e74afe79edfda0c56c

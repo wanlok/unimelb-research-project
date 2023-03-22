@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 ZoneMinder/zoneminder,SECURITY.md,7643c9d375a028b406e71e18dc6d29cbb840b301,2020-05-07 00:48:10+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -17,4 +17,4 @@ Time and computers move on. We do not have the resources to support every ancien
 Since sometimes security vulnerabilities can be sensitive, you can just email me at isaac@zoneminder.com.
 If it's not such a big deal, by all means, create an issue here on github
 
-",638
+",638,b ZoneMinder/zoneminder 7643c9d375a028b406e71e18dc6d29cbb840b301

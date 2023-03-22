@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 contiki-ng/contiki-ng,SECURITY.md,c0c058b566ecda99acbe333c259364a0e9293d2f,2019-09-21 21:18:12+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -20,4 +20,4 @@ To report a vulnerability privately please email security@contiki-ng.org
 We will try to confirm or decline your report ASAP by email. For accepted
 vulnerability reports we will create an [advisory](https://github.com/contiki-ng/contiki-ng/security/advisories)
 and, if you wish, invite you to the discussion.
-",861
+",861,b contiki-ng/contiki-ng c0c058b566ecda99acbe333c259364a0e9293d2f

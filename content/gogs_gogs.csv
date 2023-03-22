@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 gogs/gogs,SECURITY.md,82ffca3fc9988345016c8033f7f65c5b028dfe10,2020-05-02 09:15:55+00:00,,"# Security policy
 
 ## Supported versions
@@ -10,7 +10,7 @@ Only lastest two minor version releases are supported for patching security fixe
 Please send report privately to [security@gogs.io](mailto:security@gogs.io), and include how would you like to be credited.
 
 Thank you!
-",292
+",292,b gogs/gogs 82ffca3fc9988345016c8033f7f65c5b028dfe10
 gogs/gogs,SECURITY.md,40513a117f83077bfaffb9bf969b2000d85ba7cc,2020-08-22 14:35:09+00:00,"# Security policy
 
 ## Supported versions
@@ -32,7 +32,7 @@ Only lastest two minor version releases are supported for patching security fixe
 
 Please create a dummy issue with high-level description of the security vulnerability,
 then report details to [security@gogs.io](mailto:security@gogs.io) privately, thank you!
-",119
+",119,b gogs/gogs 40513a117f83077bfaffb9bf969b2000d85ba7cc
 gogs/gogs,SECURITY.md,36102f168938244624a5cf843d455f057f50779a,2022-03-06 12:13:56+00:00,"# Security policy
 
 ## Supported versions
@@ -56,7 +56,7 @@ Please create a dummy issue with high-level description of the security vulnerab
 We strongly enourage to use https://huntr.dev/ for submitting and managing status of vulnerability reports instead of emails.
 
 Thank you!
-",169
+",169,b gogs/gogs 36102f168938244624a5cf843d455f057f50779a
 gogs/gogs,SECURITY.md,82ee08908869e2cab56ce89f088d5a63b636d69a,2022-03-11 06:25:09+00:00,"# Security policy
 
 ## Supported versions
@@ -93,7 +93,7 @@ Existing vulnerability reports are being tracked in [Gogs Vulnerability Reports]
 1. Publish the original vulnerability report and a new [GitHub security advisory](https://github.com/gogs/gogs/security/advisories).
 
 Thank you!
-",881
+",881,b gogs/gogs 82ee08908869e2cab56ce89f088d5a63b636d69a
 gogs/gogs,SECURITY.md,69514d2fc8441c72de2d7027bfff54003f307083,2022-04-09 06:02:32+00:00,"# Security policy
 
 ## Supported versions
@@ -140,4 +140,4 @@ Existing vulnerability reports are being tracked in [Gogs Vulnerability Reports]
 1. Publish the original vulnerability report and a new [GitHub security advisory](https://github.com/gogs/gogs/security/advisories).
 
 Thank you!
-",3
+",3,b gogs/gogs 69514d2fc8441c72de2d7027bfff54003f307083

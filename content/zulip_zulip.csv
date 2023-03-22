@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 zulip/zulip,SECURITY.md,ab918c139b054dbfe3b9202a86ae6301fa1eb416,2020-06-25 22:23:22+00:00,,"# Security Policy
 
 Security announcements are sent to zulip-announce@googlegroups.com,
@@ -27,7 +27,7 @@ form of minor security/maintenance releases.
 We work hard to make
 [upgrades](https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release)
 reliable, so that there's no reason to run older major releases.
-",985
+",985,b zulip/zulip ab918c139b054dbfe3b9202a86ae6301fa1eb416
 zulip/zulip,SECURITY.md,72d6ff3c3be73fc6c28acd64f5740e3bd2cb78de,2020-10-23 18:46:55+00:00,"# Security Policy
 
 Security announcements are sent to zulip-announce@googlegroups.com,
@@ -84,7 +84,7 @@ form of minor security/maintenance releases.
 We work hard to make
 [upgrades](https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release)
 reliable, so that there's no reason to run older major releases.
-",3
+",3,b zulip/zulip 72d6ff3c3be73fc6c28acd64f5740e3bd2cb78de
 zulip/zulip,SECURITY.md,d7d79b57b7ecc2f9c8ecee4097929d9605125cc9,2021-05-05 16:08:43+00:00,"# Security policy
 
 Security announcements are sent to zulip-announce@googlegroups.com,
@@ -145,7 +145,7 @@ See also our documentation on the [Zulip release lifecycle][release-lifecycle]
 [security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
 [upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
 [release-cycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
-",385
+",385,b zulip/zulip d7d79b57b7ecc2f9c8ecee4097929d9605125cc9
 zulip/zulip,SECURITY.md,35c1c8d41b937f7a444fea3866ce88375e7400e2,2021-09-08 19:06:24+00:00,"# Security policy
 
 Security announcements are sent to zulip-announce@googlegroups.com,
@@ -210,7 +210,7 @@ See also our documentation on the [Zulip release lifecycle][release-lifecycle]
 [security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
 [upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
 [release-cycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
-",1
+",1,b zulip/zulip 35c1c8d41b937f7a444fea3866ce88375e7400e2
 zulip/zulip,SECURITY.md,c5a427c79e0ad6b753dec55b552ae8b9fad272e5,2022-01-07 22:37:42+00:00,"# Security policy
 
 Security announcements are sent to zulip-announce@googlegroups.com,
@@ -276,7 +276,7 @@ lifecycle][release-lifecycle].
 [security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
 [upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
 [release-lifecycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
-",6
+",6,b zulip/zulip c5a427c79e0ad6b753dec55b552ae8b9fad272e5
 zulip/zulip,SECURITY.md,8fe47e8878c20693555891e556674baf80db8f4f,2022-01-07 23:56:26+00:00,"# Security policy
 
 Security announcements are sent to zulip-announce@googlegroups.com,
@@ -347,4 +347,4 @@ lifecycle][release-lifecycle].
 [security-model]: https://zulip.readthedocs.io/en/latest/production/security-model.html
 [upgrades]: https://zulip.readthedocs.io/en/latest/production/upgrade-or-modify.html#upgrading-to-a-release
 [release-lifecycle]: https://zulip.readthedocs.io/en/latest/overview/release-lifecycle.html
-",384
+",384,b zulip/zulip 8fe47e8878c20693555891e556674baf80db8f4f
