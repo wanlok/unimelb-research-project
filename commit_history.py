@@ -47,6 +47,7 @@ def download(repos, paths, file_path):
 
 
 if __name__ == '__main__':
-    directory_name = '_'.join(sys.argv[2].split('.'))
+    slices = sys.argv[2].split('/')
+    directory_name = '_'.join(slices[len(slices) - 1].split('.'))
     file_name = '_'.join(sys.argv[1].split('/'))
-    download([sys.argv[1]], [[sys.argv[2]]], f'commit_histories\\{directory_name}\\{file_name}.csv')
+    download([sys.argv[1]], [[sys.argv[2]]], f'data\\commits\\{directory_name}\\{file_name}.csv')

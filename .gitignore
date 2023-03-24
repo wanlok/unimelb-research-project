@@ -2,3 +2,5 @@ __pycache__
 secret.json
 settings_nordvpn.txt
 history*.csv
+left.txt
+right.txt
