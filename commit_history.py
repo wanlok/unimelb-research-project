@@ -47,4 +47,6 @@ def download(repos, paths, file_path):
 
 
 if __name__ == '__main__':
-    download(['ReactiveX/RxJava'], [['build.gradle']], 'C:\\Files\\Projects\\a.csv')
+    directory_name = '_'.join(sys.argv[2].split('.'))
+    file_name = '_'.join(sys.argv[1].split('/'))
+    download([sys.argv[1]], [[sys.argv[2]]], f'commit_histories\\{directory_name}\\{file_name}.csv')

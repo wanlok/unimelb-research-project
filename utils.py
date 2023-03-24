@@ -5,6 +5,15 @@ import sys
 from urllib.request import Request, urlopen
 
 
+def get_file_json(file_path):
+    try:
+        file = open(file_path, encoding='utf-8')
+        data = json.load(file)
+    except Exception:
+        data = None
+    return data
+
+
 def get_json(url_string, token=None):
     try:
         print(f'url: {url_string}')
