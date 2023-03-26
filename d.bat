@@ -1,2 +1,2 @@
 @echo off
-py dependency.py %1
+py dependency.py %1 %2
