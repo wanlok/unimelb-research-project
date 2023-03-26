@@ -6,27 +6,45 @@ from dateutil import parser
 
 from utils import csv_writer, csv_reader, prepare_csv_file, get_json, get_content
 
+header = ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'levenshtein_distance', 'bcompare']
+
+rate_limit = 60
+rate_limit_exceeded = 'rate limit exceeded'
+
+
+def write(repos, rows, error, file_path):
+    if error != rate_limit_exceeded:
+        writer = csv_writer(file_path, mode='w')
+        prepare_csv_file(csv_reader(file_path), writer, header)
+        if len(rows) > 0:
+            previous_content = ''
+            for row in rows:
+                repo, path, sha, date_time, content = row
+                writer.writerow([repo, path, sha, date_time, previous_content, content, distance(previous_content, content), f'b {repos[0]} {sha}'])
+                previous_content = content
+
 
 def download(repos, paths, file_path):
-    writer = csv_writer(file_path, mode='w')
-    reader = csv_reader(file_path)
-    rows = prepare_csv_file(reader, writer, ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'levenshtein_distance', 'bcompare'])
-    valid = False
+    api_count = 0
+    rows = []
+    error = None
     for i in range(len(repos)):
         repo = repos[i]
         for path in paths[i]:
-            data_1, error_1 = get_json(f'https://api.github.com/repos/{repo}/commits?path={path}')
+            data_1, error = get_json(f'https://api.github.com/repos/{repo}/commits?path={path}')
+            api_count = api_count + 1
             if data_1 is not None:
-                valid = len(data_1) > 0
                 for j in range(len(data_1)):
                     sha = data_1[j]['sha']
-                    data_2, error_2 = get_json(f'https://api.github.com/repos/{repo}/commits/{sha}?path={path}')
+                    data_2, error = get_json(f'https://api.github.com/repos/{repo}/commits/{sha}?path={path}')
+                    api_count = api_count + 1
                     if data_2 is not None:
                         date_time = parser.parse(data_2['commit']['committer']['date'])
                         for file in data_2['files']:
                             if file["filename"] == path:
                                 content = get_content(file['raw_url'])
                                 content = BeautifulSoup(eval(f'{content}').decode('utf-8'), features='lxml').get_text()
+                                # api_count = api_count + 1
                                 row = [repo, path, sha, date_time, content]
                                 if row not in rows:
                                     index = len(rows)
@@ -35,15 +53,18 @@ def download(repos, paths, file_path):
                                             index = k
                                             break
                                     rows.insert(index, row)
-            if valid:
+                    if error == rate_limit_exceeded:
+                        api_count = rate_limit
+                        break
+            if error == rate_limit_exceeded:
+                api_count = rate_limit
                 break
-        if valid:
+            if len(rows) > 0:
+                break
+        if error == rate_limit_exceeded or len(rows) > 0:
             break
-    previous_content = ''
-    for j in range(len(rows)):
-        repo, path, sha, date_time, content = rows[j]
-        writer.writerow([repo, path, sha, date_time, previous_content, content, distance(previous_content, content), f'b {repos[0]} {sha}'])
-        previous_content = content
+    write(repos, rows, error, file_path)
+    return api_count
 
 
 if __name__ == '__main__':
