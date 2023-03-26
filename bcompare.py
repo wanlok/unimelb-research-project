@@ -14,6 +14,7 @@ directory_paths = [
     'C:\\Files\\Projects\\unimelb-research-project\\data\\commits\\requirements_txt\\',
     'C:\\Files\\Projects\\unimelb-research-project\\data\\commits\\composer_json\\',
     'C:\\Files\\Projects\\unimelb-research-project\\data\\commits\\package_json\\',
+    'C:\\Files\\Projects\\unimelb-research-project\\data\\security\\'
 ]
 
 
