@@ -15,11 +15,11 @@ if __name__ == '__main__':
     #     rotate_VPN()
     #     time.sleep(10)
     while True:
-        files_csv_file_path = 'files.csv'
+        files_csv_file_path = '../files.csv'
         files_csv_writer = csv_writer(files_csv_file_path)
         files_csv_reader = csv_reader(files_csv_file_path)
         files_csv_rows = prepare_csv_file(files_csv_reader, files_csv_writer, ['repo', 'path', 'url'])
-        content_csv_file_path = 'content.csv'
+        content_csv_file_path = '../content.csv'
         content_csv_writer = csv_writer(content_csv_file_path)
         content_csv_reader = csv_reader(content_csv_file_path)
         content_csv_rows = prepare_csv_file(content_csv_reader, content_csv_writer, ['repo', 'path', 'content'])

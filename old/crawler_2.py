@@ -4,7 +4,7 @@ from utils import get_secret, csv_reader, csv_writer, prepare_csv_file, get_json
 
 if __name__ == '__main__':
     secret = get_secret()
-    repo_csv_file_path = 'repo.csv'
+    repo_csv_file_path = '../repo.csv'
     repo_csv_writer = csv_writer(repo_csv_file_path)
     repo_csv_reader = csv_reader(repo_csv_file_path)
     repo_csv_rows = prepare_csv_file(repo_csv_reader, repo_csv_writer, ['repo'])

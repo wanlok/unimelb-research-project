@@ -3,11 +3,11 @@ import time
 from utils import csv_writer, csv_reader, prepare_csv_file, get_json, get_csv_start_index
 
 if __name__ == '__main__':
-    files_csv_file_path = 'files.csv'
+    files_csv_file_path = '../files.csv'
     files_csv_writer = csv_writer(files_csv_file_path)
     files_csv_reader = csv_reader(files_csv_file_path)
     files_csv_rows = prepare_csv_file(files_csv_reader, files_csv_writer, ['repo', 'path', 'url'])
-    file_mapping_csv_file_path = 'file_mapping.csv'
+    file_mapping_csv_file_path = '../file_mapping.csv'
     file_mapping_csv_writer = csv_writer(file_mapping_csv_file_path)
     file_mapping_csv_reader = csv_reader(file_mapping_csv_file_path)
     file_mapping_csv_rows = prepare_csv_file(file_mapping_csv_reader, file_mapping_csv_writer, ['repo', 'path', 'sha'])

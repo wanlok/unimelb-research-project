@@ -3,7 +3,7 @@ import time
 from utils import csv_writer, csv_reader, prepare_csv_file, get_csv_start_index, get_json, get_content
 
 if __name__ == '__main__':
-    file_mapping_csv_file_path = 'file_mapping.csv'
+    file_mapping_csv_file_path = '../file_mapping.csv'
     file_mapping_csv_writer = csv_writer(file_mapping_csv_file_path)
     file_mapping_csv_reader = csv_reader(file_mapping_csv_file_path)
     file_mapping_csv_rows = prepare_csv_file(file_mapping_csv_reader, file_mapping_csv_writer, ['repo', 'path', 'sha'])

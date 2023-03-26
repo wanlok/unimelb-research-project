@@ -4,7 +4,7 @@ from utils import get_secret, csv_writer, csv_reader, prepare_csv_file, get_json
 
 if __name__ == '__main__':
     secret = get_secret()
-    files_csv_file_path = 'files.csv'
+    files_csv_file_path = '../files.csv'
     q = 'security+in:path+language:markdown'
     per_page = 100
     size_limit = 1000
