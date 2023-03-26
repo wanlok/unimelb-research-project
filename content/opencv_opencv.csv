@@ -1,5 +1,5 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
-opencv/opencv,SECURITY.md,d19bccad74f75a03f4e115222f0b5decf3ac72a6,2019-11-07 10:10:42+00:00,,"# Security Policy
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
+OpenCV/opencv,SECURITY.md,d19bccad74f75a03f4e115222f0b5decf3ac72a6,2019-11-07 10:10:42+00:00,,"# Security Policy
 
 ## Reporting a Vulnerability
 
@@ -73,4 +73,4 @@ d++Epc3Ef7lPex4eIIbqyup8X0SNiQelV91j3IyUEi3NZxSX9LQzSzG705gohpCz
 =Mdna
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-",3820
+",3820,b OpenCV/opencv d19bccad74f75a03f4e115222f0b5decf3ac72a6

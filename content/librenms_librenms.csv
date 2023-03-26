@@ -1,4 +1,4 @@
-repo,path,sha,date_time,previous_content,content,levenshtein_distance
+repo,path,sha,date_time,previous_content,content,levenshtein_distance,bcompare
 librenms/librenms,SECURITY.md,ef8dd82bc942731a1744f8206b9db8cef7c9fac1,2021-12-03 14:06:33+00:00,,"# Security Policy
 
 ## Supported Versions
@@ -20,7 +20,7 @@ get back to as quick as we can, this is usually within 24 hours.
 We are happy to attribute credit to the findings, but we ask that we're
 given a chance to patch any vulnerability before public disclosure so
 that our users can update as soon as a fix is available.
-",887
+",887,b librenms/librenms ef8dd82bc942731a1744f8206b9db8cef7c9fac1
 librenms/librenms,SECURITY.md,9f0b1cafff69e1b81d5049896f50076545e8f5dc,2022-09-18 06:00:38+00:00,"# Security Policy
 
 ## Supported Versions
@@ -69,4 +69,4 @@ that our users can update as soon as a fix is available.
 
 If you discover a security vulnerability in librenms please disclose it via [our huntr page](https://huntr.dev/repos/librenms/librenms/). Bounty eligibility, CVE assignment, response times and past reports are all there.
 
-Thank you for improving the security of librenms.",302
+Thank you for improving the security of librenms.",302,b librenms/librenms 9f0b1cafff69e1b81d5049896f50076545e8f5dc
