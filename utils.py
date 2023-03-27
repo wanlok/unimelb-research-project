@@ -109,3 +109,11 @@ def get_csv_start_index(full_list, sub_list, number_of_matches):
 
 def sort_by_descending_values(input_dict):
     return dict(sorted(input_dict.items(), key=operator.itemgetter(1), reverse=True))
+
+
+def get_writer(file_path):
+    try:
+        file = open(file_path, mode='w', encoding='utf-8')
+    except Exception:
+        file = None
+    return file

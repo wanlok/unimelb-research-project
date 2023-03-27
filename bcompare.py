@@ -10,11 +10,11 @@ left_path = 'C:\\Files\\Projects\\unimelb-research-project\\left.txt'
 right_path = 'C:\\Files\\Projects\\unimelb-research-project\\right.txt'
 
 directory_paths = [
-    'C:\\Files\\Projects\\unimelb-research-project\\content\\',
+    # 'C:\\Files\\Projects\\unimelb-research-project\\content\\',
     'C:\\Files\\Projects\\unimelb-research-project\\data\\commits\\requirements_txt\\',
     'C:\\Files\\Projects\\unimelb-research-project\\data\\commits\\composer_json\\',
     'C:\\Files\\Projects\\unimelb-research-project\\data\\commits\\package_json\\',
-    'C:\\Files\\Projects\\unimelb-research-project\\data\\security\\'
+    'C:\\Files\\Projects\\unimelb-research-project\\data\\securities\\'
 ]
 
 

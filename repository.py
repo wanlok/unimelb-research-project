@@ -190,7 +190,7 @@ def get_commit_count(repo, start_date=None, end_date=None):
         until = datetime.strptime(end_date, '%Y%m%d')
         until = datetime(until.year, until.month, until.day, 23, 59, 59, 999999).strftime(date_time_format)
         until = f', until: \"{until}\"'
-    query = 'query {repository(owner: "{1}", name: "{2}") {defaultBranchRef {target {... on Commit {history(first: 1{3}{4}) {totalCount}}}}}}'
+    query = 'query{repository(owner:"{1}",name:"{2}"){defaultBranchRef{target{...on Commit{history(first:1{3}{4}){totalCount}}}}}}'
     query = query.replace('{1}', owner)
     query = query.replace('{2}', name)
     query = query.replace('{3}', since)
@@ -214,6 +214,23 @@ def get_repositories_by_owners(file_names):
     for key in my_dict:
         if len(my_dict[key]) > 1:
             print(f'{key} {my_dict[key]}')
+
+
+def create_deduplicated_repo_list():
+    repo_file_path = 'deduplicated_repo.csv'
+    repo_writer = csv_writer(repo_file_path, mode='w')
+    repo_reader = csv_reader(repo_file_path)
+    prepare_csv_file(repo_reader, repo_writer, ['repo'])
+    repo_list = []
+    i = 0
+    for repo in get_list():
+        key = repo.lower()
+        if key not in repo_list:
+            repo_writer.writerow([repo])
+            repo_list.append(key)
+        else:
+            i = i + 1
+            print(f'{i} {repo}')
 
 
 if __name__ == '__main__':
