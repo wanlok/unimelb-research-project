@@ -22,6 +22,21 @@ def get_list(repo, up_to_date='99999999'):
     return targets
 
 
+def is_exists(repo, up_to_date='99999999'):
+    exists = False
+    directory_path = f'C:\\Files\\Projects\\'
+    file_path = f'{directory_path}nvdcve.csv'
+    up_to_date = int(up_to_date)
+    i = 0
+    for row in csv_reader(file_path):
+        if i > 0:
+            if int(row[1]) <= up_to_date and repo.lower() in row[7].lower():
+                exists = True
+                break
+        i = i + 1
+    return exists
+
+
 if __name__ == '__main__':
     targets = []
     for file_name in os.listdir(directory_path):
