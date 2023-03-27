@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime
 
 from Levenshtein import distance
 from bs4 import BeautifulSoup
@@ -10,6 +11,38 @@ header = ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'le
 
 rate_limit = 60
 rate_limit_exceeded = 'rate limit exceeded'
+
+
+def get_content_by_month(directory_path, repo):
+    file_name = '_'.join(repo.split('/'))
+    file_path = f'{directory_path}{file_name}.csv'
+    my_dict = dict()
+    for row in csv_reader(file_path):
+        try:
+            key = int(datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S%z').strftime('%Y%m'))
+            if key in my_dict:
+                my_dict[key].append(row)
+            else:
+                my_dict[key] = [row]
+        except ValueError as e:
+            pass
+    return my_dict
+
+
+def get_content_by_day(directory_path, repo):
+    file_name = '_'.join(repo.split('/'))
+    file_path = f'{directory_path}{file_name}.csv'
+    my_dict = dict()
+    for row in csv_reader(file_path):
+        try:
+            key = int(datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S%z').strftime('%Y%m%d'))
+            if key in my_dict:
+                my_dict[key].append(row)
+            else:
+                my_dict[key] = [row]
+        except ValueError as e:
+            pass
+    return my_dict
 
 
 def write(repos, rows, error, file_path):
