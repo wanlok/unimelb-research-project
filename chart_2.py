@@ -49,8 +49,7 @@ if __name__ == '__main__':
     for repo in repository.get_list(334, 9999):
         print(repo)
         x_values, y_values = dummy_by_day(repo)
-        if len(x_values) == len(y_values) and len(x_values) > 0:
-            slices = repo.split('/')
-            file_name = '_'.join(slices)
-            # append_html(writer, number_of_rows, date_dict, file_name)
-            plot(repo, x_values, y_values, x_title, y_title, f'{chart_path}{file_name}.png')
+        slices = repo.split('/')
+        file_name = '_'.join(slices)
+        # append_html(writer, number_of_rows, date_dict, file_name)
+        plot(repo, x_values, y_values, x_title, y_title, f'{chart_path}{file_name}.png')

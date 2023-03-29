@@ -2,6 +2,7 @@ from math import floor, ceil
 
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib.ticker import MaxNLocator, MultipleLocator
 
 font_name = 'Times New Roman'
 font = {'fontname': font_name}
@@ -9,24 +10,35 @@ padding_1 = 16
 padding_2 = 24
 
 
+def scatter_plot(x_values, y_values, file_path):
+    if len(x_values) == len(y_values) and len(x_values) > 0:
+        ax = plt.figure().gca()
+        ax.xaxis.set_major_locator(MultipleLocator(1))
+        ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+        plt.scatter(x_values, y_values)
+        plt.savefig(file_path, dpi=300, bbox_inches='tight')
+        plt.close()
+
+
 def plot(title, x_values, y_values, x_title, y_title, file_path):
-    fig = plt.figure()
-    fig.set_size_inches(len(x_values) * 2, 8)
-    ax = plt.gca()
-    ax.tick_params(axis='x', pad=padding_1)
-    ax.tick_params(axis='y', pad=padding_1)
-    plt.bar(x_values, y_values, color='black', width=0.24)
-    plt.xticks(fontname=font_name)
-    plt.xlabel(x_title, fontdict=font, labelpad=padding_2)
-    plt.yticks(range(floor(min(y_values)), ceil(max(y_values)) + 1, 50), fontname=font_name)
-    plt.ylabel(y_title, fontdict=font, labelpad=padding_2)
-    plt.title(title, fontdict=font, pad=padding_2)
-    ax = plt.gca()
-    for i in range(len(y_values)):
-        rect = ax.patches[i]
-        ax.text(rect.get_x() + rect.get_width() / 2, y_values[i], f'{y_values[i]}\n', ha='center', fontdict=font)
-    plt.savefig(file_path, dpi=300, bbox_inches='tight')
-    plt.close()
+    if len(x_values) == len(y_values) and len(x_values) > 0:
+        fig = plt.figure()
+        fig.set_size_inches(len(x_values) * 2, 8)
+        ax = plt.gca()
+        ax.tick_params(axis='x', pad=padding_1)
+        ax.tick_params(axis='y', pad=padding_1)
+        plt.bar(x_values, y_values, color='black', width=0.24)
+        plt.xticks(fontname=font_name)
+        plt.xlabel(x_title, fontdict=font, labelpad=padding_2)
+        plt.yticks(range(floor(min(y_values)), ceil(max(y_values)) + 1, 50), fontname=font_name)
+        plt.ylabel(y_title, fontdict=font, labelpad=padding_2)
+        plt.title(title, fontdict=font, pad=padding_2)
+        ax = plt.gca()
+        for i in range(len(y_values)):
+            rect = ax.patches[i]
+            ax.text(rect.get_x() + rect.get_width() / 2, y_values[i], f'{y_values[i]}\n', ha='center', fontdict=font)
+        plt.savefig(file_path, dpi=300, bbox_inches='tight')
+        plt.close()
 
 
 def plot2(title, x, y, legends, colors, file_path):
