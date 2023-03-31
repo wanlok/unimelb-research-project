@@ -1,9 +1,12 @@
+import os
 import sys
 from datetime import datetime
 
 import requests
+from bs4 import BeautifulSoup
 
-from utils import csv_writer, csv_reader, prepare_csv_file, get_secret
+from security_md import get_non_empty_file_names
+from utils import csv_writer, csv_reader, prepare_csv_file, get_secret, get_start_and_end_date_string
 
 csv_header = ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'levenshtein_distance', 'bcompare']
 
@@ -136,6 +139,7 @@ query {
 }
 '''
 
+date_format = '%Y-%m-%d'
 date_time_format = '%Y-%m-%dT%H:%M:%SZ'
 
 
@@ -195,11 +199,207 @@ def get_commit_count(repo, start_date=None, end_date=None):
     query = query.replace('{2}', name)
     query = query.replace('{3}', since)
     query = query.replace('{4}', until)
+    print(query)
     json = requests.post('https://api.github.com/graphql', json={'query': query}, headers=headers).json()
     commit_count = 0
     if 'errors' not in json:
         commit_count = int(json['data']['repository']['defaultBranchRef']['target']['history']['totalCount'])
     return commit_count
+
+
+def get_issues(repo):
+    slices = repo.split('/')
+    owner = slices[0]
+    name = slices[1]
+    after = ''
+    query = 'query{repository(owner:\"{1}\",name:\"{2}\"){issues(first:100,states:OPEN{3}){edges{node{createdAt title body url}}pageInfo{hasNextPage endCursor}}}}'
+    query = query.replace('{1}', owner)
+    query = query.replace('{2}', name)
+    targets = []
+    has_next_page = True
+    while has_next_page:
+        q = query.replace('{3}', after)
+        print(q)
+        json = requests.post('https://api.github.com/graphql', json={'query': q}, headers=headers).json()
+        if 'errors' not in json:
+            issues = json['data']['repository']['issues']
+            for issue in issues['edges']:
+                issue = issue['node']
+                target = dict()
+                target['date_time'] = issue['createdAt']
+                target['title'] = issue['title']
+                target['body'] = issue['body']
+                target['url'] = issue['url']
+                targets.append(target)
+            page_info = issues['pageInfo']
+            has_next_page = bool(page_info['hasNextPage'])
+            cursor = page_info['endCursor']
+            after = f',after:\"{cursor}\"'
+    return targets
+
+
+def get_issue_count(repo, start_date=None, end_date=None):
+    created = ''
+    if start_date is not None and end_date is not None:
+        start = datetime.strptime(start_date, '%Y%m%d').strftime(date_format)
+        end = datetime.strptime(end_date, '%Y%m%d').strftime(date_format)
+        created = f' created:{start}..{end}'
+    query = 'query {search(query:"repo:{1} is:issue{2}",type:ISSUE){issueCount}}'
+    query = query.replace('{1}', repo)
+    query = query.replace('{2}', created)
+    print(query)
+    json = requests.post('https://api.github.com/graphql', json={'query': query}, headers=headers).json()
+    count = 0
+    if 'errors' not in json:
+        count = int(json['data']['search']['issueCount'])
+    else:
+        print(json)
+    return count
+
+
+
+
+
+
+def download_yearly_commits(year):
+    day = '{:02d}'.format(1)
+    file_names = get_non_empty_file_names()
+    repos = get_list()
+    for month in range(1, 13):
+        file_path = f'.\\data\\commits\\{year}\\{month}\\'
+        month = '{:02d}'.format(month)
+        start_date, end_date = get_start_and_end_date_string(f'{year}{month}{day}')
+        for file_name in file_names:
+            for repo in repos:
+                file_path_2 = f'{file_path}{file_name}'
+                if file_name.split('.')[0] == '_'.join(repo.split('/')):
+                    if not os.path.exists(file_path_2):
+                        print(file_path_2)
+                        writer = csv_writer(file_path_2, mode='w')
+                        prepare_csv_file(csv_reader(file_path_2), writer, ['date_time', 'message'])
+                        for commit_message in get_commit_messages(repo, start_date, end_date):
+                            writer.writerow([commit_message['date_time'], commit_message['message']])
+
+
+qqq = '''
+query {
+    securityAdvisories(first:100{1}) {
+        nodes {
+            ... on SecurityAdvisory {
+                publishedAt
+                references{
+                    url
+                }
+            }
+        }
+        pageInfo {
+            endCursor
+            hasNextPage
+        }
+    }
+}
+'''
+
+
+def download_security_advisories():
+    file_path = 'security_advisory.csv'
+    writer = csv_writer(file_path, mode='w')
+    reader = csv_reader(file_path)
+    rows = prepare_csv_file(reader, writer, ['ghsa_id', 'repo', 'date_time'])
+    after = ''
+    query = qqq
+    has_next_page = True
+    while has_next_page:
+        q = query.replace('{1}', after)
+        json = requests.post('https://api.github.com/graphql', json={'query': q}, headers=headers).json()
+        if 'errors' not in json:
+            security_advisories = json['data']['securityAdvisories']
+            for security_advisory in security_advisories['nodes']:
+                ghsa_id = None
+                repo = None
+                published_at = security_advisory['publishedAt']
+                for url in security_advisory['references']:
+                    url = url['url']
+                    if 'https://github.com/advisories/' in url:
+                        ghsa_id = url.replace('https://github.com/advisories/', '')
+                    elif 'https://github.com/' in url:
+                        slices = url.replace('https://github.com/', '').split('/')
+                        if len(slices) > 2:
+                            repo = f'{slices[0]}/{slices[1]}'
+                if ghsa_id is not None:
+                    if repo is None:
+                        repo = ''
+                    row = [ghsa_id, repo, published_at]
+                    if row not in rows:
+                        print(row)
+                        writer.writerow(row)
+            page_info = security_advisories['pageInfo']
+            has_next_page = bool(page_info['hasNextPage'])
+            cursor = page_info['endCursor']
+            after = f',after:\"{cursor}\"'
+
+
+def get_security_advisories(repo, start_date=None, end_date=None):
+    rows = []
+    file_path = 'security_advisory.csv'
+    if start_date is not None and end_date is not None:
+        start = datetime.strptime(start_date, '%Y%m%d')
+        end = datetime.strptime(end_date, '%Y%m%d')
+        end = datetime(end.year, end.month, end.day, 23, 59, 59, 999999)
+        for row in csv_reader(file_path):
+            if row[1] == repo:
+                date_time = datetime.strptime(row[2], '%Y-%m-%dT%H:%M:%SZ')
+                # print(f'{start} < {date_time} < {end}')
+                if start < date_time < end:
+                    rows.append(row)
+    else:
+        for row in csv_reader(file_path):
+            if row[1] == repo:
+                rows.append(row)
+    return rows
+
+
+def get_email_statistics(repo, start_date, end_date):
+    slices = repo.split('/')
+    owner = slices[0]
+    name = slices[1]
+    # file_path = 'security_advisory.csv'
+    # writer = csv_writer(file_path, mode='w')
+    # reader = csv_reader(file_path)
+    # rows = prepare_csv_file(reader, writer, ['ghsa_id', 'repo', 'date_time'])
+    after = ''
+    query = 'query{repository(owner:\"{1}\",name:\"{2}\"){defaultBranchRef{target{... on Commit{history(first:100,since:\"{3}\",until:\"{4}\"{5}){edges{node{author{email}}}pageInfo{endCursor hasNextPage}}}}}}}'
+    query = query.replace('{1}', owner)
+    query = query.replace('{2}', name)
+    query = query.replace('{3}', f'{start_date}')
+    query = query.replace('{4}', f'{end_date}')
+    email_dict = dict()
+    domain_dict = dict()
+    has_next_page = True
+    while has_next_page:
+        q = query.replace('{5}', after)
+        print(q)
+        json = requests.post('https://api.github.com/graphql', json={'query': q}, headers=headers).json()
+        if 'errors' not in json:
+            history = json['data']['repository']['defaultBranchRef']['target']['history']
+            commits = history['edges']
+            for commit in commits:
+                commit = commit['node']
+                email = commit['author']['email']
+                if email in email_dict:
+                    email_dict[email] = email_dict[email] + 1
+                else:
+                    email_dict[email] = 1
+                domain = email[email.index('@') + 1:]
+                if domain in domain_dict:
+                    domain_dict[domain] = domain_dict[domain] + 1
+                else:
+                    domain_dict[domain] = 1
+            page_info = history['pageInfo']
+            has_next_page = bool(page_info['hasNextPage'])
+            cursor = page_info['endCursor']
+            after = f',after:\"{cursor}\"'
+    return email_dict, domain_dict
 
 
 def get_repositories_by_owners(file_names):
