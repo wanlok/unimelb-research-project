@@ -2,7 +2,10 @@ import csv
 import json
 import operator
 import sys
+from datetime import datetime, timedelta
 from urllib.request import Request, urlopen
+
+from dateutil.relativedelta import relativedelta
 
 
 def get_file_json(file_path):
@@ -117,3 +120,28 @@ def get_writer(file_path):
     except Exception:
         file = None
     return file
+
+
+def get_start_and_end_date_string(date_string, output_format='%Y%m%d'):
+    date = datetime.strptime(date_string, '%Y%m%d')
+    year = date.year
+    month = date.month
+    month_string = '{:02d}'.format(month)
+    start_date = datetime.strptime(f'{year}{month_string}01', '%Y%m%d').strftime(output_format)
+    if month == 12:
+        year = year + 1
+        month = 1
+    else:
+        month = month + 1
+    month_string = '{:02d}'.format(month)
+    end_date = (datetime.strptime(f'{year}{month_string}01', '%Y%m%d') - timedelta(days=1)).strftime(output_format)
+    return start_date, end_date
+
+
+def get_start_and_end_date_string_before_date_minus_days(date, days, format):
+    date = datetime(date.year, date.month, date.day, 0, 0, 0, 0)
+    end_date = date - relativedelta(days=1)
+    start_date = date - relativedelta(days=days)
+    start_date = start_date.strftime(format)
+    end_date = end_date.strftime(format)
+    return start_date, end_date
