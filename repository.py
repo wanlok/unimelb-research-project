@@ -1,9 +1,11 @@
 import os
 import sys
 from datetime import datetime
+from os.path import exists
 
 import requests
 from bs4 import BeautifulSoup
+from dateutil import parser
 
 from security_md import get_non_empty_file_names
 from utils import csv_writer, csv_reader, prepare_csv_file, get_secret, get_start_and_end_date_string
@@ -207,6 +209,31 @@ def get_commit_count(repo, start_date=None, end_date=None):
     return commit_count
 
 
+def get_monthly_commit_statistics(repo, start_date=None, end_date=None):
+    commit_dict = dict()
+    directory_path = '.\\data\\commits\\'
+    file_name = '_'.join(repo.split('/'))
+    if start_date is not None and end_date is not None:
+        start_date = datetime.strptime(start_date, '%Y%m%d')
+        end_date = datetime.strptime(end_date, '%Y%m%d')
+        end_date = datetime(end_date.year, end_date.month, end_date.day, 23, 59, 59, 999999)
+        for year in range(start_date.year, end_date.year + 1):
+            if year == end_date.year:
+                end_month = end_date.month
+            else:
+                end_month = 12
+            for month in range(1, end_month + 1):
+                file_path = f'{directory_path}{year}\\{month}\\{file_name}.csv'
+                if exists(file_path):
+                    number_of_commits = -1
+                    for _ in csv_reader(file_path):
+                        number_of_commits = number_of_commits + 1
+                    month = '{:02d}'.format(month)
+                    commit_dict[f'{year}{month}'] = number_of_commits
+    return commit_dict
+
+
+
 def get_issues(repo):
     slices = repo.split('/')
     owner = slices[0]
@@ -257,10 +284,6 @@ def get_issue_count(repo, start_date=None, end_date=None):
     return count
 
 
-
-
-
-
 def download_yearly_commits(year):
     day = '{:02d}'.format(1)
     file_names = get_non_empty_file_names()
@@ -274,11 +297,49 @@ def download_yearly_commits(year):
                 file_path_2 = f'{file_path}{file_name}'
                 if file_name.split('.')[0] == '_'.join(repo.split('/')):
                     if not os.path.exists(file_path_2):
-                        print(file_path_2)
+                        print(f'{year}{month} {file_path_2}')
+                        rows = []
+                        for commit_message in get_commit_messages(repo, start_date, end_date):
+                            row = [commit_message['date_time'], commit_message['message']]
+                            if row not in rows:
+                                index = len(rows)
+                                for i in range(len(rows)):
+                                    if parser.parse(row[0]) < parser.parse(rows[i][0]):
+                                        index = i
+                                        break
+                                rows.insert(index, row)
                         writer = csv_writer(file_path_2, mode='w')
                         prepare_csv_file(csv_reader(file_path_2), writer, ['date_time', 'message'])
-                        for commit_message in get_commit_messages(repo, start_date, end_date):
-                            writer.writerow([commit_message['date_time'], commit_message['message']])
+                        for row in rows:
+                            writer.writerow(row)
+
+
+def download_yearly_issue_counts(year):
+    day = '{:02d}'.format(1)
+    query = 'i{1}:search(query:"repo:{2} is:issue created:{3}..{4}",type:ISSUE){issueCount}'
+    file_path = f'.\\data\\issues\\statistics.csv'
+    writer = csv_writer(file_path, mode='w')
+    prepare_csv_file(csv_reader(file_path), writer, ['repo', 'date', 'count'])
+    for file_name in get_non_empty_file_names():
+        for repo in get_list():
+            if file_name.split('.')[0] == '_'.join(repo.split('/')):
+                print(repo)
+                my_list = []
+                for month in range(1, 13):
+                    month = '{:02d}'.format(month)
+                    start_date, end_date = get_start_and_end_date_string(f'{year}{month}{day}', '%Y-%m-%d')
+                    q = query
+                    q = q.replace('{1}', f'{year}{month}')
+                    q = q.replace('{2}', repo)
+                    q = q.replace('{3}', start_date)
+                    q = q.replace('{4}', end_date)
+                    my_list.append(q)
+                q = ','.join(my_list)
+                q = f'query{{{q}}}'
+                json = requests.post('https://api.github.com/graphql', json={'query': q}, headers=headers).json()
+                for key in json['data']:
+                    row = [repo, key[1:], int(json['data'][key]['issueCount'])]
+                    writer.writerow(row)
 
 
 qqq = '''
