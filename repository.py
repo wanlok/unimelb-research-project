@@ -126,8 +126,12 @@ query {
                 ... on Commit {
                     history(first: 100{3}{4}{5}) {
                         nodes {
+                            oid
                             committedDate
                             message
+                            author {
+                                email
+                            }
                         }
                         pageInfo {
                             endCursor
@@ -173,8 +177,10 @@ def get_commit_messages(repo, start_date=None, end_date=None):
             branch = json['data']['repository']['defaultBranchRef']['target']['history']
             for commit in branch['nodes']:
                 target = dict()
+                target['sha'] = commit['oid']
                 target['date_time'] = commit['committedDate']
                 target['message'] = commit['message']
+                target['email'] = commit['author']['email']
                 targets.append(target)
             page_info = branch['pageInfo']
             has_next_page = bool(page_info['hasNextPage'])
@@ -233,6 +239,16 @@ def get_monthly_commit_statistics(repo, start_date=None, end_date=None):
     return commit_dict
 
 
+def get_issue_count(repo, start_date, end_date):
+    count = 0
+    file_path = f'.\\data\\issues\\statistics.csv'
+    start_date = int(datetime.strptime(start_date, '%Y%m%d').strftime('%Y%m'))
+    end_date = int(datetime.strptime(end_date, '%Y%m%d').strftime('%Y%m'))
+    for row in csv_reader(file_path):
+        if repo == row[0] and start_date <= int(row[1]) <= end_date:
+            count = count + int(row[2])
+    return count
+
 
 def get_issues(repo):
     slices = repo.split('/')
@@ -265,25 +281,6 @@ def get_issues(repo):
     return targets
 
 
-def get_issue_count(repo, start_date=None, end_date=None):
-    created = ''
-    if start_date is not None and end_date is not None:
-        start = datetime.strptime(start_date, '%Y%m%d').strftime(date_format)
-        end = datetime.strptime(end_date, '%Y%m%d').strftime(date_format)
-        created = f' created:{start}..{end}'
-    query = 'query {search(query:"repo:{1} is:issue{2}",type:ISSUE){issueCount}}'
-    query = query.replace('{1}', repo)
-    query = query.replace('{2}', created)
-    print(query)
-    json = requests.post('https://api.github.com/graphql', json={'query': query}, headers=headers).json()
-    count = 0
-    if 'errors' not in json:
-        count = int(json['data']['search']['issueCount'])
-    else:
-        print(json)
-    return count
-
-
 def download_yearly_commits(year):
     day = '{:02d}'.format(1)
     file_names = get_non_empty_file_names()
@@ -300,16 +297,16 @@ def download_yearly_commits(year):
                         print(f'{year}{month} {file_path_2}')
                         rows = []
                         for commit_message in get_commit_messages(repo, start_date, end_date):
-                            row = [commit_message['date_time'], commit_message['message']]
+                            row = [commit_message['sha'], commit_message['date_time'], commit_message['message'], commit_message['email']]
                             if row not in rows:
                                 index = len(rows)
                                 for i in range(len(rows)):
-                                    if parser.parse(row[0]) < parser.parse(rows[i][0]):
+                                    if parser.parse(row[1]) < parser.parse(rows[i][1]):
                                         index = i
                                         break
                                 rows.insert(index, row)
                         writer = csv_writer(file_path_2, mode='w')
-                        prepare_csv_file(csv_reader(file_path_2), writer, ['date_time', 'message'])
+                        prepare_csv_file(csv_reader(file_path_2), writer, ['sha', 'date_time', 'message', 'email'])
                         for row in rows:
                             writer.writerow(row)
 
