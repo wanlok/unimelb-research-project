@@ -8,15 +8,16 @@ from utils import csv_writer, csv_reader, prepare_csv_file
 directory_path = 'C:\\Files\\Projects\\nvdcve\\'
 
 
-def get_list(repo, up_to_date='99999999'):
+def get_list(repo, start_date=0, end_date='99999999'):
     targets = []
     directory_path = f'C:\\Files\\Projects\\'
     file_path = f'{directory_path}nvdcve.csv'
-    up_to_date = int(up_to_date)
+    start_date = int(start_date)
+    end_date = int(end_date)
     i = 0
     for row in csv_reader(file_path):
         if i > 0:
-            if int(row[1]) <= up_to_date and repo.lower() in row[7].lower():
+            if repo.lower() in row[7].lower() and start_date <= int(row[1]) <= end_date:
                 targets.append(row)
         i = i + 1
     return targets

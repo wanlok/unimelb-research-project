@@ -1,21 +1,133 @@
+from datetime import datetime
 from math import floor, ceil
+from os.path import exists
+from statistics import mean, stdev
 
+import numpy
 import numpy as np
+import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator, MultipleLocator
+from scipy.stats import norm
+
+from repository import get_list, get_monthly_commit_statistics
+from security_md import get_date_statistics
 
 font_name = 'Times New Roman'
 font = {'fontname': font_name}
-padding_1 = 16
-padding_2 = 24
+padding_1 = 8
+padding_2 = 16
+padding_3 = 24
+
+security_md_directory_path = f'C:\\Files\\Projects\\wanlok.github.io\\research\\data\\securities\\'
 
 
-def scatter_plot(x_values, y_values, file_path):
+def security_dummy(start_date, end_date, y_function):
+    x_title = f'Number of SECURITY.md Commits'
+    x_all_values = []
+    y_all_values = []
+    i = 0
+
+    repos = get_list()
+    print(len(repos))
+
+    for repo in get_list(10):
+        file_name = '_'.join(repo.split('/'))
+        file_path = f'{security_md_directory_path}{file_name}.csv'
+        if exists(file_path):
+            _, date_dict = get_date_statistics(file_path, start_date, end_date)
+            # commit_dict = get_monthly_commit_statistics(repo, start_date, end_date)
+            number_of_security_md_commits = sum(date_dict.values())
+            # number_of_commits = sum(commit_dict.values())
+            # if number_of_security_md_commits > 0 and number_of_commits > 0:
+            #     print(f'{repo} Number of SECURITY.md Commits: {number_of_security_md_commits}, Number of Commits: {number_of_commits}')
+            x_all_values.append(number_of_security_md_commits)
+
+    # x_all_values = numpy.array(x_all_values)
+    # print(x_all_values)
+    mean_val = mean(x_all_values)
+    print(x_all_values)
+    print(mean_val)
+    sd_val = stdev(x_all_values)
+
+    plt.hist(x_all_values, bins=max(x_all_values), density=True)
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.title('Normal Distribution Curve')
+
+    plt.axvline(mean_val, color='red', linestyle='dashed', linewidth=2)
+    plt.axvline(mean_val - sd_val, color='green', linestyle='dashed', linewidth=2)
+    plt.axvline(mean_val + sd_val, color='green', linestyle='dashed', linewidth=2)
+
+    plt.show()
+
+
+def security_md_plot(start_date, end_date, y_function, title, y_title, save_file_path):
+    x_title = f'Number of SECURITY.md Commits'
+    x_values = []
+    y_values = []
+    for repo in get_list():
+        file_name = '_'.join(repo.split('/'))
+        file_path = f'{security_md_directory_path}{file_name}.csv'
+        if exists(file_path):
+            x_value = sum(get_date_statistics(file_path, start_date, end_date)[1].values())
+            y_value = y_function(repo, start_date, end_date)
+            print(f'{repo} {x_value} {y_value}')
+            x_values.append(x_value)
+            y_values.append(y_value)
+    scatter_plot(x_values, y_values, title, x_title, y_title, save_file_path)
+
+
+def security_md_by_date_plot(date_function, y_function, y_title, chart_directory_path):
+    number_of_days_before = 100
+    x_title = f'SECURITY.md Update Dates (Number of Updates)'
+    y_title = y_title.replace('{}', f'{number_of_days_before}')
+    x_all_values = []
+    y_all_values = []
+    for repo in get_list(200):
+        file_name = '_'.join(repo.split('/'))
+        file_path = f'{security_md_directory_path}{file_name}.csv'
+        if exists(file_path):
+            print(repo)
+            x_values = []
+            y_values = []
+            date_list, date_dict = get_date_statistics(file_path)
+            for date in date_list:
+                start_date, end_date = date_function(datetime.strptime(date, '%Y%m%d'), number_of_days_before, '%Y%m%d')
+                number_of_security_md_commits = date_dict[date]
+                x_values.append(f'{date} ({number_of_security_md_commits})')
+                x_all_values.append(number_of_security_md_commits)
+                y_values.append(len(y_function(repo, start_date, end_date)))
+            y_all_values.extend(y_values)
+            plot(repo, x_values, y_values, x_title, y_title, f'{chart_directory_path}{file_name}.png')
+    scatter_plot(x_all_values, y_all_values, '', '', '', f'{chart_directory_path}distribution.png')
+
+
+def scatter_plot(x_values, y_values, title, x_title, y_title, file_path):
+    # print(f'validate: {len(x_values) * 2}')
     if len(x_values) == len(y_values) and len(x_values) > 0:
-        ax = plt.figure().gca()
+        fig = plt.figure()
+        h = 8
+        fig.set_size_inches(max(x_values) * 0.5, h)
+        ax = fig.gca()
+        ax.tick_params(axis='x', pad=padding_1)
+        ax.tick_params(axis='y', pad=padding_1)
         ax.xaxis.set_major_locator(MultipleLocator(1))
         ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-        plt.scatter(x_values, y_values)
+        # ax.margins(x=0.1, y=0.1)
+        plt.scatter(x_values, y_values, color='black')
+        if max(y_values) <= h:
+            dummy = 1
+        else:
+            dummy = int(max(y_values) / h)
+        print(ceil(max(y_values)))
+        plt.yticks(range(floor(min(y_values)), ceil(max(y_values)), dummy), fontname=font_name)
+        plt.ylabel(y_title, fontdict=font, labelpad=padding_2)
+        plt.title(title, fontdict=font, pad=padding_3)
+        plt.xlim(0, max(x_values))
+        plt.ylim(0, max(y_values))
+        plt.xticks(fontname=font_name)
+        plt.xlabel(x_title, fontdict=font, labelpad=padding_2)
         plt.savefig(file_path, dpi=300, bbox_inches='tight')
         plt.close()
 
@@ -23,16 +135,22 @@ def scatter_plot(x_values, y_values, file_path):
 def plot(title, x_values, y_values, x_title, y_title, file_path):
     if len(x_values) == len(y_values) and len(x_values) > 0:
         fig = plt.figure()
-        fig.set_size_inches(len(x_values) * 2, 8)
+        h = 8
+        fig.set_size_inches(len(x_values) * 2, h)
         ax = plt.gca()
-        ax.tick_params(axis='x', pad=padding_1)
-        ax.tick_params(axis='y', pad=padding_1)
+        ax.tick_params(axis='x', pad=padding_2)
+        ax.tick_params(axis='y', pad=padding_2)
         plt.bar(x_values, y_values, color='black', width=0.24)
+        # plt.xticks(fontname=font_name, rotation=45)
         plt.xticks(fontname=font_name)
-        plt.xlabel(x_title, fontdict=font, labelpad=padding_2)
-        plt.yticks(range(floor(min(y_values)), ceil(max(y_values)) + 1, 50), fontname=font_name)
-        plt.ylabel(y_title, fontdict=font, labelpad=padding_2)
-        plt.title(title, fontdict=font, pad=padding_2)
+        plt.xlabel(x_title, fontdict=font, labelpad=padding_3)
+        if max(y_values) <= h:
+            dummy = 1
+        else:
+            dummy = int(max(y_values) / h)
+        plt.yticks(range(floor(min(y_values)), ceil(max(y_values)) + 1, dummy), fontname=font_name)
+        plt.ylabel(y_title, fontdict=font, labelpad=padding_3)
+        plt.title(title, fontdict=font, pad=padding_3)
         ax = plt.gca()
         for i in range(len(y_values)):
             rect = ax.patches[i]
@@ -66,9 +184,9 @@ def plot2(title, x, y, legends, colors, file_path):
         ax.bar_label(container, labels=labels, label_type='center', **font)
     plt.xticks(font=font_name)
     plt.yticks(font=font_name)
-    ax.tick_params(axis='x', pad=padding_1)
-    ax.tick_params(axis='y', pad=padding_1)
-    plt.title(title, fontdict=font, pad=padding_1)
+    ax.tick_params(axis='x', pad=padding_2)
+    ax.tick_params(axis='y', pad=padding_2)
+    plt.title(title, fontdict=font, pad=padding_2)
     plt.setp(ax.legend(loc='upper left').texts, family=font_name)
     ax.set_ylim([0, length])
     plt.savefig(file_path, dpi=300, bbox_inches='tight')

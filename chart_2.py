@@ -1,10 +1,12 @@
+import os
 import sys
 from datetime import datetime, timedelta
 
 import commit_history
 import repository
-from chart import plot
-
+from chart import plot, scatter_plot
+from security_md import get_date_statistics
+from utils import get_start_and_end_date_string_before_date_minus_days
 
 markdown_path = f'C:\\Files\\Projects\\wanlok.github.io\\research\\data\\securities\\'
 chart_path = 'C:\\Files\\Projects\\wanlok.github.io\\research\\charts\\2\\'
@@ -44,12 +46,26 @@ def dummy_by_day(repo):
 
 
 if __name__ == '__main__':
-    x_title = 'SECURITY.md Update Dates (Number of Updates)'
-    y_title = 'Number of Commits'
-    for repo in repository.get_list(334, 9999):
-        print(repo)
-        x_values, y_values = dummy_by_day(repo)
+    number_of_days_before = 100
+    x_title = "SECURITY.md Update Dates (Number of Updates)"
+    y_title = f"Number of Commits {number_of_days_before} Days Before"
+    x_all_values = []
+    y_all_values = []
+    for repo in repository.get_list(200):
         slices = repo.split('/')
         file_name = '_'.join(slices)
-        # append_html(writer, number_of_rows, date_dict, file_name)
-        plot(repo, x_values, y_values, x_title, y_title, f'{chart_path}{file_name}.png')
+        file_path = f'{markdown_path}{file_name}.csv'
+        if os.path.exists(file_path):
+            print(repo)
+            x_values = []
+            y_values = []
+            date_list, date_dict = get_date_statistics(file_path)
+            for date in date_list:
+                start_date, end_date = get_start_and_end_date_string_before_date_minus_days(datetime.strptime(date, '%Y%m%d'), number_of_days_before, '%Y%m%d')
+                number_of_security_md_commits = date_dict[date]
+                x_values.append(f'{date} ({number_of_security_md_commits})')
+                x_all_values.append(number_of_security_md_commits)
+                y_values.append(repository.get_commit_count(repo, start_date, end_date))
+            y_all_values.extend(y_values)
+            plot(repo, x_values, y_values, x_title, y_title, f'{chart_path}{file_name}.png')
+    scatter_plot(x_all_values, y_all_values, f'{chart_path}distribution.png')
