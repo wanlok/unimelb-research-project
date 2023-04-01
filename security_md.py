@@ -1,5 +1,6 @@
 import os.path
 import sys
+from datetime import datetime
 
 import commit_history
 import repository
@@ -25,6 +26,50 @@ def get_non_empty_file_names():
     return file_names
 
 
+def security_md_changed_file_names():
+    my_dict = dict()
+    for file_name in os.listdir(directory_path):
+        slices = file_name.split('.')
+        if slices[len(slices) - 1] == 'csv':
+            i = 0
+            for row in csv_reader(f'{directory_path}{file_name}', encoding='latin-1'):
+                if i > 0:
+                    if file_name in my_dict:
+                        my_dict[file_name].add(row[0])
+                    else:
+                        my_set = set()
+                        my_set.add(row[0])
+                        my_dict[file_name] = my_set
+                i = i + 1
+    for key in my_dict:
+        list = my_dict[key]
+        if len(list) > 1:
+            print(f'{key} {my_dict[key]}')
+
+
+def get_date_statistics(file_path, start_date=None, end_date=None):
+    date_list = []
+    date_dict = dict()
+    if start_date is not None:
+        start_date = int(start_date)
+    if end_date is not None:
+        end_date = int(end_date)
+    for row in csv_reader(file_path):
+        try:
+            date = int(datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S%z').strftime('%Y%m%d'))
+            if start_date is not None and end_date is not None:
+                if date < start_date or date > end_date:
+                    continue
+            if date in date_dict:
+                date_dict[date] = date_dict[date] + 1
+            else:
+                date_list.append(date)
+                date_dict[date] = 1
+        except ValueError:
+            pass
+    return date_list, date_dict
+
+
 def download(repo, lower_case, directory_path, replace):
     slices = repo.split('/')
     repos = [repo, f'{slices[0]}/.github']
@@ -47,9 +92,10 @@ if __name__ == '__main__':
         api_count = 0
         repos = repository.get_list()
         for repo in repos:
-            api_count = api_count + download(repo, lower_case, f'{directory_path}{{}}.csv', False)
-            if api_count >= commit_history.rate_limit:
-                break
+            download(repo, lower_case, f'{directory_path}{{}}.csv', False)
+            # api_count = api_count + download(repo, lower_case, f'{directory_path}{{}}.csv', False)
+            # if api_count >= commit_history.rate_limit:
+            #     break
     elif '/' in sys.argv[1]:
         lower_case = len(sys.argv) > 2 and sys.argv[2] == 'l'
         download(sys.argv[1], lower_case, f'{directory_path}{{}}.csv', True)
