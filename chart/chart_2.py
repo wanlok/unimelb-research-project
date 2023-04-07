@@ -13,7 +13,7 @@ chart_path = 'C:\\Files\\Projects\\wanlok.github.io\\research\\charts\\2\\'
 
 
 def dummy_by_month(repo):
-    my_dict = commit_history.get_content_by_month('./data/securities/', repo)
+    my_dict = commit_history.get_content_by_month('../data/securities/', repo)
     keys = list(my_dict.keys())
     keys.sort()
     for key in keys:
@@ -33,7 +33,7 @@ def dummy_by_month(repo):
 
 
 def dummy_by_day(repo):
-    my_dict = commit_history.get_content_by_day('./data/securities/', repo)
+    my_dict = commit_history.get_content_by_day('../data/securities/', repo)
     keys = list(my_dict.keys())
     keys.sort()
     x = []

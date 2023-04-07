@@ -3,14 +3,13 @@ from math import floor, ceil
 from os.path import exists
 from statistics import mean, stdev
 
-import numpy
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator, MultipleLocator
-from scipy.stats import norm
+from scipy.stats import pearsonr
 
-from repository import get_list, get_monthly_commit_statistics
+from repository import get_list
 from security_md import get_date_statistics
 
 font_name = 'Times New Roman'
@@ -76,6 +75,8 @@ def security_md_plot(start_date, end_date, y_function, title, y_title, save_file
             x_values.append(x_value)
             y_values.append(y_value)
     scatter_plot(x_values, y_values, title, x_title, y_title, save_file_path)
+    correlation_coefficient, p_value = pearsonr(x_values, y_values)
+    print(f'{correlation_coefficient} {p_value}')
 
 
 def security_md_by_date_plot(date_function, y_function, y_title, chart_directory_path):
@@ -84,7 +85,7 @@ def security_md_by_date_plot(date_function, y_function, y_title, chart_directory
     y_title = y_title.replace('{}', f'{number_of_days_before}')
     x_all_values = []
     y_all_values = []
-    for repo in get_list(200):
+    for repo in get_list(2):
         file_name = '_'.join(repo.split('/'))
         file_path = f'{security_md_directory_path}{file_name}.csv'
         if exists(file_path):
@@ -92,15 +93,32 @@ def security_md_by_date_plot(date_function, y_function, y_title, chart_directory
             x_values = []
             y_values = []
             date_list, date_dict = get_date_statistics(file_path)
-            for date in date_list:
-                start_date, end_date = date_function(datetime.strptime(date, '%Y%m%d'), number_of_days_before, '%Y%m%d')
-                number_of_security_md_commits = date_dict[date]
-                x_values.append(f'{date} ({number_of_security_md_commits})')
-                x_all_values.append(number_of_security_md_commits)
-                y_values.append(len(y_function(repo, start_date, end_date)))
-            y_all_values.extend(y_values)
-            plot(repo, x_values, y_values, x_title, y_title, f'{chart_directory_path}{file_name}.png')
-    scatter_plot(x_all_values, y_all_values, '', '', '', f'{chart_directory_path}distribution.png')
+            # for date in date_list:
+            #     print(date)
+
+            if len(date_list) > 0:
+                start = datetime.strptime(f'{min(date_list)}', '%Y%m%d').strftime('%m/%d/%Y')
+                end = datetime.strptime(f'{max(date_list)}', '%Y%m%d').strftime('%m/%d/%Y')
+                date_range = pd.date_range(start=start, end=end, freq='D')
+                i = 0
+                for date in date_range:
+                    i = i + 1
+                    print(f'{i} {date}')
+                # data = {'datatime': pd.date_range(start=start, end=end, freq='D'),
+                #         'dummy': []}
+
+
+
+                # start_date, end_date = date_function(datetime.strptime(f'{date}', '%Y%m%d'), number_of_days_before, '%Y%m%d')
+
+                # number_of_security_md_commits = date_dict[date]
+                # print(number_of_security_md_commits)
+                # x_values.append(f'{date} ({number_of_security_md_commits})')
+                # x_all_values.append(number_of_security_md_commits)
+                # y_values.append(y_function(repo, start_date, end_date))
+    #         y_all_values.extend(y_values)
+    #         plot(repo, x_values, y_values, x_title, y_title, f'{chart_directory_path}{file_name}.png')
+    # scatter_plot(x_all_values, y_all_values, '', '', '', f'{chart_directory_path}distribution.png')
 
 
 def scatter_plot(x_values, y_values, title, x_title, y_title, file_path):
@@ -120,7 +138,6 @@ def scatter_plot(x_values, y_values, title, x_title, y_title, file_path):
             dummy = 1
         else:
             dummy = int(max(y_values) / h)
-        print(ceil(max(y_values)))
         plt.yticks(range(floor(min(y_values)), ceil(max(y_values)), dummy), fontname=font_name)
         plt.ylabel(y_title, fontdict=font, labelpad=padding_2)
         plt.title(title, fontdict=font, pad=padding_3)
