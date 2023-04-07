@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import repository
-from chart.chart import plot
+from chart import plot
 from security_md import get_date_statistics
 
 security_md_directory_path = f'C:\\Files\\Projects\\wanlok.github.io\\research\\data\\securities\\'

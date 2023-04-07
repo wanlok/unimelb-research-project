@@ -5,7 +5,7 @@ import nvdcve
 import repository
 from chart import plot, scatter_plot
 from security_md import get_date_statistics
-from utils import csv_reader, get_writer, get_start_and_end_date_string_before_date_minus_days
+from utils import csv_reader, get_start_and_end_date_string_before_date_minus_days
 
 markdown_path = f'C:\\Files\\Projects\\wanlok.github.io\\research\\data\\securities\\'
 chart_path = 'C:\\Files\\Projects\\wanlok.github.io\\research\\charts\\1\\'
