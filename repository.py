@@ -7,8 +7,11 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil import parser
 
+import security_md
 from security_md import get_non_empty_file_names
 from utils import csv_writer, csv_reader, prepare_csv_file, get_secret, get_start_and_end_date_string
+
+graphql = 'https://api.github.com/graphql'
 
 csv_header = ['repo', 'path', 'sha', 'date_time', 'previous_content', 'content', 'levenshtein_distance', 'bcompare']
 
@@ -311,14 +314,42 @@ def download_yearly_commits(year):
                             writer.writerow(row)
 
 
-def download_yearly_issue_counts(year):
+def get_issue_count_2(repo, date):
     day = '{:02d}'.format(1)
     query = 'i{1}:search(query:"repo:{2} is:issue created:{3}..{4}",type:ISSUE){issueCount}'
-    file_path = f'.\\data\\issues\\statistics.csv'
+    file_path = f'.\\data\\issues\\{year}.csv'
     writer = csv_writer(file_path, mode='w')
     prepare_csv_file(csv_reader(file_path), writer, ['repo', 'date', 'count'])
     for file_name in get_non_empty_file_names():
-        for repo in get_list():
+        for repo in get_list(2):
+            if file_name.split('.')[0] == '_'.join(repo.split('/')):
+                print(repo)
+                my_list = []
+                for month in range(1, 13):
+                    month = '{:02d}'.format(month)
+                    start_date, end_date = get_start_and_end_date_string(f'{year}{month}{day}', '%Y-%m-%d')
+                    q = query
+                    q = q.replace('{1}', f'{year}{month}')
+                    q = q.replace('{2}', repo)
+                    q = q.replace('{3}', start_date)
+                    q = q.replace('{4}', end_date)
+                    my_list.append(q)
+                q = ','.join(my_list)
+                q = f'query{{{q}}}'
+                json = requests.post('https://api.github.com/graphql', json={'query': q}, headers=headers).json()
+                for key in json['data']:
+                    row = [repo, key[1:], int(json['data'][key]['issueCount'])]
+                    writer.writerow(row)
+
+
+def download_yearly_issue_counts(year):
+    day = '{:02d}'.format(1)
+    query = 'i{1}:search(query:"repo:{2} is:issue created:{3}..{4}",type:ISSUE){issueCount}'
+    file_path = f'.\\data\\issues\\{year}.csv'
+    writer = csv_writer(file_path, mode='w')
+    prepare_csv_file(csv_reader(file_path), writer, ['repo', 'date', 'count'])
+    for file_name in get_non_empty_file_names():
+        for repo in get_list(2):
             if file_name.split('.')[0] == '_'.join(repo.split('/')):
                 print(repo)
                 my_list = []
@@ -344,6 +375,7 @@ query {
     securityAdvisories(first:100{1}) {
         nodes {
             ... on SecurityAdvisory {
+                ghsaId
                 publishedAt
                 references{
                     url
@@ -373,28 +405,31 @@ def download_security_advisories():
         if 'errors' not in json:
             security_advisories = json['data']['securityAdvisories']
             for security_advisory in security_advisories['nodes']:
-                ghsa_id = None
+                ghsa_id = security_advisory['ghsaId']
                 repo = None
                 published_at = security_advisory['publishedAt']
                 for url in security_advisory['references']:
                     url = url['url']
                     if 'https://github.com/advisories/' in url:
-                        ghsa_id = url.replace('https://github.com/advisories/', '')
+                        pass
                     elif 'https://github.com/' in url:
                         slices = url.replace('https://github.com/', '').split('/')
                         if len(slices) > 2:
                             repo = f'{slices[0]}/{slices[1]}'
-                if ghsa_id is not None:
-                    if repo is None:
-                        repo = ''
-                    row = [ghsa_id, repo, published_at]
-                    if row not in rows:
-                        print(row)
-                        writer.writerow(row)
+                if repo is None:
+                    repo = ''
+                row = [ghsa_id, repo, published_at]
+                if row not in rows:
+                    print(row)
+                    writer.writerow(row)
             page_info = security_advisories['pageInfo']
             has_next_page = bool(page_info['hasNextPage'])
             cursor = page_info['endCursor']
             after = f',after:\"{cursor}\"'
+
+
+def download_categories():
+    print('Hello World')
 
 
 def get_security_advisories(repo, start_date=None, end_date=None):
@@ -489,6 +524,115 @@ def create_deduplicated_repo_list():
         else:
             i = i + 1
             print(f'{i} {repo}')
+
+
+def is_security_md_empty(repo):
+    file_name = repo.replace('/', '_')
+    file_path = f'.\\data\\securities\\{file_name}.csv'
+    i = 0
+    for _ in csv_reader(file_path, encoding='latin-1'):
+        i = i + 1
+    return i <= 1
+
+
+def get_topics(repo):
+    topics = []
+    slices = repo.split('/')
+    owner = slices[0]
+    name = slices[1]
+    query = 'query{repository(owner:"{1}",name:"{2}"){repositoryTopics(first:100){edges{node{topic{name}}}}}}'
+    query = query.replace('{1}', owner)
+    query = query.replace('{2}', name)
+    print(query)
+    json = requests.post(graphql, json={'query': query}, headers=headers).json()
+    for topic in json['data']['repository']['repositoryTopics']['edges']:
+        topics.append(topic['node']['topic']['name'])
+    return topics
+
+
+def search_by_categories(keywords=None, not_keywords=None, exact_match=False):
+    total = 0
+    with_security_md_repo_set = set()
+    without_security_md_repo_set = set()
+    for row in get_categories():
+        if keywords is None:
+            a = True
+        else:
+            a = False
+            for keyword in keywords:
+                if (exact_match and keyword.lower() == row[0].lower()) or (not exact_match and keyword.lower() in row[0].lower()):
+                    a = True
+                    break
+        if not_keywords is None:
+            b = True
+        else:
+            b = False
+            for not_keyword in not_keywords:
+                if (exact_match and not_keyword.lower() == row[0].lower()) or (not exact_match and not_keyword.lower() in row[0].lower()):
+                    b = True
+                    break
+            b = not b
+        if a and b:
+            # print(f'    {row[0]}')
+            total += row[1]
+            with_security_md_repo_set.update(row[2])
+            without_security_md_repo_set.update(row[3])
+    return list(with_security_md_repo_set), list(without_security_md_repo_set)
+
+
+def get_categories():
+    categories = []
+    for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\dummy.csv'):
+        category = row[0]
+        my_list = eval(row[1])
+        length = len(my_list)
+        with_security_md_repos = []
+        without_security_md_repos = []
+        for a in my_list:
+            repo, empty = a
+            if empty:
+                without_security_md_repos.append(repo)
+            else:
+                with_security_md_repos.append(repo)
+        row = [category, length, with_security_md_repos, without_security_md_repos]
+        index = len(categories)
+        for i in range(index):
+            if length > categories[i][1]:
+                index = i
+                break
+        categories.insert(index, row)
+    return categories
+
+
+def my_dummy():
+    categories = get_categories()
+    # filter(categories, ['react'], ['azureactivedirectory', 'reactive', 'reactive-programming'])
+    # filter(categories, ['vue'])
+    # filter(categories, ['angular'])
+    # filter(categories, ['spring'])
+    # filter(categories, ['django'])
+    with_security_md_repos, without_security_md_repos = search(categories, ['php'])
+    # print(f'php {len(with_security_md_repos)} {len(without_security_md_repos)}')
+    for repo in with_security_md_repos:
+        print('_'.join(repo.split('/')))
+
+
+    # print(security_md.get_date_statistics())
+
+
+    # filter(categories, ['python'])
+    # filter(categories, ['javascript'])
+    # filter(categories, ['go'], ['argo', 'gorm', 'gogs', 'sogo', 'beego', 'piwigo', 'gophish', 'flashgot', 'godotengine', 'argo-workflows', 'argo-cd', 'gollum', 'django', 'spigotmc-plugins', 'mongo', 'arangodb', 'argo-tunnel', 'good-first-issue', 'algolia', 'dragonfly', 'trigonometry', 'google', 'goog', 'goa', 'goobi', 'hugo', 'duckduckgo', 'algorithm', 'nodegoat', 'agora'])
+    # filter(categories, ['java'], ['javascript', 'javascipt', 'js'])
+    # filter(categories, ['typescript'])
+    # filter(categories, ['c'], exact_match=True)
+    # filter(categories, ['ruby'])
+    # filter(categories, ['shell'])
+    # filter(categories, ['swift'])
+    # filter(categories, ['objective-c'])
+    # filter(categories, ['c#'])
+    # filter(categories, ['c++'])
+    # filter(categories, ['kotlin'])
 
 
 if __name__ == '__main__':

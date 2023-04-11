@@ -63,8 +63,13 @@ def read():
 
 if __name__ == '__main__':
     # show_details = len(sys.argv) > 2 and sys.argv[2] == 'a'
-    for repo in repository.get_list(100):
-        repos, dependency_dict = read()
-        if repo not in repos:
-            update(dependency_dict, repo)
-            write(dependency_dict)
+
+    # for repo in repository.get_list(100):
+    #     repos, dependency_dict = read()
+    #     if repo not in repos:
+    #         update(dependency_dict, repo)
+    #         write(dependency_dict)
+
+    repos, dependency_dict = read()
+    for key in dependency_dict:
+        print(f'{key},{len(dependency_dict[key])}')

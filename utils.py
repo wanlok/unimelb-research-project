@@ -42,7 +42,8 @@ def get_content(url_string):
 
 
 def get_secret():
-    return json.load(open('secret.json'))
+    path = 'C:\\Files\\Projects\\unimelb-research-project\\'
+    return json.load(open(f'{path}secret.json'))
 
 
 def read_csv_file(reader):

@@ -9,8 +9,9 @@ from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator, MultipleLocator
 from scipy.stats import pearsonr
 
+import repository
 from repository import get_list
-from security_md import get_date_statistics
+from security_md import get_date_statistics, get_date_statistics_with_zeros
 
 font_name = 'Times New Roman'
 font = {'fontname': font_name}
@@ -149,6 +150,15 @@ def scatter_plot(x_values, y_values, title, x_title, y_title, file_path):
         plt.close()
 
 
+def line_chart(x_values, y_values, x_ticks, title, x_title, y_title):
+    plt.plot(x_values, y_values)
+    plt.title(title)
+    plt.xticks(x_ticks)
+    plt.xlabel(x_title)
+    plt.ylabel(y_title)
+    plt.show()
+
+
 def plot(title, x_values, y_values, x_title, y_title, file_path):
     if len(x_values) == len(y_values) and len(x_values) > 0:
         fig = plt.figure()
@@ -208,3 +218,53 @@ def plot2(title, x, y, legends, colors, file_path):
     ax.set_ylim([0, length])
     plt.savefig(file_path, dpi=300, bbox_inches='tight')
     plt.close()
+
+
+def dummy(repos, start_date, end_date, title, file_path):
+    x_values = None
+    aggregated_y_values = None
+    fig = plt.figure()
+    for repo in repos:
+        print(repo)
+        repo_file_name = '_'.join(repo.split('/'))
+        repo_file_path = f'{security_md_directory_path}{repo_file_name}.csv'
+        date_list, date_dict = get_date_statistics_with_zeros(repo_file_path, start_date, end_date)
+        if x_values is None:
+            x_values = []
+            for date in date_list:
+                x_value = f'{date}'
+                if x_value[6:] == '01':
+                    x_values.append(x_value[:6])
+                else:
+                    x_values.append(x_value)
+            fig.set_size_inches(len(x_values) * 0.08, 6)
+        y_values = []
+        for date in date_list:
+            if date_dict[date] > 0:
+                y_values.append(1)
+            else:
+                y_values.append(0)
+        if sum(y_values) > 0:
+            if aggregated_y_values is None:
+                aggregated_y_values = np.zeros(len(y_values))
+                plt.bar(x_values, y_values, align='edge')
+            else:
+                plt.bar(x_values, y_values, bottom=aggregated_y_values, align='edge')
+            aggregated_y_values = aggregated_y_values + y_values
+    print(aggregated_y_values)
+    if x_values is not None:
+        max_aggregated_y_value = int(max(aggregated_y_values))
+        ax = fig.gca()
+        ax.tick_params(axis='x', pad=padding_1)
+        ax.tick_params(axis='y', pad=padding_1)
+        x_ticks = list(filter(lambda x: len(x) == 6, x_values))
+        plt.xticks(x_ticks, font=font_name)
+        plt.yticks(range(0, max_aggregated_y_value + 1), font=font_name)
+        # plt.xlim(x_values[0], x_values[-1])
+        plt.ylim(0, max_aggregated_y_value + 0.2)
+        plt.title(title, fontdict=font, pad=padding_2)
+        plt.xlabel('Dates', fontdict=font, labelpad=padding_2)
+        plt.ylabel('Number of Repositories', fontdict=font, labelpad=padding_2)
+        plt.savefig(file_path, dpi=300, bbox_inches='tight')
+    plt.close()
+
