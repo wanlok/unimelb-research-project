@@ -1,5 +1,5 @@
-Security Policy World
----------------
+Security Policy
+-
 
 ## Supported Versions
 
