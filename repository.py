@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil import parser
 
+import nvdcve
 import security_md
 from security_md import get_non_empty_file_names
 from utils import csv_writer, csv_reader, prepare_csv_file, get_secret, get_start_and_end_date_string
@@ -78,6 +79,17 @@ def get_list(i=None, j=None):
     else:
         repo_rows = repo_rows[1:]
     return list(map(lambda x: x[0], repo_rows))
+
+
+
+def get_separated_issue_count(repo, date):
+    start = '1970-01-01'
+    json = {'query': f'query {{s1: search(query:"repo:{repo} is:issue created:{start}..{date}",type:ISSUE) {{issueCount}}, s2: search(query:"repo:{repo} is:issue is:open created:{start}..{date}",type:ISSUE) {{issueCount}}, s3: search(query:"repo:{repo} is:issue is:closed created:{start}..{date}",type:ISSUE) {{issueCount}}}}'}
+    # json = {'query': f'{content}query {{repository(owner: \"{owner}\", name: \"{repo}\") {{...content}}}}'}
+    json = requests.post('https://api.github.com/graphql', json=json, headers=headers).json()
+    return int(json['data']['s1']['issueCount']), int(json['data']['s2']['issueCount']), int(json['data']['s3']['issueCount'])
+
+
 
 
 personal_access_token = get_secret()['personal_access_token']
@@ -210,7 +222,7 @@ def get_commit_count(repo, start_date=None, end_date=None):
     query = query.replace('{2}', name)
     query = query.replace('{3}', since)
     query = query.replace('{4}', until)
-    print(query)
+    # print(query)
     json = requests.post('https://api.github.com/graphql', json={'query': query}, headers=headers).json()
     commit_count = 0
     if 'errors' not in json:
@@ -242,15 +254,16 @@ def get_monthly_commit_statistics(repo, start_date=None, end_date=None):
     return commit_dict
 
 
-def get_issue_count(repo, start_date, end_date):
-    count = 0
-    file_path = f'.\\data\\issues\\statistics.csv'
-    start_date = int(datetime.strptime(start_date, '%Y%m%d').strftime('%Y%m'))
-    end_date = int(datetime.strptime(end_date, '%Y%m%d').strftime('%Y%m'))
-    for row in csv_reader(file_path):
-        if repo == row[0] and start_date <= int(row[1]) <= end_date:
-            count = count + int(row[2])
-    return count
+def get_issue_count_rows(repo, start_date, end_date):
+    rows = []
+    start_date = int(f'{start_date}'[:6])
+    end_date = int(f'{end_date}'[:6])
+    directory_path = f'.\\data\\issues\\'
+    for file_name in os.listdir(directory_path):
+        for row in csv_reader(f'{directory_path}{file_name}'):
+            if row[0] == repo and start_date <= int(row[1]) <= end_date:
+                rows.append(row)
+    return rows
 
 
 def get_issues(repo):
@@ -283,6 +296,100 @@ def get_issues(repo):
             after = f',after:\"{cursor}\"'
     return targets
 
+ccc = '''
+query{
+    parent:repository(owner:"{1}",name:".github"){
+        defaultBranchRef{
+            target {
+                ... on Commit {
+                    history(path: "SECURITY.md") {
+                        totalCount
+                    },
+                }
+            }
+        }
+    }
+    repo:repository(owner:"{2}",name:"{3}"){
+        defaultBranchRef{
+            security:target {
+                ... on Commit {
+                    root:history(path: "SECURITY.md") {
+                        totalCount
+                    },
+                    github:history(path: ".github/SECURITY.md") {
+                        totalCount
+                    },
+                    docs:history(path: "docs/SECURITY.md") {
+                        totalCount
+                    }
+                }
+            },
+            commit:target{
+                ...on Commit{
+                    history(first:1){
+                        totalCount
+                    }
+                }
+            }  
+        },
+        languages(first: 100) {
+            edges {
+                node {
+                    name
+                }
+            }
+        }
+    }
+}
+'''
+
+
+def case_selection(after=None):
+    repo_dict = dict()
+    prefix = 'https://github.com/'
+    for row in nvdcve.get_list():
+        for url in eval(row[7]):
+            if prefix in url:
+                slices = url.replace(prefix, '').split('/')
+                if slices[0] != 'advisories':
+                    if len(slices) > 1:
+                        key = f'{slices[0]}/{slices[1]}'
+                        if key not in repo_dict:
+                            repo_dict[key] = 1
+    print(len(repo_dict))
+    started = False
+    for repo in repo_dict.keys():
+        if started:
+            slices = repo.split('/')
+            owner = slices[0]
+            name = slices[1]
+            ddd = ccc
+            ddd = ddd.replace('{1}', owner)
+            ddd = ddd.replace('{2}', owner)
+            ddd = ddd.replace('{3}', name)
+            json = requests.post('https://api.github.com/graphql', json={'query': ddd}, headers=headers).json()
+            data = json['data']
+            parent_data = data['parent']
+            if parent_data is None or parent_data['defaultBranchRef'] is None:
+                parent_count = 0
+            else:
+                parent_count = int(data['parent']['defaultBranchRef']['target']['history']['totalCount'])
+            repo_data = data['repo']
+            if repo_data is None or repo_data['defaultBranchRef'] is None:
+                print(f'{repo},{parent_count},0,[]')
+            else:
+                repo_default = repo_data['defaultBranchRef']
+                root_count = int(repo_default['security']['root']['totalCount'])
+                github_count = int(repo_default['security']['github']['totalCount'])
+                docs_count = int(repo_default['security']['docs']['totalCount'])
+                security_md_count = parent_count + root_count + github_count + docs_count
+                commit_count = int(repo_default['commit']['history']['totalCount'])
+                languages = list(map(lambda x: x['node']['name'], repo_data['languages']['edges']))
+                print(f'{repo},{security_md_count},{commit_count},{languages}')
+        if after is None or len(after) == 0 or repo == after:
+            started = True
+
+
 
 def download_yearly_commits(year):
     day = '{:02d}'.format(1)
@@ -314,14 +421,14 @@ def download_yearly_commits(year):
                             writer.writerow(row)
 
 
-def get_issue_count_2(repo, date):
+def download_yearly_issue_counts(repos, year):
     day = '{:02d}'.format(1)
     query = 'i{1}:search(query:"repo:{2} is:issue created:{3}..{4}",type:ISSUE){issueCount}'
     file_path = f'.\\data\\issues\\{year}.csv'
     writer = csv_writer(file_path, mode='w')
     prepare_csv_file(csv_reader(file_path), writer, ['repo', 'date', 'count'])
     for file_name in get_non_empty_file_names():
-        for repo in get_list(2):
+        for repo in repos:
             if file_name.split('.')[0] == '_'.join(repo.split('/')):
                 print(repo)
                 my_list = []
@@ -336,34 +443,7 @@ def get_issue_count_2(repo, date):
                     my_list.append(q)
                 q = ','.join(my_list)
                 q = f'query{{{q}}}'
-                json = requests.post('https://api.github.com/graphql', json={'query': q}, headers=headers).json()
-                for key in json['data']:
-                    row = [repo, key[1:], int(json['data'][key]['issueCount'])]
-                    writer.writerow(row)
-
-
-def download_yearly_issue_counts(year):
-    day = '{:02d}'.format(1)
-    query = 'i{1}:search(query:"repo:{2} is:issue created:{3}..{4}",type:ISSUE){issueCount}'
-    file_path = f'.\\data\\issues\\{year}.csv'
-    writer = csv_writer(file_path, mode='w')
-    prepare_csv_file(csv_reader(file_path), writer, ['repo', 'date', 'count'])
-    for file_name in get_non_empty_file_names():
-        for repo in get_list(2):
-            if file_name.split('.')[0] == '_'.join(repo.split('/')):
-                print(repo)
-                my_list = []
-                for month in range(1, 13):
-                    month = '{:02d}'.format(month)
-                    start_date, end_date = get_start_and_end_date_string(f'{year}{month}{day}', '%Y-%m-%d')
-                    q = query
-                    q = q.replace('{1}', f'{year}{month}')
-                    q = q.replace('{2}', repo)
-                    q = q.replace('{3}', start_date)
-                    q = q.replace('{4}', end_date)
-                    my_list.append(q)
-                q = ','.join(my_list)
-                q = f'query{{{q}}}'
+                print(q)
                 json = requests.post('https://api.github.com/graphql', json={'query': q}, headers=headers).json()
                 for key in json['data']:
                     row = [repo, key[1:], int(json['data'][key]['issueCount'])]
@@ -428,8 +508,27 @@ def download_security_advisories():
             after = f',after:\"{cursor}\"'
 
 
-def download_categories():
-    print('Hello World')
+def download_topics():
+    file_path = 'topics.csv'
+    writer = csv_writer(file_path, mode='w')
+    reader = csv_reader(file_path)
+    rows = prepare_csv_file(reader, writer, ['repo', 'topics'])
+    for repo in get_list(10):
+        topics = []
+        slices = repo.split('/')
+        owner = slices[0]
+        name = slices[1]
+        query = 'query{repository(owner:"{1}",name:"{2}"){repositoryTopics(first:100){edges{node{topic{name}}}}}}'
+        query = query.replace('{1}', owner)
+        query = query.replace('{2}', name)
+        # print(query)
+        json = requests.post(graphql, json={'query': query}, headers=headers).json()
+        for topic in json['data']['repository']['repositoryTopics']['edges']:
+            topics.append(topic['node']['topic']['name'])
+        row = [repo, topics]
+        if row not in rows:
+            print(row)
+            writer.writerow(row)
 
 
 def get_security_advisories(repo, start_date=None, end_date=None):
@@ -535,19 +634,43 @@ def is_security_md_empty(repo):
     return i <= 1
 
 
-def get_topics(repo):
-    topics = []
-    slices = repo.split('/')
-    owner = slices[0]
-    name = slices[1]
-    query = 'query{repository(owner:"{1}",name:"{2}"){repositoryTopics(first:100){edges{node{topic{name}}}}}}'
-    query = query.replace('{1}', owner)
-    query = query.replace('{2}', name)
-    print(query)
-    json = requests.post(graphql, json={'query': query}, headers=headers).json()
-    for topic in json['data']['repository']['repositoryTopics']['edges']:
-        topics.append(topic['node']['topic']['name'])
-    return topics
+def get_list_by_keywords(keywords=None, not_keywords=None, exact_match=False):
+    repos = []
+    i = 0
+    for row in csv_reader('topics.csv'):
+        if i > 0:
+            if keywords is None:
+                a = True
+            else:
+                a = False
+                for keyword in keywords:
+                    keyword = keyword.lower()
+                    for topic in eval(row[1]):
+                        topic = topic.lower()
+                        if (exact_match and keyword == topic) or (not exact_match and keyword in topic):
+                            a = True
+                            break
+                    if a:
+                        break
+            if not_keywords is None:
+                b = True
+            else:
+                b = False
+                for not_keyword in not_keywords:
+                    not_keyword = not_keyword.lower()
+                    for topic in eval(row[1]):
+                        topic = topic.lower()
+                        if (exact_match and not_keyword == topic) or (not exact_match and not_keyword in topic):
+                            b = True
+                            break
+                    if b:
+                        break
+                b = not b
+            if a and b:
+                print(row)
+                repos.append(row[0])
+        i = i + 1
+    return repos
 
 
 def search_by_categories(keywords=None, not_keywords=None, exact_match=False):
