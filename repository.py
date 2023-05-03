@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 from datetime import datetime
 from os.path import exists
@@ -32,6 +33,22 @@ package_managers = [
     'sbt',
     'setuptools'
 ]
+
+package_manager_languages = {
+    'Ruby',
+    'PHP',
+    'C',
+    'C++',
+    'Go',
+    'Java',
+    'Groovy',
+    'Kotlin',
+    'JavaScript',
+    'TypeScript',
+    '.NET',
+    'Python',
+    'Scala'
+}
 
 content = '''
 fragment content on Repository {
@@ -332,19 +349,64 @@ query{
                 }
             }  
         },
-        languages(first: 100) {
-            edges {
-                node {
-                    name
-                }
-            }
-        }
-    }
-}
+        languages(first:100){edges{node{name}}}}}
 '''
 
 
-def case_selection(after=None):
+def random_case_selection():
+    nvd_repositories = set()
+    i = 0
+    for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\dummy (2).csv'):
+        if i > 0:
+            if int(row[2]) >= 500 and len(set(eval(row[3])).intersection(package_manager_languages)) > 0:
+                nvd_repositories.add(row[0])
+        i = i + 1
+    repositories = set()
+    rows = []
+    while len(rows) < len(nvd_repositories):
+        start = random.randint(0, 365258)
+        end = start + 1000
+        query = f'{{search(query:"stars:{start}..{end}",type:REPOSITORY,first:100){{nodes{{...on Repository{{nameWithOwner}}}}}}}}'
+        json = requests.post('https://api.github.com/graphql', json={'query': query}, headers=headers).json()
+        for repository in list(set(map(lambda x: x['nameWithOwner'], json['data']['search']['nodes'])) - nvd_repositories - repositories):
+            row = get_repository_details(repository)
+            if int(row[2]) >= 500 and len(set(row[3]).intersection(package_manager_languages)) > 0:
+                rows.append(row)
+                repositories.add(repository)
+                print(f'{row[0]},{row[1]},{row[2]},\"{row[3]}\"')
+
+
+def get_repository_details(repo):
+    slices = repo.split('/')
+    owner = slices[0]
+    name = slices[1]
+    ddd = ccc
+    ddd = ddd.replace('{1}', owner)
+    ddd = ddd.replace('{2}', owner)
+    ddd = ddd.replace('{3}', name)
+    json = requests.post('https://api.github.com/graphql', json={'query': ddd}, headers=headers).json()
+    data = json['data']
+    parent_data = data['parent']
+    if parent_data is None or parent_data['defaultBranchRef'] is None:
+        parent_count = 0
+    else:
+        parent_count = int(data['parent']['defaultBranchRef']['target']['history']['totalCount'])
+    repo_data = data['repo']
+    if repo_data is None or repo_data['defaultBranchRef'] is None:
+        row = [repo, parent_count, 0, []]
+    else:
+        repo_default = repo_data['defaultBranchRef']
+        root_count = int(repo_default['security']['root']['totalCount'])
+        github_count = int(repo_default['security']['github']['totalCount'])
+        docs_count = int(repo_default['security']['docs']['totalCount'])
+        security_md_count = parent_count + root_count + github_count + docs_count
+        commit_count = int(repo_default['commit']['history']['totalCount'])
+        languages = list(map(lambda x: x['node']['name'], repo_data['languages']['edges']))
+        row = [repo, security_md_count, commit_count, languages]
+    return row
+
+
+def nvd_case_selection(after=None):
     repo_dict = dict()
     prefix = 'https://github.com/'
     for row in nvdcve.get_list():
@@ -360,35 +422,20 @@ def case_selection(after=None):
     started = False
     for repo in repo_dict.keys():
         if started:
-            slices = repo.split('/')
-            owner = slices[0]
-            name = slices[1]
-            ddd = ccc
-            ddd = ddd.replace('{1}', owner)
-            ddd = ddd.replace('{2}', owner)
-            ddd = ddd.replace('{3}', name)
-            json = requests.post('https://api.github.com/graphql', json={'query': ddd}, headers=headers).json()
-            data = json['data']
-            parent_data = data['parent']
-            if parent_data is None or parent_data['defaultBranchRef'] is None:
-                parent_count = 0
-            else:
-                parent_count = int(data['parent']['defaultBranchRef']['target']['history']['totalCount'])
-            repo_data = data['repo']
-            if repo_data is None or repo_data['defaultBranchRef'] is None:
-                print(f'{repo},{parent_count},0,[]')
-            else:
-                repo_default = repo_data['defaultBranchRef']
-                root_count = int(repo_default['security']['root']['totalCount'])
-                github_count = int(repo_default['security']['github']['totalCount'])
-                docs_count = int(repo_default['security']['docs']['totalCount'])
-                security_md_count = parent_count + root_count + github_count + docs_count
-                commit_count = int(repo_default['commit']['history']['totalCount'])
-                languages = list(map(lambda x: x['node']['name'], repo_data['languages']['edges']))
-                print(f'{repo},{security_md_count},{commit_count},{languages}')
+            get_repository_details(repo)
         if after is None or len(after) == 0 or repo == after:
             started = True
 
+
+def nvd_fulfilled_repositories():
+    rows = []
+    i = 0
+    for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\dummy (2).csv'):
+        if i > 0:
+            if int(row[2]) >= 500 and len(set(eval(row[3])).intersection(package_manager_languages)) > 0:
+                rows.append(row)
+        i = i + 1
+    return rows
 
 
 def download_yearly_commits(year):
