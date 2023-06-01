@@ -2,19 +2,13 @@ import os
 
 from docx import Document
 
-
-def get_lines(table, column_index):
-    lines = None
-    cells = table.columns[column_index].cells
-    if len(cells) == 1:
-        lines = cells[0].text
-    return lines
+from document_utils import get_lines
 
 
 if __name__ == '__main__':
     file_names = []
     directory_path = 'C:\\Files\\c\\Completed\\'
-    text = 'Vulnerability type'
+    text = ''
     for file_name in os.listdir(directory_path):
         f = open(f'{directory_path}{file_name}', 'rb')
         document = Document(f)

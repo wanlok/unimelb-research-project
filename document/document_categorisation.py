@@ -7,13 +7,7 @@ import pandas as pd
 from docx import Document
 from sklearn.model_selection import train_test_split
 
-
-def get_lines(table, column_index):
-    lines = None
-    cells = table.columns[column_index].cells
-    if len(cells) == 1:
-        lines = cells[0].text
-    return lines
+from document_utils import get_lines
 
 
 def get_type_1_header(line, dummy):
