@@ -23,9 +23,9 @@ def set_page_style(document):
 
 
 if __name__ == '__main__':
-    size = 500
+    size = 2
     from_path = 'C:\\Files\\a1\\'
-    check_path = 'C:\\Files\\d\\'
+    check_path = 'C:\\Files\\c\\Completed\\'
     to_path = 'C:\\Files\\e\\'
     from_file_names = set(os.listdir(from_path))
     check_file_names = set(map(lambda x: x[:-5], os.listdir(check_path)))
@@ -41,12 +41,16 @@ if __name__ == '__main__':
             content_dict[file_name] = row[5]
     if len(content_dict) < size:
         size = len(content_dict)
-    for file_name in random.sample(list(content_dict.keys()), size):
-        document = Document()
-        set_page_style(document)
-        table = document.add_table(rows=1, cols=2)
-        table.allow_autofit = False
-        for cell in table.columns[0].cells:
-            cell.width = Cm(6)
-        table.rows[0].cells[1].text = content_dict[file_name]
-        document.save(f'{to_path}{file_name}.docx')
+    while size > 0:
+        for file_name in random.sample(list(content_dict.keys()), size):
+            content = content_dict[file_name]
+            if len(content) > 1000:
+                document = Document()
+                set_page_style(document)
+                table = document.add_table(rows=1, cols=2)
+                table.allow_autofit = False
+                for cell in table.columns[0].cells:
+                    cell.width = Cm(6)
+                table.rows[0].cells[1].text = content_dict[file_name]
+                document.save(f'{to_path}{file_name}.docx')
+                size = size - 1

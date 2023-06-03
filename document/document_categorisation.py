@@ -7,33 +7,7 @@ import pandas as pd
 from docx import Document
 from sklearn.model_selection import train_test_split
 
-from document_utils import get_lines
-
-
-def get_type_1_header(line, dummy):
-    header = None
-    if len(set([*line])) == 1 and ('-' in line[:4] or '=' in line[:4]):
-        header = ' '.join(dummy)
-    return header
-
-
-def get_type_2_header(line):
-    header = None
-    if line[:6] == '######':
-        header = line[6:]
-    elif line[:5] == '#####':
-        header = line[5:]
-    elif line[:4] == '####':
-        header = line[4:]
-    elif line[:3] == '###':
-        header = line[3:]
-    elif line[:2] == '##':
-        header = line[2:]
-    elif line[:1] == '#':
-        header = line[1:]
-    if header is not None:
-        header = header.strip()
-    return header
+from document_utils import get_lines, get_type_1_header, get_type_2_header
 
 
 def preprocess(s):
@@ -133,15 +107,16 @@ def get_document_contents(test_size, train_path, test_path):
     np.savetxt(test_path, test[columns].values, fmt=fmt, encoding=encoding)
 
 
-if __name__ == '__main__':
+def evaluate_categorisation_performance():
     train_path = 'C:\\Files\\Projects\\jupyter\\dummy.train'
     test_path = 'C:\\Files\\Projects\\jupyter\\dummy.valid'
     list_i = []
-    for i in range(0, 10):
+    for i in range(0, 1):
         list_j = []
         for j in range(0, 10):
             get_document_contents(0.1, train_path, test_path)
-            model = fasttext.train_supervised(input=train_path, lr=0.5, epoch=25, wordNgrams=2, bucket=200000, dim=300, loss='ova')
+            model = fasttext.train_supervised(input=train_path, lr=0.5, epoch=25, wordNgrams=2, bucket=200000, dim=300,
+                                              loss='ova')
             list_j.append(model.test(test_path))
 
         sum_precision = 0
@@ -162,3 +137,81 @@ if __name__ == '__main__':
         list_i.append((sum_precision / length_j, sum_recall / length_j, sum_f1 / length_j))
     for avg_preision, avg_recall, avg_f1 in list_i:
         print(f'AVG_PRECISION: {avg_preision}, AVG_RECALL: {avg_recall}, AVG_F1: {avg_f1}')
+
+
+def get_data(file_path):
+    data = []
+    with open(file_path, encoding='utf-8') as f:
+        for line in f:
+            text = []
+            labels = []
+            for s in line.split(' '):
+                if s[:9] == '__label__':
+                    labels.append(s)
+                else:
+                    text.append(s)
+            data.append((' '.join(text[:-1]), labels))
+    return data
+
+
+if __name__ == '__main__':
+    train_path = 'C:\\Files\\Projects\\jupyter\\dummy.train'
+    test_path = 'C:\\Files\\Projects\\jupyter\\dummy.valid'
+    get_document_contents(0.1, train_path, test_path)
+    test_data = get_data(test_path)
+    model = fasttext.train_supervised(input=train_path, lr=0.5, epoch=25, wordNgrams=2, bucket=200000, dim=300,
+                                      loss='ova')
+    number_of_samples, precision, recall = model.test(test_path)
+    f1 = (2 * precision * recall) / (precision + recall)
+    print(f'NUMBER_OF_SAMPLES: {number_of_samples}, PRECISION: {precision}, RECALL: {recall}, F1: {f1}')
+    all_labels = set()
+    label_dict = dict()
+    for i in range(len(test_data)):
+        text, true_labels = test_data[i]
+        predicted_labels = list(model.predict(text, k=len(true_labels))[0])
+        true_labels.sort()
+        predicted_labels.sort()
+        all_labels.update(true_labels)
+        all_labels.update(predicted_labels)
+        test_data[i] = (text, true_labels, predicted_labels)
+    for text, true_labels, predicted_labels in test_data:
+
+        for label in all_labels:
+            if label in true_labels and label in predicted_labels:
+                true_positive = 1
+            else:
+                true_positive = 0
+            if label not in true_labels and label in predicted_labels:
+                false_positive = 1
+            else:
+                false_positive = 0
+            if label in true_labels and label not in predicted_labels:
+                false_negative = 1
+            else:
+                false_negative = 0
+            if label not in true_labels and label not in predicted_labels:
+                true_negative = 1
+            else:
+                true_negative = 0
+            if label in label_dict:
+                true_positive_sum, false_positive_sum, false_negative_sum, true_negative_sum = label_dict[label]
+                label_dict[label] = (
+                    true_positive_sum + true_positive,
+                    false_positive_sum + false_positive,
+                    false_negative_sum + false_negative,
+                    true_negative_sum + true_negative
+                )
+            else:
+                label_dict[label] = (true_positive, false_positive, false_negative, true_negative)
+    precision_sum = 0
+    for label in label_dict:
+        true_positive_sum, false_positive_sum, false_negative_sum, true_negative_sum = label_dict[label]
+        if true_positive_sum > 0 or false_positive_sum > 0:
+            precision = true_positive_sum / (true_positive_sum + false_positive_sum)
+        else:
+            precision = 0
+        if true_positive_sum > 0 or false_negative_sum > 0:
+            recall = true_positive_sum / (true_positive_sum + false_negative_sum)
+        else:
+            recall = 0
+        print(f'LABEL: {label} PRECISION: {precision}, RECALL: {recall}')

@@ -8,7 +8,7 @@ from document_utils import get_lines
 if __name__ == '__main__':
     file_names = []
     directory_path = 'C:\\Files\\c\\Completed\\'
-    text = ''
+    text = 'accept'
     for file_name in os.listdir(directory_path):
         f = open(f'{directory_path}{file_name}', 'rb')
         document = Document(f)
