@@ -1,6 +1,4 @@
 ---
-abc
----
 title: Reporting of Security Vulnerabilities
 category: Contributing
 layout: default
