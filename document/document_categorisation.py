@@ -1,3 +1,5 @@
+import math
+
 import fasttext
 import numpy as np
 import pandas as pd
@@ -7,7 +9,7 @@ from document_utils import get_df_list
 
 train_path = 'C:\\Files\\Projects\\jupyter\\dummy.train'
 test_path = 'C:\\Files\\Projects\\jupyter\\dummy.valid'
-test_size = 0.1
+k = 10
 
 directory_paths = [
     'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230522\\',  # 50
@@ -25,17 +27,14 @@ ignored_file_names = [
 
 label_prefix = '__label__'
 
-def start_prediction():
-    df_list = get_df_list(directory_paths, ignored_file_names)
-    dataset = pd.concat(df_list, ignore_index=True).sample(frac=1)
-    train, test = train_test_split(dataset, test_size=test_size)
+def start_prediction(training_set, test_set):
+    texts = []
+    # train, test = train_test_split(dataset, test_size=test_size)
     columns = ['labels', 'paragraph']
     fmt = '%s %s'
     encoding = 'utf-8'
-    np.savetxt(train_path, train[columns].values, fmt=fmt, encoding=encoding)
-    np.savetxt(test_path, test[columns].values, fmt=fmt, encoding=encoding)
-
-    texts = []
+    np.savetxt(train_path, training_set[columns].values, fmt=fmt, encoding=encoding)
+    np.savetxt(test_path, test_set[columns].values, fmt=fmt, encoding=encoding)
     model = fasttext.train_supervised(input=train_path, lr=0.5, epoch=25, wordNgrams=2, bucket=200000, dim=300, loss='ova')
     actual_labels = np.empty((0, len(model.labels)))
     predicted_labels = np.empty((0, len(model.labels)))
@@ -60,7 +59,7 @@ def start_prediction():
                     if model.labels[i] == label:
                         labels[i] = 1
             predicted_labels = np.vstack((predicted_labels, labels))
-    return texts, actual_labels, predicted_labels, model.labels
+    return texts, model.labels, actual_labels, predicted_labels
 
 
 def compute_f1_score(precision, recall):
@@ -135,20 +134,20 @@ def compute_label_confusion_matrix(true_labels, predicted_labels, all_labels):
     return label_dict
 
 
-if __name__ == '__main__':
-    texts, true_labels, predicted_labels, all_labels = start_prediction()
+def output(start, end, all_labels, true_labels, predicted_labels, predicted_results):
     confusion_matrices = np.empty((0, 4))
     for i in range(len(true_labels)):
         confusion_matrix = compute_confusion_matrix(true_labels[i], predicted_labels[i])
-        print(f'{i + 1} {true_labels[i]} {predicted_labels[i]} {confusion_matrix}')
+        # print(f'{i + 1} {true_labels[i]} {predicted_labels[i]} {confusion_matrix}')
         confusion_matrices = np.vstack((confusion_matrices, confusion_matrix))
     label_dict = compute_label_confusion_matrix(true_labels, predicted_labels, all_labels)
     label_max_length = len(max(label_dict.keys(), key=len).replace(label_prefix, ''))
-    place_holder_1 = ''.ljust(label_max_length)
-    place_holder_2 = ''.ljust(label_max_length, '-')
+    label_place_holder = 'LABEL'.ljust(label_max_length)
+    total_place_hodler = 'TOTAL'.ljust(label_max_length)
+    hyphen_place_holder = ''.ljust(label_max_length, '-')
     print()
-    print(f'{place_holder_1} TRUE POSITIVE FALSE POSITIVE FALSE NEGATIVE TRUE NEGATIVE')
-    print(f'{place_holder_2} ------------- -------------- -------------- -------------')
+    print(f'{label_place_holder} TRUE POSITIVE FALSE POSITIVE FALSE NEGATIVE TRUE NEGATIVE')
+    print(f'{hyphen_place_holder} ------------- -------------- -------------- -------------')
     for key in label_dict:
         label = key.replace(label_prefix, '').ljust(label_max_length)
         true_positive, false_positive, false_negative, true_negative = label_dict[key]
@@ -162,13 +161,59 @@ if __name__ == '__main__':
     false_positive = f'{int(sum[1])}'.rjust(14)
     false_negative = f'{int(sum[2])}'.rjust(14)
     true_negative = f'{int(sum[3])}'.rjust(13)
-    print(f'{place_holder_2} ------------- -------------- -------------- -------------')
-    print(f'{place_holder_1} {true_positive} {false_positive} {false_negative} {true_negative}')
+    print(f'{hyphen_place_holder} ------------- -------------- -------------- -------------')
+    print(f'{total_place_hodler} {true_positive} {false_positive} {false_negative} {true_negative}')
     print()
-    print(f'ACTUAL    : {np.sum(true_labels, axis=0)}')
-    print(f'PREDICTED : {np.sum(predicted_labels, axis=0)}')
+    # print(f'RANGE     : {start} - {end}')
+    # print(f'ACTUAL    : {np.sum(true_labels, axis=0)}')
+    # print(f'PREDICTED : {np.sum(predicted_labels, axis=0)}')
     precision, recall, f1_score = compute_precision_recall_f1_score(np.sum(confusion_matrices, axis=0))
-    print()
-    print(f'PRECISION : {precision}')
-    print(f'RECALL    : {recall}')
-    print(f'F1 SCORE  : {f1_score}')
+    # print(f'PRECISION : {precision}')
+    # print(f'RECALL    : {recall}')
+    # print(f'F1 SCORE  : {f1_score}')
+    # print()
+    predicted_results.append((start, end, precision, recall, f1_score))
+
+
+def output_2(predicted_results):
+    precision_sum = 0
+    recall_sum = 0
+    f1_score_sum = 0
+    print(f'#       RANGE       PRECISION          RECALL             F1 SCORE          ')
+    print(f'------- ----------- ------------------ ------------------ ------------------')
+    i = 0
+    for start, end, precision, recall, f1_score in predicted_results:
+        i = i + 1
+        j = f'{i}'.rjust(7)
+        range = f'{start} - {end - 1}'.rjust(11)
+        precision_sum = precision_sum + precision
+        precision = f'{precision}'.rjust(18)
+        recall_sum = recall_sum + recall
+        recall = f'{recall}'.rjust(18)
+        f1_score_sum = f1_score_sum + f1_score
+        f1_score = f'{f1_score}'.rjust(18)
+        print(f'{j} {range} {precision} {recall} {f1_score}')
+    precision_avg = f'{precision_sum / k}'.rjust(18)
+    recall_avg = f'{recall_sum / k}'.rjust(18)
+    f1_score_avg = f'{f1_score_sum / k}'.rjust(18)
+    print(f'------- ----------- ------------------ ------------------ ------------------')
+    print(f'AVERAGE             {precision_avg} {recall_avg} {f1_score_avg}')
+
+
+if __name__ == '__main__':
+    dataset = pd.concat(get_df_list(directory_paths, ignored_file_names), ignore_index=True).sample(frac=1)
+    dataset_size = len(dataset)
+    segment_size = math.ceil(dataset_size / k)
+    predicted_results = []
+    for i in range(k):
+        start = i * segment_size
+        if dataset_size - start >= segment_size:
+            end = start + segment_size
+        else:
+            end = dataset_size
+        training_set = pd.concat([dataset[:start], dataset[end:]], ignore_index=True)
+        test_set = dataset[start:end]
+        _, all_labels, true_labels, predicted_labels = start_prediction(training_set, test_set)
+        output(start, end, all_labels, true_labels, predicted_labels, predicted_results)
+    output_2(predicted_results)
+
