@@ -1,10 +1,12 @@
 import os
 import random
+from functools import reduce
 
 from docx import Document
 from docx.enum.section import WD_ORIENTATION
 from docx.shared import Cm
 
+from document.document_utils import get_document_contents
 from utils import csv_reader
 
 
@@ -22,15 +24,42 @@ def set_page_style(document):
         section.right_margin = Cm(1)
 
 
+def dummy():
+    existing_paths = [
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230522\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230606\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230606-1\\'
+    ]
+    existing_file_names = reduce(lambda a, b: a.union(b), map(lambda directory_path: set(
+        map(lambda file_name: file_name, os.listdir(directory_path))), existing_paths))
+
+    file_names = set(os.listdir('M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\Combined\\'))
+    # print(file_names)
+    print(file_names - existing_file_names)
+
 if __name__ == '__main__':
-    size = 2
+    size = 1
     from_path = 'C:\\Files\\a1\\'
-    check_path = 'C:\\Files\\c\\Completed\\'
-    to_path = 'C:\\Files\\e\\'
+    existing_paths = [
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230522\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230601\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230606\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230607\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230608\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230609\\',
+        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230610\\Completed\\'
+    ]
+    to_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230610\\'
     from_file_names = set(os.listdir(from_path))
-    check_file_names = set(map(lambda x: x[:-5], os.listdir(check_path)))
+    if len(existing_paths) > 0:
+        existing_file_names = reduce(lambda a, b: a.union(b), map(lambda directory_path: set(map(lambda file_name: file_name[:-5], os.listdir(directory_path))), existing_paths))
+        dummy = list(existing_file_names)
+        for i in range(len(dummy)):
+            print(f'{i} {dummy[i]}')
+    else:
+        existing_file_names = set()
     content_dict = dict()
-    for file_name in from_file_names - check_file_names:
+    for file_name in from_file_names - existing_file_names:
         row = None
         i = 0
         for r in csv_reader(f'{from_path}{file_name}'):
@@ -44,7 +73,7 @@ if __name__ == '__main__':
     while size > 0:
         for file_name in random.sample(list(content_dict.keys()), size):
             content = content_dict[file_name]
-            if len(content) > 1000:
+            if len(content) >= 1000:
                 document = Document()
                 set_page_style(document)
                 table = document.add_table(rows=1, cols=2)
