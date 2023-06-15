@@ -10,7 +10,7 @@ if __name__ == '__main__':
     text = 'consider vulnerabilities leading to the compromise'
     # text = 'threat model'
     # text = 'process is to reduce the total time users are vulnerable to publicly known exploits'
-    text = 'advis'
+    text = 'mailing'
     column = 1
     directory_paths = [
         'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230522\\',

@@ -7,9 +7,9 @@ from document_utils import get_dataset, get_fasttext_model, test_path, k_fold
 
 label_prefix = '__label__'
 
-def start_prediction(training_set, test_set):
+def start_prediction(training_set, test_set, save_path=None):
     texts = []
-    model = get_fasttext_model(training_set, test_set)
+    model = get_fasttext_model(training_set, test_set, save_path)
     actual_labels = np.empty((0, len(model.labels)))
     predicted_labels = np.empty((0, len(model.labels)))
     with open(test_path, encoding='utf-8') as f:

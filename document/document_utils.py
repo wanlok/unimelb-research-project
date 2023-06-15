@@ -199,13 +199,16 @@ def get_training_and_test_set(segments, k_fold):
     return training_set, test_set
 
 
-def get_fasttext_model(training_set, test_set):
+def get_fasttext_model(training_set, test_set, save_path=None):
     columns = ['labels', 'paragraph']
     fmt = '%s %s'
     encoding = 'utf-8'
     np.savetxt(train_path, training_set[columns].values, fmt=fmt, encoding=encoding)
     np.savetxt(test_path, test_set[columns].values, fmt=fmt, encoding=encoding)
-    return fasttext.train_supervised(input=train_path, lr=0.5, epoch=25, wordNgrams=2, bucket=200000, dim=300, loss='ova')
+    model = fasttext.train_supervised(input=train_path, lr=0.5, epoch=25, wordNgrams=2, bucket=200000, dim=300, loss='ova')
+    if save_path is not None:
+        model.save_model(save_path)
+    return model
 
 
 
