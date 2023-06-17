@@ -1,13 +1,14 @@
 import math
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
 
-from document_utils import get_dataset, get_fasttext_model, test_path, k_fold
+from document_utils import get_dataset, get_fasttext_model, test_path, k_fold, model_save_path
 
 label_prefix = '__label__'
 
-def start_prediction(training_set, test_set, save_path=None):
+def start_prediction(training_set, test_set, save_path):
     texts = []
     model = get_fasttext_model(training_set, test_set, save_path)
     actual_labels = np.empty((0, len(model.labels)))
@@ -108,7 +109,7 @@ def compute_label_confusion_matrix(true_labels, predicted_labels, all_labels):
     return label_dict
 
 
-def output(start, end, all_labels, true_labels, predicted_labels, predicted_results):
+def output(start, end, all_labels, true_labels, predicted_labels, predicted_results, save_path):
     confusion_matrices = np.empty((0, 4))
     for i in range(len(true_labels)):
         confusion_matrix = compute_confusion_matrix(true_labels[i], predicted_labels[i])
@@ -146,17 +147,17 @@ def output(start, end, all_labels, true_labels, predicted_labels, predicted_resu
     # print(f'RECALL    : {recall}')
     # print(f'F1 SCORE  : {f1_score}')
     # print()
-    predicted_results.append((start, end, precision, recall, f1_score))
+    predicted_results.append((start, end, precision, recall, f1_score, save_path))
 
 
 def output_2(predicted_results):
     precision_sum = 0
     recall_sum = 0
     f1_score_sum = 0
-    print(f'#        RANGE        PRECISION           RECALL              F1 SCORE          ')
-    print(f'-------  -----------  ------------------  ------------------  ------------------')
+    print(f'#        RANGE        PRECISION           RECALL              F1 SCORE            FILE NAME       ')
+    print(f'-------  -----------  ------------------  ------------------  ------------------  ----------------')
     i = 0
-    for start, end, precision, recall, f1_score in predicted_results:
+    for start, end, precision, recall, f1_score, save_path in predicted_results:
         i = i + 1
         j = f'{i}'.rjust(7)
         range = f'{start} - {end - 1}'.rjust(11)
@@ -166,11 +167,12 @@ def output_2(predicted_results):
         recall = f'{recall}'.rjust(18)
         f1_score_sum = f1_score_sum + f1_score
         f1_score = f'{f1_score}'.rjust(18)
-        print(f'{j}  {range}  {precision}  {recall}  {f1_score}')
+        file_name = save_path.split('\\')[-1][:-4]
+        print(f'{j}  {range}  {precision}  {recall}  {f1_score}  {file_name}')
     precision_avg = f'{precision_sum / k_fold}'.rjust(18)
     recall_avg = f'{recall_sum / k_fold}'.rjust(18)
     f1_score_avg = f'{f1_score_sum / k_fold}'.rjust(18)
-    print(f'-------  -----------  ------------------  ------------------  ------------------')
+    print(f'-------  -----------  ------------------  ------------------  ------------------  ----------------')
     print(f'AVERAGE               {precision_avg}  {recall_avg}  {f1_score_avg}')
 
 
@@ -179,6 +181,7 @@ if __name__ == '__main__':
     dataset_size = len(dataset)
     segment_size = math.ceil(dataset_size / k_fold)
     predicted_results = []
+    current_date_time = datetime.now().strftime("%Y%m%d%H%M%S")
     for i in range(k_fold):
         start = i * segment_size
         if dataset_size - start >= segment_size:
@@ -187,6 +190,8 @@ if __name__ == '__main__':
             end = dataset_size
         training_set = pd.concat([dataset[:start], dataset[end:]], ignore_index=True)
         test_set = dataset[start:end]
-        _, all_labels, true_labels, predicted_labels = start_prediction(training_set, test_set)
-        output(start, end, all_labels, true_labels, predicted_labels, predicted_results)
+        save_path = f'{i + 1}'.rjust(2, '0')
+        save_path = f'{model_save_path}{current_date_time}{save_path}.bin'
+        _, all_labels, true_labels, predicted_labels = start_prediction(training_set, test_set, save_path)
+        output(start, end, all_labels, true_labels, predicted_labels, predicted_results, save_path)
     output_2(predicted_results)

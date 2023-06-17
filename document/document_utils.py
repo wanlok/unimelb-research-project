@@ -9,6 +9,7 @@ from docx import Document
 
 train_path = 'C:\\Files\\Projects\\jupyter\\dummy.train'
 test_path = 'C:\\Files\\Projects\\jupyter\\dummy.valid'
+model_save_path = 'C:\\Files\\Projects\\jupyter\\models\\'
 k_fold = 10
 
 directory_paths = [
@@ -25,6 +26,21 @@ ignored_file_names = [
     'desktop.ini',
     'Completed'
 ]
+
+
+def get_fasttext_mappings():
+    fasttext_mappings = dict()
+    fasttext_mappings['__label__reporting-procedure'] = 'Reporting procedure'
+    fasttext_mappings['__label__handling-procedure'] = 'Handling procedure'
+    fasttext_mappings['__label__scope'] = 'Scope'
+    fasttext_mappings['__label__secure-communication'] = 'Secure communication'
+    fasttext_mappings['__label__threat-model'] = 'Threat model'
+    fasttext_mappings['__label__empty'] = 'Empty'
+    fasttext_mappings['__label__introduction'] = 'Introduction'
+    fasttext_mappings['__label__bug-bounty-program'] = 'Bug bounty program'
+    fasttext_mappings['__label__known-vulnerabilities'] = 'Known vulnerabilities'
+    fasttext_mappings['__label__guideline'] = 'Guideline'
+    return fasttext_mappings
 
 
 def get_lines(table, column_index):
@@ -105,6 +121,41 @@ def df_dummy(directory_path, file_name, file_headers, file_paragraphs, file_cate
         })
 
     return pd.DataFrame(data)
+
+
+def dummy123(content):
+    headers = []
+    paragraphs = []
+
+    previous_header = ''
+
+    header_lines = []
+    paragraph_lines = []
+
+    found = False
+
+    for line in content.split('\n'):
+        line = line.strip()
+        found, header = get_type_1_header(line, header_lines, found)
+        if header is not None:
+            header_lines.clear()
+            paragraph_lines.clear()
+        else:
+            header_lines.append(line)
+            header = get_type_2_header(line)
+        if len(line) == 0:
+            found = False
+            header_lines.clear()
+        if header is None:
+            if len(line) > 0:
+                paragraph_lines.append(line)
+            elif len(paragraph_lines) > 0:
+                headers.append(previous_header)
+                paragraphs.append(' '.join(map(lambda x: x.strip(), paragraph_lines)).strip())
+                paragraph_lines = []
+        if header is not None:
+            previous_header = header
+    return headers, paragraphs
 
 
 def get_df_list(directory_paths):
@@ -199,17 +250,29 @@ def get_training_and_test_set(segments, k_fold):
     return training_set, test_set
 
 
-def get_fasttext_model(training_set, test_set, save_path=None):
+def get_fasttext_model(training_set, test_set, save_path):
     columns = ['labels', 'paragraph']
     fmt = '%s %s'
     encoding = 'utf-8'
     np.savetxt(train_path, training_set[columns].values, fmt=fmt, encoding=encoding)
     np.savetxt(test_path, test_set[columns].values, fmt=fmt, encoding=encoding)
     model = fasttext.train_supervised(input=train_path, lr=0.5, epoch=25, wordNgrams=2, bucket=200000, dim=300, loss='ova')
-    if save_path is not None:
-        model.save_model(save_path)
+    model.save_model(save_path)
     return model
 
 
+def get_distinct_categories(file_path):
+    my_dict = dict()
+    file = open(file_path, 'r')
+    for line in file.readlines():
+        line = line.strip()
+        if len(line) > 0:
+            for category in map(lambda x: x.strip(), line.split(',')):
+                my_dict[category] = 1
+    return my_dict.keys()
 
-# if __name__ == '__main__':
+
+if __name__ == '__main__':
+    categories = get_distinct_categories('C:\\Users\\WAN Tung Lok\\Desktop\\pham.txt')
+    for category in categories:
+        print(category)

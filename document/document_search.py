@@ -2,24 +2,15 @@ import os
 
 from docx import Document
 
-from document_utils import get_lines
-
+from document_utils import get_lines, directory_paths
 
 if __name__ == '__main__':
     # text = 'take the security of our software products and services seriously'
-    text = 'consider vulnerabilities leading to the compromise'
+    # text = 'consider vulnerabilities leading to the compromise'
     # text = 'threat model'
     # text = 'process is to reduce the total time users are vulnerable to publicly known exploits'
-    text = 'mailing'
+    text = 'member'
     column = 1
-    directory_paths = [
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230522\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230601\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230606\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230607\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230608\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230609\\'
-    ]
     ignored_files = ['desktop.ini', 'Completed']
     i = 0
     for directory_path in directory_paths:
