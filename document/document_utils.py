@@ -147,11 +147,20 @@ def dummy123(content):
             found = False
             header_lines.clear()
         if header is None:
-            if len(line) > 0:
+            previous_line_ends_with_colon = False
+            if len(paragraph_lines) > 0:
+                previous_line_ends_with_colon = paragraph_lines[-1][-1] == ':'
+            if previous_line_ends_with_colon:
+                if len(line) > 0:
+                    paragraph_lines.append(line)
+                else:
+                    paragraph_lines.append('\n')
+            elif len(line) > 0:
                 paragraph_lines.append(line)
             elif len(paragraph_lines) > 0:
                 headers.append(previous_header)
-                paragraphs.append(' '.join(map(lambda x: x.strip(), paragraph_lines)).strip())
+                paragraph = '\n'.join(map(lambda x: x.strip(), paragraph_lines)).strip()
+                paragraphs.append(paragraph)
                 paragraph_lines = []
         if header is not None:
             previous_header = header
