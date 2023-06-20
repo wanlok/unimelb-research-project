@@ -4,7 +4,7 @@ from functools import reduce
 from docx import Document
 from numpy import ndarray
 
-from document_utils import get_lines, get_type_1_header, get_type_2_header, get_document_contents
+from document_utils import get_lines, get_type_1_header, get_type_2_header, get_df_list, directory_paths
 
 from utils import sort_by_descending_keys
 
@@ -58,35 +58,35 @@ def header_document_distribution(df_list):
     dummy_dummy(paragraph_dict, 'PARAGRAPHS')
 
 
-# def code_document_distribution(df_list):
-#     distribution_dict = dict()
-#     for df in df_list:
-#         file_name = get_file_name(df)
-#         document_headers = df['headers'].tolist()
-#         document_categories = df['labels'].tolist()
-#         # file_name, document_headers, _, document_categories = document_content
-#         document_category_dict = dict()
-#         for i in range(len(document_headers)):
-#             key = document_headers[i]
-#             if i < len(document_categories):
-#                 value = set(document_categories[i])
-#             else:
-#                 value = set()
-#             if key in document_category_dict:
-#                 document_category_dict[key] = document_category_dict[key].union(value)
-#             else:
-#                 document_category_dict[key] = value
-#         print(f'VALIDATING: {document_category_dict}')
-#         size = 0
-#         for key in document_category_dict:
-#             size = size + len(document_category_dict[key])
-#         if size in distribution_dict:
-#             distribution_dict[size].append(file_name)
-#         else:
-#             distribution_dict[size] = [file_name]
-#     for key in sort_by_descending_keys(distribution_dict):
-#         value = distribution_dict[key]
-#         print(f'CODES: {key}, FILES: {len(value)} {value}')
+def code_document_distribution(df_list):
+    distribution_dict = dict()
+    for df in df_list:
+        file_name = get_file_name(df)
+        document_headers = df['headers'].tolist()
+        document_categories = df['labels'].tolist()
+        # file_name, document_headers, _, document_categories = document_content
+        document_category_dict = dict()
+        for i in range(len(document_headers)):
+            key = document_headers[i]
+            if i < len(document_categories):
+                value = set(document_categories[i])
+            else:
+                value = set()
+            if key in document_category_dict:
+                document_category_dict[key] = document_category_dict[key].union(value)
+            else:
+                document_category_dict[key] = value
+        print(f'VALIDATING: {document_category_dict}')
+        size = 0
+        for key in document_category_dict:
+            size = size + len(document_category_dict[key])
+        if size in distribution_dict:
+            distribution_dict[size].append(file_name)
+        else:
+            distribution_dict[size] = [file_name]
+    for key in sort_by_descending_keys(distribution_dict):
+        value = distribution_dict[key]
+        print(f'CODES: {key}, FILES: {len(value)} {value}')
 #
 #
 # def distinct_code_header_distribution(document_contents):
@@ -140,28 +140,14 @@ def header_document_distribution(df_list):
 
 
 if __name__ == '__main__':
-    directory_paths = [
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230522\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230601\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230606\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230607\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230608\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230609\\',
-        'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\20230610\\',
-    ]
-    ignored_file_names = [
-        'desktop.ini'
-    ]
-    document_contents = get_document_contents(directory_paths, ignored_file_names)
-    # for document_content in document_contents:
-    #     print(document_content)
-    category_distribution(document_contents)
+    df_list = get_df_list(directory_paths)
+    category_distribution(df_list)
     print()
-    header_document_distribution(document_contents)
+    header_document_distribution(df_list)
     # print()
     # paragraph_document_distribution(document_contents)
     # print()
-    # code_document_distribution(document_contents)
+    # code_document_distribution(df_list)
     # print()
     # distinct_code_header_distribution(document_contents)
     # distinct_header_distribution(document_contents)

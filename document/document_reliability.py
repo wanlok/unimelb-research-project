@@ -222,7 +222,7 @@ if __name__ == '__main__':
     #     i = i + 1
 
 
-    csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Round 2 Combined.csv'
+    csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Round 3.csv'
 
     categories = [
         'Introduction',
@@ -235,7 +235,8 @@ if __name__ == '__main__':
         'FAQ',
         'Known vulnerabilities',
         'Guideline',
-        'Empty'
+        'Empty',
+        'Subscription'
     ]
 
     rows = []

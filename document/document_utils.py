@@ -7,6 +7,8 @@ import numpy as np
 import pandas as pd
 from docx import Document
 
+from utils import max_item_length, contain_patterns
+
 train_path = 'C:\\Files\\Projects\\jupyter\\dummy.train'
 test_path = 'C:\\Files\\Projects\\jupyter\\dummy.valid'
 model_save_path = 'C:\\Files\\Projects\\jupyter\\models\\'
@@ -28,6 +30,28 @@ ignored_file_names = [
 ]
 
 
+colon_patterns = [
+    ':',
+    '：'
+]
+
+
+list_patterns = [
+    '-',
+    '*'
+]
+
+
+link_patterns = [
+    'http://',
+    'https://',
+    'www.',
+    '.com',
+    '.net',
+    '.org'
+]
+
+
 def get_fasttext_mappings():
     fasttext_mappings = dict()
     fasttext_mappings['__label__reporting-procedure'] = 'Reporting procedure'
@@ -40,6 +64,7 @@ def get_fasttext_mappings():
     fasttext_mappings['__label__bug-bounty-program'] = 'Bug bounty program'
     fasttext_mappings['__label__known-vulnerabilities'] = 'Known vulnerabilities'
     fasttext_mappings['__label__guideline'] = 'Guideline'
+    fasttext_mappings['__label__subscription'] = 'Subscription'
     return fasttext_mappings
 
 
@@ -123,17 +148,13 @@ def df_dummy(directory_path, file_name, file_headers, file_paragraphs, file_cate
     return pd.DataFrame(data)
 
 
-def dummy123(content):
+def get_headers_and_paragraphs(content, append_header_to_paragraph=False):
     headers = []
     paragraphs = []
-
     previous_header = ''
-
     header_lines = []
     paragraph_lines = []
-
     found = False
-
     for line in content.split('\n'):
         line = line.strip()
         found, header = get_type_1_header(line, header_lines, found)
@@ -147,24 +168,99 @@ def dummy123(content):
             found = False
             header_lines.clear()
         if header is None:
-            previous_line_ends_with_colon = False
-            if len(paragraph_lines) > 0:
-                previous_line_ends_with_colon = paragraph_lines[-1][-1] == ':'
-            if previous_line_ends_with_colon:
-                if len(line) > 0:
-                    paragraph_lines.append(line)
-                else:
-                    paragraph_lines.append('\n')
-            elif len(line) > 0:
+            if len(line) > 0:
                 paragraph_lines.append(line)
             elif len(paragraph_lines) > 0:
                 headers.append(previous_header)
                 paragraph = '\n'.join(map(lambda x: x.strip(), paragraph_lines)).strip()
+                # if append_header_to_paragraph:
+                #     paragraph = f'{previous_header} {paragraph}'.strip()
                 paragraphs.append(paragraph)
                 paragraph_lines = []
         if header is not None:
             previous_header = header
-    return headers, paragraphs
+    if len(paragraph_lines) > 0:
+        headers.append(previous_header)
+        paragraph = '\n'.join(map(lambda x: x.strip(), paragraph_lines)).strip()
+        paragraphs.append(paragraph)
+    return combine_headers_and_paragraphs(headers, paragraphs, append_header_to_paragraph)
+
+
+def combine_headers_and_paragraphs(headers, paragraphs, append_header_to_paragraph):
+    new_headers = []
+    new_paragraphs = []
+    header_buffer = []
+    paragraph_buffer = []
+    for i in range(len(paragraphs)):
+        header = headers[i]
+        paragraph = paragraphs[i]
+        if len(header_buffer) == 0:
+            if paragraph[-1] in colon_patterns:
+                header_buffer.append(header)
+                paragraph_buffer.append(paragraph)
+            else:
+                new_headers.append(header)
+                new_paragraph = paragraph
+                if append_header_to_paragraph:
+                    new_paragraph = f'{header} {new_paragraph}'.strip()
+                new_paragraphs.append(new_paragraph)
+        else:
+            first_word = paragraph.split(' ')[0]
+            unordered_list_item = first_word in list_patterns
+            ordered_list_item = first_word[-1] == '.' and first_word[:-1].isdigit()
+            link = contain_patterns(link_patterns, first_word)
+            if unordered_list_item or ordered_list_item or link:
+                if len(header_buffer) > 0 and header != header_buffer[0]:
+                    new_header = header_buffer[0]
+                    new_headers.append(new_header)
+                    new_paragraph = '\n'.join(paragraph_buffer)
+                    if append_header_to_paragraph:
+                        new_paragraph = f'{new_header} {new_paragraph}'.strip()
+                    new_paragraphs.append(new_paragraph)
+                    header_buffer.clear()
+                    paragraph_buffer.clear()
+                header_buffer.append(header)
+                paragraph_buffer.append(paragraph)
+            else:
+                new_header = header_buffer[0]
+                new_headers.append(new_header)
+                new_paragraph = '\n'.join(paragraph_buffer)
+                if append_header_to_paragraph:
+                    new_paragraph = f'{new_header} {new_paragraph}'.strip()
+                new_paragraphs.append(new_paragraph)
+                header_buffer.clear()
+                paragraph_buffer.clear()
+                if paragraph[-1] in colon_patterns:
+                    header_buffer.append(header)
+                    paragraph_buffer.append(paragraph)
+                else:
+                    new_headers.append(header)
+                    new_paragraph = paragraph
+                    if append_header_to_paragraph:
+                        new_paragraph = f'{header} {new_paragraph}'.strip()
+                    new_paragraphs.append(new_paragraph)
+    if len(header_buffer) > 0:
+        new_header = header_buffer[0]
+        new_headers.append(new_header)
+        new_paragraph = '\n'.join(paragraph_buffer)
+        if append_header_to_paragraph:
+            new_paragraph = f'{new_header} {new_paragraph}'.strip()
+        new_paragraphs.append(new_paragraph)
+    return new_headers, new_paragraphs
+
+
+def get_categories(content):
+    categories = []
+    category_lines = []
+    for line in content.split('\n'):
+        if len(line) > 0:
+            category_lines.append(line)
+        elif len(category_lines) > 0:
+            categories.append(category_lines)
+            category_lines = []
+    if len(category_lines) > 0:
+        categories.append(category_lines)
+    return categories
 
 
 def get_df_list(directory_paths):
@@ -174,52 +270,20 @@ def get_df_list(directory_paths):
         for file_name in file_names:
             if file_name in ignored_file_names:
                 continue
-            file = open(f'{directory_path}{file_name}', 'rb')
+            file_path = f'{directory_path}{file_name}'
+            file = open(file_path, 'rb')
             tables = Document(file).tables
             if len(tables) == 1:
                 table = tables[0]
-
-                file_headers = []
-                file_paragraphs = []
-                file_categories = []
-
-                categories = []
-                for line in get_lines(table, 0).split('\n'):
-                    if len(line) > 0:
-                        categories.append(line)
-                    elif len(categories) > 0:
-                        file_categories.append(categories)
-                        categories = []
-
-                header_lines = []
-                previous_header = ''
-                paragraph = []
-                found = False
-                for line in get_lines(table, 1).split('\n'):
-                    line = line.strip()
-                    found, header = get_type_1_header(line, header_lines, found)
-                    if header is not None:
-                        header_lines.clear()
-                        paragraph.clear()
-                    else:
-                        header_lines.append(line)
-                        header = get_type_2_header(line)
-                    if len(line) == 0:
-                        found = False
-                        header_lines.clear()
-                    if header is None:
-                        if len(line) > 0:
-                            paragraph.append(line)
-                        elif len(paragraph) > 0:
-                            file_paragraph = ' '.join(map(lambda x: x.strip(), paragraph)).strip()
-                            file_paragraph = f'{previous_header} {file_paragraph}'.strip()
-                            file_headers.append(previous_header)
-                            file_paragraphs.append(file_paragraph)
-                            paragraph = []
-                    if header is not None:
-                        previous_header = header
-
-                df_list.append(df_dummy(directory_path, file_name, file_headers, file_paragraphs, file_categories))
+                categories = get_categories(get_lines(table, 0))
+                headers, paragraphs = get_headers_and_paragraphs(get_lines(table, 1), True)
+                category_length = len(categories)
+                paragraph_length = len(paragraphs)
+                if category_length != paragraph_length:
+                    category_length = f'{category_length}'.rjust(2)
+                    paragraph_length = f'{paragraph_length}'.rjust(2)
+                    print(f'CATEGORIES: {category_length}, PARAGRAPHS: {paragraph_length}, FILE_PATH: {file_path}')
+                df_list.append(df_dummy(directory_path, file_name, headers, paragraphs, categories))
             file.close()
     return df_list
 

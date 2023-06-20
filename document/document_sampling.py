@@ -1,13 +1,11 @@
 import os
-import random
-from functools import reduce
 
-from docx import Document
 from docx.enum.section import WD_ORIENTATION
 from docx.shared import Cm
 
-from document.document_utils import directory_paths, ignored_file_names, dummy123
-from utils import csv_reader, sort_by_descending_values
+from document.document_utils import directory_paths, ignored_file_names, combine_headers_and_paragraphs, \
+    get_headers_and_paragraphs
+from utils import csv_reader, csv_writer
 
 
 def set_page_style(document):
@@ -56,7 +54,6 @@ def get_file_paths():
     return file_paths
 
 
-
 def get_latest_content(file_path):
     content = None
     target_row = None
@@ -70,24 +67,58 @@ def get_latest_content(file_path):
     return content
 
 
+def save_to_csv(file_paths, save_path):
+    writer = csv_writer(save_path, mode='w')
+    for file_path in file_paths:
+        file_name = file_path.split('\\')[-1]
+        repo = file_name[:-4].replace('_', '/')
+        content = get_latest_content(file_path)
+        headers, paragraphs = get_headers_and_paragraphs(content)
+        for i in range(len(paragraphs)):
+            print(f'/ / / / / / / / / /  {headers[i]}')
+            print(paragraphs[i])
+
+            # writer.writerow([repo, headers[i], paragraphs[i]])
+
+
 if __name__ == '__main__':
 
     my_dict = dict()
-    file_paths = get_file_paths()
-    for file_path in file_paths:
-        content = get_latest_content(file_path)
-        headers, _ = dummy123(content)
-        for header in headers:
-            header = header.lower()
-            if header in my_dict:
-                my_dict[header].add(file_path)
-            else:
-                my_dict[header] = {file_path}
-    i = 0
-    for header in my_dict:
-        i = i + 1
-        file_paths = my_dict[header]
-        print(f'"{header}",{len(file_paths)},"{file_paths}"')
+    file_paths = [
+        # "C:\\Files\\a1\\Automattic_jetpack.csv",
+        # "C:\\Files\\a1\\bitwarden_desktop.csv",
+        # "C:\\Files\\a1\\cortexproject_cortex.csv",
+        # "C:\\Files\\a1\\exim_exim.csv",
+        # "C:\\Files\\a1\\imagemagick_imagemagick6.csv",
+        # "C:\\Files\\a1\\libexif_exif.csv",
+        # "C:\\Files\\a1\\nextauthjs_next-auth.csv",
+        # "C:\\Files\\a1\\odoo_odoo.csv",
+        # "C:\\Files\\a1\\rabbitmq_rabbitmq-jms-client.csv",
+        # "C:\\Files\\a1\\rapidsai_cudf.csv",
+        # "C:\\Files\\a1\\kennethreitz_requests.csv"
+        # "C:\\Files\\a1\\dataease_dataease.csv"
+        # "C:\\Files\\a1\\laminas_laminas-diactoros.csv"
+
+
+
+        # "C:\\Files\\a1\\treeverse_lakeFS.csv"
+        "C:\\Files\\a1\\facebookincubator_SocketRocket.csv"
+    ]
+    # file_paths = get_file_paths()
+    save_to_csv(file_paths, 'C:\\Files\\dummy.csv')
+
+
+        # for header in headers:
+        #     header = header.lower()
+        #     if header in my_dict:
+        #         my_dict[header].add(file_path)
+        #     else:
+        #         my_dict[header] = {file_path}
+    # i = 0
+    # for header in my_dict:
+    #     i = i + 1
+    #     file_paths = my_dict[header]
+    #     print(f'"{header}",{len(file_paths)},"{file_paths}"')
 
 
 

@@ -111,6 +111,14 @@ def get_csv_start_index(full_list, sub_list, number_of_matches):
     return start_index + 1
 
 
+def sort_by_ascending_keys(input_dict):
+    return dict(sorted(input_dict.items()))
+
+
+def sort_by_descending_keys(input_dict):
+    return dict(sorted(input_dict.items(), reverse=True))
+
+
 def sort_by_descending_values(input_dict):
     return dict(sorted(input_dict.items(), key=operator.itemgetter(1), reverse=True))
 
@@ -146,3 +154,21 @@ def get_start_and_end_date_string_before_date_minus_days(date, days, format):
     start_date = start_date.strftime(format)
     end_date = end_date.strftime(format)
     return start_date, end_date
+
+
+def max_item_length(list):
+    max_length = 0
+    for item in list:
+        length = len(item)
+        if length > max_length:
+            max_length = length
+    return max_length
+
+
+def contain_patterns(patterns, string):
+    contain = False
+    for pattern in patterns:
+        if pattern in string:
+            contain = True
+            break
+    return contain

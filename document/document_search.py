@@ -1,4 +1,6 @@
 import os
+import sys
+sys.path.append('C:\\Files\\Projects\\unimelb-research-project')
 
 from docx import Document
 
@@ -9,18 +11,19 @@ if __name__ == '__main__':
     # text = 'consider vulnerabilities leading to the compromise'
     # text = 'threat model'
     # text = 'process is to reduce the total time users are vulnerable to publicly known exploits'
-    text = 'member'
-    column = 1
-    ignored_files = ['desktop.ini', 'Completed']
-    i = 0
-    for directory_path in directory_paths:
-        for file_name in os.listdir(directory_path):
-            if file_name not in ignored_files:
-                f = open(f'{directory_path}{file_name}', 'rb')
-                document = Document(f)
-                tables = document.tables
-                if len(tables) == 1:
-                    if text.lower() in get_lines(tables[0], column).lower():
-                        i = i + 1
-                        print(f'{i} {directory_path}{file_name}')
+    if len(sys.argv) > 2:
+        column = int(sys.argv[1])
+        text = ' '.join(sys.argv[2:])
+        ignored_files = ['desktop.ini', 'Completed']
+        i = 0
+        for directory_path in directory_paths:
+            for file_name in os.listdir(directory_path):
+                if file_name not in ignored_files:
+                    f = open(f'{directory_path}{file_name}', 'rb')
+                    document = Document(f)
+                    tables = document.tables
+                    if len(tables) == 1:
+                        if text.lower() in get_lines(tables[0], column).lower():
+                            i = i + 1
+                            print(f'{i} {directory_path}{file_name}')
 
