@@ -1,6 +1,6 @@
 from document_utils import get_df_list, get_fasttext_mappings
 
-from utils import sort_by_descending_keys
+from utils import sort_by_descending_keys, csv_reader
 
 fasttext_mappings = get_fasttext_mappings()
 
@@ -131,13 +131,73 @@ def code_document_distribution(df_list):
 
 
 
+def doSomething(df_list):
+    header_category_mappings = dict()
+    for header, paragraph_categories in csv_reader('M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\header_category_mappings.csv', encoding='utf-8-sig'):
+        header_category_mappings[header] = set(paragraph_categories.split(','))
+
+    count = 0
+    exact_match_count = 0
+    not_exact_match_count = 0
+    one_match_count = 0
+    for df in df_list:
+        file_dict = dict()
+        file_name = list(set(df['name'].tolist()))[0]
+        previous_header = None
+        category_set = set()
+        categories = map(lambda x: list(map(lambda y: fasttext_mappings[y], x.split(' '))), df['labels'].tolist())
+        for header, paragraph_categories in zip(df['headers'].tolist(), categories):
+            if previous_header is not None and header != previous_header:
+                if file_name in file_dict:
+                    file_dict[file_name].append((previous_header, category_set))
+                else:
+                    file_dict[file_name] = [(previous_header, category_set)]
+                category_set = set()
+            for category in paragraph_categories:
+                category_set.add(category)
+            previous_header = header
+        if len(category_set) > 0:
+            if file_name in file_dict:
+                file_dict[file_name].append((previous_header, category_set))
+            else:
+                file_dict[file_name] = [(previous_header, category_set)]
+        for file_name in file_dict:
+            for header, paragraph_categories in file_dict[file_name]:
+                count = count + 1
+                key = header.replace('\xa0', ' ').lower()
+                if key in header_category_mappings:
+                    header_categories = header_category_mappings[key]
+                    if paragraph_categories == header_categories:
+                        exact_match = True
+                        exact_match_count = exact_match_count + 1
+                    else:
+                        exact_match = False
+                        not_exact_match_count = not_exact_match_count + 1
+                    if len(paragraph_categories.intersection(header_categories)) == 1:
+                        one_match = True
+                        one_match_count = one_match_count + 1
+                    else:
+                        one_match = False
+                    print(f'{count} {file_name} {header} {paragraph_categories} {header_categories} {exact_match} {one_match}')
+                else:
+                    not_exact_match_count = not_exact_match_count + 1
+                    print(f'{count} {file_name} {header} {paragraph_categories} {{}} False False')
+    print(f'EXACT MATCH     : {exact_match_count} / {count} = {exact_match_count / count}')
+    print(f'ONE MATCH       : {one_match_count} / {count} = {one_match_count / count}')
+    print(f'NOT EXACT MATCH : {not_exact_match_count} / {count} = {not_exact_match_count / count}')
+
+
+
 
 
 
 
 if __name__ == '__main__':
     df_list = get_df_list()
-    category_distribution(df_list)
+    # category_distribution(df_list)
+    # print()
+    doSomething(df_list)
+
     # print()
     # header_document_distribution(df_list)
     # print()

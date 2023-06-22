@@ -291,6 +291,7 @@ def get_csv_file_tuple(file_path):
     headers = []
     paragraphs = []
     categories = []
+    # print(file_path)
     for header, paragraph, paragraph_categories in csv_reader(file_path):
         headers.append(header)
         paragraphs.append(paragraph)

@@ -14,7 +14,7 @@ def get_predictions():
     statistic_dict = dict()
     remaining_file_paths, categorised_file_paths = get_remaining_and_categorised_file_paths()
     print(f'{len(remaining_file_paths)} {len(categorised_file_paths)}')
-    model = fasttext.load_model('C:\\Files\\Projects\\jupyter\\models\\2023062216294307.bin')
+    model = fasttext.load_model('C:\\Files\\Projects\\jupyter\\models\\2023062223234503.bin')
     for file_path in remaining_file_paths:
         content = get_latest_content(file_path)
         headers, paragraphs = get_headers_and_paragraphs(content, False)
@@ -46,13 +46,25 @@ def get_predictions():
 if __name__ == '__main__':
     predictions = get_predictions()
     directory_path = 'C:\Files\Projects\jupyter\samples\\'
+
+    required_categories = [
+        '__label__guideline'
+    ]
+
     for file_path in predictions:
         file_name = file_path.split('\\')[-1]
         file_predictions = predictions[file_path]
-        file_csv_writer = csv_writer(f'{directory_path}{file_name}', mode='w')
-        for header, paragraph, categories in file_predictions:
-            categories = ','.join(list(map(lambda x: fasttext_mappings[x], categories[0])))
-            file_csv_writer.writerow([f'{header}', f'{paragraph}', f'{categories}'])
+        found = False
+        for _, _, categories in file_predictions:
+            for required_category in required_categories:
+                if required_category in categories[0]:
+                    found = True
+                    break
+        if found:
+            file_csv_writer = csv_writer(f'{directory_path}{file_name}', mode='w')
+            for header, paragraph, categories in file_predictions:
+                categories = ','.join(list(map(lambda x: fasttext_mappings[x], categories[0])))
+                file_csv_writer.writerow([f'{header}', f'{paragraph}', f'{categories}'])
 
 
 
