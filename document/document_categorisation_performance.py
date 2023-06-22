@@ -4,9 +4,8 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-from document_utils import get_dataset, get_fasttext_model, test_path, k_fold, model_save_path
+from document_utils import get_dataset, get_fasttext_model, test_path, k_fold, model_save_path, label_prefix
 
-label_prefix = '__label__'
 
 def start_prediction(training_set, test_set, save_path):
     texts = []

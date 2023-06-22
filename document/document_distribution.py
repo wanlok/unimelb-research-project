@@ -1,12 +1,8 @@
-import os
-from functools import reduce
-
-from docx import Document
-from numpy import ndarray
-
-from document_utils import get_lines, get_type_1_header, get_type_2_header, get_df_list, directory_paths
+from document_utils import get_df_list, get_fasttext_mappings
 
 from utils import sort_by_descending_keys
+
+fasttext_mappings = get_fasttext_mappings()
 
 
 def get_file_name(df):
@@ -18,19 +14,19 @@ def get_file_name(df):
 
 
 def category_distribution(df_list):
-    my_dict = dict()
+    distribution_dict = dict()
     for df in df_list:
         file_name = get_file_name(df)
         categories = set()
         for labels in df['labels'].tolist():
-            categories.update(set(map(lambda x: x.replace('__label__', ''), labels.split(' '))))
+            categories.update(labels.split(' '))
         for category in categories:
-            if category in my_dict:
-                my_dict[category].add(file_name)
+            if category in distribution_dict:
+                distribution_dict[category].add(file_name)
             else:
-                my_dict[category] = {file_name}
-    for category in my_dict:
-        print(f'{category} {my_dict[category]}')
+                distribution_dict[category] = {file_name}
+    for category in distribution_dict:
+        print(f'{fasttext_mappings[category]} {distribution_dict[category]}')
 
 
 def dummy_dummy(distribution_dict, name):
@@ -140,10 +136,10 @@ def code_document_distribution(df_list):
 
 
 if __name__ == '__main__':
-    df_list = get_df_list(directory_paths)
+    df_list = get_df_list()
     category_distribution(df_list)
-    print()
-    header_document_distribution(df_list)
+    # print()
+    # header_document_distribution(df_list)
     # print()
     # paragraph_document_distribution(document_contents)
     # print()

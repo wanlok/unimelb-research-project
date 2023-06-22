@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from docx import Document
 
-from utils import max_item_length, contain_patterns
+from utils import contain_string, csv_reader
 
 train_path = 'C:\\Files\\Projects\\jupyter\\dummy.train'
 test_path = 'C:\\Files\\Projects\\jupyter\\dummy.valid'
@@ -29,18 +29,15 @@ ignored_file_names = [
     'Completed'
 ]
 
-
 colon_patterns = [
     ':',
     '：'
 ]
 
-
 list_patterns = [
     '-',
     '*'
 ]
-
 
 link_patterns = [
     'http://',
@@ -50,6 +47,8 @@ link_patterns = [
     '.net',
     '.org'
 ]
+
+label_prefix = '__label__'
 
 
 def get_fasttext_mappings():
@@ -129,7 +128,7 @@ def df_dummy(directory_path, file_name, file_headers, file_paragraphs, file_cate
 
         paragraph = preprocess(file_paragraphs[i])
         labels = map(lambda x: x.lower().replace(' ', '-'), file_categories[i])
-        labels = map(lambda x: f'__label__{x}', labels)
+        labels = map(lambda x: f'{label_prefix}{x}', labels)
         labels = ' '.join(labels)
 
         # print()
@@ -208,7 +207,7 @@ def combine_headers_and_paragraphs(headers, paragraphs, append_header_to_paragra
             first_word = paragraph.split(' ')[0]
             unordered_list_item = first_word in list_patterns
             ordered_list_item = first_word[-1] == '.' and first_word[:-1].isdigit()
-            link = contain_patterns(link_patterns, first_word)
+            link = contain_string(first_word, link_patterns)
             if unordered_list_item or ordered_list_item or link:
                 if len(header_buffer) > 0 and header != header_buffer[0]:
                     new_header = header_buffer[0]
@@ -263,33 +262,71 @@ def get_categories(content):
     return categories
 
 
-def get_df_list(directory_paths):
+def get_directory_paths():
+    directory_paths = []
+    parent_directory_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\'
+    for path in os.listdir(parent_directory_path):
+        path = f'{parent_directory_path}{path}\\'
+        if os.path.isdir(path):
+            directory_paths.append(path)
+    return directory_paths
+
+
+def get_docx_file_tuple(file_path):
+    file_tuple = None
+    file = open(file_path, 'rb')
+    tables = Document(file).tables
+    if len(tables) == 1:
+        table = tables[0]
+        categories = get_categories(get_lines(table, 0))
+        headers, paragraphs = get_headers_and_paragraphs(get_lines(table, 1), True)
+        if len(categories) == len(paragraphs):
+            file_tuple = (headers, paragraphs, categories)
+    file.close()
+    return file_tuple
+
+
+def get_csv_file_tuple(file_path):
+    file_tuple = None
+    headers = []
+    paragraphs = []
+    categories = []
+    for header, paragraph, paragraph_categories in csv_reader(file_path):
+        headers.append(header)
+        paragraphs.append(paragraph)
+        paragraph_categories = list(map(lambda x: x.strip(), paragraph_categories.split(',')))
+        if len(paragraph_categories) > 0:
+            categories.append(paragraph_categories)
+    if len(categories) == len(paragraphs):
+        file_tuple = (headers, paragraphs, categories)
+    return file_tuple
+
+
+def get_df_list():
     df_list = []
-    for directory_path in directory_paths:
+    for directory_path in get_directory_paths():
         file_names = os.listdir(directory_path)
         for file_name in file_names:
             if file_name in ignored_file_names:
                 continue
+            file_tuple = None
             file_path = f'{directory_path}{file_name}'
-            file = open(file_path, 'rb')
-            tables = Document(file).tables
-            if len(tables) == 1:
-                table = tables[0]
-                categories = get_categories(get_lines(table, 0))
-                headers, paragraphs = get_headers_and_paragraphs(get_lines(table, 1), True)
-                category_length = len(categories)
-                paragraph_length = len(paragraphs)
-                if category_length != paragraph_length:
-                    category_length = f'{category_length}'.rjust(2)
-                    paragraph_length = f'{paragraph_length}'.rjust(2)
-                    print(f'CATEGORIES: {category_length}, PARAGRAPHS: {paragraph_length}, FILE_PATH: {file_path}')
+            file_extension = file_name.split('.')[-1]
+            if file_extension == 'docx':
+                file_tuple = get_docx_file_tuple(file_path)
+            elif file_extension == 'csv':
+                file_tuple = get_csv_file_tuple(file_path)
+            if file_tuple is not None:
+                headers, paragraphs, categories = file_tuple
                 df_list.append(df_dummy(directory_path, file_name, headers, paragraphs, categories))
-            file.close()
+            else:
+                print(f'INVALID FILE PATH: {file_path}')
+    print(f'df_list SIZE: {len(df_list)}')
     return df_list
 
 
 def get_dataset(random=True):
-    dataset = pd.concat(get_df_list(directory_paths), ignore_index=True)
+    dataset = pd.concat(get_df_list(), ignore_index=True)
     if random:
         dataset = dataset.sample(frac=1)
     return dataset

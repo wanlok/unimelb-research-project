@@ -3,8 +3,7 @@ import os
 from docx.enum.section import WD_ORIENTATION
 from docx.shared import Cm
 
-from document.document_utils import directory_paths, ignored_file_names, combine_headers_and_paragraphs, \
-    get_headers_and_paragraphs
+from document.document_utils import ignored_file_names, get_headers_and_paragraphs, get_directory_paths
 from utils import csv_reader, csv_writer
 
 
@@ -24,7 +23,7 @@ def set_page_style(document):
 
 def get_categorised_file_paths():
     categorised_file_paths = []
-    for directory_path in directory_paths:
+    for directory_path in get_directory_paths():
         for file_name in os.listdir(directory_path):
             if file_name not in ignored_file_names:
                 categorised_file_paths.append(f'{directory_path}{file_name}')
@@ -38,7 +37,7 @@ def get_remaining_and_categorised_file_paths():
     for file_name in os.listdir(directory_path):
         categorised = False
         for file_path in categorised_file_paths:
-            if file_name == file_path.split('\\')[-1][:-5]:
+            if file_name in file_path:
                 categorised = True
                 break
         if not categorised:
@@ -102,7 +101,8 @@ if __name__ == '__main__':
 
 
         # "C:\\Files\\a1\\treeverse_lakeFS.csv"
-        "C:\\Files\\a1\\facebookincubator_SocketRocket.csv"
+        # "C:\\Files\\a1\\facebookincubator_SocketRocket.csv"
+        "C:\\Files\\a1\\01org_tpm2.0-tools.csv"
     ]
     # file_paths = get_file_paths()
     save_to_csv(file_paths, 'C:\\Files\\dummy.csv')
