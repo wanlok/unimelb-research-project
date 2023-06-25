@@ -43,18 +43,19 @@ def get_predictions():
     # print()
     return predictions
 
+
 if __name__ == '__main__':
     predictions = get_predictions()
     directory_path = 'C:\Files\Projects\jupyter\samples\\'
 
     required_categories = [
-        '__label__guideline'
+
     ]
 
     for file_path in predictions:
         file_name = file_path.split('\\')[-1]
         file_predictions = predictions[file_path]
-        found = False
+        found = len(required_categories) == 0
         for _, _, categories in file_predictions:
             for required_category in required_categories:
                 if required_category in categories[0]:

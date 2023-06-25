@@ -129,17 +129,18 @@ def code_document_distribution(df_list):
     #     print(f'"{header}",{len(header_dict[header])}')
 
 
+def get_header_category_dict():
+    header_category_dict = dict()
+    file_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\header_category_mappings.csv'
+    for header, paragraph_categories in csv_reader(file_path, encoding='utf-8-sig'):
+        header_category_dict[header] = set(filter(lambda x: len(x) > 0, paragraph_categories.split(',')))
+    return header_category_dict
 
 
-def doSomething(df_list):
-    header_category_mappings = dict()
-    for header, paragraph_categories in csv_reader('M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\header_category_mappings.csv', encoding='utf-8-sig'):
-        header_category_mappings[header] = set(paragraph_categories.split(','))
-
+def get_header_paragraph_category_statistics(df_list):
+    count_dict = dict()
     count = 0
-    exact_match_count = 0
-    not_exact_match_count = 0
-    one_match_count = 0
+    header_category_dict = get_header_category_dict()
     for df in df_list:
         file_dict = dict()
         file_name = list(set(df['name'].tolist()))[0]
@@ -165,38 +166,25 @@ def doSomething(df_list):
             for header, paragraph_categories in file_dict[file_name]:
                 count = count + 1
                 key = header.replace('\xa0', ' ').lower()
-                if key in header_category_mappings:
-                    header_categories = header_category_mappings[key]
-                    if paragraph_categories == header_categories:
-                        exact_match = True
-                        exact_match_count = exact_match_count + 1
-                    else:
-                        exact_match = False
-                        not_exact_match_count = not_exact_match_count + 1
-                    if len(paragraph_categories.intersection(header_categories)) == 1:
-                        one_match = True
-                        one_match_count = one_match_count + 1
-                    else:
-                        one_match = False
-                    print(f'{count} {file_name} {header} {paragraph_categories} {header_categories} {exact_match} {one_match}')
+                if key in header_category_dict:
+                    header_categories = header_category_dict[key]
                 else:
-                    not_exact_match_count = not_exact_match_count + 1
-                    print(f'{count} {file_name} {header} {paragraph_categories} {{}} False False')
-    print(f'EXACT MATCH     : {exact_match_count} / {count} = {exact_match_count / count}')
-    print(f'ONE MATCH       : {one_match_count} / {count} = {one_match_count / count}')
-    print(f'NOT EXACT MATCH : {not_exact_match_count} / {count} = {not_exact_match_count / count}')
-
-
-
-
-
+                    header_categories = set()
+                key = len(paragraph_categories.intersection(header_categories))
+                if key in count_dict:
+                    count_dict[key] = count_dict[key] + 1
+                else:
+                    count_dict[key] = 1
+                # print(f'{count} {file_name} {header} {paragraph_categories} {header_categories} {key}')
+    for key in count_dict:
+        print(f'{key} {count_dict[key]}')
 
 
 if __name__ == '__main__':
     df_list = get_df_list()
-    # category_distribution(df_list)
-    # print()
-    doSomething(df_list)
+    category_distribution(df_list)
+    print()
+    get_header_paragraph_category_statistics(df_list)
 
     # print()
     # header_document_distribution(df_list)
