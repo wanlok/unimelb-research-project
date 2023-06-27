@@ -220,6 +220,47 @@ def get_list(graphql, path_list, path_next_page, path_cursor, path_count=None):
     return list
 
 
+def extract(key, dict):
+    if key in dict:
+        value = dict[key]
+    else:
+        value = None
+    return value
+
+
+def download_attributes(repo):
+    slices = repo.split('/')
+    owner = slices[0]
+    project = slices[1]
+    # if not is_exists(repo, language_csv_file_rows) or True:
+    graphql = all_graphql.replace('{1}', owner).replace('{2}', project).replace('{3}', repo)
+    result_dict = get_result_dict(graphql, post_graphql(graphql))
+    programming_languages = extract(path_programming_language, result_dict)
+    if programming_languages is not None:
+        programming_languages = list(map(lambda x: x['node']['name'], programming_languages))
+    row = [
+        repo,
+        extract(path_number_of_stars, result_dict),
+        extract(path_commit_count_2018, result_dict),
+        extract(path_commit_count_2019, result_dict),
+        extract(path_commit_count_2020, result_dict),
+        extract(path_commit_count_2021, result_dict),
+        extract(path_commit_count_2022, result_dict),
+        extract(path_issue_count_2018, result_dict),
+        extract(path_issue_count_2019, result_dict),
+        extract(path_issue_count_2020, result_dict),
+        extract(path_issue_count_2021, result_dict),
+        extract(path_issue_count_2022, result_dict),
+        extract(path_issue_closed_count_2018, result_dict),
+        extract(path_issue_closed_count_2019, result_dict),
+        extract(path_issue_closed_count_2020, result_dict),
+        extract(path_issue_closed_count_2021, result_dict),
+        extract(path_issue_closed_count_2022, result_dict),
+        f'{programming_languages}'
+    ]
+    return row
+
+
 if __name__ == '__main__':
     language_csv_file_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Attributes\\Languages.csv'
     language_csv_file_rows = get_csv_rows(language_csv_file_path)
@@ -230,38 +271,5 @@ if __name__ == '__main__':
         i = i + 1
         repo = file_name.replace('.csv', '').replace('_', '/', 1)
         # repo = 'tensorflow/tensorflow'
-        slices = repo.split('/')
-        owner = slices[0]
-        project = slices[1]
-        if not is_exists(repo, language_csv_file_rows) or True:
-            for year in years:
-                graphql = committer_graphql.replace('{1}', owner).replace('{2}', project).replace('{3}', f'{year}')
-                committers = set(map(lambda x: x['node']['author']['email'], get_list(graphql, path_committer_list, path_committer_next_page, path_committer_cursor)))
-                print(f'{repo},{year},{len(set(committers))}')
-
-            # graphql = graphql.replace('{1}', owner).replace('{2}', project).replace('{3}', repo)
-
-            # result_dict = get_result_dict(graphql, post_graphql(graphql))
-
-            # programming_languages = list(map(lambda x: x['node']['name'], result_dict[path_programming_language]))
-            # row = [
-            #     result_dict[path_number_of_stars],
-            #     result_dict[path_commit_count_2018],
-            #     result_dict[path_commit_count_2019],
-            #     result_dict[path_commit_count_2020],
-            #     result_dict[path_commit_count_2021],
-            #     result_dict[path_commit_count_2022],
-            #     result_dict[path_issue_count_2018],
-            #     result_dict[path_issue_count_2019],
-            #     result_dict[path_issue_count_2020],
-            #     result_dict[path_issue_count_2021],
-            #     result_dict[path_issue_count_2022],
-            #     result_dict[path_issue_closed_count_2018],
-            #     result_dict[path_issue_closed_count_2019],
-            #     result_dict[path_issue_closed_count_2020],
-            #     result_dict[path_issue_closed_count_2021],
-            #     result_dict[path_issue_closed_count_2022],
-            #     f'{programming_languages}'
-            # ]
-            # print(row)
+        print(download_attributes(repo))
             # break
