@@ -50,6 +50,20 @@ link_patterns = [
 
 label_prefix = '__label__'
 
+category_names = [
+    'Introduction',
+    'Threat model',
+    'Scope',
+    'Reporting procedure',
+    'Handling procedure',
+    'Secure communication',
+    'Bug bounty program',
+    'Known vulnerabilities',
+    'Guideline',
+    'Empty',
+    'Subscription'
+]
+
 
 def get_fasttext_mappings():
     fasttext_mappings = dict()
