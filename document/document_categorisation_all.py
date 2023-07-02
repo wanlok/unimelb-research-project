@@ -9,7 +9,8 @@ import pandas as pd
 from document.document_sampling import get_remaining_and_categorised_file_paths, get_latest_content
 from document.document_utils import get_fasttext_mappings, get_headers_and_paragraphs, preprocess, get_csv_file_tuple, \
     get_docx_file_tuple, category_names
-from utils import sort_by_descending_values, csv_writer, csv_reader, expand
+from repository import package_manager_languages
+from utils import sort_by_descending_values, csv_writer, csv_reader, expand, contain_string
 
 fasttext_mappings = get_fasttext_mappings()
 fasttext_model_file_path = 'C:\\Files\\Projects\\jupyter\\models\\2023062223234503.bin'
@@ -192,7 +193,7 @@ def compute_number_ranges(values, number_of_segments):
     return number_ranges
 
 
-def get_parameters(column_index, number_of_segments):
+def get_parameters(column_index, as_count, number_of_segments):
     rows = []
     distribution_function = None
     values = None
@@ -206,6 +207,8 @@ def get_parameters(column_index, number_of_segments):
             sub_title = row[column_index]
         else:
             value = row[column_index]
+            if as_count:
+                value = f'{len(value)}'
             if value.isdigit():
                 if distribution_function is None:
                     distribution_function = range_function
@@ -254,9 +257,9 @@ def get_distributions_if_list(distributions, keys):
     return if_list, new_distributions
 
 
-def dummy_dummy(column_index, number_of_segments=None):
+def dummy_dummy(column_index, as_count=False, number_of_segments=None, filter_keys=[]):
     data = dict()
-    parameters = get_parameters(column_index, number_of_segments)
+    parameters = get_parameters(column_index, as_count, number_of_segments)
     distributions, title, sub_title = get_distributions(parameters)
     if parameters[2] is None:
         keys = sorted(distributions.keys(), key=str.casefold)
@@ -267,13 +270,19 @@ def dummy_dummy(column_index, number_of_segments=None):
     else:
         keys = list(map(lambda x: x[2], parameters[2]))
     for key in keys:
-        data[key] = np.zeros(len(category_names))
-        for i in range(len(category_names)):
-            category = category_names[i]
-            if category in distributions[key]:
-                data[key][i] = distributions[key][category]
-            else:
-                data[key][i] = 0
+        valid = len(filter_keys) == 0
+        for filter_key in filter_keys:
+            if filter_key.lower() == key.lower():
+                valid = True
+                break
+        if valid:
+            data[key] = np.zeros(len(category_names))
+            for i in range(len(category_names)):
+                category = category_names[i]
+                if category in distributions[key]:
+                    data[key][i] = distributions[key][category]
+                else:
+                    data[key][i] = 0
     df = pd.DataFrame(data, index=category_names)
     if len(sub_title) > 0:
         print(f'{title} - {sub_title}')
@@ -281,8 +290,8 @@ def dummy_dummy(column_index, number_of_segments=None):
         print(f'{title}')
     print(df.to_string())
     print()
-    print(df.div(len(parameters[0])).to_string())
-    print()
+    # print(df.div(len(parameters[0])).to_string())
+    # print()
 
 
 if __name__ == '__main__':
@@ -297,7 +306,13 @@ if __name__ == '__main__':
     # dummy_dummy(17, number_of_segments=5)
     # dummy_dummy(22, number_of_segments=5)
     # dummy_dummy(23)
-    dummy_dummy(24)
+
+    # {'Groovy', 'Kotlin', 'Python', 'C#', 'Go', 'JavaScript', 'C', '.NET', 'TypeScript', 'Java', 'Ruby', 'Scala', 'C++', 'PHP'}
+    # print(contain_string('Kotlin123', package_manager_languages, True))
+
+
+    # languages = list(package_manager_languages) + ['ASP.NET', 'Classic ASP', 'F#', 'Visual Basic .NET', 'Visual Basic 6.0']
+    # dummy_dummy(24, filter_keys=languages)
     # dummy_dummy(25)
-    # dummy_dummy(26)
-    # dummy_dummy(27)
+    dummy_dummy(26, as_count=True, number_of_segments=2)
+    dummy_dummy(27, as_count=True, number_of_segments=5)
