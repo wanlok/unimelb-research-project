@@ -161,7 +161,7 @@ def get_distributions(parameters):
 
 
 def compute_number_ranges(values, number_of_segments):
-    if values is None and number_of_segments is None:
+    if values is None or number_of_segments is None:
         number_ranges = None
     else:
         number_ranges = []
@@ -169,6 +169,7 @@ def compute_number_ranges(values, number_of_segments):
         all_segments = []
         segments = []
         segment_size = int(len(values) / number_of_segments)
+        # print(f'SEGMENT_SIZE: {segment_size}')
         for value in values:
             if len(segments) < segment_size:
                 segments.append(value)
@@ -182,6 +183,8 @@ def compute_number_ranges(values, number_of_segments):
                 all_segments[-1].extend(segments)
             else:
                 all_segments.append(segments)
+        # for s in all_segments:
+        #     print(s)
         all_segment_length = len(all_segments)
         for i in range(all_segment_length):
             start = all_segments[i][0]
@@ -290,8 +293,99 @@ def dummy_dummy(column_index, as_count=False, number_of_segments=None, filter_ke
         print(f'{title}')
     print(df.to_string())
     print()
+
     # print(df.div(len(parameters[0])).to_string())
     # print()
+
+
+def get_values(config):
+    title = None
+    sub_title = None
+    values = []
+    unique_values = set()
+    distribution_function = None
+    column_index, column_as_count, number_of_segments = config
+    i = 0
+    for row in csv_reader(attribute_file_path):
+        if i == 0:
+            title = expand(row)[column_index]
+        elif i == 1:
+            sub_title = row[column_index]
+        else:
+            value = row[column_index]
+            if len(value) > 0 and value[0] == '[' and value[-1] == ']':
+                value = eval(value)
+            if column_as_count:
+                value = f'{len(value)}'
+            if type(value) == list:
+                unique_values.update(value)
+                if distribution_function is None:
+                    distribution_function = value_function
+            elif value.isdigit():
+                value = int(value)
+                unique_values.add(value)
+                if distribution_function is None:
+                    distribution_function = range_function
+            else:
+                unique_values.add(value)
+                if distribution_function is None:
+                    distribution_function = value_function
+            values.append(value)
+        i = i + 1
+    return title, sub_title, values, sorted(list(unique_values)), compute_number_ranges(values, number_of_segments), distribution_function
+
+
+def get_matching_index_set(value, data):
+    indexes = set()
+    values = data[2]
+    number_ranges = data[4]
+    distribution_function = data[5]
+    for i in range(len(values)):
+        if number_ranges is None:
+            if type(values[i]) == list:
+                for j in range(len(values[i])):
+                    if value == values[i][j]:
+                        indexes.add(i)
+                        break
+            elif value == values[i]:
+                indexes.add(i)
+        elif value[2] == distribution_function(values[i], number_ranges):
+            indexes.add(i)
+    return indexes
+
+
+def compute_df(configs):
+    if len(configs) >= 2:
+        data = dict()
+        vertical = get_values(configs.pop(0))
+        vertical_number_ranges = vertical[4]
+        if vertical_number_ranges is None:
+            vertical_values = vertical[3]
+        else:
+            vertical_values = vertical_number_ranges
+        horizontal = get_values(configs[0])
+        horizontal_number_ranges = horizontal[4]
+        if horizontal_number_ranges is None:
+            horizontal_values = horizontal[3]
+        else:
+            horizontal_values = horizontal_number_ranges
+        for horizontal_value in horizontal_values:
+            print(horizontal_value)
+            horizontal_indexes = get_matching_index_set(horizontal_value, horizontal)
+            counts = []
+            for vertical_value in vertical_values:
+                vertical_indexes = get_matching_index_set(vertical_value, vertical)
+                count = len(horizontal_indexes.intersection(vertical_indexes))
+                counts.append(count)
+            if horizontal_number_ranges is None:
+                data[horizontal_value] = counts
+            else:
+                data[horizontal_value[2]] = counts
+        if vertical_number_ranges is None:
+            df = pd.DataFrame(data, index=vertical[3])
+        else:
+            df = pd.DataFrame(data, index=map(lambda x: x[2], vertical[4]))
+        return df
 
 
 if __name__ == '__main__':
@@ -312,7 +406,10 @@ if __name__ == '__main__':
 
 
     # languages = list(package_manager_languages) + ['ASP.NET', 'Classic ASP', 'F#', 'Visual Basic .NET', 'Visual Basic 6.0']
-    # dummy_dummy(24, filter_keys=languages)
+    # dummy_dummy(23)
     # dummy_dummy(25)
-    dummy_dummy(26, as_count=True, number_of_segments=2)
-    dummy_dummy(27, as_count=True, number_of_segments=5)
+    # dummy_dummy(24)
+    # dummy_dummy(27, as_count=True, number_of_segments=5)
+
+    df = compute_df([(24, None, None), (23, None, None), (6, None, None)])
+    print(df.to_string())

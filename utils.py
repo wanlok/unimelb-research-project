@@ -156,19 +156,26 @@ def get_start_and_end_date_string_before_date_minus_days(date, days, format):
     return start_date, end_date
 
 
-def max_item_length(list):
-    max_length = 0
-    for item in list:
-        length = len(item)
-        if length > max_length:
-            max_length = length
-    return max_length
-
-
-def contain_patterns(patterns, string):
+def contain_string(string, string_list, ignore_case=False):
     contain = False
-    for pattern in patterns:
-        if pattern in string:
+    for s in string_list:
+        if ignore_case and s.lower() in string.lower():
+            print(f'{s.lower()} {string.lower()}')
+            contain = True
+            break
+        elif s in string:
             contain = True
             break
     return contain
+
+
+def expand(aaa):
+    bbb = []
+    previous = None
+    for i in range(len(aaa)):
+        if len(aaa[i]) == 0:
+            bbb.append(previous)
+        else:
+            bbb.append(aaa[i])
+            previous = aaa[i]
+    return bbb
