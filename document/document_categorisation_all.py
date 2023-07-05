@@ -294,19 +294,16 @@ def dummy_dummy(column_index, as_count=False, number_of_segments=None, filter_ke
     print(df.to_string())
     print()
 
-    # print(df.div(len(parameters[0])).to_string())
-    # print()
 
-
-def get_values(config):
+def get_values(node, rows):
     title = None
     sub_title = None
     values = []
     unique_values = set()
     distribution_function = None
-    column_index, column_as_count, number_of_segments = config
+    column_index, column_as_count, number_of_segments = node
     i = 0
-    for row in csv_reader(attribute_file_path):
+    for row in rows:
         if i == 0:
             title = expand(row)[column_index]
         elif i == 1:
@@ -335,6 +332,13 @@ def get_values(config):
     return title, sub_title, values, sorted(list(unique_values)), compute_number_ranges(values, number_of_segments), distribution_function
 
 
+def get_rows():
+    rows = []
+    for row in csv_reader(attribute_file_path):
+        rows.append(row)
+    return rows
+
+
 def get_matching_index_set(value, data):
     indexes = set()
     values = data[2]
@@ -354,38 +358,58 @@ def get_matching_index_set(value, data):
     return indexes
 
 
-def compute_df(configs):
-    if len(configs) >= 2:
-        data = dict()
-        vertical = get_values(configs.pop(0))
-        vertical_number_ranges = vertical[4]
-        if vertical_number_ranges is None:
-            vertical_values = vertical[3]
-        else:
-            vertical_values = vertical_number_ranges
-        horizontal = get_values(configs[0])
-        horizontal_number_ranges = horizontal[4]
+def get_df_and_match_rows(vertical_node, horizontal_node, rows):
+    data = dict()
+    all_match_rows = []
+    vertical = get_values(vertical_node, rows)
+    vertical_number_ranges = vertical[4]
+    if vertical_number_ranges is None:
+        vertical_values = vertical[3]
+    else:
+        vertical_values = vertical_number_ranges
+    horizontal = get_values(horizontal_node, rows)
+    horizontal_number_ranges = horizontal[4]
+    if horizontal_number_ranges is None:
+        horizontal_values = horizontal[3]
+    else:
+        horizontal_values = horizontal_number_ranges
+    for horizontal_value in horizontal_values:
+        horizontal_indexes = get_matching_index_set(horizontal_value, horizontal)
+        counts = []
+        for vertical_value in vertical_values:
+            vertical_indexes = get_matching_index_set(vertical_value, vertical)
+            match_rows = [rows[2:][i] for i in horizontal_indexes.intersection(vertical_indexes)]
+            counts.append(len(match_rows))
+            all_match_rows.append((vertical_value, horizontal_value, rows[:2] + match_rows))
         if horizontal_number_ranges is None:
-            horizontal_values = horizontal[3]
+            data[horizontal_value] = counts
         else:
-            horizontal_values = horizontal_number_ranges
-        for horizontal_value in horizontal_values:
-            print(horizontal_value)
-            horizontal_indexes = get_matching_index_set(horizontal_value, horizontal)
-            counts = []
-            for vertical_value in vertical_values:
-                vertical_indexes = get_matching_index_set(vertical_value, vertical)
-                count = len(horizontal_indexes.intersection(vertical_indexes))
-                counts.append(count)
-            if horizontal_number_ranges is None:
-                data[horizontal_value] = counts
-            else:
-                data[horizontal_value[2]] = counts
-        if vertical_number_ranges is None:
-            df = pd.DataFrame(data, index=vertical[3])
-        else:
-            df = pd.DataFrame(data, index=map(lambda x: x[2], vertical[4]))
-        return df
+            data[horizontal_value[2]] = counts
+    if vertical_number_ranges is None:
+        df = pd.DataFrame(data, index=vertical[3])
+    else:
+        df = pd.DataFrame(data, index=map(lambda x: x[2], vertical[4]))
+    return vertical[0], vertical[1], horizontal[0], horizontal[1], df, all_match_rows
+
+
+def combine_match_rows_by_column(match_rows, column):
+    title_row = None
+    sub_title_row = None
+    rows = []
+    repo_dict = dict()
+    for _, horizontal_value, r in match_rows:
+        if horizontal_value == column:
+            for i in range(len(r)):
+                if i == 0:
+                    title_row = r[i]
+                elif i == 1:
+                    sub_title_row = r[i]
+                else:
+                    repo = r[i][0]
+                    if repo not in repo_dict:
+                        repo_dict[repo] = 1
+                        rows.append(r[i])
+    return [title_row, sub_title_row] + rows
 
 
 if __name__ == '__main__':
@@ -411,5 +435,26 @@ if __name__ == '__main__':
     # dummy_dummy(24)
     # dummy_dummy(27, as_count=True, number_of_segments=5)
 
-    df = compute_df([(24, None, None), (23, None, None), (6, None, None)])
+    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, match_rows = get_df_and_match_rows((23, None, None), (23, None, None), get_rows())
+    vertical_title = f'{vertical_title} {vertical_sub_title}'.strip()
+    horizontal_title = f'{horizontal_title} {horizontal_sub_title}'.strip()
+    print(f'{vertical_title} / {horizontal_title}')
     print(df.to_string())
+    print()
+    rows = combine_match_rows_by_column(match_rows, 'Documentation')
+    print(len(rows))
+
+    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, match_rows = get_df_and_match_rows((23, None, None), (27, True, 2), rows)
+    vertical_title = f'{vertical_title} {vertical_sub_title}'.strip()
+    horizontal_title = f'{horizontal_title} {horizontal_sub_title}'.strip()
+    print(f'{vertical_title} / {horizontal_title}')
+    print(df.to_string())
+    # print()
+    # rows = combine_match_rows_by_column(match_rows, 'Software tools')
+    # print(len(rows))
+
+
+    # for r in rows:
+    #     print(r)
+
+
