@@ -7,8 +7,7 @@ import numpy as np
 import pandas as pd
 
 from document.document_sampling import get_remaining_and_categorised_file_paths, get_latest_content
-from document.document_utils import get_fasttext_mappings, get_headers_and_paragraphs, preprocess, get_csv_file_tuple, \
-    get_docx_file_tuple, category_names
+from document.document_utils import get_fasttext_mappings, get_headers_and_paragraphs, preprocess, get_csv_file_tuple, get_docx_file_tuple, category_names
 from repository import package_manager_languages
 from utils import sort_by_descending_values, csv_writer, csv_reader, expand, contain_string
 
@@ -163,12 +162,17 @@ def get_distributions(parameters):
 def compute_number_ranges(values, number_of_segments):
     if values is None or number_of_segments is None:
         number_ranges = None
+    elif len(values) == 1:
+        number_ranges = [(values[0], values[0], f'{values[0]} - {values[0]}')]
     else:
         number_ranges = []
         values = sorted(values)
         all_segments = []
         segments = []
-        segment_size = int(len(values) / number_of_segments)
+        if len(values) < number_of_segments:
+            segment_size = len(values)
+        else:
+            segment_size = int(len(values) / number_of_segments)
         # print(f'SEGMENT_SIZE: {segment_size}')
         for value in values:
             if len(segments) < segment_size:
@@ -183,8 +187,6 @@ def compute_number_ranges(values, number_of_segments):
                 all_segments[-1].extend(segments)
             else:
                 all_segments.append(segments)
-        # for s in all_segments:
-        #     print(s)
         all_segment_length = len(all_segments)
         for i in range(all_segment_length):
             start = all_segments[i][0]
@@ -301,7 +303,7 @@ def get_values(node, rows):
     values = []
     unique_values = set()
     distribution_function = None
-    column_index, column_as_count, number_of_segments = node
+    column_index, column_as_count, number_of_segments, filter_list = node
     i = 0
     for row in rows:
         if i == 0:
@@ -329,7 +331,13 @@ def get_values(node, rows):
                     distribution_function = value_function
             values.append(value)
         i = i + 1
-    return title, sub_title, values, sorted(list(unique_values)), compute_number_ranges(values, number_of_segments), distribution_function
+    unique_values = sorted(list(unique_values))
+    number_ranges = compute_number_ranges(values, number_of_segments)
+    if number_ranges is None:
+        keys = unique_values
+    else:
+        keys = number_ranges
+    return title, sub_title, values, unique_values, number_ranges, keys, distribution_function, filter_list
 
 
 def get_rows():
@@ -343,7 +351,7 @@ def get_matching_index_set(value, data):
     indexes = set()
     values = data[2]
     number_ranges = data[4]
-    distribution_function = data[5]
+    distribution_function = data[6]
     for i in range(len(values)):
         if number_ranges is None:
             if type(values[i]) == list:
@@ -358,58 +366,109 @@ def get_matching_index_set(value, data):
     return indexes
 
 
+def is_filtered(filter_list, key):
+    return filter_list is None or len(filter_list) == 0 or key in filter_list
+
+
 def get_df_and_match_rows(vertical_node, horizontal_node, rows):
     data = dict()
-    all_match_rows = []
     vertical = get_values(vertical_node, rows)
-    vertical_number_ranges = vertical[4]
-    if vertical_number_ranges is None:
-        vertical_values = vertical[3]
-    else:
-        vertical_values = vertical_number_ranges
+    vertical_dict = dict()
     horizontal = get_values(horizontal_node, rows)
-    horizontal_number_ranges = horizontal[4]
-    if horizontal_number_ranges is None:
-        horizontal_values = horizontal[3]
-    else:
-        horizontal_values = horizontal_number_ranges
-    for horizontal_value in horizontal_values:
-        horizontal_indexes = get_matching_index_set(horizontal_value, horizontal)
+    horizontal_dict = dict()
+    for horizontal_key in horizontal[5]:
+        horizontal_indexes = get_matching_index_set(horizontal_key, horizontal)
         counts = []
-        for vertical_value in vertical_values:
-            vertical_indexes = get_matching_index_set(vertical_value, vertical)
+        for vertical_key in vertical[5]:
+            vertical_indexes = get_matching_index_set(vertical_key, vertical)
             match_rows = [rows[2:][i] for i in horizontal_indexes.intersection(vertical_indexes)]
             counts.append(len(match_rows))
-            all_match_rows.append((vertical_value, horizontal_value, rows[:2] + match_rows))
-        if horizontal_number_ranges is None:
-            data[horizontal_value] = counts
-        else:
-            data[horizontal_value[2]] = counts
-    if vertical_number_ranges is None:
+            if is_filtered(vertical[7], vertical_key):
+                if vertical_key in vertical_dict:
+                    vertical_dict[vertical_key].append(match_rows)
+                else:
+                    vertical_dict[vertical_key] = [match_rows]
+            if is_filtered(horizontal[7], horizontal_key):
+                if horizontal_key in horizontal_dict:
+                    horizontal_dict[horizontal_key].append(match_rows)
+                else:
+                    horizontal_dict[horizontal_key] = [match_rows]
+        if is_filtered(horizontal[7], horizontal_key):
+            if horizontal[4] is None:
+                data[horizontal_key] = counts
+            else:
+                data[horizontal_key[2]] = counts
+    if vertical[4] is None:
         df = pd.DataFrame(data, index=vertical[3])
     else:
         df = pd.DataFrame(data, index=map(lambda x: x[2], vertical[4]))
-    return vertical[0], vertical[1], horizontal[0], horizontal[1], df, all_match_rows
+    vertical_dict = combine_rows(vertical_dict, rows[:2])
+    horizontal_dict = combine_rows(horizontal_dict, rows[:2])
+    return vertical[0], vertical[1], horizontal[0], horizontal[1], df, vertical_dict, horizontal_dict
 
 
-def combine_match_rows_by_column(match_rows, column):
-    title_row = None
-    sub_title_row = None
-    rows = []
-    repo_dict = dict()
-    for _, horizontal_value, r in match_rows:
-        if horizontal_value == column:
-            for i in range(len(r)):
-                if i == 0:
-                    title_row = r[i]
-                elif i == 1:
-                    sub_title_row = r[i]
-                else:
-                    repo = r[i][0]
-                    if repo not in repo_dict:
-                        repo_dict[repo] = 1
-                        rows.append(r[i])
-    return [title_row, sub_title_row] + rows
+def combine_rows(my_dict, title_rows):
+    my_new_dict = dict()
+    for key in my_dict:
+        rows = []
+        repo_dict = dict()
+        for r in my_dict[key]:
+            for row in r:
+                repo = row[0]
+                if repo not in repo_dict:
+                    repo_dict[repo] = 1
+                    rows.append(row)
+        my_new_dict[key] = title_rows + rows
+    return my_new_dict
+
+
+def get_data_frame_title(titles):
+    s = ''
+    for i in range(len(titles)):
+        title = titles[i]
+        if i > 0:
+            s = s + f' / '
+        if title[1] is None:
+            s = s + f'{title[0]}'
+        else:
+            if type(title[1]) is tuple:
+                s = s + f'{title[0]} ({title[1][2]})'
+            else:
+                s = s + f'{title[0]} ({title[1]})'
+    return s
+
+
+def compute_data_frames_recur(leaf_node, nodes, titles, index, horizontal_dict):
+    if index < len(nodes):
+        first = True
+        for key in horizontal_dict:
+            _, _, horizontal_title, horizontal_sub_title, df, _, next_horizontal_dict = get_df_and_match_rows(leaf_node, nodes[index], horizontal_dict[key])
+            if first:
+                titles.append((f'{horizontal_title} {horizontal_sub_title}'.strip(), None))
+                first = False
+            titles[index + 1] = (titles[index + 1][0], key)
+            print(get_data_frame_title(titles))
+            print()
+            print(df.to_string())
+            print()
+            print(df.sum().sum())
+            print()
+            compute_data_frames_recur(leaf_node, nodes, titles.copy(), index + 1, next_horizontal_dict)
+
+
+def compute_data_frames(leaf_node, nodes):
+    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, _, horizontal_dict = get_df_and_match_rows(leaf_node, nodes.pop(0), get_rows())
+    titles = [
+        (f'{vertical_title} {vertical_sub_title}'.strip(), None),
+        (f'{horizontal_title} {horizontal_sub_title}'.strip(), None)
+    ]
+    print(get_data_frame_title(titles))
+    print()
+    print(df.to_string())
+    print()
+    print(df.sum().sum())
+    print()
+    compute_data_frames_recur(leaf_node, nodes, titles.copy(), 0, horizontal_dict)
 
 
 if __name__ == '__main__':
@@ -435,26 +494,10 @@ if __name__ == '__main__':
     # dummy_dummy(24)
     # dummy_dummy(27, as_count=True, number_of_segments=5)
 
-    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, match_rows = get_df_and_match_rows((23, None, None), (23, None, None), get_rows())
-    vertical_title = f'{vertical_title} {vertical_sub_title}'.strip()
-    horizontal_title = f'{horizontal_title} {horizontal_sub_title}'.strip()
-    print(f'{vertical_title} / {horizontal_title}')
-    print(df.to_string())
-    print()
-    rows = combine_match_rows_by_column(match_rows, 'Documentation')
-    print(len(rows))
 
-    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, match_rows = get_df_and_match_rows((23, None, None), (27, True, 2), rows)
-    vertical_title = f'{vertical_title} {vertical_sub_title}'.strip()
-    horizontal_title = f'{horizontal_title} {horizontal_sub_title}'.strip()
-    print(f'{vertical_title} / {horizontal_title}')
-    print(df.to_string())
-    # print()
-    # rows = combine_match_rows_by_column(match_rows, 'Software tools')
-    # print(len(rows))
+    programming_languages = list(package_manager_languages) + ['ASP.NET', 'Classic ASP', 'F#', 'Visual Basic .NET']
 
-
-    # for r in rows:
-    #     print(r)
-
+    # compute_data_frames((1, None, None), [(7, None, 5), (12, None, 5), (17, None, 5)])
+    compute_data_frames((1, None, None, None), [(23, None, None, None), (24, None, None, programming_languages), (7, None, 5, None)])
+    # compute_data_frames((23, None, None, None), [(23, None, None, None)])
 
