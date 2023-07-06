@@ -297,13 +297,32 @@ def dummy_dummy(column_index, as_count=False, number_of_segments=None, filter_ke
     print()
 
 
+def parse_node(node):
+    number_of_segments = None
+    column_as_count = None
+    filter_list = None
+    assigned_type = None
+    length = len(node)
+    if type(node) == int or length == 1:
+        column_index = node
+    elif length == 2:
+        column_index, number_of_segments = node
+    elif length == 3:
+        column_index, number_of_segments, column_as_count = node
+    elif length == 4:
+        column_index, number_of_segments, column_as_count, filter_list = node
+    else:
+        column_index, number_of_segments, column_as_count, filter_list, assigned_type = node
+    return column_index, number_of_segments, column_as_count, filter_list, assigned_type
+
+
 def get_values(node, rows):
     title = None
     sub_title = None
     values = []
     unique_values = set()
     distribution_function = None
-    column_index, column_as_count, number_of_segments, filter_list = node
+    column_index, number_of_segments, column_as_count, filter_list, assigned_type = parse_node(node)
     i = 0
     for row in rows:
         if i == 0:
@@ -320,7 +339,7 @@ def get_values(node, rows):
                 unique_values.update(value)
                 if distribution_function is None:
                     distribution_function = value_function
-            elif value.isdigit():
+            elif assigned_type is not str and value.isdigit():
                 value = int(value)
                 unique_values.add(value)
                 if distribution_function is None:
@@ -495,9 +514,13 @@ if __name__ == '__main__':
     # dummy_dummy(27, as_count=True, number_of_segments=5)
 
 
-    programming_languages = list(package_manager_languages) + ['ASP.NET', 'Classic ASP', 'F#', 'Visual Basic .NET']
+    programming_languages = list(package_manager_languages) + ['ASP.NET', 'Classic ASP', 'F#', 'Visual Basic .NET', 'Visual Basic 6.0']
 
     # compute_data_frames((1, None, None), [(7, None, 5), (12, None, 5), (17, None, 5)])
-    compute_data_frames((1, None, None, None), [(23, None, None, None), (24, None, None, programming_languages), (7, None, 5, None)])
+    # compute_data_frames((2, None, None, None), [(24, None, None, None), (25, None, None, programming_languages), (1, None, None, None, str)])
+    # compute_data_frames(24, [24])
+    compute_data_frames((8, 5), [(8, 5)])
+    # compute_data_frames((2, None, None, None), [(25, None, None, programming_languages), (3, None, 3, None)])
+    # compute_data_frames((2, None, None, None), [(1, None, None, None, str), (25, None, None, programming_languages)])
     # compute_data_frames((23, None, None, None), [(23, None, None, None)])
 
