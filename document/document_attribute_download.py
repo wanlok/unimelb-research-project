@@ -309,29 +309,13 @@ def download_issues(repo):
         f.write(f'{issue_list}')
 
 
+def repos(function):
+    directory_path = 'C:\\Files\\a1\\'
+    for file_name in os.listdir(directory_path):
+        repo = file_name.replace('.csv', '').replace('_', '/', 1)
+        function(repo)
 
 
 if __name__ == '__main__':
-    # language_csv_file_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Attributes\\Languages.csv'
-    # language_csv_file_rows = get_csv_rows(language_csv_file_path)
-    directory_path = 'C:\\Files\\a1\\'
-    # i = 0
-    # years = [2018, 2019, 2020, 2021, 2022]
-    # for file_name in os.listdir(directory_path):
-    #     i = i + 1
-    #     repo = file_name.replace('.csv', '').replace('_', '/', 1)
-    #     # repo = 'tensorflow/tensorflow'
-    #     print(download_attributes(repo))
-            # break
-
-    for file_name in os.listdir(directory_path):
-        repo = file_name.replace('.csv', '').replace('_', '/', 1)
-        download_issues(repo)
-
-    # with open('C:\\Files\\issues\\activerecord-hackery_ransack.txt', encoding='utf-8') as f:
-    #     lines = f.readlines()
-    #     i = 0
-    #     for a in eval(lines[0]):
-    #         print(a['node'])
-    #         i = i + 1
-    #     print(i)
+    # repos(download_attributes)
+    repos(download_issues)
