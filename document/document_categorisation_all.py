@@ -302,17 +302,20 @@ def parse_node(node):
     column_as_count = None
     filter_list = None
     assigned_type = None
-    length = len(node)
-    if type(node) == int or length == 1:
+    if type(node) == int:
         column_index = node
-    elif length == 2:
-        column_index, number_of_segments = node
-    elif length == 3:
-        column_index, number_of_segments, column_as_count = node
-    elif length == 4:
-        column_index, number_of_segments, column_as_count, filter_list = node
     else:
-        column_index, number_of_segments, column_as_count, filter_list, assigned_type = node
+        length = len(node)
+        if length == 1:
+            column_index = node
+        elif length == 2:
+            column_index, number_of_segments = node
+        elif length == 3:
+            column_index, number_of_segments, column_as_count = node
+        elif length == 4:
+            column_index, number_of_segments, column_as_count, filter_list = node
+        else:
+            column_index, number_of_segments, column_as_count, filter_list, assigned_type = node
     return column_index, number_of_segments, column_as_count, filter_list, assigned_type
 
 
@@ -519,8 +522,8 @@ if __name__ == '__main__':
     # compute_data_frames((1, None, None), [(7, None, 5), (12, None, 5), (17, None, 5)])
     # compute_data_frames((2, None, None, None), [(24, None, None, None), (25, None, None, programming_languages), (1, None, None, None, str)])
     # compute_data_frames(24, [24])
-    compute_data_frames((8, 5), [(8, 5)])
-    # compute_data_frames((2, None, None, None), [(25, None, None, programming_languages), (3, None, 3, None)])
+    compute_data_frames((8, 5), [(8, 5), 24])
+    # compute_data_frames((2), [(25, None, None, programming_languages), (3, 3)])
     # compute_data_frames((2, None, None, None), [(1, None, None, None, str), (25, None, None, programming_languages)])
     # compute_data_frames((23, None, None, None), [(23, None, None, None)])
 

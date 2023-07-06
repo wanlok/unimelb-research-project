@@ -3,7 +3,7 @@ import os
 import requests
 
 from repository import headers
-from utils import csv_reader
+from utils import csv_reader, csv_writer
 
 all_graphql = '''
 query {
@@ -100,6 +100,37 @@ query {
 }
 '''
 
+issue_graphql = '''
+query {
+    repository(owner: "{1}", name: "{2}") {
+        issues(first: 100{AFTER}) {
+            totalCount
+            edges {
+                node {
+                    createdAt
+                    state
+                    title
+                    bodyText
+                    comments(first: 100) {
+                        edges {
+                            node {
+                                createdAt
+                                bodyText
+                            }
+                        }
+                    }
+                }
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+            }            
+        }
+    }
+}
+'''
+
+
 path_programming_language = '/data/repository/languages/edges'
 path_number_of_stars = '/data/repository/stargazers/totalCount'
 path_commit_count_2018 = '/data/repository/defaultBranchRef/target/commitCount2018/totalCount'
@@ -123,6 +154,10 @@ path_committer_count = '/data/repository/defaultBranchRef/target/history/totalCo
 path_committer_next_page = '/data/repository/defaultBranchRef/target/history/pageInfo/hasNextPage'
 path_committer_cursor = '/data/repository/defaultBranchRef/target/history/pageInfo/endCursor'
 
+path_issue_list = '/data/repository/issues/edges'
+path_issue_count = '/data/repository/issues/totalCount'
+path_issue_next_page = '/data/repository/issues/pageInfo/hasNextPage'
+path_issue_cursor = '/data/repository/issues/pageInfo/endCursor'
 
 def post_graphql(graphql):
     return requests.post('https://api.github.com/graphql', json={'query': graphql}, headers=headers).json()
@@ -261,15 +296,42 @@ def download_attributes(repo):
     return row
 
 
+def download_issues(repo):
+    slices = repo.split('/')
+    owner = slices[0]
+    project = slices[1]
+    graphql = issue_graphql.replace('{1}', owner).replace('{2}', project)
+    directory_path = 'C:\\Files\\issues\\'
+    file_name = repo.replace('/', '_')
+    print(repo)
+    issue_list = get_list(graphql, path_issue_list, path_issue_next_page, path_issue_cursor, path_issue_count)
+    with open(f'{directory_path}{file_name}.txt', 'w', encoding='utf-8') as f:
+        f.write(f'{issue_list}')
+
+
+
+
 if __name__ == '__main__':
-    language_csv_file_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Attributes\\Languages.csv'
-    language_csv_file_rows = get_csv_rows(language_csv_file_path)
+    # language_csv_file_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Attributes\\Languages.csv'
+    # language_csv_file_rows = get_csv_rows(language_csv_file_path)
     directory_path = 'C:\\Files\\a1\\'
-    i = 0
-    years = [2018, 2019, 2020, 2021, 2022]
-    for file_name in os.listdir(directory_path):
-        i = i + 1
-        repo = file_name.replace('.csv', '').replace('_', '/', 1)
-        # repo = 'tensorflow/tensorflow'
-        print(download_attributes(repo))
+    # i = 0
+    # years = [2018, 2019, 2020, 2021, 2022]
+    # for file_name in os.listdir(directory_path):
+    #     i = i + 1
+    #     repo = file_name.replace('.csv', '').replace('_', '/', 1)
+    #     # repo = 'tensorflow/tensorflow'
+    #     print(download_attributes(repo))
             # break
+
+    for file_name in os.listdir(directory_path):
+        repo = file_name.replace('.csv', '').replace('_', '/', 1)
+        download_issues(repo)
+
+    # with open('C:\\Files\\issues\\activerecord-hackery_ransack.txt', encoding='utf-8') as f:
+    #     lines = f.readlines()
+    #     i = 0
+    #     for a in eval(lines[0]):
+    #         print(a['node'])
+    #         i = i + 1
+    #     print(i)
