@@ -337,7 +337,9 @@ def download_issues(repo):
                 for new_issue in new_issue_list:
                     exists = False
                     for issue in issue_list:
-                        if new_issue['node']['createdAt'] == issue['node']['createdAt'] and new_issue['node']['title'] == issue['node']['title'] :
+                        if new_issue['node']['createdAt'] == issue['node']['createdAt']\
+                                and new_issue['node']['title'] == issue['node']['title']\
+                                and new_issue['node']['bodyText'] == issue['node']['bodyText']:
                             exists = True
                             break
                     if not exists:
