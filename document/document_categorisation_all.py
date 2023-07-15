@@ -9,12 +9,11 @@ import pandas as pd
 from document.document_sampling import get_remaining_and_categorised_file_paths, get_latest_content
 from document.document_utils import get_fasttext_mappings, get_headers_and_paragraphs, preprocess, get_csv_file_tuple, get_docx_file_tuple, category_names
 from repository import package_manager_languages
-from utils import sort_by_descending_values, csv_writer, csv_reader, expand, contain_string
+from utils import sort_by_descending_values, csv_writer, csv_reader, expand, contain_string, attribute_file_path
 
 fasttext_mappings = get_fasttext_mappings()
 fasttext_model_file_path = 'C:\\Files\\Projects\\jupyter\\models\\2023062223234503.bin'
 sample_directory_path = 'C:\\Files\\Projects\\jupyter\\samples\\'
-attribute_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Attributes.csv'
 
 
 def print_distributions(distributions, distinct=False):
@@ -302,6 +301,7 @@ def parse_node(node):
     column_as_count = None
     filter_list = None
     assigned_type = None
+    number_ranges = None
     if type(node) == int:
         column_index = node
     else:
@@ -314,9 +314,11 @@ def parse_node(node):
             column_index, number_of_segments, column_as_count = node
         elif length == 4:
             column_index, number_of_segments, column_as_count, filter_list = node
-        else:
+        elif length == 5:
             column_index, number_of_segments, column_as_count, filter_list, assigned_type = node
-    return column_index, number_of_segments, column_as_count, filter_list, assigned_type
+        else:
+            column_index, number_of_segments, column_as_count, filter_list, assigned_type, number_ranges = node
+    return column_index, number_of_segments, column_as_count, filter_list, assigned_type, number_ranges
 
 
 def get_values(node, rows):
@@ -325,7 +327,7 @@ def get_values(node, rows):
     values = []
     unique_values = set()
     distribution_function = None
-    column_index, number_of_segments, column_as_count, filter_list, assigned_type = parse_node(node)
+    column_index, number_of_segments, column_as_count, filter_list, assigned_type, number_ranges = parse_node(node)
     i = 0
     for row in rows:
         if i == 0:
@@ -354,7 +356,8 @@ def get_values(node, rows):
             values.append(value)
         i = i + 1
     unique_values = sorted(list(unique_values))
-    number_ranges = compute_number_ranges(values, number_of_segments)
+    if number_ranges is None:
+        number_ranges = compute_number_ranges(values, number_of_segments)
     if number_ranges is None:
         keys = unique_values
     else:
@@ -471,9 +474,11 @@ def compute_data_frames_recur(leaf_node, nodes, titles, index, horizontal_dict):
             titles[index + 1] = (titles[index + 1][0], key)
             print(get_data_frame_title(titles))
             print()
+            sum = df.sum().sum()
+            df = df / sum
             print(df.to_string())
             print()
-            print(df.sum().sum())
+            print(f'{sum} {df.sum().sum()}')
             print()
             compute_data_frames_recur(leaf_node, nodes, titles.copy(), index + 1, next_horizontal_dict)
 
@@ -486,9 +491,13 @@ def compute_data_frames(leaf_node, nodes):
     ]
     print(get_data_frame_title(titles))
     print()
+    # df = df /
+    # divide by the corresponding language
+    sum = df.sum().sum()
+    # df = df / sum
     print(df.to_string())
     print()
-    print(df.sum().sum())
+    print(f'{sum} {df.sum().sum()}')
     print()
     compute_data_frames_recur(leaf_node, nodes, titles.copy(), 0, horizontal_dict)
 
@@ -522,8 +531,36 @@ if __name__ == '__main__':
     # compute_data_frames((1, None, None), [(7, None, 5), (12, None, 5), (17, None, 5)])
     # compute_data_frames((2, None, None, None), [(24, None, None, None), (25, None, None, programming_languages), (1, None, None, None, str)])
     # compute_data_frames(24, [24])
-    compute_data_frames((8, 5), [(8, 5), 24])
+
+    # compute_data_frames(2, [(8, 5)])
+    # compute_data_frames(2, [24, (25, None, None, programming_languages)])
+
+    # compute_data_frames(2, [(29, 10)])
+
+    number_ranges = []
+    number_ranges.append((0, 1000, f'0 - 1000'))
+    number_ranges.append((1001, 10000, f'1001 - 10000'))
+    number_ranges.append((10001, 999999999, f'10001 or above'))
+
+    # number_ranges.append((0, 1000, f'0 - 1000'))
+    # number_ranges.append((1001, 2000, f'1001 - 2000'))
+    # number_ranges.append((2001, 3000, f'2001 - 3000'))
+    # number_ranges.append((3001, 4000, f'3001 - 4000'))
+    # number_ranges.append((4001, 5000, f'4001 - 5000'))
+    # number_ranges.append((5001, 6000, f'5001 - 6000'))
+    # number_ranges.append((6001, 7000, f'6001 - 7000'))
+    # number_ranges.append((7001, 8000, f'7001 - 8000'))
+    # number_ranges.append((8001, 9000, f'8001 - 9000'))
+    # number_ranges.append((9001, 10000, f'9001 - 10000'))
+    # number_ranges.append((10001, 999999999, f'10001 or above'))
+
+    compute_data_frames((29, 10, None, None, None, number_ranges), [2])
+    compute_data_frames((3, 10, None, None, None, number_ranges), [2])
+
+    # compute_data_frames(2, [(3, 2)])
+    # compute_data_frames((8, 5), [24])
     # compute_data_frames((2), [(25, None, None, programming_languages), (3, 3)])
+    # compute_data_frames(2, [24, (25, None, None, programming_languages)])
     # compute_data_frames((2, None, None, None), [(1, None, None, None, str), (25, None, None, programming_languages)])
     # compute_data_frames((23, None, None, None), [(23, None, None, None)])
 
