@@ -3,7 +3,7 @@ import os
 import requests
 
 from repository import headers
-from utils import csv_reader, csv_writer
+from utils import csv_reader, csv_writer, repos
 
 all_graphql = '''
 query {
@@ -39,6 +39,7 @@ query {
                 }
             }
         }
+        forkCount
     }
     issueCount2018: search(query:"repo:{3} is:issue created:2018-01-01T00:00:00Z..2018-12-31T23:59:59Z", type:ISSUE) {
         issueCount
@@ -130,7 +131,6 @@ query {
 }
 '''
 
-
 path_programming_language = '/data/repository/languages/edges'
 path_number_of_stars = '/data/repository/stargazers/totalCount'
 path_commit_count_2018 = '/data/repository/defaultBranchRef/target/commitCount2018/totalCount'
@@ -148,6 +148,7 @@ path_issue_closed_count_2019 = '/data/issueClosedCount2019/issueCount'
 path_issue_closed_count_2020 = '/data/issueClosedCount2020/issueCount'
 path_issue_closed_count_2021 = '/data/issueClosedCount2021/issueCount'
 path_issue_closed_count_2022 = '/data/issueClosedCount2022/issueCount'
+path_fork_count = '/data/repository/forkCount'
 
 path_committer_list = '/data/repository/defaultBranchRef/target/history/edges'
 path_committer_count = '/data/repository/defaultBranchRef/target/history/totalCount'
@@ -158,6 +159,7 @@ path_issue_list = '/data/repository/issues/edges'
 path_issue_count = '/data/repository/issues/totalCount'
 path_issue_next_page = '/data/repository/issues/pageInfo/hasNextPage'
 path_issue_cursor = '/data/repository/issues/pageInfo/endCursor'
+
 
 def post_graphql(graphql):
     return requests.post('https://api.github.com/graphql', json={'query': graphql}, headers=headers).json()
@@ -312,7 +314,9 @@ def get_saved_issue_list(file_path):
     issues = []
     if os.path.exists(file_path):
         with open(file_path, encoding='utf-8') as f:
-            issues = eval(f.readlines()[0])
+            lines = f.readlines()
+            if len(lines) > 0:
+                issues = eval(lines[0])
         f.close()
     return issues
 
@@ -329,7 +333,8 @@ def download_issues(repo):
         expected_number_of_issues = count_dict[repo]
         issue_list = get_saved_issue_list(file_path)
         number_of_issues = len(issue_list)
-        if expected_number_of_issues <= 5000:
+        print(f'{repo} {expected_number_of_issues} {number_of_issues}')
+        if expected_number_of_issues <= 999999999 and repo not in ['kubernetes/kubernetes']:
             cursor = ''
             while len(issue_list) < expected_number_of_issues:
                 print(f'{repo} {expected_number_of_issues} {number_of_issues}')
@@ -349,22 +354,20 @@ def download_issues(repo):
                 number_of_issues = len(issue_list)
 
 
-def repos(function):
-    directory_path = 'C:\\Files\\a1\\'
-    for file_name in os.listdir(directory_path):
-        repo = file_name.replace('.csv', '').replace('_', '/', 1)
-        function(repo)
 
 
 def dummy(repo):
-    file_name = repo.replace('/', '_')
+    graphql = all_graphql
+    path = path_fork_count
+    # file_name = repo.replace('/', '_')
     slices = repo.split('/')
     owner = slices[0]
     project = slices[1]
-    graphql = issue_graphql.replace('{1}', owner).replace('{2}', project).replace('{AFTER}', '')
+    graphql = graphql.replace('{1}', owner).replace('{2}', project)
     result_dict = get_result_dict(graphql, post_graphql(graphql))
-    if path_issue_count in result_dict:
-        print(f'{repo},{result_dict[path_issue_count]}')
+    print(result_dict)
+    if path in result_dict:
+        print(f'{repo},{result_dict[path]}')
     else:
         print(f'{repo},failed')
 
@@ -374,3 +377,7 @@ if __name__ == '__main__':
     prepare_count_dict()
     repos(download_issues)
     # repos(dummy)
+
+    # dummy('tensorflow/tensorflow')
+
+

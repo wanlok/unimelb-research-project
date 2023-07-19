@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from docx import Document
 
+from document.document_sampling import set_page_style
 from utils import contain_string, csv_reader
 
 train_path = 'C:\\Files\\Projects\\jupyter\\dummy.train'
@@ -286,6 +287,16 @@ def get_directory_paths():
     return directory_paths
 
 
+def get_docx_content(file_path):
+    content = None
+    file = open(file_path, 'rb')
+    paragraphs = Document(file).paragraphs
+    if len(paragraphs) == 1:
+        content = paragraphs[0].text
+    file.close()
+    return content
+
+
 def get_docx_file_tuple(file_path):
     file_tuple = None
     file = open(file_path, 'rb')
@@ -395,6 +406,18 @@ def get_distinct_categories(file_path):
             for category in map(lambda x: x.strip(), line.split(',')):
                 my_dict[category] = 1
     return my_dict.keys()
+
+
+def write_content_to_file_path(content, file_path):
+    document = Document()
+    set_page_style(document)
+    document.add_paragraph(content)
+    # table = document.add_table(rows=1, cols=1)
+    # table.allow_autofit = False
+    # for cell in table.columns[0].cells:
+    #     cell.width = Cm(6)
+    # table.rows[0].cells[0].text = content
+    document.save(file_path)
 
 
 if __name__ == '__main__':

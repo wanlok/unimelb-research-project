@@ -3,7 +3,6 @@ import os
 from docx.enum.section import WD_ORIENTATION
 from docx.shared import Cm
 
-from document.document_utils import ignored_file_names, get_headers_and_paragraphs, get_directory_paths
 from utils import csv_reader, csv_writer
 
 
@@ -51,19 +50,6 @@ def get_file_paths():
     for file_name in os.listdir(directory_path):
         file_paths.append(f'{directory_path}{file_name}')
     return file_paths
-
-
-def get_latest_content(file_path):
-    content = None
-    target_row = None
-    i = 0
-    for row in csv_reader(f'{file_path}'):
-        if i > 0:
-            target_row = row
-        i = i + 1
-    if target_row is not None:
-        content = target_row[5]
-    return content
 
 
 def save_to_csv(file_paths, save_path):

@@ -6,7 +6,7 @@ import fasttext
 import numpy as np
 import pandas as pd
 
-from document.document_sampling import get_remaining_and_categorised_file_paths, get_latest_content
+from document.document_sampling import get_remaining_and_categorised_file_paths
 from document.document_utils import get_fasttext_mappings, get_headers_and_paragraphs, preprocess, get_csv_file_tuple, get_docx_file_tuple, category_names
 from repository import package_manager_languages
 from utils import sort_by_descending_values, csv_writer, csv_reader, expand, contain_string, attribute_file_path
@@ -399,13 +399,17 @@ def get_df_and_match_rows(vertical_node, horizontal_node, rows):
     data = dict()
     vertical = get_values(vertical_node, rows)
     vertical_dict = dict()
+    vertical_count_dict = dict()
     horizontal = get_values(horizontal_node, rows)
     horizontal_dict = dict()
+    horizontal_count_dict = dict()
     for horizontal_key in horizontal[5]:
         horizontal_indexes = get_matching_index_set(horizontal_key, horizontal)
+        horizontal_count_dict[horizontal_key] = len(horizontal_indexes)
         counts = []
         for vertical_key in vertical[5]:
             vertical_indexes = get_matching_index_set(vertical_key, vertical)
+            vertical_count_dict[vertical_key] = len(vertical_indexes)
             match_rows = [rows[2:][i] for i in horizontal_indexes.intersection(vertical_indexes)]
             counts.append(len(match_rows))
             if is_filtered(vertical[7], vertical_key):
@@ -429,7 +433,7 @@ def get_df_and_match_rows(vertical_node, horizontal_node, rows):
         df = pd.DataFrame(data, index=map(lambda x: x[2], vertical[4]))
     vertical_dict = combine_rows(vertical_dict, rows[:2])
     horizontal_dict = combine_rows(horizontal_dict, rows[:2])
-    return vertical[0], vertical[1], horizontal[0], horizontal[1], df, vertical_dict, horizontal_dict
+    return vertical[0], vertical[1], horizontal[0], horizontal[1], df, vertical_dict, horizontal_dict, vertical_count_dict, horizontal_count_dict
 
 
 def combine_rows(my_dict, title_rows):
@@ -467,7 +471,7 @@ def compute_data_frames_recur(leaf_node, nodes, titles, index, horizontal_dict):
     if index < len(nodes):
         first = True
         for key in horizontal_dict:
-            _, _, horizontal_title, horizontal_sub_title, df, _, next_horizontal_dict = get_df_and_match_rows(leaf_node, nodes[index], horizontal_dict[key])
+            _, _, horizontal_title, horizontal_sub_title, df, _, next_horizontal_dict, vertical_count_dict, horizontal_count_dict = get_df_and_match_rows(leaf_node, nodes[index], horizontal_dict[key])
             if first:
                 titles.append((f'{horizontal_title} {horizontal_sub_title}'.strip(), None))
                 first = False
@@ -483,21 +487,33 @@ def compute_data_frames_recur(leaf_node, nodes, titles, index, horizontal_dict):
             compute_data_frames_recur(leaf_node, nodes, titles.copy(), index + 1, next_horizontal_dict)
 
 
+def get_count_list(df, count_dict):
+    counts = []
+    for i in df.index.tolist():
+        value = 0
+        for j in count_dict:
+            _, _, k = j
+            if i == k:
+                value = count_dict[j]
+        counts.append(value)
+    return counts
+
+
 def compute_data_frames(leaf_node, nodes):
-    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, _, horizontal_dict = get_df_and_match_rows(leaf_node, nodes.pop(0), get_rows())
+    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, vertical_dict, horizontal_dict, vertical_count_dict, horizontal_count_dict = get_df_and_match_rows(leaf_node, nodes.pop(0), get_rows())
+    vertical_counts = get_count_list(df, vertical_count_dict)
+    # print(vertical_counts)
     titles = [
         (f'{vertical_title} {vertical_sub_title}'.strip(), None),
         (f'{horizontal_title} {horizontal_sub_title}'.strip(), None)
     ]
+    # divide by the corresponding language
     print(get_data_frame_title(titles))
     print()
-    # df = df /
-    # divide by the corresponding language
-    sum = df.sum().sum()
-    # df = df / sum
-    print(df.to_string())
+    # print(df.to_string())
+    print(df.div(vertical_counts, axis=0).to_string())
     print()
-    print(f'{sum} {df.sum().sum()}')
+    print(f'{vertical_counts} {df.sum().sum()}')
     print()
     compute_data_frames_recur(leaf_node, nodes, titles.copy(), 0, horizontal_dict)
 
@@ -537,10 +553,20 @@ if __name__ == '__main__':
 
     # compute_data_frames(2, [(29, 10)])
 
-    number_ranges = []
-    number_ranges.append((0, 1000, f'0 - 1000'))
-    number_ranges.append((1001, 10000, f'1001 - 10000'))
-    number_ranges.append((10001, 999999999, f'10001 or above'))
+    number_ranges = [
+        (0, 1000, f'0 - 1000'),
+        (1001, 10000, f'1001 - 10000'),
+        (10001, 20000, f'10001 - 20000'),
+        (20001, 30000, f'20001 - 30000'),
+        (30001, 40000, f'30001 - 40000'),
+        (40001, 50000, f'40001 - 50000'),
+        (50001, 60000, f'50001 - 60000'),
+        (60001, 70000, f'60001 - 70000'),
+        (70001, 80000, f'70001 - 80000'),
+        (80001, 90000, f'80001 - 90000'),
+        (90001, 100000, f'90001 - 100000'),
+        (100001, 999999999, f'100001 or above')
+    ]
 
     # number_ranges.append((0, 1000, f'0 - 1000'))
     # number_ranges.append((1001, 2000, f'1001 - 2000'))
@@ -554,8 +580,13 @@ if __name__ == '__main__':
     # number_ranges.append((9001, 10000, f'9001 - 10000'))
     # number_ranges.append((10001, 999999999, f'10001 or above'))
 
-    compute_data_frames((29, 10, None, None, None, number_ranges), [2])
-    compute_data_frames((3, 10, None, None, None, number_ranges), [2])
+    # compute_data_frames((29, 10, None, None, None, number_ranges), [(3, 5)])
+    compute_data_frames((29, None, None, None, None, number_ranges), [2])
+    compute_data_frames((30, None, None, None, None, number_ranges), [2])
+    compute_data_frames((31, None, None, None, None, number_ranges), [2])
+    compute_data_frames((32, None, None, None, None, number_ranges), [2])
+    compute_data_frames((3, None, None, None, None, number_ranges), [2])
+
 
     # compute_data_frames(2, [(3, 2)])
     # compute_data_frames((8, 5), [24])

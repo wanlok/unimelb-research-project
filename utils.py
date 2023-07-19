@@ -1,11 +1,15 @@
 import csv
 import json
 import operator
+import os
 import sys
+import types
 from datetime import datetime, timedelta
 from urllib.request import Request, urlopen
 
 from dateutil.relativedelta import relativedelta
+
+attribute_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Attributes.csv'
 
 
 def get_file_json(file_path):
@@ -179,3 +183,42 @@ def expand(aaa):
             bbb.append(aaa[i])
             previous = aaa[i]
     return bbb
+
+
+def repos(*params):
+    my_list = []
+    if len(params) > 0 and type(params[0]) is types.FunctionType:
+        function = params[0]
+        params = list(params[1:])
+        for file_name in os.listdir('C:\\Files\\security policies\\'):
+            repo = file_name.replace('.csv', '').replace('_', '/', 1)
+            my_list.append(function(*tuple([repo] + params)))
+    return my_list
+
+
+def get_file_path(repo):
+    file_name = repo.replace('/', '_')
+    return f'C:\\Files\\security policies\\{file_name}.csv'
+
+
+def get_latest_content(file_path):
+    content = None
+    target_row = None
+    i = 0
+    for row in csv_reader(f'{file_path}'):
+        if i > 0:
+            target_row = row
+        i = i + 1
+    if target_row is not None:
+        content = target_row[5]
+    return content
+
+
+def is_contain_alphanumeric(word):
+    contain_alphanumeric = False
+    for character in word:
+        if f'{character}'.isalnum():
+            contain_alphanumeric = True
+            break
+    return contain_alphanumeric
+
