@@ -71,9 +71,15 @@ def extract_security_related_keywords(text):
     for keyword in security_related_keywords:
         keyword = keyword.lower()
         keyword_length = len(keyword)
-        for word in words:
+        for i in range(len(words)):
+            word = words[i]
             if (keyword_length == 3 and keyword == word) or (keyword_length > 3 and keyword in word):
                 keywords.add(keyword)
+            else:
+                slices = keyword.split(' ')
+                words_with_spaces = words[i:i + len(slices)]
+                if slices == words_with_spaces:
+                    keywords.add(' '.join(words_with_spaces))
     return keywords
 
 
@@ -83,10 +89,16 @@ def is_security_related_text(text):
     for keyword in security_related_keywords:
         keyword = keyword.lower()
         keyword_length = len(keyword)
-        for word in words:
+        for i in range(len(words)):
+            word = words[i]
             if (keyword_length == 3 and keyword == word) or (keyword_length > 3 and keyword in word):
                 security_related = True
                 break
+            else:
+                slices = keyword.split(' ')
+                if slices == words[i:i + len(slices)]:
+                    security_related = True
+                    break
         if security_related:
             break
     return security_related
@@ -351,7 +363,7 @@ def print_security_issue_title_titles_and_body_texts(repo_list):
 if __name__ == '__main__':
     # rr = ['dotnet/efcore']
 
-
+    # print_security_issue_title_titles_and_body_texts([('scipy/scipy', 2014)])
     repos(get_yearly_security_issue_counts)
 
 
