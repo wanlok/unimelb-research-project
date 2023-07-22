@@ -196,9 +196,35 @@ def repos(*params):
     return my_list
 
 
+def random_repo(*params):
+    data = None
+    if len(params) > 0 and type(params[0]) is types.FunctionType:
+        function = params[0]
+        params = list(params[1:])
+
+        for file_name in os.listdir('C:\\Files\\security policies\\'):
+            repo = file_name.replace('.csv', '').replace('_', '/', 1)
+            # dafunction(*tuple([repo] + params)))
+    # return my_list
+
+
+
 def get_file_path(repo):
     file_name = repo.replace('/', '_')
     return f'C:\\Files\\security policies\\{file_name}.csv'
+
+
+def get_latest_security_policy_repo(file_path):
+    repo = None
+    target_row = None
+    i = 0
+    for row in csv_reader(f'{file_path}'):
+        if i > 0:
+            target_row = row
+        i = i + 1
+    if target_row is not None:
+        repo = target_row[0]
+    return repo
 
 
 def get_latest_content(file_path):
