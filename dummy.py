@@ -41,8 +41,27 @@ def get_issues_by_year(repo):
     return issue_dict
 
 
+def get_issues_by_year_month(repo):
+    issue_dict = dict()
+    issue_file_name = repo.replace('/', '_')
+    issue_file_path = f'{issue_directory_path}{issue_file_name}.txt'
+    for issue in get_saved_issue_list(issue_file_path):
+        created_at = issue['node']['createdAt']
+        date_time = datetime.strptime(created_at, '%Y-%m-%dT%H:%M:%SZ')
+        year = int(date_time.strftime('%Y'))
+        month = int(date_time.strftime('%m'))
+        month = '{:02d}'.format(month)
+        year_month = f'{year}{month}'
+        if year_month in issue_dict:
+            issue_dict[year_month].append(issue)
+        else:
+            issue_dict[year_month] = [issue]
+    return issue_dict
+
+
 def get_yearly_security_issue_counts(repo):
-    issue_dict = get_issues_by_year(repo)
+    # issue_dict = get_issues_by_year(repo)
+    issue_dict = get_issues_by_year_month(repo)
     for year in issue_dict.keys():
         issues = issue_dict[year]
         issue_dict[year] = (len(issues), get_security_issue_counts(issues))
