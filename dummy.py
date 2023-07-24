@@ -78,56 +78,32 @@ def get_issues_and_security_issues_by_year(repo, year):
         issues = issue_dict[year]
         for issue in issues:
             title = issue['node']['title']
+            title_security_related_strings = get_security_related_strings(title)
             body_text = issue['node']['bodyText']
-            if is_security_related_text(title) or is_security_related_text(body_text):
-                security_related_issues.append(issue)
+            body_text_security_related_strings = get_security_related_strings(body_text)
+            if len(title_security_related_strings) > 0 or len(body_text_security_related_strings) > 0:
+                security_related_issues.append((issue, title, title_security_related_strings, body_text, body_text_security_related_strings))
     return issues, security_related_issues
 
 
-def extract_security_related_keywords(text):
-    keywords = set()
+def get_security_related_strings(text):
+    security_related_strings = set()
+    keywords = list(map(lambda x: x.lower(), security_related_keywords))
+    three_length_keywords = list(filter(lambda x: len(x) == 3, keywords))
     words = list(map(lambda x: x.lower(), text.split(' ')))
-    for keyword in security_related_keywords:
-        keyword = keyword.lower()
-        keyword_length = len(keyword)
-        for i in range(len(words)):
-            word = words[i]
-            if (keyword_length == 3 and keyword == word) or (keyword_length > 3 and keyword in word):
-                keywords.add(keyword)
-            else:
-                slices = keyword.split(' ')
-                words_with_spaces = words[i:i + len(slices)]
-                if slices == words_with_spaces:
-                    keywords.add(' '.join(words_with_spaces))
-    return keywords
-
-
-def is_security_related_text(text):
-    security_related = False
-    words = list(map(lambda x: x.lower(), text.split(' ')))
-    for keyword in security_related_keywords:
-        keyword = keyword.lower()
-        keyword_length = len(keyword)
-        for i in range(len(words)):
-            word = words[i]
-            if (keyword_length == 3 and keyword == word) or (keyword_length > 3 and keyword in word):
-                security_related = True
-                break
-            else:
-                slices = keyword.split(' ')
-                if slices == words[i:i + len(slices)]:
-                    security_related = True
-                    break
-        if security_related:
-            break
-    return security_related
+    security_related_strings.update([word for word in words if word in three_length_keywords])
+    if len(security_related_strings) == 0:
+        for keyword in [keyword for keyword in keywords if keyword not in three_length_keywords]:
+            if keyword in text:
+                security_related_strings.add(keyword)
+    return security_related_strings
 
 
 def get_security_related_ratios(issue):
     title = issue['title']
-    title_security_related = 1 if is_security_related_text(title) else 0
+    title_security_related_strings = get_security_related_strings(title)
     body_text = issue['bodyText']
-    body_text_security_related = 1 if is_security_related_text(body_text) else 0
+    body_text_security_related_strings = get_security_related_strings(body_text)
     # comments = issue['comments']['edges']
     # number_of_comments = len(comments)
     # comments_security_related = [0] * number_of_comments
@@ -144,7 +120,7 @@ def get_security_related_ratios(issue):
     #         if percentage >= (i + 1) * 0.1: # 10% 20% 30% ... 100%
     #             security_related_ratios[i] = 1
 
-    if title_security_related or body_text_security_related:
+    if len(title_security_related_strings) > 0 or len(body_text_security_related_strings) > 0:
         security_related_ratios = [1]
     else:
         security_related_ratios = [0]
@@ -370,11 +346,9 @@ def dumm2():
 def print_security_issue_title_titles_and_body_texts(repo_list):
     for repo, year in repo_list:
         issues, security_related_issues = get_issues_and_security_issues_by_year(repo, year)
-        for security_related_issue in security_related_issues:
-            title = security_related_issue['node']['title']
-            body_text = security_related_issue['node']['bodyText']
-            print(f'TITLE: {extract_security_related_keywords(title)} {[title]}')
-            print(f'BODY TEXT: {extract_security_related_keywords(body_text)} {[body_text]}')
+        for _, title, title_security_related_strings, body_text, body_text_security_related_strings in security_related_issues:
+            print(f'TITLE: {title_security_related_strings} {[title]}')
+            print(f'BODY TEXT: {body_text_security_related_strings} {[body_text]}')
             print()
         print(f'{len(issues)} {len(security_related_issues)}')
 
@@ -382,9 +356,8 @@ def print_security_issue_title_titles_and_body_texts(repo_list):
 if __name__ == '__main__':
     # rr = ['dotnet/efcore']
 
-    # print_security_issue_title_titles_and_body_texts([('scipy/scipy', 2014)])
+    # print_security_issue_title_titles_and_body_texts([('angular-ui/ui-leaflet', 2015)])
     repos(get_yearly_security_issue_counts)
-
 
     # texts = [
     #     'Hi there,\nI am having difficulties to track this issue down and I did search for a solution for like 2 days, even digging in the EF Core code did not help.\nI have a multi-tenant DB setup where each tenant has a separate DB. Therefore I need to attach the tenant ID to the context. The example linked in the Managing state in pooled contexts documentation perfectly fits my needs BUT ... I need to resolve the MyDbContext consecutively in a for loop to iterate over all tenant DBs like\nforeach (var tenantId in tenantIds)\n{\n   ...\n    \n    using (var context = serviceProvider.GetRequiredService<MyDbContext>())\n    {\n        ...\n    }\n}\nand this throws a\nSystem.ObjectDisposedException: Cannot access a disposed context instance. A common cause of this error is disposing a context instance that was resolved from dependency injection and then later trying to use the same context instance elsewhere in your application. This may occur if you are calling \'Dispose\' on the context instance, or wrapping it in a using statement. If you are using dependency injection, you should let the dependency injection container take care of disposing context instances.\nObject name: \'WeatherForecastContext\'.\n   at Microsoft.EntityFrameworkCore.DbContext.CheckDisposed()\n   at Microsoft.EntityFrameworkCore.DbContext.get_Database()\n\nas soon as I resolve MyDbContext a second time.\nYou can repro this by extending the WeatherForecastController from the aforementioned example with\n[HttpPost(Name = "GetWeatherForecast")]\npublic async Task<IEnumerable<WeatherForecast>> Post()\n{\n    using (var context1 = _services.GetRequiredService<WeatherForecastContext>())\n    {\n        await context1.Database.EnsureCreatedAsync();\n    }\n\n    using (var context2 = _services.GetRequiredService<WeatherForecastContext>())\n    {\n        await context2.Database.EnsureCreatedAsync();\n    }\n\n    return null;\n}\n... then start the application and run the action. It will fail with the same error as mentioned above.\nNow the strange part: when I use AddDbContextPool instead of AddPooledDbContextFactory in my application everything works flawlessly ... but with AddDbContextPool I cannot  attach state to MyDbContext.\nI think it has something to do with the scoped lease stuff, somehow this works differently when using the factory approach.\nSo I am a bit lost now as simply not disposing MyDbContext is not an option, right?\nIs there something missing that I need to do to make resolving in consecutive order possible?\nProvider and version information\nEF Core version: 6.0.1\nDatabase provider: Microsoft.EntityFrameworkCore.SqlServer\nTarget framework: .NET 6.0\nOperating system: Windows 11\nIDE: VS 2022 Version 17.3.0 Preview 5.0',
