@@ -6,11 +6,11 @@ import numpy as np
 import pandas as pd
 from Levenshtein import distance
 
-from document.document_utils import write_content_to_file_path, get_docx_content
-from utils import get_latest_content, repos
+from document.document_utils import write_content_to_file_path, get_docx_content, category_names
+from utils import get_latest_content, repos, attribute_file_path, csv_reader, get_latest_security_policy_repo
 
 csv_directory_path = 'C:\\Files\\security policies\\'
-classification_directory_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Security Policy Manual Classification 3\\'
+classification_directory_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Security Policy Manual Classification 2\\'
 
 
 def get_content(repo, directory_path):
@@ -164,27 +164,6 @@ def start_grouping():
     print_summary()
 
 
-def get_levenshtein_distances():
-    grouped_documents, _ = get_contents()
-    number_of_documents = len(grouped_documents)
-    levenshtein_distances = []
-    for i in range(number_of_documents):
-        document_levenshtein_distances = []
-        x = int(grouped_documents[i][0])
-        x_content = grouped_documents[i][1]
-        for j in range(number_of_documents):
-            y = int(grouped_documents[j][0])
-            y_content = grouped_documents[j][1]
-            if x != y:
-                d = distance(x_content, y_content)
-                if x > y:
-                    document_levenshtein_distances.append((y, x, d))
-                else:
-                    document_levenshtein_distances.append((x, y, d))
-        levenshtein_distances.append(document_levenshtein_distances)
-    return levenshtein_distances
-
-
 def get_levenshtein_distance_matrix(contents):
     matrix = []
     number_of_contents = len(contents)
@@ -215,14 +194,13 @@ def merge_document_groups(threshold):
                     shutil.move(f'{classification_directory_path}{j}', f'{directory_path}\\{j}')
 
 
-def search_by_user_recur(user, path=classification_directory_path, results=[]):
+def search_by_user_recur(user, path, results):
     for name in os.listdir(path):
         path_1 = f'{path}{name}'
         if os.path.isdir(path_1):
-            search_by_user_recur(user, f'{path_1}\\')
+            search_by_user_recur(user, f'{path_1}\\', results)
         elif user.lower() == name.split('_')[0].lower():
             results.append(path_1)
-    return results
 
 
 def group_by_paths(results):
@@ -277,22 +255,74 @@ def get_groupings(rows):
     return rows
 
 
-def dummy_dummy(threshold, user):
-    documents = search_by_user_recur(user)
+def get_category_statistics(documents):
+    data = []
+    for row in csv_reader(attribute_file_path):
+        for document in documents:
+            repo = document.split('\\')[-1].replace('.docx', '').replace('_', '/', 1)
+            if row[0] == repo:
+                categories = [0] * len(category_names)
+                assigned_category_names = eval(row[2])
+                for i in range(len(category_names)):
+                    if category_names[i] in assigned_category_names:
+                        categories[i] = 1
+                data.append(categories)
+    df = pd.DataFrame(data)
+    return (df.sum()/len(documents)).tolist()
+
+
+def get_security_policy_repo_counts(documents):
+    my_dict = dict()
+    for document in documents:
+        file_name = document.split('\\')[-1].replace('.docx', '.csv', -1)
+        file_path = f'C:\\Files\\security policies\\{file_name}'
+        security_policy_repo = get_latest_security_policy_repo(file_path)
+        if security_policy_repo in my_dict:
+            my_dict[security_policy_repo] = my_dict[security_policy_repo] + 1
+        else:
+            my_dict[security_policy_repo] = 1
+    return my_dict
+
+
+def dummy_dummy(threshold, user, print_groups=False):
+    documents = []
+    search_by_user_recur(user, classification_directory_path, documents)
+    category_statistic = ','.join(map(lambda x: f'{x}', get_category_statistics(documents)))
+    security_policy_repo_counts = get_security_policy_repo_counts(documents)
     distinct_documents = group_by_paths(documents)
-    print(f'{len(documents)} {len(distinct_documents)}')
-    print([x[0] for x in distinct_documents])
     contents = [get_docx_content(document[1]) for document in distinct_documents]
     matrix = get_levenshtein_distance_matrix(contents)
     rows = list(map(lambda x: list(map(lambda y: 1 if y <= threshold else 0, x)), matrix))
+    groups = get_groupings(rows)
+    number_of_documents = len(documents)
+    number_of_distinct_documents = len(distinct_documents)
+    same = 'Y' if number_of_documents == number_of_distinct_documents else 'N'
+    distribution = [x[0] for x in distinct_documents]
+    distribution.sort(reverse=True)
+    number_of_similar_documents = len(groups)
+    percentages = list(map(lambda x: x / number_of_documents, distribution))
+    n = 0
     total = 0
+    for i in range(len(percentages)):
+        total = total + percentages[i]
+        if total >= 0.8:
+            n = i + 1
+            break
+    print(f'"{user}",{number_of_documents},{number_of_distinct_documents},{same},"{distribution}",{number_of_similar_documents},"{percentages[:n]}",{n},{category_statistic},"{security_policy_repo_counts}"')
     for row in get_groupings(rows):
         a = [distinct_documents[i] for i in range(len(row)) if row[i] == 1]
-        for document in a:
-            print(f'{document[0]} "{document[1]}"')
-        print()
-        total = total + len(a)
-    print(total)
+        if print_groups:
+            print()
+            for document in a:
+                print(f'{document[0]} "{document[1]}"')
+
+
+def get_user(repo, user_dict):
+    user = repo.split('/')[0]
+    if user in user_dict:
+        user_dict[user].append(repo)
+    else:
+        user_dict[user] = [repo]
 
 
 if __name__ == '__main__':
@@ -308,7 +338,12 @@ if __name__ == '__main__':
     # for document in grouped_documents:
     #     print(document)
 
-    dummy_dummy(100, 'facebook')
+    # user_dict = dict()
+    # repos(get_user, user_dict)
+    # for user in user_dict:
+    #     dummy_dummy(100, user, print_groups=False)
 
+    # dummy_dummy(100, 'microsoft', print_groups=True)
 
+    print('Hello World')
 
