@@ -87,10 +87,9 @@ def get_security_related_strings(text):
     three_length_keywords = list(filter(lambda x: len(x) == 3, keywords))
     words = list(map(lambda x: x.lower(), text.split(' ')))
     security_related_strings.update([word for word in words if word in three_length_keywords])
-    if len(security_related_strings) == 0:
-        for keyword in [keyword for keyword in keywords if keyword not in three_length_keywords]:
-            if keyword in text:
-                security_related_strings.add(keyword)
+    for keyword in [keyword for keyword in keywords if keyword not in three_length_keywords]:
+        if keyword in text:
+            security_related_strings.add(keyword)
     return security_related_strings
 
 
