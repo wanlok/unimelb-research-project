@@ -1,7 +1,9 @@
 import os
+import shutil
 import subprocess
 
 cloc_directory_path = 'C:\\Files\\Projects\\cloc\\'
+temp_directory_path = 'C:\\Files\\Projects\\cloc\\temp-linecount-repo'
 os.chdir(cloc_directory_path)
 
 
@@ -9,6 +11,8 @@ from utils import repos
 
 
 def do_something(repo):
+    if os.path.exists(temp_directory_path):
+        shutil.rmtree(temp_directory_path)
     file_name = repo.replace('/', '_')
     file_name = f'{file_name}.txt'
     file_path = f'{cloc_directory_path}{file_name}'
