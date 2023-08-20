@@ -5,11 +5,13 @@ from functools import reduce
 import fasttext
 import numpy as np
 import pandas as pd
+from scipy.stats import spearmanr
 
 from document.document_sampling import get_remaining_and_categorised_file_paths
 from document.document_utils import get_fasttext_mappings, get_headers_and_paragraphs, preprocess, get_csv_file_tuple, get_docx_file_tuple, category_names
 from repository import package_manager_languages
-from utils import sort_by_descending_values, csv_writer, csv_reader, expand, contain_string, attribute_file_path
+from utils import sort_by_descending_values, csv_writer, csv_reader, expand, contain_string, attribute_file_path, \
+    get_latest_content, repos, is_contain_alphanumeric
 
 fasttext_mappings = get_fasttext_mappings()
 fasttext_model_file_path = 'C:\\Files\\Projects\\jupyter\\models\\2023062223234503.bin'
@@ -83,8 +85,46 @@ def save_predictions(predictions, required_categories=[]):
                 file_csv_writer.writerow([f'{header}', f'{paragraph}', f'{categories}'])
 
 
-def get_categorisation_results():
-    categorisation_results = []
+def count_number_of_words(titles, contents, count_title):
+    number_of_word_list = []
+    for title, content in zip(titles, contents):
+        number_of_words = 0
+        title_slices = list(filter(lambda x: is_contain_alphanumeric(x), title.replace('\n', ' ').split(' ')))
+        content_slices = list(filter(lambda x: is_contain_alphanumeric(x), content.replace('\n', ' ').split(' ')))
+        # print(title_slices)
+        # print(content_slices)
+        if count_title:
+            number_of_words = number_of_words + len(title_slices)
+        number_of_words = number_of_words + len(content_slices)
+        number_of_word_list.append(number_of_words)
+    return number_of_word_list
+
+
+def update_repo_category_dict_1(repo, category_list, word_counts, repo_dict):
+    category_dict = dict()
+    for categories, word_count in zip(category_list, word_counts):
+        for category in categories:
+            if len(category) > 0:
+                if category in category_dict:
+                    category_dict[category] = category_dict[category] + word_count
+                else:
+                    category_dict[category] = word_count
+    repo_dict[repo] = category_dict
+
+
+def update_repo_category_dict_2(repo, category_list, repo_dict):
+    category_dict = dict()
+    for categories in category_list:
+        for category in categories:
+            if category in category_dict:
+                category_dict[category] = category_dict[category] + 1
+            else:
+                category_dict[category] = 1
+    repo_dict[repo] = category_dict
+
+
+def get_repo_categorisation_results():
+    repo_dict = dict()
     _, categorised_file_paths = get_remaining_and_categorised_file_paths()
     for file_path in categorised_file_paths:
         file_name = file_path.split('\\')[-1]
@@ -94,31 +134,21 @@ def get_categorisation_results():
             file_tuple = get_docx_file_tuple(file_path)
         elif file_extension == 'csv':
             file_tuple = get_csv_file_tuple(file_path)
-        category_set = set()
-        for categories in file_tuple[2]:
-            for category in categories:
-                category_set.add(category)
-        categorisation_results.append((repo, list(category_set)))
+        # update_repo_category_dict_1(repo, file_tuple[2], count_number_of_words(file_tuple[0], file_tuple[1], False), repo_dict)
+        update_repo_category_dict_2(repo, file_tuple[2], repo_dict)
     for file_name in os.listdir(sample_directory_path):
         file_path = f'{sample_directory_path}{file_name}'
         repo = file_name.replace('.docx', '').replace('.csv', '').replace('_', '/', 1)
-        category_set = set()
+        titles = []
+        contents = []
+        categories = []
         for row in csv_reader(file_path):
-            for category in row[2].split(','):
-                category = category.strip()
-                if len(category) > 0:
-                    category_set.add(category)
-        categorisation_results.append((repo, list(category_set)))
-    # for file_name in os.listdir('C:\\Files\\a1\\'):
-    #     repo = file_name.replace('.docx', '').replace('.csv', '').replace('_', '/', 1)
-    #     for r, categories in categorisation_results:
-    #         if repo == r:
-    #             print(f'"{repo}","{categories}"')
-    return categorisation_results
-
-    # prediction_samples = random.sample(predictions, 100)
-    # for prediction in prediction_samples:
-    #     print(prediction)
+            titles.append(row[0])
+            contents.append(row[1])
+            categories.append(row[2].split(','))
+        # update_repo_category_dict_1(repo, categories, count_number_of_words(titles, contents, True), repo_dict)
+        update_repo_category_dict_2(repo, categories, repo_dict)
+    return repo_dict
 
 
 def value_function(value, ranges):
@@ -515,7 +545,27 @@ def compute_data_frames(leaf_node, nodes):
     print()
     print(f'{vertical_counts} {df.sum().sum()}')
     print()
+    # print('Hello World')
+    # print(spearmanr(df))
     compute_data_frames_recur(leaf_node, nodes, titles.copy(), 0, horizontal_dict)
+
+
+def get_data_frame(leaf_node, nodes):
+    vertical_title, vertical_sub_title, horizontal_title, horizontal_sub_title, df, vertical_dict, horizontal_dict, vertical_count_dict, horizontal_count_dict = get_df_and_match_rows(
+        leaf_node, nodes.pop(0), get_rows())
+    return df
+
+
+def show_categorisation(repo, repo_dict):
+    category_dict = repo_dict[repo]
+    counts = []
+    for category in category_names:
+        if category in category_dict:
+            counts.append(category_dict[category])
+        else:
+            counts.append(0)
+    print(f'{repo},{counts},{category_dict}')
+
 
 
 if __name__ == '__main__':
@@ -523,7 +573,9 @@ if __name__ == '__main__':
     # # print(len(predictions))
     # print_distributions(distributions, distinct=True)
     # # save_predictions(predictions)
-    # # categorisation_results = get_categorisation_results()
+
+    repos(show_categorisation, get_repo_categorisation_results())
+
     #
     # dummy_dummy(7, number_of_segments=5)
     # dummy_dummy(12, number_of_segments=5)
@@ -542,7 +594,7 @@ if __name__ == '__main__':
     # dummy_dummy(27, as_count=True, number_of_segments=5)
 
 
-    programming_languages = list(package_manager_languages) + ['ASP.NET', 'Classic ASP', 'F#', 'Visual Basic .NET', 'Visual Basic 6.0']
+    # programming_languages = list(package_manager_languages) + ['ASP.NET', 'Classic ASP', 'F#', 'Visual Basic .NET', 'Visual Basic 6.0']
 
     # compute_data_frames((1, None, None), [(7, None, 5), (12, None, 5), (17, None, 5)])
     # compute_data_frames((2, None, None, None), [(24, None, None, None), (25, None, None, programming_languages), (1, None, None, None, str)])
@@ -553,20 +605,20 @@ if __name__ == '__main__':
 
     # compute_data_frames(2, [(29, 10)])
 
-    number_ranges = [
-        (0, 1000, f'0 - 1000'),
-        (1001, 10000, f'1001 - 10000'),
-        (10001, 20000, f'10001 - 20000'),
-        (20001, 30000, f'20001 - 30000'),
-        (30001, 40000, f'30001 - 40000'),
-        (40001, 50000, f'40001 - 50000'),
-        (50001, 60000, f'50001 - 60000'),
-        (60001, 70000, f'60001 - 70000'),
-        (70001, 80000, f'70001 - 80000'),
-        (80001, 90000, f'80001 - 90000'),
-        (90001, 100000, f'90001 - 100000'),
-        (100001, 999999999, f'100001 or above')
-    ]
+    # number_ranges = [
+    #     (0, 1000, f'0 - 1000'),
+    #     (1001, 10000, f'1001 - 10000'),
+    #     (10001, 20000, f'10001 - 20000'),
+    #     (20001, 30000, f'20001 - 30000'),
+    #     (30001, 40000, f'30001 - 40000'),
+    #     (40001, 50000, f'40001 - 50000'),
+    #     (50001, 60000, f'50001 - 60000'),
+    #     (60001, 70000, f'60001 - 70000'),
+    #     (70001, 80000, f'70001 - 80000'),
+    #     (80001, 90000, f'80001 - 90000'),
+    #     (90001, 100000, f'90001 - 100000'),
+    #     (100001, 999999999, f'100001 or above')
+    # ]
 
     # number_ranges.append((0, 1000, f'0 - 1000'))
     # number_ranges.append((1001, 2000, f'1001 - 2000'))
@@ -581,11 +633,11 @@ if __name__ == '__main__':
     # number_ranges.append((10001, 999999999, f'10001 or above'))
 
     # compute_data_frames((29, 10, None, None, None, number_ranges), [(3, 5)])
-    compute_data_frames((29, None, None, None, None, number_ranges), [2])
-    compute_data_frames((30, None, None, None, None, number_ranges), [2])
-    compute_data_frames((31, None, None, None, None, number_ranges), [2])
-    compute_data_frames((32, None, None, None, None, number_ranges), [2])
-    compute_data_frames((3, None, None, None, None, number_ranges), [2])
+    # compute_data_frames((29, None, None, None, None, number_ranges), [2])
+    # compute_data_frames((30, None, None, None, None, number_ranges), [2])
+    # compute_data_frames((31, None, None, None, None, number_ranges), [2])
+    # compute_data_frames((32, None, None, None, None, number_ranges), [2])
+    # compute_data_frames((3, None, None, None, None, number_ranges), [2])
 
 
     # compute_data_frames(2, [(3, 2)])
