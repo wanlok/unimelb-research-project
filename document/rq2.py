@@ -1,3 +1,4 @@
+import datetime
 import itertools
 import math
 import os
@@ -5,6 +6,7 @@ import shutil
 import statistics
 import string
 import sys
+from functools import reduce
 from math import log10
 
 import numpy as np
@@ -16,9 +18,12 @@ from scipy import randn, stats
 from scipy.stats import pearsonr, spearmanr, skew, pointbiserialr, chi2_contingency, chi2
 
 from chart import scatter_plot, histogram, font_name, padding_2, padding_1, paired_box
+from cvss import get_v3_rating, group_scores_to_v3_ratings, group_scores_to_v2_ratings, v3_ratings, \
+    v2_ratings, get_sum_list
+from dependency import get_package_manager_dict
 from document.my_statistics import compute_chi_square_value, compute_mann_whitney_u, compute_mann_whitney_effect_size
-from document.document_categorisation_all import compute_data_frames, get_data_frame
-from document.document_utils import write_content_to_file_path, get_docx_content, category_names
+from document.document_categorisation_all import compute_data_frames, get_data_frame, get_repo_categorisation_results
+from document.document_utils import get_docx_content, category_names
 from repository import package_manager_languages
 from utils import repos, get_latest_content, attribute_file_path, csv_reader, expand, get_writer, \
     sort_by_descending_values
@@ -186,18 +191,6 @@ def q(x, y, file_path):
     return spearmanr(x_values, y_values)
 
 
-def dummy(column_index):
-    directory_path = f'C:\\Files\\RQ2\\{column_index}\\'
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-    a = q(36, column_index, f'{directory_path}number_of_words.png')
-    b = q(37, column_index, f'{directory_path}number_of_headers.png')
-    c = q(38, column_index, f'{directory_path}number_of_paragraphs.png')
-    d = q((2, True, True), column_index, f'{directory_path}number_of_categories.png')
-    # print(f'"{round(a[0], 2)}, {round(a[1], 2)}","{round(b[0], 2)}, {round(b[1], 2)}","{round(c[0], 2)}, {round(c[1], 2)}","{round(d[0], 2)}, {round(d[1], 2)}"')
-    print(f'{d[1]}')
-
-
 def compute_data_normality(x):
     if type(x) == tuple:
         title, values = get_column_title_and_values(*x)
@@ -245,15 +238,208 @@ def compute_all_data_normality():
     compute_data_normality(39) # Lines of code
 
 
-def compute_all_correlation():
-    dummy(3)
-    dummy(15)
-    dummy(22)
-    dummy(29)
-    dummy((33, True, True))
-    dummy((34, True, True))
-    dummy(35)
-    dummy(39)
+
+
+def dummy(column_index):
+    directory_path = f'C:\\Files\\RQ2\\{column_index}\\'
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+    a = q(36, column_index, f'{directory_path}number_of_words.png')
+    b = q(37, column_index, f'{directory_path}number_of_headers.png')
+    c = q(38, column_index, f'{directory_path}number_of_paragraphs.png')
+    d = q((2, True, True), column_index, f'{directory_path}number_of_categories.png')
+
+    print(d)
+
+
+    # print(f'"{round(a[0], 2)}, {round(a[1], 2)}","{round(b[0], 2)}, {round(b[1], 2)}","{round(c[0], 2)}, {round(c[1], 2)}","{round(d[0], 2)}, {round(d[1], 2)}"')
+    # print(f'{d[1]}')
+
+
+def get_first_security_policies():
+    first_security_policies = []
+    directory_path = 'C:\\Files\\security policies\\'
+    for file_name in os.listdir(directory_path):
+        file_path = f'{directory_path}{file_name}'
+        repo = file_name.replace('.csv', '').replace('_', '/', 1)
+        smallest_date_time = None
+        smallest_date_time_row = None
+        i = 0
+        for row in csv_reader(file_path):
+            if i > 0:
+                date_time = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S%z')
+                date_time = date_time.replace(tzinfo=None)
+                if smallest_date_time is None or date_time < smallest_date_time:
+                    smallest_date_time = date_time
+                    smallest_date_time_row = row
+            i = i + 1
+        first_security_policies.append((repo, smallest_date_time, smallest_date_time_row))
+    return first_security_policies
+
+
+
+def get_number_of_days_since_document_created():
+    # start_date_time = datetime.datetime(year=2019, month=5, day=23)
+    # start = int(invented_date.strftime('%Y%m%d'))
+
+    y_values = []
+    today_date = pd.to_datetime('today').normalize()
+    _, values = get_column_title_and_values(49)
+    for value in values:
+        if len(value) > 0:
+            date_time = datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z')
+            date_time = date_time.replace(tzinfo=None)
+            y_values.append(f'{(today_date - date_time).days}')
+        else:
+            y_values.append(f'')
+    # first_security_policies = get_first_security_policies()
+    # for security_policy in first_security_policies:
+    #     print(security_policy)
+    # for repo, created_date in security_policy_created_dates:
+    #     before_fix.append((today_date - created_date).days)
+    #     if created_date < invented_date:
+    #         print(f'{repo} {created_date}')
+    #         #print(f'BEFORE {(today_date - created_date).days}')
+    #         # created_date = invented_date
+    #         # print(f'AFTER {(today_date - created_date).days}')
+    #     y_values.append((today_date - created_date).days)
+    # for row in first_security_policies:
+    #     if row[1] < invented_date:
+    #         print(f'{row[2][1]} {row[2][0].lower() == row[0].lower()} {row[2][0].lower()}')
+    return y_values
+
+
+def get_cvss_counts():
+    v2_i = []
+    v2_e = []
+    v3_i = []
+    v3_e = []
+    _, v2 = get_column_title_and_values(50, True)
+    _, v3 = get_column_title_and_values(51, True)
+    for value in v2:
+        i = []
+        e = []
+        for impact_score, exploitability_score in value:
+            i.append(impact_score)
+            e.append(exploitability_score)
+        v2_i.append(group_scores_to_v2_ratings(i))
+        v2_e.append(group_scores_to_v2_ratings(e))
+    for value in v3:
+        i = []
+        e = []
+        for impact_score, exploitability_score in value:
+            i.append(impact_score)
+            e.append(exploitability_score)
+        v3_i.append(group_scores_to_v3_ratings(i))
+        v3_e.append(group_scores_to_v3_ratings(e))
+    return v2_i, v2_e, v3_i, v3_e
+
+
+def get_security_advisory_dict():
+    security_advisory_dict = dict()
+    i = 0
+    for row in csv_reader('C:\\Files\\Projects\\unimelb-research-project\\security_advisory.csv'):
+        if i > 0:
+            repo = row[1]
+            if len(repo) > 0:
+                t = ((row[0], row[2]))
+                if repo in security_advisory_dict:
+                    security_advisory_dict[repo].append(t)
+                else:
+                    security_advisory_dict[repo] = [t]
+        i = i + 1
+    return security_advisory_dict
+
+
+def get_number_of_security_advisory(repo, security_advisory_dict):
+    if repo in security_advisory_dict:
+        number_of_security_advisory = f'{len(security_advisory_dict[repo])}'
+    else:
+        number_of_security_advisory = f'{0}'
+    return number_of_security_advisory
+
+
+def spearman_correlation():
+    v2_i, v2_e, v3_i, v3_e = get_cvss_counts()
+    indexes = [
+        ('Number of stars', 3),
+        ('Number of committers', 15),
+        ('Number of issues', 22),
+        ('Number of security-related issues', 29),
+        ('Number of security advisories', repos(get_number_of_security_advisory, get_security_advisory_dict())),
+        ('Number of CVEs', (33, True, True)),
+        ('Number of CWEs', (34, True, True)),
+        ('Number of CVSS v2 impact score low', get_sum_list(v2_ratings, ['Low'], v2_i)),
+        ('Number of CVSS v2 impact score medium or above', get_sum_list(v2_ratings, ['Medium', 'High'], v2_i)),
+        ('Number of CVSS v3 impact score low', get_sum_list(v3_ratings, ['Low'], v3_i)),
+        ('Number of CVSS v3 impact score medium or above', get_sum_list(v3_ratings, ['Medium', 'High', 'Critical'], v3_i)),
+        ('Number of forks', 35),
+        ('Number of languages', 44),
+        ('Number of days since document created', get_number_of_days_since_document_created()),
+        ('Lines of code', 39)
+    ]
+    alpha = 0.05
+    corrected_alpha = alpha / (len(indexes) * len(category_names))
+    rho_lines = []
+    p_value_lines = []
+    p_value_rejection_lines = []
+    results = get_repo_categorisation_results()
+    for name, index in indexes:
+        if type(index) == int:
+            y_title, y_values = get_column_title_and_values(index)
+        elif type(index) == tuple:
+            y_title, y_values = get_column_title_and_values(*index)
+        else:
+            y_title = name
+            y_values = index
+        rhos = []
+        p_values = []
+        p_value_rejections = []
+        for category_name in category_names:
+            x_values = repos(get_dict_value, results, category_name)
+            # x_values = list(map(lambda x: 0 if x is None else x, x_values))
+            a = []
+            b = []
+            for x, y in zip(x_values, y_values):
+                if y is not None and len(y) > 0:
+                    y = int(y)
+                    if x is not None:
+                        a.append(x)
+                        b.append(y)
+            print(f'{name},{category_name},{y_title},{len(x_values)},{len(y_values)},{len(a)},{len(b)}')
+            rho, p_value = spearmanr(a, b)
+            p_values.append(f'{p_value}')
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            p_value_rejections.append(f'"{p_value_rejection}"')
+            rhos.append(f'{rho}')
+        p_value_line = ','.join(p_values)
+        p_value_lines.append(f',"{name}",{p_value_line}')
+        p_value_rejection_line = ','.join(p_value_rejections)
+        p_value_rejection_lines.append(f',"{name}",{p_value_rejection_line}')
+        rho_line = ','.join(rhos)
+        rho_lines.append(f',"{name}",{rho_line}')
+    header_line = ','.join(map(lambda x: f'"{x}"', category_names))
+    header_line = f',,{header_line}'
+    print()
+    print(header_line)
+    for line in p_value_lines:
+        print(line)
+    print()
+    print(header_line)
+    for line in p_value_rejection_lines:
+        print(line)
+    print()
+    print(header_line)
+    for line in rho_lines:
+        print(line)
+
+
+def get_dict_value(repo, repo_dict, key):
+    value = None
+    category_dict = repo_dict[repo]
+    if key in category_dict:
+        value = category_dict[key]
+    return value
 
 
 def get_name_vector(names):
@@ -389,10 +575,6 @@ def transpose(rows):
     return new_rows
 
 
-
-
-
-
 test_datasets = [
     3, # Number of stars
     15, # Number of committers
@@ -471,72 +653,6 @@ def get_results(y_column_index, y_as_list, y_values):
             row.append(compute_chi2(category_name, y_column_index, y_as_list, y_value))
         rows.append(row)
     return rows
-
-
-def ans_1_1_programming_languages():
-    values = get_dominant_programming_languages(0.8)
-    # for programming_language in package_manager_languages:
-    #     if programming_language not in values:
-    #         values.append(programming_language)
-    print_results(values, get_results(31, True, values))
-
-
-def ans_1_1_programming_languages_level_of_abstraction():
-    values = get_dominant_programming_languages(0.8)
-
-    for value in values:
-        print(value)
-
-    # l_dict = dict()
-    # for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\RQ2\\programming language_2.csv'):
-    #     # programming_paradigm = eval(row[2])
-    #     # types = []
-    #     l_dict[row[0]] = row[1]
-    #
-    # title, values = get_column_title_and_values(31, True)
-    # for value in values:
-    #     if value is not None:
-    #         my_set = set()
-    #         for programming_language in value:
-    #             my_set.add(l_dict[programming_language])
-    #         print(my_set)
-    #     else:
-    #         print('None')
-
-
-
-
-
-# def ans_1_1_programming_languages_programming_paradigm():
-    # programming_language_paradigm_dict = dict()
-    # with open('C:\\Users\\WAN Tung Lok\\Desktop\\language paradigm.txt') as f:
-    #     for line in f.readlines():
-    #         slices = list(map(lambda x: x.strip(), line.strip().split(',')))
-    #         print(slices)
-    #         # slices = line.strip().split(' - ')
-    #         # programming_language = slices[0]
-    #         # programming_language_paradigm = slices[1]
-    #         # programming_language_paradigm_dict[programming_language] = programming_language_paradigm
-    # print(programming_language_paradigm_dict)
-
-
-
-
-
-
-def ans_1_1_number_of_programming_languages():
-    column_index = 44
-    as_list = False
-    value_dict, _ = get_value_dict(column_index, as_list)
-    values = [x for x in value_dict]
-    print(value_dict)
-    print_results(values, get_results(column_index, as_list, values))
-
-
-
-# def get_values_proportion():
-
-
 
 
 def get_expected_count_greater_than_or_equals_five_percentage(expected_counts):
@@ -630,6 +746,16 @@ def chi2_category_statistic_csv():
         ('Backend development language', get_language_values(32)),
         # ('Application domain', get_column_title_and_values(30, False)[1])
     ])
+
+
+    # my_dict = dict()
+    # package_manager_dict = get_package_manager_dict()
+    # for package_manager in package_manager_dict:
+    #     my_dict[package_manager] = repos(is_package_manager_exists, package_manager_dict[package_manager])
+    #
+    # print(my_dict)
+
+
 
     application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
     for application_domain in application_domain_dict:
@@ -775,7 +901,7 @@ def get_values(v, percentage=0.8, with_count=False):
 
 
 
-def ans_1_0_number_of_issues():
+def mann_whitney():
 
     # 44 programming language
 
@@ -903,6 +1029,13 @@ def validation():
     print('Hello World')
 
 
+def is_package_manager_exists(repo, b):
+    exists = 'No'
+    for bb in b:
+        if bb[0] == repo:
+            exists = 'Yes'
+            break
+    return exists
 
 
 if __name__ == '__main__':
@@ -932,21 +1065,17 @@ if __name__ == '__main__':
     # q((2, True, True), )
 
     # compute_all_data_normality()
-    # compute_all_correlation()
+    # spearman_correlation()
+    # mann_whitney()
+
+    chi2_category_statistic_csv()
+
+
 
     # dummy_dummy()
 
     # dummy()
 
-    # ans_1_1_programming_languages()
-    # ans_1_1_programming_languages_level_of_abstraction()
-    # ans_1_1_programming_languages_programming_paradigm()
-    # ans_1_1_number_of_programming_languages()
-
-
-    # ans_1_0_number_of_issues()
-
-    chi2_category_statistic_csv()
 
     # validation()
 
