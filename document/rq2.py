@@ -370,15 +370,15 @@ def compute_mann_whitney():
     table_3_rows = []
     indexes = get_indexes()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
-    for name, index in indexes:
-        x_title, x_values = get_column_title_and_values(2, True)
-        y_title, y_values = get_index_title_and_values(name, index)
-        remove_invalid_values(x_values, y_values)
-        y_values = list(map(lambda x: int(x), y_values))
+    for x_title, index in indexes:
         p_values = []
         p_value_rejections = []
-        cramer_vs = []
+        effect_sizes = []
         for category_name in category_names:
+            _, x_values = get_column_title_and_values(2, True)
+            y_title, y_values = get_index_title_and_values(x_title, index)
+            remove_invalid_values(x_values, y_values)
+            y_values = list(map(lambda x: int(x), y_values))
             y_group = []
             n_group = []
             for i in range(len(x_values)):
@@ -390,16 +390,16 @@ def compute_mann_whitney():
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             p_value_rejections.append(f'"{p_value_rejection},{compute_group_sign(ALPHA, y_group, n_group)}"')
-            cramer_vs.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
+            effect_sizes.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
             print(f'"{category_name}","{y_title}",{p_value},{p_value_rejection}')
             print(f'YES: {len(y_group)} {y_group}')
             print(f'NO: {len(n_group)} {n_group}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
-        table_3_row = ','.join(cramer_vs)
-        table_1_rows.append(f',"{name}",{table_1_row}')
-        table_2_rows.append(f',"{name}",{table_2_row}')
-        table_3_rows.append(f',"{name}",{table_3_row}')
+        table_3_row = ','.join(effect_sizes)
+        table_1_rows.append(f',"{x_title}",{table_1_row}')
+        table_2_rows.append(f',"{x_title}",{table_2_row}')
+        table_3_rows.append(f',"{x_title}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
 
 
@@ -432,11 +432,10 @@ def compute_chi_squared():
     for package_manager in package_manager_dict:
         indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
 
-    alpha = 0.05
-    corrected_alpha = alpha / (len(indexes) * len(category_names))
-    p_value_lines = []
-    p_value_rejection_lines = []
-    effect_size_lines = []
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
     for name, y_values in indexes:
         p_values = []
         p_value_rejections = []
@@ -452,7 +451,6 @@ def compute_chi_squared():
             chi2_value, p_value, degrees_of_freedom, expected_frequencies = chi2_contingency(table, correction=True)
             # print(f'{category_name}')
             # if category_name == 'Reporting procedure':
-            print(table.to_string())
             # print(expected_frequencies)
             # print(compute_chi_square_value(table, expected_frequencies, True))
             if table.shape == (2,2):
@@ -469,36 +467,24 @@ def compute_chi_squared():
                     sign = '='
             else:
                 sign = ''
-            critical_value = chi2.ppf(1 - alpha, degrees_of_freedom)
+            critical_value = chi2.ppf(1 - ALPHA, degrees_of_freedom)
             # print(chi2_value)
             cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
             expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
             chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             print(f',{category_name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
+            print(table.to_string())
             p_values.append(f'{p_value}')
             p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             effect_sizes.append(f'{cramer_v}')
-        p_value_line = ','.join(p_values)
-        p_value_lines.append(f',"{name}",{p_value_line}')
-        p_value_rejection_line = ','.join(p_value_rejections)
-        p_value_rejection_lines.append(f',"{name}",{p_value_rejection_line}')
-        effect_size_line = ','.join(effect_sizes)
-        effect_size_lines.append(f',"{name}",{effect_size_line}')
-    header_line = ','.join(map(lambda x: f'"{x}"', category_names))
-    header_line = f',,{header_line}'
-    print()
-    print(header_line)
-    for line in p_value_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in p_value_rejection_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in effect_size_lines:
-        print(line)
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(effect_sizes)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
 
 
 def print_tables(table_1_rows, table_2_rows, table_3_rows):
