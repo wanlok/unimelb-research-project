@@ -7,7 +7,7 @@ import sys
 
 import pandas as pd
 from scipy import stats
-from scipy.stats import spearmanr, skew, pointbiserialr, chi2_contingency, chi2
+from scipy.stats import spearmanr, skew, pointbiserialr, chi2_contingency, chi2, fisher_exact
 
 from dependency import get_package_manager_dict, get_repo_xx
 from document.document_categorisation_all import get_repo_categorisation_results
@@ -339,28 +339,28 @@ def compute_spearman():
     indexes = get_indexes()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
     results = get_repo_categorisation_results()
-    for x_title, index in indexes:
+    for name, index in indexes:
         p_values = []
         p_value_rejections = []
         rhos = []
         for category_name in category_names:
             x_values = repos(get_dict_value, results, category_name)
-            y_title, y_values = get_index_title_and_values(x_title, index)
+            y_title, y_values = get_index_title_and_values(name, index)
             remove_invalid_values(x_values, y_values)
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
             rhos.append(f'{rho}')
-            print(f'"{category_name}","{x_title}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'"{category_name}","{name}","{y_title}",{p_value},{p_value_rejection}')
             print(f'x_values: {len(x_values)} {x_values}')
             print(f'y_values: {len(y_values)} {y_values}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(rhos)
-        table_1_rows.append(f',"{x_title}",{table_1_row}')
-        table_2_rows.append(f',"{x_title}",{table_2_row}')
-        table_3_rows.append(f',"{x_title}",{table_3_row}')
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
 
 
@@ -370,13 +370,13 @@ def compute_mann_whitney():
     table_3_rows = []
     indexes = get_indexes()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
-    for x_title, index in indexes:
+    for name, index in indexes:
         p_values = []
         p_value_rejections = []
         effect_sizes = []
         for category_name in category_names:
             _, x_values = get_column_title_and_values(2, True)
-            y_title, y_values = get_index_title_and_values(x_title, index)
+            y_title, y_values = get_index_title_and_values(name, index)
             remove_invalid_values(x_values, y_values)
             y_values = list(map(lambda x: int(x), y_values))
             y_group = []
@@ -397,10 +397,136 @@ def compute_mann_whitney():
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(effect_sizes)
-        table_1_rows.append(f',"{x_title}",{table_1_row}')
-        table_2_rows.append(f',"{x_title}",{table_2_row}')
-        table_3_rows.append(f',"{x_title}",{table_3_row}')
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
+
+
+def get_df(x_title, x_values, y_title, y_values):
+    value_dict = dict()
+    value_dict[('Yes', 'Yes')] = 0
+    value_dict[('Yes', 'No')] = 0
+    value_dict[('No', 'Yes')] = 0
+    value_dict[('No', 'No')] = 0
+    if len(x_values) == len(y_values):
+        for i in range(len(x_values)):
+            key = x_values[i], y_values[i]
+            value_dict[key] = value_dict[key] + 1
+    return pd.DataFrame({
+        f'{x_title} yes': [value_dict[('Yes', 'Yes')], value_dict[('Yes', 'No')]],
+        f'{x_title} no': [value_dict[('No', 'Yes')], value_dict[('No', 'No')]]
+    }, index=pd.Index([f'{y_title} yes', f'{y_title} no']))
+
+
+def compute_odds_ratio_and_sign(df, x_title, y_title):
+    a = df[f'{x_title} yes'][f'{y_title} yes']
+    b = df[f'{x_title} no'][f'{y_title} yes']
+    c = df[f'{x_title} yes'][f'{y_title} no']
+    d = df[f'{x_title} no'][f'{y_title} no']
+    odds_ratio = (a * d) / (b * c)
+    if odds_ratio > 1:
+        sign = '+'
+    elif odds_ratio < 1:
+        sign = '-'
+    else:
+        sign = '='
+    return odds_ratio, sign
+
+def compute_fisher_exact():
+    # cwes = get_column_title_and_values(34, True)[1]
+    # top_cwes = get_top_25_cwes()
+
+    indexes = []
+    # for cwe in top_cwes:
+    #     indexes.append((cwe, list(map(lambda x: 'Yes' if x is not None and cwe in x else 'No', cwes))))
+
+    language_dict = one_hot_encoding(get_column_title_and_values(45)[1], percentage=0.8)
+    for language in language_dict:
+        indexes.append((language, language_dict[language]))
+
+    indexes.extend([
+        ('Object-oriented language', get_language_values(9)),
+        ('Web development language', get_language_values(20)),
+        ('Mobile development language', get_language_values(26)),
+        ('Backend development language', get_language_values(32))
+    ])
+
+    application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
+    for application_domain in application_domain_dict:
+        indexes.append((application_domain, application_domain_dict[application_domain]))
+
+    indexes.append(('README.md', get_column_title_and_values(47)[1]))
+
+    package_manager_dict = get_package_manager_dict()
+    for package_manager in package_manager_dict:
+        indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
+
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    ccc = 0
+    for name, y_values in indexes:
+        p_values = []
+        p_value_rejections = []
+        effect_sizes = []
+        _, x_values = get_column_title_and_values(2, True)
+        remove_invalid_values(x_values, y_values)
+        for category_name in category_names:
+            categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
+
+            # print(categories)
+            # print(y_values)
+
+            df = get_df(category_name, categories, name, y_values)
+            print(df)
+            a = fisher_exact(df.to_numpy())
+            b = compute_odds_ratio_and_sign(df, category_name, name)
+
+            print(f'AAAAA {a} BBBBB {b}')
+
+            p_value = a.pvalue
+            sign = b[1]
+            # # print(f'{category_name}')
+            # # if category_name == 'Reporting procedure':
+            # # print(expected_frequencies)
+            # # print(compute_chi_square_value(table, expected_frequencies, True))
+            # if table.shape == (2,2):
+            #     a = table['Yes']['Yes']
+            #     b = table['Yes']['No']
+            #     c = table['No']['Yes']
+            #     d = table['No']['No']
+            #     odds_ratio = (a * d) / (b * c)
+            #     if odds_ratio > 1:
+            #         sign = '+'
+            #     elif odds_ratio < 1:
+            #         sign = '-'
+            #     else:
+            #         sign = '='
+            # else:
+            #     sign = ''
+            # critical_value = chi2.ppf(1 - ALPHA, degrees_of_freedom)
+            # # print(chi2_value)
+            # cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
+            # expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
+            # chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            # print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
+            # # print(table.to_string())
+            # if expected_count_percentage < 0.8:
+            #     ccc = ccc + 1
+            p_values.append(f'{p_value}')
+            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
+            effect_sizes.append(f'{b[0]}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(effect_sizes)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+    print(ccc)
 
 
 def compute_chi_squared():
@@ -436,15 +562,13 @@ def compute_chi_squared():
     table_2_rows = []
     table_3_rows = []
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    ccc = 0
     for name, y_values in indexes:
         p_values = []
         p_value_rejections = []
         effect_sizes = []
         _, x_values = get_column_title_and_values(2, True)
         remove_invalid_values(x_values, y_values)
-        print()
-        print(f',{name}')
-        print(f',"Category name","Chi-square value","Phi/Cramer\'s V association","p-value","Rejected by chi-square","Rejected by p-value","Degrees of freedom","Expected count >= 5"')
         for category_name in category_names:
             categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
             table = pd.crosstab(categories, y_values)
@@ -473,8 +597,10 @@ def compute_chi_squared():
             expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
             chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
-            print(f',{category_name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
-            print(table.to_string())
+            print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
+            # print(table.to_string())
+            if expected_count_percentage < 0.8:
+                ccc = ccc + 1
             p_values.append(f'{p_value}')
             p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             effect_sizes.append(f'{cramer_v}')
@@ -485,6 +611,7 @@ def compute_chi_squared():
         table_2_rows.append(f',"{name}",{table_2_row}')
         table_3_rows.append(f',"{name}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
+    print(ccc)
 
 
 def print_tables(table_1_rows, table_2_rows, table_3_rows):
@@ -930,7 +1057,8 @@ if __name__ == '__main__':
 
     # compute_all_data_normality()
     # compute_spearman()
-    compute_mann_whitney()
+    # compute_mann_whitney()
+    compute_fisher_exact()
     # compute_chi_squared()
     # validation()
 
