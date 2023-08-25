@@ -238,8 +238,6 @@ def compute_all_data_normality():
     compute_data_normality(39) # Lines of code
 
 
-
-
 def dummy(column_index):
     directory_path = f'C:\\Files\\RQ2\\{column_index}\\'
     if not os.path.exists(directory_path):
@@ -359,8 +357,9 @@ def get_number_of_security_advisory(repo, security_advisory_dict):
     return number_of_security_advisory
 
 
-def spearman_correlation():
+def compute_spearman():
     v2_i, v2_e, v3_i, v3_e = get_cvss_counts()
+
     indexes = [
         ('Number of stars', 3),
         ('Number of committers', 15),
@@ -376,14 +375,20 @@ def spearman_correlation():
         ('Number of forks', 35),
         ('Number of languages', 44),
         ('Number of days since document created', get_number_of_days_since_document_created()),
-        ('Lines of code', 39)
+        ('Number of lines of code', 39)
     ]
+
+    package_manager_dict = get_package_manager_dict()
+    for package_manager in package_manager_dict:
+        indexes.append((f'Number of {package_manager} dependencies', repos(get_package_manager_count, package_manager_dict[package_manager])))
+
     alpha = 0.05
     corrected_alpha = alpha / (len(indexes) * len(category_names))
     rho_lines = []
     p_value_lines = []
     p_value_rejection_lines = []
     results = get_repo_categorisation_results()
+    aaaaa = []
     for name, index in indexes:
         if type(index) == int:
             y_title, y_values = get_column_title_and_values(index)
@@ -400,6 +405,7 @@ def spearman_correlation():
             # x_values = list(map(lambda x: 0 if x is None else x, x_values))
             a = []
             b = []
+            aaaaa.append(len([x for x in y_values if x is None or len(x) == 0]))
             for x, y in zip(x_values, y_values):
                 if y is not None and len(y) > 0:
                     y = int(y)
@@ -407,6 +413,8 @@ def spearman_correlation():
                         a.append(x)
                         b.append(y)
             print(f'{name},{category_name},{y_title},{len(x_values)},{len(y_values)},{len(a)},{len(b)}')
+            print(f'{a}')
+            print(f'{b}')
             rho, p_value = spearmanr(a, b)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
@@ -432,6 +440,7 @@ def spearman_correlation():
     print(header_line)
     for line in rho_lines:
         print(line)
+    print(aaaaa)
 
 
 def get_dict_value(repo, repo_dict, key):
@@ -450,19 +459,6 @@ def get_name_vector(names):
             if name == category_names[i]:
                 vector[i] = 1
     return vector
-
-
-# def get_categories(names=None):
-    # if names is None:
-    #     indexes = []
-    # else:
-    #     indexes = [i for i in range(len(category_names)) if category_names[i] in names]
-
-    # for i in range(len(results)):
-    #     value, vector = results[i]
-    #     filtered_indexes = [vector[j] for j in range(len(vector)) if j in indexes]
-    #     results[i] = (value, vector, filtered_indexes)
-    # return results
 
 
 def compute_point_biserial_correlation(x_title, x_values, y, writer):
@@ -727,7 +723,7 @@ def one_hot_encoding(item_list, as_list=False, percentage=1):
     return column_dict
 
 
-def chi2_category_statistic_csv():
+def compute_chi_squared():
     # cwes = get_column_title_and_values(34, True)[1]
     # top_cwes = get_top_25_cwes()
 
@@ -743,26 +739,19 @@ def chi2_category_statistic_csv():
         ('Object-oriented language', get_language_values(9)),
         ('Web development language', get_language_values(20)),
         ('Mobile development language', get_language_values(26)),
-        ('Backend development language', get_language_values(32)),
-        # ('Application domain', get_column_title_and_values(30, False)[1])
+        ('Backend development language', get_language_values(32))
     ])
-
-
-    # my_dict = dict()
-    # package_manager_dict = get_package_manager_dict()
-    # for package_manager in package_manager_dict:
-    #     my_dict[package_manager] = repos(is_package_manager_exists, package_manager_dict[package_manager])
-    #
-    # print(my_dict)
-
-
 
     application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
     for application_domain in application_domain_dict:
         indexes.append((application_domain, application_domain_dict[application_domain]))
 
-    indexes.append(('Contains README.md', get_column_title_and_values(47, False)[1]))
-    print(get_column_title_and_values(47, False))
+    indexes.append(('README.md', get_column_title_and_values(47)[1]))
+
+    package_manager_dict = get_package_manager_dict()
+    for package_manager in package_manager_dict:
+        indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
+
     alpha = 0.05
     corrected_alpha = alpha / (len(indexes) * len(category_names))
     p_value_lines = []
@@ -786,7 +775,6 @@ def chi2_category_statistic_csv():
             print(table.to_string())
             # print(expected_frequencies)
             # print(compute_chi_square_value(table, expected_frequencies, True))
-            sign = ''
             if table.shape == (2,2):
                 a = table['Yes']['Yes']
                 b = table['Yes']['No']
@@ -799,7 +787,8 @@ def chi2_category_statistic_csv():
                     sign = '-'
                 else:
                     sign = '='
-
+            else:
+                sign = ''
             critical_value = chi2.ppf(1 - alpha, degrees_of_freedom)
             # print(chi2_value)
             cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
@@ -898,23 +887,33 @@ def get_values(v, percentage=0.8, with_count=False):
     return values
 
 
-
-
-
-def mann_whitney():
+def compute_mann_whitney():
 
     # 44 programming language
+
+    v2_i, v2_e, v3_i, v3_e = get_cvss_counts()
 
     indexes = [
         ('Number of stars', 3),
         ('Number of committers', 15),
         ('Number of issues', 22),
         ('Number of security-related issues', 29),
+        ('Number of security advisories', repos(get_number_of_security_advisory, get_security_advisory_dict())),
         ('Number of CVEs', (33, True, True)),
         ('Number of CWEs', (34, True, True)),
+        ('Number of CVSS v2 impact score low', get_sum_list(v2_ratings, ['Low'], v2_i)),
+        ('Number of CVSS v2 impact score medium or above', get_sum_list(v2_ratings, ['Medium', 'High'], v2_i)),
+        ('Number of CVSS v3 impact score low', get_sum_list(v3_ratings, ['Low'], v3_i)),
+        ('Number of CVSS v3 impact score medium or above', get_sum_list(v3_ratings, ['Medium', 'High', 'Critical'], v3_i)),
         ('Number of forks', 35),
-        ('Lines of code', 39)
+        ('Number of languages', 44),
+        ('Number of days since document created', get_number_of_days_since_document_created()),
+        ('Number of lines of code', 39)
     ]
+
+    package_manager_dict = get_package_manager_dict()
+    for package_manager in package_manager_dict:
+        indexes.append((f'Number of {package_manager} dependencies', repos(get_package_manager_count, package_manager_dict[package_manager])))
 
     alpha = 0.05
     p_value_lines = []
@@ -923,16 +922,17 @@ def mann_whitney():
     for name, index in indexes:
         _, x_values = get_column_title_and_values(2, True)
         if type(index) == int:
-            _, y_values = get_column_title_and_values(index)
+            y_title, y_values = get_column_title_and_values(index)
+        elif type(index) == tuple:
+            y_title, y_values = get_column_title_and_values(*index)
         else:
-            _, y_values = get_column_title_and_values(*index)
+            y_title = name
+            y_values = index
         remove_invalid_values(x_values, y_values)
-
-        # print(x_values)
-        # print(y_values)
-
         print()
         print(f',"{name}"')
+        print(f'{len(x_values)} {x_values[:10]}')
+        print(f'{len(y_values)} {y_values[:10]}')
         y_values = list(map(lambda x: int(x), y_values))
         number_of_categories = len(category_names)
         family_wise_error_rate = number_of_categories * len(indexes)
@@ -950,16 +950,26 @@ def mann_whitney():
                     y_group.append(y_values[i])
                 else:
                     n_group.append(y_values[i])
-            y_mean = statistics.mean(y_group)
-            n_mean = statistics.mean(n_group)
-            absolute_difference = abs(y_mean - n_mean)
-            # print(f'{name} {category_name} {y_mean} {n_mean} {absolute_difference}')
-            if absolute_difference / y_mean <= alpha and absolute_difference / n_mean <= alpha:
-                sign = '='
-            elif y_mean > n_mean:
-                sign = '+'
+            # y_group = list(filter(lambda x: x > 0, y_group))
+            # n_group = list(filter(lambda x: x > 0, n_group))
+            print(f'YES: {len(y_group)} {y_group}')
+            print(f'NO: {len(n_group)} {n_group}')
+            if len(y_group) > 0 and len(n_group) > 0:
+                y_mean = statistics.mean(y_group)
+                n_mean = statistics.mean(n_group)
+                absolute_difference = abs(y_mean - n_mean)
+                # print(f'{name} {category_name} {y_mean} {n_mean} {absolute_difference}')
+                if y_mean > 0 and n_mean > 0:
+                    if absolute_difference / y_mean <= alpha and absolute_difference / n_mean <= alpha:
+                        sign = '='
+                    elif y_mean > n_mean:
+                        sign = '+'
+                    else:
+                        sign = '-'
+                else:
+                    sign = ''
             else:
-                sign = '-'
+                sign = ''
             # print(','.join(map(lambda x: f'{x}', y_group)))
             # print(','.join(map(lambda x: f'{x}', n_group)))
             a = stats.mannwhitneyu(y_group, n_group)
@@ -970,13 +980,13 @@ def mann_whitney():
             p_values.append(f'{p_value}')
             p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             effect_sizes.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
+        # paired_box(aaa)
         p_value_line = ','.join(p_values)
         p_value_lines.append(f',"{name}",{p_value_line}')
         p_value_rejection_line = ','.join(p_value_rejections)
         p_value_rejection_lines.append(f',"{name}",{p_value_rejection_line}')
         effect_size_line = ','.join(effect_sizes)
         effect_size_lines.append(f',"{name}",{effect_size_line}')
-        # paired_box(aaa)
     header_line = ','.join(map(lambda x: f'"{x}"', category_names))
     header_line = f',,{header_line}'
     print()
@@ -1029,13 +1039,22 @@ def validation():
     print('Hello World')
 
 
-def is_package_manager_exists(repo, b):
+def is_package_manager_used(repo, b):
     exists = 'No'
     for bb in b:
         if bb[0] == repo:
             exists = 'Yes'
             break
     return exists
+
+
+def get_package_manager_count(repo, b):
+    count = 0
+    for bb in b:
+        if bb[0] == repo:
+            count = len(bb[1])
+            break
+    return f'{count}'
 
 
 if __name__ == '__main__':
@@ -1065,34 +1084,22 @@ if __name__ == '__main__':
     # q((2, True, True), )
 
     # compute_all_data_normality()
-    # spearman_correlation()
-    # mann_whitney()
+    compute_spearman()
+    # compute_mann_whitney()
+    # compute_chi_squared()
+    # validation()
 
-    chi2_category_statistic_csv()
+
+
+
 
 
 
     # dummy_dummy()
-
     # dummy()
-
-
-    # validation()
-
 
     # ans_1_2()
     # ans_1_3()
-
-
-    # values = get_values(45)
-    # _, v = get_column_title_and_values(45)
-    # for value in v:
-    #     if value in values:
-    #         print(value)
-    #     else:
-    #         print('Others')
-
-
 
     # a(29, (2, True), nr([1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000])) # Number of forks / Categories
     # a(30, (2, True), nr([200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000])) # Number of words / Categories
