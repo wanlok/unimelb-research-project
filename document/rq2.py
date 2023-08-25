@@ -29,6 +29,9 @@ from utils import repos, get_latest_content, attribute_file_path, csv_reader, ex
     sort_by_descending_values
 
 
+ALPHA = 0.05
+
+
 def a(vertical, horizontal, number_ranges):
     pass
     # if type(horizontal) == int:
@@ -307,7 +310,7 @@ def get_number_of_days_since_document_created():
     return y_values
 
 
-def compute_spearman():
+def get_indexes():
     indexes = [
         ('Number of stars', 3),
         ('Number of committers', 15),
@@ -322,19 +325,25 @@ def compute_spearman():
         ('Number of CVSS v3 impact score medium or above', 64),
         ('Number of forks', 35),
         ('Number of languages', 44),
-        # ('Number of days since document created', get_number_of_days_since_document_created()),
+        ('Number of days since document created', [get_number_of_days_since_document_created]),
         ('Number of lines of code', 39)
     ]
 
-    # package_manager_dict = get_package_manager_dict()
-    # for package_manager in package_manager_dict:
-    #     indexes.append((f'Number of {package_manager} dependencies', repos(get_package_manager_count, package_manager_dict[package_manager])))
+    package_manager_dict = get_package_manager_dict()
+    for package_manager in package_manager_dict:
+        callable = [repos]
+        params = [get_package_manager_count, package_manager_dict[package_manager]]
+        indexes.append((f'Number of {package_manager} dependencies', callable + params))
 
-    alpha = 0.05
-    corrected_alpha = alpha / (len(indexes) * len(category_names))
-    rho_lines = []
-    p_value_lines = []
-    p_value_rejection_lines = []
+    return indexes
+
+
+def compute_spearman():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    indexes = get_indexes()
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
     results = get_repo_categorisation_results()
     for name, index in indexes:
         rhos = []
@@ -347,50 +356,39 @@ def compute_spearman():
             elif type(index) == tuple:
                 y_title, y_values = get_column_title_and_values(*index)
             else:
-                y_title, y_values = name, index
-
-
-
-            # x_values = list(map(lambda x: 0 if x is None else x, x_values))
-            # a = []
-            # b = []
-            # for x, y in zip(x_values, y_values):
-            #     if x is None:
-            #         x = 0
-            #     if y is not None and len(y) == 0:
-            #         y = 0
-            #     if x is not None and y is not None:
-            #         a.append(x)
-            #         b.append(y)
-            # print(f'before remove {len(x_values)},{len(y_values)}')
+                y_title, y_values = name, index[0](*(index[1:] if len(index) > 1 else []))
             remove_invalid_values(x_values, y_values)
-            print(f'{name},{y_title},{category_name},{len(x_values)},{len(y_values)}')
-            print(f'X: {len(x_values)} {x_values}')
-            print(f'Y: {len(y_values)} {y_values}')
+            print(f'"{category_name}","{name}","{y_title}",{len(x_values)},{len(y_values)}')
+            print(f'x_values: {len(x_values)} {x_values}')
+            print(f'y_values: {len(y_values)} {y_values}')
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             p_value_rejections.append(f'"{p_value_rejection}"')
             rhos.append(f'{rho}')
-        p_value_line = ','.join(p_values)
-        p_value_lines.append(f',"{name}",{p_value_line}')
-        p_value_rejection_line = ','.join(p_value_rejections)
-        p_value_rejection_lines.append(f',"{name}",{p_value_rejection_line}')
-        rho_line = ','.join(rhos)
-        rho_lines.append(f',"{name}",{rho_line}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(rhos)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+
+
+def print_tables(table_1_rows, table_2_rows, table_3_rows):
     header_line = ','.join(map(lambda x: f'"{x}"', category_names))
     header_line = f',,{header_line}'
     print()
     print(header_line)
-    for line in p_value_lines:
+    for line in table_1_rows:
         print(line)
     print()
     print(header_line)
-    for line in p_value_rejection_lines:
+    for line in table_2_rows:
         print(line)
     print()
     print(header_line)
-    for line in rho_lines:
+    for line in table_3_rows:
         print(line)
 
 
@@ -399,7 +397,8 @@ def get_dict_value(repo, repo_dict, key):
     category_dict = repo_dict[repo]
     if key in category_dict:
         value = f'{category_dict[key]}'
-    return value
+    invalid_repos = ['iofinnet/tss-lib']
+    return None if repo in invalid_repos else value
 
 
 def get_name_vector(names):
@@ -997,10 +996,7 @@ def is_package_manager_used(repo, b):
 
 
 def get_package_manager_count(repo, b):
-    count = None
-    if repo == 'iofinnet/tss-lib':
-        # print(f'{repo} {b}')
-        print(repo)
+    count = f'0'
     for bb in b:
         if bb[0] == repo:
             count = f'{len(bb[1])}'
