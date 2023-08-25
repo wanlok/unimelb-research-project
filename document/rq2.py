@@ -2,32 +2,19 @@ import datetime
 import itertools
 import math
 import os
-import shutil
 import statistics
-import string
 import sys
-from functools import reduce
-from math import log10
 
-import numpy as np
-import pandas
 import pandas as pd
-from Levenshtein import distance
-from matplotlib import pyplot as plt
-from scipy import randn, stats
-from scipy.stats import pearsonr, spearmanr, skew, pointbiserialr, chi2_contingency, chi2
+from scipy import stats
+from scipy.stats import spearmanr, skew, pointbiserialr, chi2_contingency, chi2
 
-from chart import scatter_plot, histogram, font_name, padding_2, padding_1, paired_box
-from cvss import get_v3_rating, v3_ratings, \
-    v2_ratings, get_sum_list, compute_v2_ratings, compute_v3_ratings, get_cvss_dumm
 from dependency import get_package_manager_dict
-from document.my_statistics import compute_chi_square_value, compute_mann_whitney_u, compute_mann_whitney_effect_size
-from document.document_categorisation_all import compute_data_frames, get_data_frame, get_repo_categorisation_results
-from document.document_utils import get_docx_content, category_names
-from repository import package_manager_languages
-from utils import repos, get_latest_content, attribute_file_path, csv_reader, expand, get_writer, \
+from document.document_categorisation_all import get_repo_categorisation_results
+from document.document_utils import category_names
+from document.my_statistics import compute_mann_whitney_effect_size, compute_mean_sign
+from utils import repos, attribute_file_path, csv_reader, expand, get_writer, \
     sort_by_descending_values
-
 
 ALPHA = 0.05
 
@@ -328,14 +315,22 @@ def get_indexes():
         ('Number of days since document created', [get_number_of_days_since_document_created]),
         ('Number of lines of code', 39)
     ]
-
     package_manager_dict = get_package_manager_dict()
     for package_manager in package_manager_dict:
         callable = [repos]
         params = [get_package_manager_count, package_manager_dict[package_manager]]
         indexes.append((f'Number of {package_manager} dependencies', callable + params))
-
     return indexes
+
+
+def get_index_title_and_values(title, index):
+    if type(index) == int:
+        title, values = get_column_title_and_values(index)
+    elif type(index) == tuple:
+        title, values = get_column_title_and_values(*index)
+    else:
+        title, values = title, index[0](*(index[1:] if len(index) > 1 else []))
+    return title, values
 
 
 def compute_spearman():
@@ -345,30 +340,64 @@ def compute_spearman():
     indexes = get_indexes()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
     results = get_repo_categorisation_results()
-    for name, index in indexes:
-        rhos = []
+    for x_title, index in indexes:
         p_values = []
         p_value_rejections = []
+        rhos = []
         for category_name in category_names:
             x_values = repos(get_dict_value, results, category_name)
-            if type(index) == int:
-                y_title, y_values = get_column_title_and_values(index)
-            elif type(index) == tuple:
-                y_title, y_values = get_column_title_and_values(*index)
-            else:
-                y_title, y_values = name, index[0](*(index[1:] if len(index) > 1 else []))
+            y_title, y_values = get_index_title_and_values(x_title, index)
             remove_invalid_values(x_values, y_values)
-            print(f'"{category_name}","{name}","{y_title}",{len(x_values)},{len(y_values)}')
-            print(f'x_values: {len(x_values)} {x_values}')
-            print(f'y_values: {len(y_values)} {y_values}')
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             p_value_rejections.append(f'"{p_value_rejection}"')
             rhos.append(f'{rho}')
+            print(f'"{category_name}","{x_title}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'x_values: {len(x_values)} {x_values}')
+            print(f'y_values: {len(y_values)} {y_values}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(rhos)
+        table_1_rows.append(f',"{x_title}",{table_1_row}')
+        table_2_rows.append(f',"{x_title}",{table_2_row}')
+        table_3_rows.append(f',"{x_title}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+
+
+def compute_mann_whitney():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    indexes = get_indexes()
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    for name, index in indexes:
+        x_title, x_values = get_column_title_and_values(2, True)
+        y_title, y_values = get_index_title_and_values(name, index)
+        remove_invalid_values(x_values, y_values)
+        y_values = list(map(lambda x: int(x), y_values))
+        p_values = []
+        p_value_rejections = []
+        cramer_vs = []
+        for category_name in category_names:
+            y_group = []
+            n_group = []
+            for i in range(len(x_values)):
+                if category_name in x_values[i]:
+                    y_group.append(y_values[i])
+                else:
+                    n_group.append(y_values[i])
+            p_value = stats.mannwhitneyu(y_group, n_group).pvalue
+            p_values.append(f'{p_value}')
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{compute_mean_sign(ALPHA, y_group, n_group)}"')
+            cramer_vs.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
+            print(f'"{category_name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'YES: {len(y_group)} {y_group}')
+            print(f'NO: {len(n_group)} {n_group}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(cramer_vs)
         table_1_rows.append(f',"{name}",{table_1_row}')
         table_2_rows.append(f',"{name}",{table_2_row}')
         table_3_rows.append(f',"{name}",{table_3_row}')
@@ -613,8 +642,8 @@ def get_expected_count_greater_than_or_equals_five_percentage(expected_counts):
 
 
 def get_invalid_index(x_values, y_values):
-    x_invalid_indexes = {i for i in range(len(x_values)) if x_values[i] is None or len(x_values[i]) == 0}
-    y_invalid_indexes = {i for i in range(len(y_values)) if y_values[i] is None or len(y_values[i]) == 0}
+    x_invalid_indexes = {i for i in range(len(x_values)) if x_values[i] is None or (type(x_values[i]) != list and len(x_values[i]) == 0)}
+    y_invalid_indexes = {i for i in range(len(y_values)) if y_values[i] is None or (type(x_values[i]) != list and len(y_values[i]) == 0)}
     invalid_indexes = list(x_invalid_indexes.union(y_invalid_indexes))
     if len(invalid_indexes) > 0:
         return invalid_indexes[0]
@@ -834,122 +863,6 @@ def get_values(v, percentage=0.8, with_count=False):
     return values
 
 
-def compute_mann_whitney():
-
-    # 44 programming language
-
-    v2_i, v2_e, v3_i, v3_e = get_cvss_counts()
-
-    indexes = [
-        ('Number of stars', 3),
-        ('Number of committers', 15),
-        ('Number of issues', 22),
-        ('Number of security-related issues', 29),
-        ('Number of security advisories', 58),
-        ('Number of CVEs', (33, True, True)),
-        ('Number of CWEs', (34, True, True)),
-        ('Number of CVSS v2 impact score low', get_sum_list(v2_ratings, ['Low'], v2_i)),
-        ('Number of CVSS v2 impact score medium or above', get_sum_list(v2_ratings, ['Medium', 'High'], v2_i)),
-        ('Number of CVSS v3 impact score low', get_sum_list(v3_ratings, ['Low'], v3_i)),
-        ('Number of CVSS v3 impact score medium or above', get_sum_list(v3_ratings, ['Medium', 'High', 'Critical'], v3_i)),
-        ('Number of forks', 35),
-        ('Number of languages', 44),
-        ('Number of days since document created', get_number_of_days_since_document_created()),
-        ('Number of lines of code', 39)
-    ]
-
-    package_manager_dict = get_package_manager_dict()
-    for package_manager in package_manager_dict:
-        indexes.append((f'Number of {package_manager} dependencies', repos(get_package_manager_count, package_manager_dict[package_manager])))
-
-    alpha = 0.05
-    p_value_lines = []
-    p_value_rejection_lines = []
-    effect_size_lines = []
-    for name, index in indexes:
-        _, x_values = get_column_title_and_values(2, True)
-        if type(index) == int:
-            y_title, y_values = get_column_title_and_values(index)
-        elif type(index) == tuple:
-            y_title, y_values = get_column_title_and_values(*index)
-        else:
-            y_title = name
-            y_values = index
-        remove_invalid_values(x_values, y_values)
-        print()
-        print(f',"{name}"')
-        print(f'{len(x_values)} {x_values[:10]}')
-        print(f'{len(y_values)} {y_values[:10]}')
-        y_values = list(map(lambda x: int(x), y_values))
-        number_of_categories = len(category_names)
-        family_wise_error_rate = number_of_categories * len(indexes)
-        aaa = []
-        # print()
-        # print(f',"Category name","Exists count","Not exists count","p-value","Rejected by p-value"')
-        p_values = []
-        p_value_rejections = []
-        effect_sizes = []
-        for category_name in category_names:
-            y_group = []
-            n_group = []
-            for i in range(len(x_values)):
-                if category_name in x_values[i]:
-                    y_group.append(y_values[i])
-                else:
-                    n_group.append(y_values[i])
-            # y_group = list(filter(lambda x: x > 0, y_group))
-            # n_group = list(filter(lambda x: x > 0, n_group))
-            print(f'YES: {len(y_group)} {y_group}')
-            print(f'NO: {len(n_group)} {n_group}')
-            if len(y_group) > 0 and len(n_group) > 0:
-                y_mean = statistics.mean(y_group)
-                n_mean = statistics.mean(n_group)
-                absolute_difference = abs(y_mean - n_mean)
-                # print(f'{name} {category_name} {y_mean} {n_mean} {absolute_difference}')
-                if y_mean > 0 and n_mean > 0:
-                    if absolute_difference / y_mean <= alpha and absolute_difference / n_mean <= alpha:
-                        sign = '='
-                    elif y_mean > n_mean:
-                        sign = '+'
-                    else:
-                        sign = '-'
-                else:
-                    sign = ''
-            else:
-                sign = ''
-            # print(','.join(map(lambda x: f'{x}', y_group)))
-            # print(','.join(map(lambda x: f'{x}', n_group)))
-            a = stats.mannwhitneyu(y_group, n_group)
-            p_value = a.pvalue
-            p_value_rejection = 'Y' if p_value < alpha / family_wise_error_rate else 'N'
-            print(f',"{category_name}",{len(y_group)},{len(n_group)},{p_value},{p_value_rejection}')
-            aaa.insert(0, (category_name, y_group, n_group))
-            p_values.append(f'{p_value}')
-            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
-            effect_sizes.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
-        # paired_box(aaa)
-        p_value_line = ','.join(p_values)
-        p_value_lines.append(f',"{name}",{p_value_line}')
-        p_value_rejection_line = ','.join(p_value_rejections)
-        p_value_rejection_lines.append(f',"{name}",{p_value_rejection_line}')
-        effect_size_line = ','.join(effect_sizes)
-        effect_size_lines.append(f',"{name}",{effect_size_line}')
-    header_line = ','.join(map(lambda x: f'"{x}"', category_names))
-    header_line = f',,{header_line}'
-    print()
-    print(header_line)
-    for line in p_value_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in p_value_rejection_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in effect_size_lines:
-        print(line)
-
-
 def validation():
     # _, w_values = get_column_title_and_values(0)
     # _, x_values = get_column_title_and_values(31)
@@ -1031,8 +944,8 @@ if __name__ == '__main__':
     # q((2, True, True), )
 
     # compute_all_data_normality()
-    compute_spearman()
-    # compute_mann_whitney()
+    # compute_spearman()
+    compute_mann_whitney()
     # compute_chi_squared()
     # validation()
 
