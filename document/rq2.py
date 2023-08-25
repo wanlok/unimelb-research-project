@@ -18,8 +18,8 @@ from scipy import randn, stats
 from scipy.stats import pearsonr, spearmanr, skew, pointbiserialr, chi2_contingency, chi2
 
 from chart import scatter_plot, histogram, font_name, padding_2, padding_1, paired_box
-from cvss import get_v3_rating, group_scores_to_v3_ratings, group_scores_to_v2_ratings, v3_ratings, \
-    v2_ratings, get_sum_list
+from cvss import get_v3_rating, v3_ratings, \
+    v2_ratings, get_sum_list, compute_v2_ratings, compute_v3_ratings, get_cvss_dumm
 from dependency import get_package_manager_dict
 from document.my_statistics import compute_chi_square_value, compute_mann_whitney_u, compute_mann_whitney_effect_size
 from document.document_categorisation_all import compute_data_frames, get_data_frame, get_repo_categorisation_results
@@ -307,80 +307,28 @@ def get_number_of_days_since_document_created():
     return y_values
 
 
-def get_cvss_counts():
-    v2_i = []
-    v2_e = []
-    v3_i = []
-    v3_e = []
-    _, v2 = get_column_title_and_values(50, True)
-    _, v3 = get_column_title_and_values(51, True)
-    for value in v2:
-        i = []
-        e = []
-        for impact_score, exploitability_score in value:
-            i.append(impact_score)
-            e.append(exploitability_score)
-        v2_i.append(group_scores_to_v2_ratings(i))
-        v2_e.append(group_scores_to_v2_ratings(e))
-    for value in v3:
-        i = []
-        e = []
-        for impact_score, exploitability_score in value:
-            i.append(impact_score)
-            e.append(exploitability_score)
-        v3_i.append(group_scores_to_v3_ratings(i))
-        v3_e.append(group_scores_to_v3_ratings(e))
-    return v2_i, v2_e, v3_i, v3_e
-
-
-def get_security_advisory_dict():
-    security_advisory_dict = dict()
-    i = 0
-    for row in csv_reader('C:\\Files\\Projects\\unimelb-research-project\\security_advisory.csv'):
-        if i > 0:
-            repo = row[1]
-            if len(repo) > 0:
-                t = ((row[0], row[2]))
-                if repo in security_advisory_dict:
-                    security_advisory_dict[repo].append(t)
-                else:
-                    security_advisory_dict[repo] = [t]
-        i = i + 1
-    return security_advisory_dict
-
-
-def get_number_of_security_advisory(repo, security_advisory_dict):
-    if repo in security_advisory_dict:
-        number_of_security_advisory = f'{len(security_advisory_dict[repo])}'
-    else:
-        number_of_security_advisory = f'{0}'
-    return number_of_security_advisory
-
-
 def compute_spearman():
-    v2_i, v2_e, v3_i, v3_e = get_cvss_counts()
-
     indexes = [
         ('Number of stars', 3),
         ('Number of committers', 15),
         ('Number of issues', 22),
         ('Number of security-related issues', 29),
-        ('Number of security advisories', repos(get_number_of_security_advisory, get_security_advisory_dict())),
+        ('Number of security advisories', 76),
         ('Number of CVEs', (33, True, True)),
         ('Number of CWEs', (34, True, True)),
-        ('Number of CVSS v2 impact score low', get_sum_list(v2_ratings, ['Low'], v2_i)),
-        ('Number of CVSS v2 impact score medium or above', get_sum_list(v2_ratings, ['Medium', 'High'], v2_i)),
-        ('Number of CVSS v3 impact score low', get_sum_list(v3_ratings, ['Low'], v3_i)),
-        ('Number of CVSS v3 impact score medium or above', get_sum_list(v3_ratings, ['Medium', 'High', 'Critical'], v3_i)),
+        ('Number of CVSS v2 impact score low', 51),
+        ('Number of CVSS v2 impact score medium or above', 54),
+        ('Number of CVSS v3 impact score low', 60),
+        ('Number of CVSS v3 impact score medium or above', 64),
         ('Number of forks', 35),
         ('Number of languages', 44),
-        ('Number of days since document created', get_number_of_days_since_document_created()),
+        # ('Number of days since document created', get_number_of_days_since_document_created()),
         ('Number of lines of code', 39)
     ]
 
-    package_manager_dict = get_package_manager_dict()
-    for package_manager in package_manager_dict:
-        indexes.append((f'Number of {package_manager} dependencies', repos(get_package_manager_count, package_manager_dict[package_manager])))
+    # package_manager_dict = get_package_manager_dict()
+    # for package_manager in package_manager_dict:
+    #     indexes.append((f'Number of {package_manager} dependencies', repos(get_package_manager_count, package_manager_dict[package_manager])))
 
     alpha = 0.05
     corrected_alpha = alpha / (len(indexes) * len(category_names))
@@ -388,34 +336,38 @@ def compute_spearman():
     p_value_lines = []
     p_value_rejection_lines = []
     results = get_repo_categorisation_results()
-    aaaaa = []
     for name, index in indexes:
-        if type(index) == int:
-            y_title, y_values = get_column_title_and_values(index)
-        elif type(index) == tuple:
-            y_title, y_values = get_column_title_and_values(*index)
-        else:
-            y_title = name
-            y_values = index
         rhos = []
         p_values = []
         p_value_rejections = []
         for category_name in category_names:
             x_values = repos(get_dict_value, results, category_name)
+            if type(index) == int:
+                y_title, y_values = get_column_title_and_values(index)
+            elif type(index) == tuple:
+                y_title, y_values = get_column_title_and_values(*index)
+            else:
+                y_title, y_values = name, index
+
+
+
             # x_values = list(map(lambda x: 0 if x is None else x, x_values))
-            a = []
-            b = []
-            aaaaa.append(len([x for x in y_values if x is None or len(x) == 0]))
-            for x, y in zip(x_values, y_values):
-                if y is not None and len(y) > 0:
-                    y = int(y)
-                    if x is not None:
-                        a.append(x)
-                        b.append(y)
-            print(f'{name},{category_name},{y_title},{len(x_values)},{len(y_values)},{len(a)},{len(b)}')
-            print(f'{a}')
-            print(f'{b}')
-            rho, p_value = spearmanr(a, b)
+            # a = []
+            # b = []
+            # for x, y in zip(x_values, y_values):
+            #     if x is None:
+            #         x = 0
+            #     if y is not None and len(y) == 0:
+            #         y = 0
+            #     if x is not None and y is not None:
+            #         a.append(x)
+            #         b.append(y)
+            # print(f'before remove {len(x_values)},{len(y_values)}')
+            remove_invalid_values(x_values, y_values)
+            print(f'{name},{y_title},{category_name},{len(x_values)},{len(y_values)}')
+            print(f'X: {len(x_values)} {x_values}')
+            print(f'Y: {len(y_values)} {y_values}')
+            rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             p_value_rejections.append(f'"{p_value_rejection}"')
@@ -440,14 +392,13 @@ def compute_spearman():
     print(header_line)
     for line in rho_lines:
         print(line)
-    print(aaaaa)
 
 
 def get_dict_value(repo, repo_dict, key):
-    value = None
+    value = f'0'
     category_dict = repo_dict[repo]
     if key in category_dict:
-        value = category_dict[key]
+        value = f'{category_dict[key]}'
     return value
 
 
@@ -665,9 +616,7 @@ def get_expected_count_greater_than_or_equals_five_percentage(expected_counts):
 def get_invalid_index(x_values, y_values):
     x_invalid_indexes = {i for i in range(len(x_values)) if x_values[i] is None or len(x_values[i]) == 0}
     y_invalid_indexes = {i for i in range(len(y_values)) if y_values[i] is None or len(y_values[i]) == 0}
-    # print(x_invalid_indexes)
-    # print(y_invalid_indexes)
-    invalid_indexes = list(x_invalid_indexes.intersection(y_invalid_indexes))
+    invalid_indexes = list(x_invalid_indexes.union(y_invalid_indexes))
     if len(invalid_indexes) > 0:
         return invalid_indexes[0]
     else:
@@ -679,7 +628,6 @@ def remove_invalid_values(x_values, y_values):
     while invalid_index is not None:
         del x_values[invalid_index]
         del y_values[invalid_index]
-        # print(f'REMOVED INDEX: {invalid_index}')
         invalid_index = get_invalid_index(x_values, y_values)
 
 
@@ -898,7 +846,7 @@ def compute_mann_whitney():
         ('Number of committers', 15),
         ('Number of issues', 22),
         ('Number of security-related issues', 29),
-        ('Number of security advisories', repos(get_number_of_security_advisory, get_security_advisory_dict())),
+        ('Number of security advisories', 58),
         ('Number of CVEs', (33, True, True)),
         ('Number of CWEs', (34, True, True)),
         ('Number of CVSS v2 impact score low', get_sum_list(v2_ratings, ['Low'], v2_i)),
@@ -1049,12 +997,15 @@ def is_package_manager_used(repo, b):
 
 
 def get_package_manager_count(repo, b):
-    count = 0
+    count = None
+    if repo == 'iofinnet/tss-lib':
+        # print(f'{repo} {b}')
+        print(repo)
     for bb in b:
         if bb[0] == repo:
-            count = len(bb[1])
+            count = f'{len(bb[1])}'
             break
-    return f'{count}'
+    return count
 
 
 if __name__ == '__main__':
@@ -1089,7 +1040,10 @@ if __name__ == '__main__':
     # compute_chi_squared()
     # validation()
 
-
+    # package_manager_dict = get_package_manager_dict()
+    # for package_manager in package_manager_dict:
+    #     a = repos(get_package_manager_count, package_manager_dict[package_manager])
+        # print(a)
 
 
 
