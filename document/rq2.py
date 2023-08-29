@@ -13,8 +13,11 @@ from dependency import get_package_manager_dict, get_repo_xx
 from document.document_categorisation_all import get_repo_categorisation_results
 from document.document_utils import category_names
 from document.my_statistics import compute_mann_whitney_effect_size, compute_group_sign, compute_spearman_sign
+from document.owasp import get_owasp_cwe_dict, get_owasp_description_dict
+from security_md import get_number_of_characters_words_headers_paragraphs
 from utils import repos, attribute_file_path, csv_reader, expand, get_writer, \
-    sort_by_descending_values
+    sort_by_descending_values, get_column_title_and_values, get_grouped_column_title_and_values, \
+    get_security_policy_repo
 
 ALPHA = 0.05
 
@@ -117,36 +120,6 @@ def nr(numbers):
             # print(content_results)
 
 
-def get_column_title_and_values(column_index, as_list=False, as_list_count=False):
-    title = ''
-    sub_title = ''
-    values = []
-    i = 0
-    for row in csv_reader(attribute_file_path):
-        if i == 0:
-            title = expand(row)[column_index]
-        elif i == 1:
-            sub_title = row[column_index]
-        else:
-            if as_list:
-                try:
-                    value = eval(row[column_index])
-                    if as_list_count:
-                        value = f'{len(value)}'
-                except:
-                    value = None
-            else:
-                value = row[column_index]
-                # v = row[column_index]
-                # if type(v) == str:
-                #     value = v
-                # else:
-                #     value = int(v) if len(v) > 0 else v
-            values.append(value)
-        i = i + 1
-    return f'{title} {sub_title}'.strip(), values
-
-
 def q(x, y, file_path):
     title = ''
     if type(x) == tuple:
@@ -157,7 +130,6 @@ def q(x, y, file_path):
         y_title, y_values = get_column_title_and_values(*y)
     else:
         y_title, y_values = get_column_title_and_values(y)
-
     new_x_values = []
     new_y_values = []
     for i in range(len(x_values)):
@@ -272,7 +244,7 @@ def get_number_of_days_since_document_created():
 
     y_values = []
     today_date = pd.to_datetime('today').normalize()
-    _, values = get_column_title_and_values(49)
+    _, values = get_column_title_and_values(50)
     for value in values:
         if len(value) > 0:
             date_time = datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z')
@@ -297,28 +269,104 @@ def get_number_of_days_since_document_created():
     return y_values
 
 
+def get_owasp_descriptions(owasp_cwe_dict):
+    y_values = []
+    title, values = get_column_title_and_values(34, True)
+    for value in values:
+        description_set = None
+        if value is not None:
+            description_set = set()
+            for cwe in value:
+                if cwe in owasp_cwe_dict:
+                    description_set.update(owasp_cwe_dict[cwe])
+        y_values.append(description_set)
+    return y_values
+
+
+def get_number_of_owasp_descriptions(owasp_cwe_dict):
+    return [f'{len(x)}' if x is not None else None for x in get_owasp_descriptions(owasp_cwe_dict)]
+
+
+def get_aaa(owasp_cwe_dict):
+    owasp_description_dict = dict()
+    owasp_descriptions = get_owasp_descriptions(owasp_cwe_dict)
+    for key in get_owasp_description_dict():
+        value = []
+        for descriptions in owasp_descriptions:
+            v = None
+            if descriptions is not None:
+                if key in descriptions:
+                    v = 'Yes'
+                else:
+                    v = 'No'
+            value.append(v)
+        owasp_description_dict[key] = value
+    return owasp_description_dict
+
+
 def get_indexes():
     package_manager_dict = get_package_manager_dict()
-    indexes = [
+    owasp_cwe_dict = get_owasp_cwe_dict()
+    indexes = []
+    indexes.extend([
         ('Number of stars', 3),
         ('Number of committers', 15),
         ('Number of issues', 22),
         ('Number of security-related issues', 29),
-        ('Number of security advisories', 76),
+        ('Number of security advisories', 77),
         ('Number of CVEs', (33, True, True)),
         ('Number of CWEs', (34, True, True)),
-        ('Number of CVSS v2 impact score low', 51),
-        ('Number of CVSS v2 impact score medium or above', 54),
-        ('Number of CVSS v3 impact score low', 60),
-        ('Number of CVSS v3 impact score medium or above', 64),
+        ('Number of OWASP descriptions', [get_number_of_owasp_descriptions, owasp_cwe_dict]),
+        ('Number of CVSS v2 impact score low', 52),
+        ('Number of CVSS v2 impact score medium or above', 55),
+        ('Number of CVSS v3 impact score low', 61),
+        ('Number of CVSS v3 impact score medium or above', 65),
         ('Number of forks', 35),
-        ('Number of languages', 44),
+        ('Number of languages', 45),
         ('Number of days since document created', [get_number_of_days_since_document_created]),
-        ('Number of lines of code', 39),
+        ('Number of lines of code', 40),
         ('Number of dependencies', [repos, get_repo_xx, package_manager_dict])
-    ]
+    ])
     for package_manager in package_manager_dict:
         indexes.append((f'Number of {package_manager} dependencies', [repos, get_package_manager_count, package_manager_dict[package_manager]]))
+    return indexes
+
+
+def get_indexes_2():
+
+    # cwes = get_column_title_and_values(34, True)[1]
+    # top_cwes = get_top_25_cwes()
+
+
+    indexes = []
+    # for cwe in top_cwes:
+    #     indexes.append((cwe, list(map(lambda x: 'Yes' if x is not None and cwe in x else 'No', cwes))))
+
+    language_dict = one_hot_encoding(get_column_title_and_values(46)[1], percentage=0.8)
+    for language in language_dict:
+        indexes.append((language, language_dict[language]))
+
+    indexes.extend([
+        ('Object-oriented language', get_language_values(9)),
+        ('Web development language', get_language_values(20)),
+        ('Mobile development language', get_language_values(26)),
+        ('Backend development language', get_language_values(32))
+    ])
+
+    application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
+    for application_domain in application_domain_dict:
+        indexes.append((application_domain, application_domain_dict[application_domain]))
+
+    indexes.append(('README.md', get_column_title_and_values(48)[1]))
+
+    package_manager_dict = get_package_manager_dict()
+    for package_manager in package_manager_dict:
+        indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
+
+    owasp_cwe_dict = get_owasp_cwe_dict()
+    a_dict = get_aaa(owasp_cwe_dict)
+    for a in a_dict:
+        indexes.append((a, a_dict[a]))
     return indexes
 
 
@@ -332,13 +380,49 @@ def get_index_title_and_values(title, index):
     return title, values
 
 
-def compute_spearman():
+def compute_spearman_level_1():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    headers = ['Number of characters', 'Number of words', 'Number of headers', 'Number of paragraphs']
+    x_indexes = [36, 37, 38, 39]
+    y_indexes = get_indexes()
+    corrected_alpha = ALPHA / (len(x_indexes) * len(y_indexes))
+    for name, y_index in y_indexes:
+        p_values = []
+        p_value_rejections = []
+        rhos = []
+        for x_index in x_indexes:
+            x_title, x_values = get_column_title_and_values(x_index)
+            y_title, y_values = get_index_title_and_values(name, y_index)
+            remove_invalid_values(x_values, y_values)
+            rho, p_value = spearmanr(x_values, y_values)
+            p_values.append(f'{p_value}')
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
+            rhos.append(f'{rho}')
+            print(f'"{x_title}","{name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'x_values: {len(x_values)} {x_values}')
+            print(f'y_values: {len(y_values)} {y_values}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(rhos)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows, headers)
+
+
+def compute_spearman_level_2(grouped):
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
     indexes = get_indexes()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
     results = get_repo_categorisation_results()
+    if grouped:
+        location_dict = dict()
+        repos(set_location_dict, location_dict)
     for name, index in indexes:
         p_values = []
         p_value_rejections = []
@@ -346,7 +430,13 @@ def compute_spearman():
         for category_name in category_names:
             x_values = repos(get_dict_value, results, category_name)
             y_title, y_values = get_index_title_and_values(name, index)
-            remove_invalid_values(x_values, y_values)
+            if grouped:
+                _, z_values = get_column_title_and_values(0)
+                remove_invalid_values(x_values, y_values, z_values)
+                x_values, y_values = group_and_filter_values(x_values, y_values, z_values, location_dict)
+            else:
+                remove_invalid_values(x_values, y_values)
+                x_values, y_values = filter_values(x_values, y_values)
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
@@ -362,6 +452,38 @@ def compute_spearman():
         table_2_rows.append(f',"{name}",{table_2_row}')
         table_3_rows.append(f',"{name}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
+
+
+def filter_values(x_values, y_values):
+    x_values = list(map(lambda x: int(x), x_values))
+    y_values = list(map(lambda x: int(x), y_values))
+    return x_values, y_values
+
+
+def group_and_filter_values(x_values, y_values, z_values, location_dict):
+    z_values = list(map(lambda x: location_dict[x], z_values))
+    # print(f'x_values: {len(x_values)} {x_values}')
+    # print(f'y_values: {len(y_values)} {y_values}')
+    # print(f'z_values: {len(z_values)} {z_values}')
+    #
+    my_dict = dict()
+    for x, y, z in zip(x_values, y_values, z_values):
+        if z in my_dict:
+            grouped_x_values, grouped_y_values = my_dict[z]
+            grouped_x_values.append(int(x))
+            grouped_y_values.append(int(y))
+        else:
+            my_dict[z] = ([int(x)], [int(y)])
+    new_x_values = []
+    new_y_values = []
+    for a in my_dict:
+        new_x_values.append(my_dict[a][0][0])
+        new_y_values.append(sum(my_dict[a][1]))
+    return new_x_values, new_y_values
+
+
+def set_location_dict(repo, location_dict):
+    location_dict[repo] = get_security_policy_repo(repo)
 
 
 def compute_mann_whitney():
@@ -433,38 +555,12 @@ def compute_odds_ratio_and_sign(df, x_title, y_title):
         sign = '='
     return odds_ratio, sign
 
+
 def compute_fisher_exact():
-    # cwes = get_column_title_and_values(34, True)[1]
-    # top_cwes = get_top_25_cwes()
-
-    indexes = []
-    # for cwe in top_cwes:
-    #     indexes.append((cwe, list(map(lambda x: 'Yes' if x is not None and cwe in x else 'No', cwes))))
-
-    language_dict = one_hot_encoding(get_column_title_and_values(45)[1], percentage=0.8)
-    for language in language_dict:
-        indexes.append((language, language_dict[language]))
-
-    indexes.extend([
-        ('Object-oriented language', get_language_values(9)),
-        ('Web development language', get_language_values(20)),
-        ('Mobile development language', get_language_values(26)),
-        ('Backend development language', get_language_values(32))
-    ])
-
-    application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
-    for application_domain in application_domain_dict:
-        indexes.append((application_domain, application_domain_dict[application_domain]))
-
-    indexes.append(('README.md', get_column_title_and_values(47)[1]))
-
-    package_manager_dict = get_package_manager_dict()
-    for package_manager in package_manager_dict:
-        indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
-
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
+    indexes = get_indexes_2()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
     ccc = 0
     for name, y_values in indexes:
@@ -530,37 +626,10 @@ def compute_fisher_exact():
 
 
 def compute_chi_squared():
-    # cwes = get_column_title_and_values(34, True)[1]
-    # top_cwes = get_top_25_cwes()
-
-    indexes = []
-    # for cwe in top_cwes:
-    #     indexes.append((cwe, list(map(lambda x: 'Yes' if x is not None and cwe in x else 'No', cwes))))
-
-    language_dict = one_hot_encoding(get_column_title_and_values(45)[1], percentage=0.8)
-    for language in language_dict:
-        indexes.append((language, language_dict[language]))
-
-    indexes.extend([
-        ('Object-oriented language', get_language_values(9)),
-        ('Web development language', get_language_values(20)),
-        ('Mobile development language', get_language_values(26)),
-        ('Backend development language', get_language_values(32))
-    ])
-
-    application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
-    for application_domain in application_domain_dict:
-        indexes.append((application_domain, application_domain_dict[application_domain]))
-
-    indexes.append(('README.md', get_column_title_and_values(47)[1]))
-
-    package_manager_dict = get_package_manager_dict()
-    for package_manager in package_manager_dict:
-        indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
-
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
+    indexes = get_indexes_2()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
     ccc = 0
     for name, y_values in indexes:
@@ -572,6 +641,7 @@ def compute_chi_squared():
         for category_name in category_names:
             categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
             table = pd.crosstab(categories, y_values)
+
             chi2_value, p_value, degrees_of_freedom, expected_frequencies = chi2_contingency(table, correction=True)
             # print(f'{category_name}')
             # if category_name == 'Reporting procedure':
@@ -598,7 +668,7 @@ def compute_chi_squared():
             chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
-            # print(table.to_string())
+            print(table.to_string())
             if expected_count_percentage < 0.8:
                 ccc = ccc + 1
             p_values.append(f'{p_value}')
@@ -614,8 +684,8 @@ def compute_chi_squared():
     print(ccc)
 
 
-def print_tables(table_1_rows, table_2_rows, table_3_rows):
-    header_line = ','.join(map(lambda x: f'"{x}"', category_names))
+def print_tables(table_1_rows, table_2_rows, table_3_rows, headers=category_names):
+    header_line = ','.join(map(lambda x: f'"{x}"', headers))
     header_line = f',,{header_line}'
     print()
     print(header_line)
@@ -861,11 +931,14 @@ def get_invalid_index(x_values, y_values):
         return None
 
 
-def remove_invalid_values(x_values, y_values):
+def remove_invalid_values(x_values, y_values, z_values=None):
     invalid_index = get_invalid_index(x_values, y_values)
     while invalid_index is not None:
+        # print(f'invalid index {invalid_index}')
         del x_values[invalid_index]
         del y_values[invalid_index]
+        if z_values is not None:
+            del z_values[invalid_index]
         invalid_index = get_invalid_index(x_values, y_values)
 
 
@@ -920,7 +993,7 @@ def get_language_values(column_index):
             value = True if row[column_index] == 'Y' else False
             value_dict[language] = value
         i = i + 1
-    _, languages = get_column_title_and_values(45, False)
+    _, languages = get_column_title_and_values(46, False)
     for language in languages:
         language = language.lower()
         if language in value_dict:
@@ -1008,6 +1081,12 @@ def validation():
     #     print(x)
     # print(sum)
 
+    # indexs = []
+    # my_dict = get_owasp_dict()
+    # for a in my_dict:
+    #     print(f'{a} {xmy_dict[a]}')
+
+
     print('Hello World')
 
 
@@ -1056,9 +1135,10 @@ if __name__ == '__main__':
     # q((2, True, True), )
 
     # compute_all_data_normality()
-    # compute_spearman()
+    # compute_spearman_level_1(True)
+    compute_spearman_level_2(True)
     # compute_mann_whitney()
-    compute_fisher_exact()
+    # compute_fisher_exact()
     # compute_chi_squared()
     # validation()
 
