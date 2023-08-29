@@ -5,14 +5,15 @@ import repository
 import nvdcve
 from utils import csv_writer, csv_reader, prepare_csv_file
 
-rating_names = ['Low', 'Medium', 'High', 'Critical', 'None']
+v2_ratings = ['Low', 'Medium', 'High']
+v3_ratings = ['Low', 'Medium', 'High', 'Critical']
 v2_legends = ['0.0 - 0.9', '1.0 - 1.9', '2.0 - 2.9', '3.0 - 3.9', '4.0 - 4.9', '5.0 - 5.9', '6.0 - 6.9', '7.0 - 7.9', '8.0 - 8.9', '9.0 - 10.0']
 v3_legends = ['0.1 - 0.9', '1.0 - 1.9', '2.0 - 2.9', '3.0 - 3.9', '4.0 - 4.9', '5.0 - 5.9', '6.0 - 6.9', '7.0 - 7.9', '8.0 - 8.9', '9.0 - 10.0']
 colors = ['#2B472B', '#407A52', '#8DB255', '#9FD4A3', 'yellow', '#FFEE75', '#FBE106', 'orange', '#F9690E', '#DC3023']
 
 
 def get_v2_rating(score):
-    rating = 'None'
+    rating = None
     score = 0 if score is None or len(score) == 0 else float(score)
     if score >= 0.0 and score <= 3.9:
         rating = 'Low'
@@ -24,7 +25,7 @@ def get_v2_rating(score):
 
 
 def get_v3_rating(score):
-    rating = 'None'
+    rating = None
     score = 0 if score is None or len(score) == 0 else float(score)
     if score >= 0.1 and score <= 3.9:
         rating = 'Low'
@@ -56,6 +57,66 @@ def rating(my_list):
 
 def number(my_list):
     return my_list
+
+
+def compute_v2_ratings(scores):
+    ratings = []
+    rating_dict = dict()
+    for score in scores:
+        rating = get_v2_rating(score)
+        if rating in rating_dict:
+            rating_dict[rating].append(score)
+        else:
+            rating_dict[rating] = [score]
+    for rating in v2_ratings:
+        if rating in rating_dict:
+            ratings.append(len(rating_dict[rating]))
+        else:
+            ratings.append(0)
+    return ratings
+
+
+def compute_v3_ratings(scores):
+    ratings = []
+    rating_dict = dict()
+    for score in scores:
+        rating = get_v3_rating(score)
+        if rating in rating_dict:
+            rating_dict[rating].append(score)
+        else:
+            rating_dict[rating] = [score]
+    for rating in v3_ratings:
+        if rating in rating_dict:
+            ratings.append(len(rating_dict[rating]))
+        else:
+            ratings.append(0)
+    return ratings
+
+
+def get_sum_list(ratings, selected_ratings, count_list):
+    sum_list = []
+    indexes = [i for i in range(len(ratings)) if ratings[i] in selected_ratings]
+    for counts in count_list:
+        sum_list.append(f'{sum([counts[i] for i in range(len(counts)) if i in indexes])}')
+    return sum_list
+
+
+def get_cvss_dumm(repos, v2, v3, impact_or_exploitability=0):
+    if len(repos) == len(v2) == len(v3):
+        for i in range(len(v2)):
+            if v2[i] is None:
+                v2[i] = ''
+            else:
+                v2[i] = list(map(lambda x: x[impact_or_exploitability], v2[i]))
+                v2[i] = list(filter(lambda x: len(x) > 0, v2[i]))
+                v2[i] = ','.join(list(map(lambda x: f'{x}', compute_v2_ratings(v2[i]))))
+            if v3[i] is None:
+                v3[i] = ''
+            else:
+                v3[i] = list(map(lambda x: x[impact_or_exploitability], v3[i]))
+                v3[i] = list(filter(lambda x: len(x) > 0, v3[i]))
+                v3[i] = ','.join(list(map(lambda x: f'{x}', compute_v3_ratings(v3[i]))))
+            print(f'{repos[i]},{v2[i]},{v3[i]}')
 
 
 def generate_charts(repo, dates, yesterday_dates):

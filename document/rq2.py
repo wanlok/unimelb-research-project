@@ -1,27 +1,25 @@
+import datetime
 import itertools
 import math
 import os
-import shutil
 import statistics
-import string
 import sys
-from math import log10
 
-import numpy as np
-import pandas
 import pandas as pd
-from Levenshtein import distance
-from matplotlib import pyplot as plt
-from scipy import randn, stats
-from scipy.stats import pearsonr, spearmanr, skew, pointbiserialr, chi2_contingency, chi2
+from scipy import stats
+from scipy.stats import spearmanr, skew, pointbiserialr, chi2_contingency, chi2, fisher_exact
 
-from chart import scatter_plot, histogram, font_name, padding_2, padding_1, paired_box
-from document.my_statistics import compute_chi_square_value, compute_mann_whitney_u, compute_mann_whitney_effect_size
-from document.document_categorisation_all import compute_data_frames, get_data_frame
-from document.document_utils import write_content_to_file_path, get_docx_content, category_names
-from repository import package_manager_languages
-from utils import repos, get_latest_content, attribute_file_path, csv_reader, expand, get_writer, \
-    sort_by_descending_values
+from dependency import get_package_manager_dict, get_repo_xx
+from document.document_categorisation_all import get_repo_categorisation_results
+from document.document_utils import category_names
+from document.my_statistics import compute_mann_whitney_effect_size, compute_group_sign, compute_spearman_sign
+from document.owasp import get_owasp_cwe_dict, get_owasp_description_dict
+from security_md import get_number_of_characters_words_headers_paragraphs
+from utils import repos, attribute_file_path, csv_reader, expand, get_writer, \
+    sort_by_descending_values, get_column_title_and_values, get_grouped_column_title_and_values, \
+    get_security_policy_repo
+
+ALPHA = 0.05
 
 
 def a(vertical, horizontal, number_ranges):
@@ -122,36 +120,6 @@ def nr(numbers):
             # print(content_results)
 
 
-def get_column_title_and_values(column_index, as_list=False, as_list_count=False):
-    title = ''
-    sub_title = ''
-    values = []
-    i = 0
-    for row in csv_reader(attribute_file_path):
-        if i == 0:
-            title = expand(row)[column_index]
-        elif i == 1:
-            sub_title = row[column_index]
-        else:
-            if as_list:
-                try:
-                    value = eval(row[column_index])
-                    if as_list_count:
-                        value = f'{len(value)}'
-                except:
-                    value = None
-            else:
-                value = row[column_index]
-                # v = row[column_index]
-                # if type(v) == str:
-                #     value = v
-                # else:
-                #     value = int(v) if len(v) > 0 else v
-            values.append(value)
-        i = i + 1
-    return f'{title} {sub_title}'.strip(), values
-
-
 def q(x, y, file_path):
     title = ''
     if type(x) == tuple:
@@ -162,7 +130,6 @@ def q(x, y, file_path):
         y_title, y_values = get_column_title_and_values(*y)
     else:
         y_title, y_values = get_column_title_and_values(y)
-
     new_x_values = []
     new_y_values = []
     for i in range(len(x_values)):
@@ -184,18 +151,6 @@ def q(x, y, file_path):
     # print(f'Spearman: {spearmanr(x_values, y_values)}')
     # scatter_plot(x_values, y_values, title, x_title, y_title, file_path)
     return spearmanr(x_values, y_values)
-
-
-def dummy(column_index):
-    directory_path = f'C:\\Files\\RQ2\\{column_index}\\'
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-    a = q(36, column_index, f'{directory_path}number_of_words.png')
-    b = q(37, column_index, f'{directory_path}number_of_headers.png')
-    c = q(38, column_index, f'{directory_path}number_of_paragraphs.png')
-    d = q((2, True, True), column_index, f'{directory_path}number_of_categories.png')
-    # print(f'"{round(a[0], 2)}, {round(a[1], 2)}","{round(b[0], 2)}, {round(b[1], 2)}","{round(c[0], 2)}, {round(c[1], 2)}","{round(d[0], 2)}, {round(d[1], 2)}"')
-    print(f'{d[1]}')
 
 
 def compute_data_normality(x):
@@ -245,15 +200,514 @@ def compute_all_data_normality():
     compute_data_normality(39) # Lines of code
 
 
-def compute_all_correlation():
-    dummy(3)
-    dummy(15)
-    dummy(22)
-    dummy(29)
-    dummy((33, True, True))
-    dummy((34, True, True))
-    dummy(35)
-    dummy(39)
+def dummy(column_index):
+    directory_path = f'C:\\Files\\RQ2\\{column_index}\\'
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+    a = q(36, column_index, f'{directory_path}number_of_words.png')
+    b = q(37, column_index, f'{directory_path}number_of_headers.png')
+    c = q(38, column_index, f'{directory_path}number_of_paragraphs.png')
+    d = q((2, True, True), column_index, f'{directory_path}number_of_categories.png')
+
+    print(d)
+
+
+    # print(f'"{round(a[0], 2)}, {round(a[1], 2)}","{round(b[0], 2)}, {round(b[1], 2)}","{round(c[0], 2)}, {round(c[1], 2)}","{round(d[0], 2)}, {round(d[1], 2)}"')
+    # print(f'{d[1]}')
+
+
+def get_first_security_policies():
+    first_security_policies = []
+    directory_path = 'C:\\Files\\security policies\\'
+    for file_name in os.listdir(directory_path):
+        file_path = f'{directory_path}{file_name}'
+        repo = file_name.replace('.csv', '').replace('_', '/', 1)
+        smallest_date_time = None
+        smallest_date_time_row = None
+        i = 0
+        for row in csv_reader(file_path):
+            if i > 0:
+                date_time = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S%z')
+                date_time = date_time.replace(tzinfo=None)
+                if smallest_date_time is None or date_time < smallest_date_time:
+                    smallest_date_time = date_time
+                    smallest_date_time_row = row
+            i = i + 1
+        first_security_policies.append((repo, smallest_date_time, smallest_date_time_row))
+    return first_security_policies
+
+
+
+def get_number_of_days_since_document_created():
+    # start_date_time = datetime.datetime(year=2019, month=5, day=23)
+    # start = int(invented_date.strftime('%Y%m%d'))
+
+    y_values = []
+    today_date = pd.to_datetime('today').normalize()
+    _, values = get_column_title_and_values(50)
+    for value in values:
+        if len(value) > 0:
+            date_time = datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z')
+            date_time = date_time.replace(tzinfo=None)
+            y_values.append(f'{(today_date - date_time).days}')
+        else:
+            y_values.append(None)
+    # first_security_policies = get_first_security_policies()
+    # for security_policy in first_security_policies:
+    #     print(security_policy)
+    # for repo, created_date in security_policy_created_dates:
+    #     before_fix.append((today_date - created_date).days)
+    #     if created_date < invented_date:
+    #         print(f'{repo} {created_date}')
+    #         #print(f'BEFORE {(today_date - created_date).days}')
+    #         # created_date = invented_date
+    #         # print(f'AFTER {(today_date - created_date).days}')
+    #     y_values.append((today_date - created_date).days)
+    # for row in first_security_policies:
+    #     if row[1] < invented_date:
+    #         print(f'{row[2][1]} {row[2][0].lower() == row[0].lower()} {row[2][0].lower()}')
+    return y_values
+
+
+def get_owasp_descriptions(owasp_cwe_dict):
+    y_values = []
+    title, values = get_column_title_and_values(34, True)
+    for value in values:
+        description_set = None
+        if value is not None:
+            description_set = set()
+            for cwe in value:
+                if cwe in owasp_cwe_dict:
+                    description_set.update(owasp_cwe_dict[cwe])
+        y_values.append(description_set)
+    return y_values
+
+
+def get_number_of_owasp_descriptions(owasp_cwe_dict):
+    return [f'{len(x)}' if x is not None else None for x in get_owasp_descriptions(owasp_cwe_dict)]
+
+
+def get_aaa(owasp_cwe_dict):
+    owasp_description_dict = dict()
+    owasp_descriptions = get_owasp_descriptions(owasp_cwe_dict)
+    for key in get_owasp_description_dict():
+        value = []
+        for descriptions in owasp_descriptions:
+            v = None
+            if descriptions is not None:
+                if key in descriptions:
+                    v = 'Yes'
+                else:
+                    v = 'No'
+            value.append(v)
+        owasp_description_dict[key] = value
+    return owasp_description_dict
+
+
+def get_indexes():
+    package_manager_dict = get_package_manager_dict()
+    owasp_cwe_dict = get_owasp_cwe_dict()
+    indexes = []
+    indexes.extend([
+        ('Number of stars', 3),
+        ('Number of committers', 15),
+        ('Number of issues', 22),
+        ('Number of security-related issues', 29),
+        ('Number of security advisories', 77),
+        ('Number of CVEs', (33, True, True)),
+        ('Number of CWEs', (34, True, True)),
+        ('Number of OWASP descriptions', [get_number_of_owasp_descriptions, owasp_cwe_dict]),
+        ('Number of CVSS v2 impact score low', 52),
+        ('Number of CVSS v2 impact score medium or above', 55),
+        ('Number of CVSS v3 impact score low', 61),
+        ('Number of CVSS v3 impact score medium or above', 65),
+        ('Number of forks', 35),
+        ('Number of languages', 45),
+        ('Number of days since document created', [get_number_of_days_since_document_created]),
+        ('Number of lines of code', 40),
+        ('Number of dependencies', [repos, get_repo_xx, package_manager_dict])
+    ])
+    for package_manager in package_manager_dict:
+        indexes.append((f'Number of {package_manager} dependencies', [repos, get_package_manager_count, package_manager_dict[package_manager]]))
+    return indexes
+
+
+def get_indexes_2():
+
+    # cwes = get_column_title_and_values(34, True)[1]
+    # top_cwes = get_top_25_cwes()
+
+
+    indexes = []
+    # for cwe in top_cwes:
+    #     indexes.append((cwe, list(map(lambda x: 'Yes' if x is not None and cwe in x else 'No', cwes))))
+
+    language_dict = one_hot_encoding(get_column_title_and_values(46)[1], percentage=0.8)
+    for language in language_dict:
+        indexes.append((language, language_dict[language]))
+
+    indexes.extend([
+        ('Object-oriented language', get_language_values(9)),
+        ('Web development language', get_language_values(20)),
+        ('Mobile development language', get_language_values(26)),
+        ('Backend development language', get_language_values(32))
+    ])
+
+    application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
+    for application_domain in application_domain_dict:
+        indexes.append((application_domain, application_domain_dict[application_domain]))
+
+    indexes.append(('README.md', get_column_title_and_values(48)[1]))
+
+    package_manager_dict = get_package_manager_dict()
+    for package_manager in package_manager_dict:
+        indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
+
+    owasp_cwe_dict = get_owasp_cwe_dict()
+    a_dict = get_aaa(owasp_cwe_dict)
+    for a in a_dict:
+        indexes.append((a, a_dict[a]))
+    return indexes
+
+
+def get_index_title_and_values(title, index):
+    if type(index) == int:
+        title, values = get_column_title_and_values(index)
+    elif type(index) == tuple:
+        title, values = get_column_title_and_values(*index)
+    else:
+        title, values = title, index[0](*(index[1:] if len(index) > 1 else []))
+    return title, values
+
+
+def compute_spearman_level_1():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    headers = ['Number of characters', 'Number of words', 'Number of headers', 'Number of paragraphs']
+    x_indexes = [36, 37, 38, 39]
+    y_indexes = get_indexes()
+    corrected_alpha = ALPHA / (len(x_indexes) * len(y_indexes))
+    for name, y_index in y_indexes:
+        p_values = []
+        p_value_rejections = []
+        rhos = []
+        for x_index in x_indexes:
+            x_title, x_values = get_column_title_and_values(x_index)
+            y_title, y_values = get_index_title_and_values(name, y_index)
+            remove_invalid_values(x_values, y_values)
+            rho, p_value = spearmanr(x_values, y_values)
+            p_values.append(f'{p_value}')
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
+            rhos.append(f'{rho}')
+            print(f'"{x_title}","{name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'x_values: {len(x_values)} {x_values}')
+            print(f'y_values: {len(y_values)} {y_values}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(rhos)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows, headers)
+
+
+def compute_spearman_level_2(grouped):
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    indexes = get_indexes()
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    results = get_repo_categorisation_results()
+    if grouped:
+        location_dict = dict()
+        repos(set_location_dict, location_dict)
+    for name, index in indexes:
+        p_values = []
+        p_value_rejections = []
+        rhos = []
+        for category_name in category_names:
+            x_values = repos(get_dict_value, results, category_name)
+            y_title, y_values = get_index_title_and_values(name, index)
+            if grouped:
+                _, z_values = get_column_title_and_values(0)
+                remove_invalid_values(x_values, y_values, z_values)
+                x_values, y_values = group_and_filter_values(x_values, y_values, z_values, location_dict)
+            else:
+                remove_invalid_values(x_values, y_values)
+                x_values, y_values = filter_values(x_values, y_values)
+            rho, p_value = spearmanr(x_values, y_values)
+            p_values.append(f'{p_value}')
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
+            rhos.append(f'{rho}')
+            print(f'"{category_name}","{name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'x_values: {len(x_values)} {x_values}')
+            print(f'y_values: {len(y_values)} {y_values}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(rhos)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+
+
+def filter_values(x_values, y_values):
+    x_values = list(map(lambda x: int(x), x_values))
+    y_values = list(map(lambda x: int(x), y_values))
+    return x_values, y_values
+
+
+def group_and_filter_values(x_values, y_values, z_values, location_dict):
+    z_values = list(map(lambda x: location_dict[x], z_values))
+    # print(f'x_values: {len(x_values)} {x_values}')
+    # print(f'y_values: {len(y_values)} {y_values}')
+    # print(f'z_values: {len(z_values)} {z_values}')
+    #
+    my_dict = dict()
+    for x, y, z in zip(x_values, y_values, z_values):
+        if z in my_dict:
+            grouped_x_values, grouped_y_values = my_dict[z]
+            grouped_x_values.append(int(x))
+            grouped_y_values.append(int(y))
+        else:
+            my_dict[z] = ([int(x)], [int(y)])
+    new_x_values = []
+    new_y_values = []
+    for a in my_dict:
+        new_x_values.append(my_dict[a][0][0])
+        new_y_values.append(sum(my_dict[a][1]))
+    return new_x_values, new_y_values
+
+
+def set_location_dict(repo, location_dict):
+    location_dict[repo] = get_security_policy_repo(repo)
+
+
+def compute_mann_whitney():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    indexes = get_indexes()
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    for name, index in indexes:
+        p_values = []
+        p_value_rejections = []
+        effect_sizes = []
+        for category_name in category_names:
+            _, x_values = get_column_title_and_values(2, True)
+            y_title, y_values = get_index_title_and_values(name, index)
+            remove_invalid_values(x_values, y_values)
+            y_values = list(map(lambda x: int(x), y_values))
+            y_group = []
+            n_group = []
+            for i in range(len(x_values)):
+                if category_name in x_values[i]:
+                    y_group.append(y_values[i])
+                else:
+                    n_group.append(y_values[i])
+            p_value = stats.mannwhitneyu(y_group, n_group).pvalue
+            p_values.append(f'{p_value}')
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{compute_group_sign(ALPHA, y_group, n_group)}"')
+            effect_sizes.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
+            print(f'"{category_name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'YES: {len(y_group)} {y_group}')
+            print(f'NO: {len(n_group)} {n_group}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(effect_sizes)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+
+
+def get_df(x_title, x_values, y_title, y_values):
+    value_dict = dict()
+    value_dict[('Yes', 'Yes')] = 0
+    value_dict[('Yes', 'No')] = 0
+    value_dict[('No', 'Yes')] = 0
+    value_dict[('No', 'No')] = 0
+    if len(x_values) == len(y_values):
+        for i in range(len(x_values)):
+            key = x_values[i], y_values[i]
+            value_dict[key] = value_dict[key] + 1
+    return pd.DataFrame({
+        f'{x_title} yes': [value_dict[('Yes', 'Yes')], value_dict[('Yes', 'No')]],
+        f'{x_title} no': [value_dict[('No', 'Yes')], value_dict[('No', 'No')]]
+    }, index=pd.Index([f'{y_title} yes', f'{y_title} no']))
+
+
+def compute_odds_ratio_and_sign(df, x_title, y_title):
+    a = df[f'{x_title} yes'][f'{y_title} yes']
+    b = df[f'{x_title} no'][f'{y_title} yes']
+    c = df[f'{x_title} yes'][f'{y_title} no']
+    d = df[f'{x_title} no'][f'{y_title} no']
+    odds_ratio = (a * d) / (b * c)
+    if odds_ratio > 1:
+        sign = '+'
+    elif odds_ratio < 1:
+        sign = '-'
+    else:
+        sign = '='
+    return odds_ratio, sign
+
+
+def compute_fisher_exact():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    indexes = get_indexes_2()
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    ccc = 0
+    for name, y_values in indexes:
+        p_values = []
+        p_value_rejections = []
+        effect_sizes = []
+        _, x_values = get_column_title_and_values(2, True)
+        remove_invalid_values(x_values, y_values)
+        for category_name in category_names:
+            categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
+
+            # print(categories)
+            # print(y_values)
+
+            df = get_df(category_name, categories, name, y_values)
+            print(df)
+            a = fisher_exact(df.to_numpy())
+            b = compute_odds_ratio_and_sign(df, category_name, name)
+
+            print(f'AAAAA {a} BBBBB {b}')
+
+            p_value = a.pvalue
+            sign = b[1]
+            # # print(f'{category_name}')
+            # # if category_name == 'Reporting procedure':
+            # # print(expected_frequencies)
+            # # print(compute_chi_square_value(table, expected_frequencies, True))
+            # if table.shape == (2,2):
+            #     a = table['Yes']['Yes']
+            #     b = table['Yes']['No']
+            #     c = table['No']['Yes']
+            #     d = table['No']['No']
+            #     odds_ratio = (a * d) / (b * c)
+            #     if odds_ratio > 1:
+            #         sign = '+'
+            #     elif odds_ratio < 1:
+            #         sign = '-'
+            #     else:
+            #         sign = '='
+            # else:
+            #     sign = ''
+            # critical_value = chi2.ppf(1 - ALPHA, degrees_of_freedom)
+            # # print(chi2_value)
+            # cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
+            # expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
+            # chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            # print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
+            # # print(table.to_string())
+            # if expected_count_percentage < 0.8:
+            #     ccc = ccc + 1
+            p_values.append(f'{p_value}')
+            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
+            effect_sizes.append(f'{b[0]}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(effect_sizes)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+    print(ccc)
+
+
+def compute_chi_squared():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    indexes = get_indexes_2()
+    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    ccc = 0
+    for name, y_values in indexes:
+        p_values = []
+        p_value_rejections = []
+        effect_sizes = []
+        _, x_values = get_column_title_and_values(2, True)
+        remove_invalid_values(x_values, y_values)
+        for category_name in category_names:
+            categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
+            table = pd.crosstab(categories, y_values)
+
+            chi2_value, p_value, degrees_of_freedom, expected_frequencies = chi2_contingency(table, correction=True)
+            # print(f'{category_name}')
+            # if category_name == 'Reporting procedure':
+            # print(expected_frequencies)
+            # print(compute_chi_square_value(table, expected_frequencies, True))
+            if table.shape == (2,2):
+                a = table['Yes']['Yes']
+                b = table['Yes']['No']
+                c = table['No']['Yes']
+                d = table['No']['No']
+                odds_ratio = (a * d) / (b * c)
+                if odds_ratio > 1:
+                    sign = '+'
+                elif odds_ratio < 1:
+                    sign = '-'
+                else:
+                    sign = '='
+            else:
+                sign = ''
+            critical_value = chi2.ppf(1 - ALPHA, degrees_of_freedom)
+            # print(chi2_value)
+            cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
+            expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
+            chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
+            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
+            print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
+            print(table.to_string())
+            if expected_count_percentage < 0.8:
+                ccc = ccc + 1
+            p_values.append(f'{p_value}')
+            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
+            effect_sizes.append(f'{cramer_v}')
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(effect_sizes)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+    print(ccc)
+
+
+def print_tables(table_1_rows, table_2_rows, table_3_rows, headers=category_names):
+    header_line = ','.join(map(lambda x: f'"{x}"', headers))
+    header_line = f',,{header_line}'
+    print()
+    print(header_line)
+    for line in table_1_rows:
+        print(line)
+    print()
+    print(header_line)
+    for line in table_2_rows:
+        print(line)
+    print()
+    print(header_line)
+    for line in table_3_rows:
+        print(line)
+
+
+def get_dict_value(repo, repo_dict, key):
+    value = f'0'
+    category_dict = repo_dict[repo]
+    if key in category_dict:
+        value = f'{category_dict[key]}'
+    invalid_repos = ['iofinnet/tss-lib']
+    return None if repo in invalid_repos else value
 
 
 def get_name_vector(names):
@@ -264,19 +718,6 @@ def get_name_vector(names):
             if name == category_names[i]:
                 vector[i] = 1
     return vector
-
-
-# def get_categories(names=None):
-    # if names is None:
-    #     indexes = []
-    # else:
-    #     indexes = [i for i in range(len(category_names)) if category_names[i] in names]
-
-    # for i in range(len(results)):
-    #     value, vector = results[i]
-    #     filtered_indexes = [vector[j] for j in range(len(vector)) if j in indexes]
-    #     results[i] = (value, vector, filtered_indexes)
-    # return results
 
 
 def compute_point_biserial_correlation(x_title, x_values, y, writer):
@@ -389,10 +830,6 @@ def transpose(rows):
     return new_rows
 
 
-
-
-
-
 test_datasets = [
     3, # Number of stars
     15, # Number of committers
@@ -473,72 +910,6 @@ def get_results(y_column_index, y_as_list, y_values):
     return rows
 
 
-def ans_1_1_programming_languages():
-    values = get_dominant_programming_languages(0.8)
-    # for programming_language in package_manager_languages:
-    #     if programming_language not in values:
-    #         values.append(programming_language)
-    print_results(values, get_results(31, True, values))
-
-
-def ans_1_1_programming_languages_level_of_abstraction():
-    values = get_dominant_programming_languages(0.8)
-
-    for value in values:
-        print(value)
-
-    # l_dict = dict()
-    # for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\RQ2\\programming language_2.csv'):
-    #     # programming_paradigm = eval(row[2])
-    #     # types = []
-    #     l_dict[row[0]] = row[1]
-    #
-    # title, values = get_column_title_and_values(31, True)
-    # for value in values:
-    #     if value is not None:
-    #         my_set = set()
-    #         for programming_language in value:
-    #             my_set.add(l_dict[programming_language])
-    #         print(my_set)
-    #     else:
-    #         print('None')
-
-
-
-
-
-# def ans_1_1_programming_languages_programming_paradigm():
-    # programming_language_paradigm_dict = dict()
-    # with open('C:\\Users\\WAN Tung Lok\\Desktop\\language paradigm.txt') as f:
-    #     for line in f.readlines():
-    #         slices = list(map(lambda x: x.strip(), line.strip().split(',')))
-    #         print(slices)
-    #         # slices = line.strip().split(' - ')
-    #         # programming_language = slices[0]
-    #         # programming_language_paradigm = slices[1]
-    #         # programming_language_paradigm_dict[programming_language] = programming_language_paradigm
-    # print(programming_language_paradigm_dict)
-
-
-
-
-
-
-def ans_1_1_number_of_programming_languages():
-    column_index = 44
-    as_list = False
-    value_dict, _ = get_value_dict(column_index, as_list)
-    values = [x for x in value_dict]
-    print(value_dict)
-    print_results(values, get_results(column_index, as_list, values))
-
-
-
-# def get_values_proportion():
-
-
-
-
 def get_expected_count_greater_than_or_equals_five_percentage(expected_counts):
     total = 0
     count = 0
@@ -551,23 +922,23 @@ def get_expected_count_greater_than_or_equals_five_percentage(expected_counts):
 
 
 def get_invalid_index(x_values, y_values):
-    x_invalid_indexes = {i for i in range(len(x_values)) if x_values[i] is None or len(x_values[i]) == 0}
-    y_invalid_indexes = {i for i in range(len(y_values)) if y_values[i] is None or len(y_values[i]) == 0}
-    # print(x_invalid_indexes)
-    # print(y_invalid_indexes)
-    invalid_indexes = list(x_invalid_indexes.intersection(y_invalid_indexes))
+    x_invalid_indexes = {i for i in range(len(x_values)) if x_values[i] is None or (type(x_values[i]) != list and len(x_values[i]) == 0)}
+    y_invalid_indexes = {i for i in range(len(y_values)) if y_values[i] is None or (type(x_values[i]) != list and len(y_values[i]) == 0)}
+    invalid_indexes = list(x_invalid_indexes.union(y_invalid_indexes))
     if len(invalid_indexes) > 0:
         return invalid_indexes[0]
     else:
         return None
 
 
-def remove_invalid_values(x_values, y_values):
+def remove_invalid_values(x_values, y_values, z_values=None):
     invalid_index = get_invalid_index(x_values, y_values)
     while invalid_index is not None:
+        # print(f'invalid index {invalid_index}')
         del x_values[invalid_index]
         del y_values[invalid_index]
-        # print(f'REMOVED INDEX: {invalid_index}')
+        if z_values is not None:
+            del z_values[invalid_index]
         invalid_index = get_invalid_index(x_values, y_values)
 
 
@@ -611,101 +982,6 @@ def one_hot_encoding(item_list, as_list=False, percentage=1):
     return column_dict
 
 
-def chi2_category_statistic_csv():
-    # cwes = get_column_title_and_values(34, True)[1]
-    # top_cwes = get_top_25_cwes()
-
-    indexes = []
-    # for cwe in top_cwes:
-    #     indexes.append((cwe, list(map(lambda x: 'Yes' if x is not None and cwe in x else 'No', cwes))))
-
-    language_dict = one_hot_encoding(get_column_title_and_values(45)[1], percentage=0.8)
-    for language in language_dict:
-        indexes.append((language, language_dict[language]))
-
-    indexes.extend([
-        ('Object-oriented language', get_language_values(9)),
-        ('Web development language', get_language_values(20)),
-        ('Mobile development language', get_language_values(26)),
-        ('Backend development language', get_language_values(32)),
-        # ('Application domain', get_column_title_and_values(30, False)[1])
-    ])
-
-    application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
-    for application_domain in application_domain_dict:
-        indexes.append((application_domain, application_domain_dict[application_domain]))
-
-    indexes.append(('Contains README.md', get_column_title_and_values(47, False)[1]))
-    print(get_column_title_and_values(47, False))
-    alpha = 0.05
-    corrected_alpha = alpha / (len(indexes) * len(category_names))
-    p_value_lines = []
-    p_value_rejection_lines = []
-    effect_size_lines = []
-    for name, y_values in indexes:
-        p_values = []
-        p_value_rejections = []
-        effect_sizes = []
-        _, x_values = get_column_title_and_values(2, True)
-        remove_invalid_values(x_values, y_values)
-        print()
-        print(f',{name}')
-        print(f',"Category name","Chi-square value","Phi/Cramer\'s V association","p-value","Rejected by chi-square","Rejected by p-value","Degrees of freedom","Expected count >= 5"')
-        for category_name in category_names:
-            categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
-            table = pd.crosstab(categories, y_values)
-            chi2_value, p_value, degrees_of_freedom, expected_frequencies = chi2_contingency(table, correction=True)
-            # print(f'{category_name}')
-            # if category_name == 'Reporting procedure':
-            print(table.to_string())
-            # print(expected_frequencies)
-            # print(compute_chi_square_value(table, expected_frequencies, True))
-            sign = ''
-            if table.shape == (2,2):
-                a = table['Yes']['Yes']
-                b = table['Yes']['No']
-                c = table['No']['Yes']
-                d = table['No']['No']
-                odds_ratio = (a * d) / (b * c)
-                if odds_ratio > 1:
-                    sign = '+'
-                elif odds_ratio < 1:
-                    sign = '-'
-                else:
-                    sign = '='
-
-            critical_value = chi2.ppf(1 - alpha, degrees_of_freedom)
-            # print(chi2_value)
-            cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
-            expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
-            chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
-            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
-            print(f',{category_name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
-            p_values.append(f'{p_value}')
-            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
-            effect_sizes.append(f'{cramer_v}')
-        p_value_line = ','.join(p_values)
-        p_value_lines.append(f',"{name}",{p_value_line}')
-        p_value_rejection_line = ','.join(p_value_rejections)
-        p_value_rejection_lines.append(f',"{name}",{p_value_rejection_line}')
-        effect_size_line = ','.join(effect_sizes)
-        effect_size_lines.append(f',"{name}",{effect_size_line}')
-    header_line = ','.join(map(lambda x: f'"{x}"', category_names))
-    header_line = f',,{header_line}'
-    print()
-    print(header_line)
-    for line in p_value_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in p_value_rejection_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in effect_size_lines:
-        print(line)
-
-
 def get_language_values(column_index):
     values = []
     value_dict = dict()
@@ -717,7 +993,7 @@ def get_language_values(column_index):
             value = True if row[column_index] == 'Y' else False
             value_dict[language] = value
         i = i + 1
-    _, languages = get_column_title_and_values(45, False)
+    _, languages = get_column_title_and_values(46, False)
     for language in languages:
         language = language.lower()
         if language in value_dict:
@@ -772,101 +1048,6 @@ def get_values(v, percentage=0.8, with_count=False):
     return values
 
 
-
-
-
-def ans_1_0_number_of_issues():
-
-    # 44 programming language
-
-    indexes = [
-        ('Number of stars', 3),
-        ('Number of committers', 15),
-        ('Number of issues', 22),
-        ('Number of security-related issues', 29),
-        ('Number of CVEs', (33, True, True)),
-        ('Number of CWEs', (34, True, True)),
-        ('Number of forks', 35),
-        ('Lines of code', 39)
-    ]
-
-    alpha = 0.05
-    p_value_lines = []
-    p_value_rejection_lines = []
-    effect_size_lines = []
-    for name, index in indexes:
-        _, x_values = get_column_title_and_values(2, True)
-        if type(index) == int:
-            _, y_values = get_column_title_and_values(index)
-        else:
-            _, y_values = get_column_title_and_values(*index)
-        remove_invalid_values(x_values, y_values)
-
-        # print(x_values)
-        # print(y_values)
-
-        print()
-        print(f',"{name}"')
-        y_values = list(map(lambda x: int(x), y_values))
-        number_of_categories = len(category_names)
-        family_wise_error_rate = number_of_categories * len(indexes)
-        aaa = []
-        # print()
-        # print(f',"Category name","Exists count","Not exists count","p-value","Rejected by p-value"')
-        p_values = []
-        p_value_rejections = []
-        effect_sizes = []
-        for category_name in category_names:
-            y_group = []
-            n_group = []
-            for i in range(len(x_values)):
-                if category_name in x_values[i]:
-                    y_group.append(y_values[i])
-                else:
-                    n_group.append(y_values[i])
-            y_mean = statistics.mean(y_group)
-            n_mean = statistics.mean(n_group)
-            absolute_difference = abs(y_mean - n_mean)
-            # print(f'{name} {category_name} {y_mean} {n_mean} {absolute_difference}')
-            if absolute_difference / y_mean <= alpha and absolute_difference / n_mean <= alpha:
-                sign = '='
-            elif y_mean > n_mean:
-                sign = '+'
-            else:
-                sign = '-'
-            # print(','.join(map(lambda x: f'{x}', y_group)))
-            # print(','.join(map(lambda x: f'{x}', n_group)))
-            a = stats.mannwhitneyu(y_group, n_group)
-            p_value = a.pvalue
-            p_value_rejection = 'Y' if p_value < alpha / family_wise_error_rate else 'N'
-            print(f',"{category_name}",{len(y_group)},{len(n_group)},{p_value},{p_value_rejection}')
-            aaa.insert(0, (category_name, y_group, n_group))
-            p_values.append(f'{p_value}')
-            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
-            effect_sizes.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
-        p_value_line = ','.join(p_values)
-        p_value_lines.append(f',"{name}",{p_value_line}')
-        p_value_rejection_line = ','.join(p_value_rejections)
-        p_value_rejection_lines.append(f',"{name}",{p_value_rejection_line}')
-        effect_size_line = ','.join(effect_sizes)
-        effect_size_lines.append(f',"{name}",{effect_size_line}')
-        # paired_box(aaa)
-    header_line = ','.join(map(lambda x: f'"{x}"', category_names))
-    header_line = f',,{header_line}'
-    print()
-    print(header_line)
-    for line in p_value_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in p_value_rejection_lines:
-        print(line)
-    print()
-    print(header_line)
-    for line in effect_size_lines:
-        print(line)
-
-
 def validation():
     # _, w_values = get_column_title_and_values(0)
     # _, x_values = get_column_title_and_values(31)
@@ -900,9 +1081,31 @@ def validation():
     #     print(x)
     # print(sum)
 
+    # indexs = []
+    # my_dict = get_owasp_dict()
+    # for a in my_dict:
+    #     print(f'{a} {xmy_dict[a]}')
+
+
     print('Hello World')
 
 
+def is_package_manager_used(repo, b):
+    exists = 'No'
+    for bb in b:
+        if bb[0] == repo:
+            exists = 'Yes'
+            break
+    return exists
+
+
+def get_package_manager_count(repo, b):
+    count = f'0'
+    for bb in b:
+        if bb[0] == repo:
+            count = f'{len(bb[1])}'
+            break
+    return count
 
 
 if __name__ == '__main__':
@@ -932,38 +1135,27 @@ if __name__ == '__main__':
     # q((2, True, True), )
 
     # compute_all_data_normality()
-    # compute_all_correlation()
-
-    # dummy_dummy()
-
-    # dummy()
-
-    # ans_1_1_programming_languages()
-    # ans_1_1_programming_languages_level_of_abstraction()
-    # ans_1_1_programming_languages_programming_paradigm()
-    # ans_1_1_number_of_programming_languages()
-
-
-    # ans_1_0_number_of_issues()
-
-    chi2_category_statistic_csv()
-
+    # compute_spearman_level_1(True)
+    compute_spearman_level_2(True)
+    # compute_mann_whitney()
+    # compute_fisher_exact()
+    # compute_chi_squared()
     # validation()
 
+    # package_manager_dict = get_package_manager_dict()
+    # for package_manager in package_manager_dict:
+    #     a = repos(get_package_manager_count, package_manager_dict[package_manager])
+        # print(a)
+
+
+
+
+
+    # dummy_dummy()
+    # dummy()
 
     # ans_1_2()
     # ans_1_3()
-
-
-    # values = get_values(45)
-    # _, v = get_column_title_and_values(45)
-    # for value in v:
-    #     if value in values:
-    #         print(value)
-    #     else:
-    #         print('Others')
-
-
 
     # a(29, (2, True), nr([1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000])) # Number of forks / Categories
     # a(30, (2, True), nr([200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000])) # Number of words / Categories
