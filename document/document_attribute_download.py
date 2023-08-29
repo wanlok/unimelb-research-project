@@ -101,6 +101,15 @@ query {
 }
 '''
 
+# comments(first: 100) {
+#                         edges {
+#                             node {
+#                                 createdAt
+#                                 bodyHTML
+#                             }
+#                         }
+#                     }
+
 issue_graphql = '''
 query {
     repository(owner: "{1}", name: "{2}") {
@@ -111,15 +120,7 @@ query {
                     createdAt
                     state
                     title
-                    bodyText
-                    comments(first: 100) {
-                        edges {
-                            node {
-                                createdAt
-                                bodyText
-                            }
-                        }
-                    }
+                    bodyHTML
                 }
             }
             pageInfo {
@@ -344,7 +345,7 @@ def download_issues(repo):
                     for issue in issue_list:
                         if new_issue['node']['createdAt'] == issue['node']['createdAt']\
                                 and new_issue['node']['title'] == issue['node']['title']\
-                                and new_issue['node']['bodyText'] == issue['node']['bodyText']:
+                                and new_issue['node']['bodyHTML'] == issue['node']['bodyHTML']:
                             exists = True
                             break
                     if not exists:
