@@ -144,20 +144,6 @@ def get_security_issue_counts(issues):
     return df.sum(axis=0).tolist()
 
 
-def print_security_issue_title_titles_and_body_texts(repo_list):
-    for repo, year in repo_list:
-        issues, security_related_issues = get_issues_and_security_issues_by_year(repo, year)
-        for _, title, title_security_related_strings, body_text, body_text_security_related_strings in security_related_issues:
-            print(f'TITLE: {title_security_related_strings} {[title]}')
-            print(f'BODY TEXT: {body_text_security_related_strings} {[body_text]}')
-            print()
-        print(f'{len(issues)} {len(security_related_issues)}')
-
-
-def ddd(repo, repo_set):
-    repo_set.add(repo)
-
-
 def clean_text(repo, text):
     # repo = repo.lower()
     owner, project = repo.split('/')
@@ -204,7 +190,7 @@ def get_title_and_body_security_related_strings(repo, title, body):
     title_security_related_strings = get_security_related_strings(title)
     body_security_related_strings = get_security_related_strings(body)
     if len(title_security_related_strings) > 0 or len(body_security_related_strings) > 0:
-        print(f'{title_security_related_strings} {body_security_related_strings}')
+        print(f'{repo} {title_security_related_strings} {body_security_related_strings}')
     # return len(title_security_related_strings) > 0 or len(body_security_related_strings) > 0
     # kw = 'violat'
     # if kw in title_security_related_strings or kw in body_security_related_strings:
@@ -216,18 +202,7 @@ def get_title_and_body_security_related_strings(repo, title, body):
     return title_security_related_strings, body_security_related_strings
 
 
-def i_get_code_snippets(repo, body):
-    lll = []
-    for tag in get_code_snippets(body):
-        body = clean_text(repo, tag.get_text())
-        body_security_related_strings = get_security_related_strings(body)
-        lll.append(body_security_related_strings)
-    return len(lll), len(list(filter(lambda x: x != set(), lll)))
-
-
-
 if __name__ == '__main__':
-    # print_security_issue_title_titles_and_body_texts([('alphagov/signonotron2', 2016)])
 
     # text_file = open('C:\\Files\\bbc.txt', 'w', encoding='utf-8')
     # repos(get_yearly_security_issue_counts, text_file)
@@ -236,13 +211,12 @@ if __name__ == '__main__':
 
     from_date_time = datetime.strptime('2007-02-01 00:00:00', '%Y-%m-%d %H:%M:%S')
     to_date_time = datetime.strptime('2016-08-31 23:59:59', '%Y-%m-%d %H:%M:%S')
-    count = 0
-    security_related = 0
-    i_count = 0
-    j_count = 0
 
     llll = []
     my_dict = dict()
+
+    number_of_issues = 0
+    number_of_security_related_issues = 0
 
     for file_name in os.listdir(issue_directory_path):
         repo = file_name.replace('.txt','').replace('_','/',1)
@@ -263,19 +237,13 @@ if __name__ == '__main__':
                         my_dict[string] = my_dict[string] + 1
                     else:
                         my_dict[string] = 1
-
-                # else:
-                #     i, j = i_get_code_snippets(repo, l['node']['bodyHTML'])
-                #     print((i, j))
-                #     if i > 0:
-                #         i_count = i_count + 1
-                #     if j > 0:
-                #         j_count = j_count + 1
-                # count = count + 1
+                if len(title_security_related_strings) > 0 or len(body_security_related_strings) > 0:
+                    number_of_security_related_issues = number_of_security_related_issues + 1
+                number_of_issues = number_of_issues + 1
     word_cloud(my_dict)
     for a in sort_by_descending_values(my_dict):
         print(f'{a} {my_dict[a]}')
-    # print(f'{count} {security_related} {i_count} {j_count}')
+    print(f'{number_of_issues} {number_of_security_related_issues}')
 
 
 
