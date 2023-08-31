@@ -1,13 +1,16 @@
 import os
+import re
 from datetime import datetime
 
 import numpy as np
 import pandas as pd
 from Levenshtein import distance
+from bs4 import BeautifulSoup
+from nltk import word_tokenize, PorterStemmer
 
 import repository
 import security_md
-from chart import scatter_plot
+from chart import scatter_plot, word_cloud
 from document.document_attribute_download import get_saved_issue_list, repos
 from document.document_categorisation_all import attribute_file_path
 from document.document_classification import dummy_dummy
@@ -15,7 +18,15 @@ from document.document_utils import get_headers_and_paragraphs
 from utils import csv_reader, sort_by_descending_keys, sort_by_descending_values, get_file_path, get_latest_content, \
     is_contain_alphanumeric
 
+import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+nltk.download('punkt')
+
+stop_words = set(stopwords.words('english'))
+
 security_related_keywords = ['access policy', 'access role', 'access-policy', 'access-role', 'accesspolicy', 'accessrole', 'aes', 'audit', 'authentic', 'authority', 'authoriz', 'biometric', 'black list', 'black-list', 'blacklist', 'blacklist', 'cbc', 'certificate', 'checksum', 'cipher', 'clearance', 'confidentiality', 'cookie', 'crc', 'credential', 'crypt', 'csrf', 'decode', 'defensive programming', 'defensive-programming', 'delegation', 'denial of service', 'denial-of-service', 'diffie-hellman', 'dmz', 'dotfuscator', 'dsa', 'ecdsa', 'encode', 'escrow', 'exploit', 'firewall', 'forge', 'forgery', 'gss api', 'gss-api', 'gssapi', 'hack', 'hash', 'hmac', 'honey pot', 'honey-pot', 'honeypot', 'inject', 'integrity', 'kerberos', 'ldap', 'login', 'malware', 'md5', 'nonce', 'nss', 'oauth', 'obfuscat', 'open auth', 'open-auth', 'openauth', 'openid', 'owasp', 'password', 'pbkdf2', 'pgp', 'phishing', 'pki', 'privacy', 'private key', 'private-key', 'privatekey', 'privilege', 'public key', 'public-key', 'publickey', 'rbac', 'rc4', 'repudiation', 'rfc 2898', 'rfc-2898', 'rfc2898', 'rijndael', 'rootkit', 'rsa', 'salt', 'saml', 'sanitiz', 'secur', 'sha', 'shell code', 'shell-code', 'shellcode', 'shibboleth', 'signature', 'signed', 'signing', 'sing sign-on', 'single sign on', 'single-sign-on', 'smart assembly', 'smart-assembly', 'smartassembly', 'snif', 'spam', 'spnego', 'spoofing', 'spyware', 'ssl', 'sso', 'steganography', 'tampering', 'trojan', 'trust', 'violat', 'virus', 'white list', 'white-list', 'whitelist', 'x509', 'xss']
+# security_related_keywords = [x.replace('-', '') for x in security_related_keywords]
 
 issue_directory_path = 'C:\\Files\\issues\\'
 
@@ -90,13 +101,16 @@ def get_security_related_strings(text):
     for keyword in [keyword for keyword in keywords if keyword not in three_length_keywords]:
         if keyword in text:
             security_related_strings.add(keyword)
+        # for s in text.split(' '):
+        #     if keyword == s:
+        #         security_related_strings.add(keyword)
     return security_related_strings
 
 
 def get_security_related_ratios(issue):
     title = issue['title']
     title_security_related_strings = get_security_related_strings(title)
-    body_text = issue['bodyText']
+    body_text = issue['bodyHTML']
     body_text_security_related_strings = get_security_related_strings(body_text)
     # comments = issue['comments']['edges']
     # number_of_comments = len(comments)
@@ -220,9 +234,121 @@ def process_issues():
     repos(aaa, repo_dict)
 
 
-if __name__ == '__main__':
-    # print_security_issue_title_titles_and_body_texts([('tensorflow/tensorflow', 2020)])
+def clean_text(repo, text):
+    # repo = repo.lower()
+    owner, project = repo.split('/')
+    a_list = [repo, owner, project] + list(stop_words)
+    # print(a_list)
+    stemmer = PorterStemmer()
+    # print(text)
+    text = text.lower()
+    text = text.replace('\n', ' ')
+    text = ' '.join(list(filter(lambda x: x not in a_list, text.split(' ')))) # remove stop words
+    text = re.sub(r'[^a-z -]', '', text) # remove punctuations and numbers
+    text = ' '.join(list(filter(lambda x: len(x) > 0, text.split(' ')))) # remove white spaces
+    text = ' '.join(list(map(lambda x: stemmer.stem(x), text.split(' ')))) # stemming
+    # print(text)
+    return text
 
-    text_file = open('C:\\Files\\abc.txt', 'w', encoding='utf-8')
-    repos(get_yearly_security_issue_counts, text_file)
-    text_file.close()
+
+def remove_code_snippets(html):
+    soup = BeautifulSoup(html)
+    # for tag in soup(['a']):
+    #     print(tag)
+    for tag in soup(['code', 'a']):
+        tag.decompose()
+    for tag in soup.find_all(attrs={'data-snippet-clipboard-copy-content': True}):
+        tag.decompose()
+    return soup.get_text()
+
+
+def get_code_snippets(html):
+    tags = []
+    soup = BeautifulSoup(html)
+    for tag in soup(['code', 'a']):
+        tags.append(tag)
+    for tag in soup.find_all(attrs={'data-snippet-clipboard-copy-content': True}):
+        tags.append(tag)
+    return tags
+
+
+def get_title_and_body_security_related_strings(repo, title, body):
+    old_title = title
+    old_body = body
+    title = clean_text(repo, remove_code_snippets(title))
+    body = clean_text(repo, remove_code_snippets(body))
+    title_security_related_strings = get_security_related_strings(title)
+    body_security_related_strings = get_security_related_strings(body)
+    if len(title_security_related_strings) > 0 or len(body_security_related_strings) > 0:
+        print(f'{title_security_related_strings} {body_security_related_strings}')
+    # return len(title_security_related_strings) > 0 or len(body_security_related_strings) > 0
+    # kw = 'violat'
+    # if kw in title_security_related_strings or kw in body_security_related_strings:
+    #     print(f'////////// ////////// ////////// ////////// ////////// OLD_TITLE: {old_title}')
+    #     print(f'////////// ////////// ////////// ////////// ////////// TITLE: {title}')
+    #     print(f'////////// ////////// ////////// ////////// ////////// OLD_BODY: {old_body}')
+    #     print(f'////////// ////////// ////////// ////////// ////////// BODY: {body}')
+    #     print()
+    return title_security_related_strings, body_security_related_strings
+
+
+def i_get_code_snippets(repo, body):
+    lll = []
+    for tag in get_code_snippets(body):
+        body = clean_text(repo, tag.get_text())
+        body_security_related_strings = get_security_related_strings(body)
+        lll.append(body_security_related_strings)
+    return len(lll), len(list(filter(lambda x: x != set(), lll)))
+
+
+
+if __name__ == '__main__':
+    # print_security_issue_title_titles_and_body_texts([('alphagov/signonotron2', 2016)])
+
+    # text_file = open('C:\\Files\\bbc.txt', 'w', encoding='utf-8')
+    # repos(get_yearly_security_issue_counts, text_file)
+    # text_file.close()
+
+
+    from_date_time = datetime.strptime('2007-02-01 00:00:00', '%Y-%m-%d %H:%M:%S')
+    to_date_time = datetime.strptime('2016-08-31 23:59:59', '%Y-%m-%d %H:%M:%S')
+    count = 0
+    security_related = 0
+    i_count = 0
+    j_count = 0
+
+    llll = []
+    my_dict = dict()
+
+    for file_name in os.listdir(issue_directory_path):
+        repo = file_name.replace('.txt','').replace('_','/',1)
+        # print(repo)
+        lll = get_saved_issue_list(f'{issue_directory_path}{file_name}')
+        for l in lll:
+            date_time = datetime.strptime(l['node']['createdAt'], '%Y-%m-%dT%H:%M:%SZ')
+            title = l['node']['title']
+            body = l['node']['bodyHTML']
+            if from_date_time <= date_time <= to_date_time:
+                title_security_related_strings, body_security_related_strings = get_title_and_body_security_related_strings(repo, title, body)
+                issue_security_related_strings = set()
+                issue_security_related_strings.update(title_security_related_strings)
+                issue_security_related_strings.update(body_security_related_strings)
+                for string in issue_security_related_strings:
+                    llll.append(string)
+                    if string in my_dict:
+                        my_dict[string] = my_dict[string] + 1
+                    else:
+                        my_dict[string] = 1
+
+                # else:
+                #     i, j = i_get_code_snippets(repo, l['node']['bodyHTML'])
+                #     print((i, j))
+                #     if i > 0:
+                #         i_count = i_count + 1
+                #     if j > 0:
+                #         j_count = j_count + 1
+                # count = count + 1
+    word_cloud(my_dict)
+    for a in sort_by_descending_values(my_dict):
+        print(f'{a} {my_dict[a]}')
+    # print(f'{count} {security_related} {i_count} {j_count}')

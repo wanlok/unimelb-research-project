@@ -8,6 +8,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator, MultipleLocator
 from scipy.stats import pearsonr
+from wordcloud import WordCloud
 
 import repository
 from repository import get_list
@@ -297,3 +298,13 @@ def paired_box(aaa):
     ax.tick_params(axis='both', labelsize=12, pad=padding_2)
     plt.tight_layout()
     plt.show()
+
+
+def black_color_func(word, font_size, position, orientation, random_state=None, **kwargs):
+    return 'rgb(0, 0, 0)'
+
+
+def word_cloud(word_dict):
+    word_cloud = WordCloud(background_color='white', color_func=black_color_func)
+    word_cloud.generate_from_frequencies(word_dict)
+    word_cloud.to_file('C:\\Files\\output.png')
