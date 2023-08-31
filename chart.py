@@ -20,8 +20,8 @@ padding_1 = 8
 padding_2 = 16
 padding_3 = 24
 
-security_md_directory_path = f'C:\\Files\\Projects\\wanlok.github.io\\research\\data\\securities\\'
-
+# security_md_directory_path = f'C:\\Files\\Projects\\wanlok.github.io\\research\\data\\securities\\'
+security_md_directory_path = f'C:\\Files\\a\\'
 
 def security_dummy(start_date, end_date, y_function):
     x_title = f'Number of SECURITY.md Commits'
@@ -107,7 +107,7 @@ def security_md_by_date_plot(date_function, y_function, y_title, chart_directory
                     i = i + 1
                     print(f'{i} {date}')
                 # data = {'datatime': pd.date_range(start=start, end=end, freq='D'),
-                #         'dummy': []}
+                #         'document': []}
 
 
 
@@ -143,8 +143,8 @@ def scatter_plot(x_values, y_values, title, x_title, y_title, file_path):
         plt.yticks(range(floor(min(y_values)), ceil(max(y_values)), dummy), fontname=font_name)
         plt.ylabel(y_title, fontdict=font, labelpad=padding_2)
         plt.title(title, fontdict=font, pad=padding_3)
-        plt.xlim(0, max(x_values))
-        plt.ylim(0, max(y_values))
+        # plt.xlim(0, max(x_values))
+        # plt.ylim(0, max(y_values))
         plt.xticks(fontname=font_name)
         plt.xlabel(x_title, fontdict=font, labelpad=padding_2)
         plt.savefig(file_path, dpi=300, bbox_inches='tight')
@@ -226,7 +226,7 @@ def dummy(repos, start_date, end_date, title, file_path):
     aggregated_y_values = None
     fig = plt.figure()
     for repo in repos:
-        print(repo)
+        # print(repo)
         repo_file_name = '_'.join(repo.split('/'))
         repo_file_path = f'{security_md_directory_path}{repo_file_name}.csv'
         date_list, date_dict = get_date_statistics_with_zeros(repo_file_path, start_date, end_date)
@@ -245,6 +245,8 @@ def dummy(repos, start_date, end_date, title, file_path):
                 y_values.append(1)
             else:
                 y_values.append(0)
+        if y_values[272] > 0:
+            print(repo)
         if sum(y_values) > 0:
             if aggregated_y_values is None:
                 aggregated_y_values = np.zeros(len(y_values))
@@ -253,6 +255,7 @@ def dummy(repos, start_date, end_date, title, file_path):
                 plt.bar(x_values, y_values, bottom=aggregated_y_values, align='edge')
             aggregated_y_values = aggregated_y_values + y_values
     print(aggregated_y_values)
+    # print(aggregated_y_values[209])
     if x_values is not None:
         max_aggregated_y_value = int(max(aggregated_y_values))
         ax = fig.gca()
@@ -268,6 +271,33 @@ def dummy(repos, start_date, end_date, title, file_path):
         plt.ylabel('Number of Repositories', fontdict=font, labelpad=padding_2)
         plt.savefig(file_path, dpi=300, bbox_inches='tight')
     plt.close()
+
+
+def histogram(x, bins):
+    plt.hist(x, bins=bins)
+    plt.show()
+
+
+def paired_box(aaa):
+    fig, ax = plt.subplots()
+    median_line_style = {'color': 'black'}
+    y_labels = []
+    y_label_indexes = []
+    for i in range(len(aaa)):
+        category_name, y_group, n_group = aaa[i]
+        j = i * 2.0
+        y_labels.append(f'{category_name} (Exists)')
+        y_labels.append(f'{category_name} (Not exists)')
+        y_label_indexes.append(j + 0.8)
+        y_label_indexes.append(j)
+        ax.boxplot(y_group, positions=[j + 0.8], widths=0.5, vert=False, showfliers=False, medianprops=median_line_style)
+        ax.boxplot(n_group, positions=[j], widths=0.5, vert=False, showfliers=False, medianprops=median_line_style)
+    plt.xticks(fontname=font_name)
+    ax.set_yticks(y_label_indexes)
+    ax.set_yticklabels(y_labels, fontname=font_name)
+    ax.tick_params(axis='both', labelsize=12, pad=padding_2)
+    plt.tight_layout()
+    plt.show()
 
 
 def black_color_func(word, font_size, position, orientation, random_state=None, **kwargs):

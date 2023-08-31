@@ -65,8 +65,8 @@ def get_issues_by_year_month(repo):
 
 
 def get_yearly_security_issue_counts(repo, text_file):
-    # issue_dict = get_issues_by_year(repo)
-    issue_dict = get_issues_by_year_month(repo)
+    issue_dict = get_issues_by_year(repo)
+    # issue_dict = get_issues_by_year_month(repo)
     for year in issue_dict.keys():
         issues = issue_dict[year]
         issue_dict[year] = (len(issues), get_security_issue_counts(issues))
@@ -142,6 +142,82 @@ def get_security_issue_counts(issues):
         security_issue_counts.append(get_security_related_ratios(issues[i]['node']))
     df = pd.DataFrame(security_issue_counts)
     return df.sum(axis=0).tolist()
+
+
+def aaa(repo, repo_dict):
+    if repo in repo_dict:
+        year_dict = repo_dict[repo]
+        issue_counts = []
+        security_issue_counts = []
+        if '2018' in year_dict:
+            issue_count, security_issue_count = year_dict['2018']
+            issue_counts.append(issue_count)
+            security_issue_counts.append(security_issue_count)
+        else:
+            issue_counts.append(0)
+            security_issue_counts.append(0)
+        if '2019' in year_dict:
+            issue_count, security_issue_count = year_dict['2019']
+            issue_counts.append(issue_count)
+            security_issue_counts.append(security_issue_count)
+        else:
+            issue_counts.append(0)
+            security_issue_counts.append(0)
+        if '2020' in year_dict:
+            issue_count, security_issue_count = year_dict['2020']
+            issue_counts.append(issue_count)
+            security_issue_counts.append(security_issue_count)
+        else:
+            issue_counts.append(0)
+            security_issue_counts.append(0)
+        if '2021' in year_dict:
+            issue_count, security_issue_count = year_dict['2021']
+            issue_counts.append(issue_count)
+            security_issue_counts.append(security_issue_count)
+        else:
+            issue_counts.append(0)
+            security_issue_counts.append(0)
+        if '2022' in year_dict:
+            issue_count, security_issue_count = year_dict['2022']
+            issue_counts.append(issue_count)
+            security_issue_counts.append(security_issue_count)
+        else:
+            issue_counts.append(0)
+            security_issue_counts.append(0)
+        if '2023' in year_dict:
+            issue_count, security_issue_count = year_dict['2023']
+            issue_counts.append(issue_count)
+            security_issue_counts.append(security_issue_count)
+        else:
+            issue_counts.append(0)
+            security_issue_counts.append(0)
+        i = ','.join(map(lambda x: f'{x}', issue_counts))
+        j = ','.join(map(lambda x: f'{x}', security_issue_counts))
+        print(f'{repo},{i},{j}')
+    else:
+        print(f'{repo},0,0,0,0,0,0,0,0,0,0,0,0')
+
+
+
+def process_issues():
+    file_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\security-related issues\\main.csv'
+    repo_dict = dict()
+    for row in csv_reader(file_path):
+        repo, year_month, issue_count, security_issue_count = row
+        issue_count = int(issue_count)
+        security_issue_count = int(security_issue_count)
+        year = year_month[0:4]
+        if repo in repo_dict:
+            year_dict = repo_dict[repo]
+            if year in year_dict:
+                issue_total, security_issue_total = year_dict[year]
+                year_dict[year] = (issue_total + issue_count, security_issue_total + security_issue_count)
+            else:
+                year_dict[year] = (issue_count, security_issue_count)
+        else:
+            repo_dict[repo] = dict()
+            repo_dict[repo][year] = (issue_count, security_issue_count)
+    repos(aaa, repo_dict)
 
 
 def clean_text(repo, text):
@@ -244,6 +320,3 @@ if __name__ == '__main__':
     for a in sort_by_descending_values(my_dict):
         print(f'{a} {my_dict[a]}')
     print(f'{number_of_issues} {number_of_security_related_issues}')
-
-
-
