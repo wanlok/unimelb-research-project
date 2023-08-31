@@ -6,7 +6,8 @@ from dateutil.relativedelta import relativedelta
 
 import commit_history
 import repository
-from utils import csv_reader
+from document.document_utils import get_headers_and_paragraphs
+from utils import csv_reader, get_latest_content, get_file_path, is_contain_alphanumeric
 
 directory_path = '.\\data\\securities\\'
 
@@ -72,11 +73,35 @@ def get_date_statistics(file_path, start_date=None, end_date=None):
     return date_list, date_dict
 
 
+def get_date_statistics_2(file_path, start_date=None, end_date=None):
+    date_list = []
+    date_dict = dict()
+    if start_date is not None:
+        start_date = int(start_date)
+    if end_date is not None:
+        end_date = int(end_date)
+    for row in csv_reader(file_path, encoding='latin-1'):
+        try:
+            date = int(datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S%z').strftime('%Y%m%d'))
+            if start_date is not None and end_date is not None:
+                if date < start_date or date > end_date:
+                    continue
+            if date in date_dict:
+                date_dict[date].append(row[7])
+            else:
+                date_list.append(date)
+                date_dict[date] = [row[7]]
+        except ValueError:
+            pass
+    return date_list, date_dict
+
+
 def get_date_statistics_with_zeros(file_path, start_date=None, end_date=None):
     _, date_dict = get_date_statistics(file_path, start_date, end_date)
     start_date = datetime.strptime(f'{start_date}', '%Y%m%d')
     end_date = datetime.strptime(f'{end_date}', '%Y%m%d')
     date_list = []
+
     date = start_date
     while date <= end_date:
         key = int(date.strftime('%Y%m%d'))
@@ -85,17 +110,6 @@ def get_date_statistics_with_zeros(file_path, start_date=None, end_date=None):
             date_dict[key] = 0
         date = date + relativedelta(days=1)
     return date_list, date_dict
-
-
-def get_repo_statistics(start_date, end_date):
-    repos = []
-    for repo in repository.get_list():
-        repo_file_name = '_'.join(repo.split('/'))
-        repo_file_path = f'{directory_path}{repo_file_name}.csv'
-        _, date_dict = get_date_statistics(repo_file_path, start_date, end_date)
-        if len(date_dict) > 0:
-            repos.append(repo)
-    return repos
 
 
 def download(repo, lower_case, directory_path, replace):
@@ -112,6 +126,19 @@ def download(repo, lower_case, directory_path, replace):
     else:
         api_count = 0
     return api_count
+
+
+def get_number_of_characters_words_headers_paragraphs(repo):
+    content = get_latest_content(get_file_path(repo))
+    words = list(filter(lambda x: is_contain_alphanumeric(x), content.replace('\n', ' ').split(' ')))
+    headers, paragraphs = get_headers_and_paragraphs(content)
+    distinct_headers = []
+    previous = None
+    for header in headers:
+        if header != previous:
+            distinct_headers.append(header)
+        previous = header
+    return repo, len(content), len(words), len(distinct_headers), len(paragraphs)
 
 
 if __name__ == '__main__':

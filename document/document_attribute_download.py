@@ -101,6 +101,15 @@ query {
 }
 '''
 
+# comments(first: 100) {
+#                         edges {
+#                             node {
+#                                 createdAt
+#                                 bodyHTML
+#                             }
+#                         }
+#                     }
+
 issue_graphql = '''
 query {
     repository(owner: "{1}", name: "{2}") {
@@ -111,15 +120,7 @@ query {
                     createdAt
                     state
                     title
-                    bodyText
-                    comments(first: 100) {
-                        edges {
-                            node {
-                                createdAt
-                                bodyText
-                            }
-                        }
-                    }
+                    bodyHTML
                 }
             }
             pageInfo {
@@ -130,6 +131,27 @@ query {
     }
 }
 '''
+
+issue_count_graphql = '''
+query {
+    repository(owner: "{1}", name: "{2}") {
+        issues(first: 1) {
+            totalCount         
+        }
+    }
+}
+'''
+
+primary_language_graphql = '''
+query {
+    repository(owner: "{1}", name: "{2}") {
+        primaryLanguage {
+            name
+        }
+    }
+}
+'''
+
 
 path_programming_language = '/data/repository/languages/edges'
 path_number_of_stars = '/data/repository/stargazers/totalCount'
@@ -344,7 +366,7 @@ def download_issues(repo):
                     for issue in issue_list:
                         if new_issue['node']['createdAt'] == issue['node']['createdAt']\
                                 and new_issue['node']['title'] == issue['node']['title']\
-                                and new_issue['node']['bodyText'] == issue['node']['bodyText']:
+                                and new_issue['node']['bodyHTML'] == issue['node']['bodyHTML']:
                             exists = True
                             break
                     if not exists:
@@ -354,30 +376,221 @@ def download_issues(repo):
                 number_of_issues = len(issue_list)
 
 
-
-
-def dummy(repo):
-    graphql = all_graphql
-    path = path_fork_count
-    # file_name = repo.replace('/', '_')
+def get_graphql_values(repo, graphql, paths):
+    values = [None] * len(paths)
     slices = repo.split('/')
     owner = slices[0]
     project = slices[1]
     graphql = graphql.replace('{1}', owner).replace('{2}', project)
+    # print(graphql)
     result_dict = get_result_dict(graphql, post_graphql(graphql))
-    print(result_dict)
-    if path in result_dict:
-        print(f'{repo},{result_dict[path]}')
+    # print(result_dict)
+    for i in range(len(paths)):
+        path = paths[i]
+        if path in result_dict:
+            # print(f'"{repo}","{result_dict[path]}"')
+            values[i] = result_dict[path]
+        # else:
+        #     print(f'"{repo}",""')
+    return values
+
+
+def get_stuff(repo, a, target):
+    # if target in a:
+    headers = {
+        'Authorization': 'token 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'
+    }
+    url = f'https://api.github.com/repos/{repo}/languages'
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        print(f'"{repo}","{data}"')
     else:
-        print(f'{repo},failed')
+        print(f'"{repo}","{{}}"')
+    # a.append(repo)
+
+
+readme_contributing_graphql = '''
+query {
+    github: repository(owner:"{1}", name:".github") {
+        defaultBranchRef {
+            target {
+                ... on Commit {
+                    readme: history(path: "README.md", first: 1) {
+                        edges {
+                            node {
+                                committedDate
+                            }
+                        }
+                    },
+                    contributing: history(path: "CONTRIBUTING.md", first: 1) {
+                        edges {
+                            node {
+                                committedDate
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    repository: repository(owner:"{1}", name:"{2}") {
+        defaultBranchRef {
+            target {
+                ... on Commit {
+                    readme: history(path: "README.md", first: 1) {
+                        edges {
+                            node {
+                                committedDate
+                            }
+                        }
+                    },
+                    readme_docs: history(path: "docs/README.md", first: 1) {
+                        edges {
+                            node {
+                                committedDate
+                            }
+                        }
+                    }
+                    contributing: history(path: "CONTRIBUTING.md", first: 1) {
+                        edges {
+                            node {
+                                committedDate
+                            }
+                        }
+                    },
+                    contributing_docs: history(path: "docs/CONTRIBUTING.md", first: 1) {
+                        edges {
+                            node {
+                                committedDate
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+'''
+
+path_github_readme = '/data/github/defaultBranchRef/target/readme/edges'
+path_github_contributing = '/data/github/defaultBranchRef/target/contributing/edges'
+path_repository_readme = '/data/repository/defaultBranchRef/target/readme/edges'
+path_repository_readme_docs = '/data/repository/defaultBranchRef/target/readme_docs/edges'
+path_repository_contributing = '/data/repository/defaultBranchRef/target/contributing/edges'
+path_repository_contributing_docs = '/data/repository/defaultBranchRef/target/contributing_docs/edges'
+
+repository_created_at_graphql = '''
+query {
+    repository(owner: "{1}", name: "{2}") {
+        createdAt
+    }
+}
+'''
+
+path_repository_created_at = '/data/repository/createdAt'
+
+
+dependency_graphql = '''
+query { 
+    repository(owner: "{1}", name: "{2}") {
+        dependencyGraphManifests {
+            edges {
+                node {
+                    blobPath
+                    dependencies {
+                        nodes {
+                            packageName
+                            requirements
+                            packageManager
+                            repository {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+'''
+
+path_dependency = '/data/repository/dependencyGraphManifests/edges'
+
+
+def dumm(repo, text_file):
+    values = get_graphql_values(repo, dependency_graphql, [path_dependency])[0]
+    package_manager_dict = dict()
+    if values is not None:
+        for value in values:
+            dependencies = value['node']['dependencies']['nodes']
+            for dependency in dependencies:
+                # package_name = dependency['packageName']
+                if 'repository' in dependency and dependency['repository'] is not None and 'url' in dependency['repository']:
+                    github_url = dependency['repository']['url']
+                    package_manager = dependency['packageManager']
+                    if package_manager in package_manager_dict:
+                        package_manager_dict[package_manager].add(github_url)
+                    else:
+                        package_manager_dict[package_manager] = {github_url}
+        # for package_manager in package_manager_dict:
+        #     package_manager_dict[package_manager] = len(package_manager_dict[package_manager])
+    print(f'"{repo}","{package_manager_dict}"')
+    text_file.write(f'"{repo}","{package_manager_dict}"\n')
+
+
+def get_failed_or_zero_issue_counts():
+    repos = []
+    file = open('C:\\Files\\repo_issue_counts - 20230827.txt', 'r', encoding='utf-8')
+    for line in file.readlines():
+        line = line.replace('\n', '')
+        slices = line.split(',')
+        if slices[1] == '0' or slices[1] == 'failed':
+            repos.append(slices[0])
+    file.close()
+    for repo in repos:
+        issue_count = get_graphql_values(repo, issue_count_graphql, [path_issue_count])[0]
+        print(f'{repo},{issue_count}')
+
+
+def combine_aaa():
+    repo_dict = dict()
+    file = open('C:\\Files\\repo_issue_counts - failed.txt', 'r', encoding='utf-8')
+    for line in file.readlines():
+        line = line.replace('\n', '')
+        slices = line.split(',')
+        repo_dict[slices[0]] = slices[1]
+    file.close()
+    file = open('C:\\Files\\repo_issue_counts - 20230827.txt', 'r', encoding='utf-8')
+    for line in file.readlines():
+        line = line.replace('\n', '')
+        slices = line.split(',')
+        if slices[0] in repo_dict:
+            print(f'{slices[0]},{repo_dict[slices[0]]}')
+        else:
+            print(line)
+    file.close()
+
+
 
 
 if __name__ == '__main__':
     # repos(download_attributes)
-    prepare_count_dict()
-    repos(download_issues)
+    # prepare_count_dict()
+    # repos(download_issues)
     # repos(dummy)
-
+    # a = []
+    # repos(get_stuff, a, "behave/behave")
     # dummy('tensorflow/tensorflow')
 
+    # repos(get_graphql_values, repository_created_at_graphql, [path_repository_created_at])
 
+    # text_file = open('C:\\Files\\depend_2.txt', 'w', encoding='utf-8')
+    # # repos(dumm, text_file)
+    #
+    # for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\remains.csv'):
+    #     dumm(row[0], text_file)
+    #
+    # text_file.close()
+    # dumm('iofinnet/tss-lib')
+    combine_aaa()

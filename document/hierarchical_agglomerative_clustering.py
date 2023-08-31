@@ -9,7 +9,7 @@ from sklearn.cluster import AgglomerativeClustering
 import scipy.cluster.hierarchy as sch
 from sklearn.metrics import silhouette_score
 
-from document.document_utils import get_docx_content
+from document.document_utils import get_docx_content, get_headers_and_paragraphs
 from utils import csv_writer, csv_reader, get_repo_and_path, sort_by_ascending_keys
 
 csv_file_path = f'C:\\Files\\zzz.csv'
@@ -53,7 +53,7 @@ def get_contents(names, show_path=False):
     return contents
 
 
-def write_csv(contents):
+def write_csv(names, contents):
     writer = csv_writer(csv_file_path, mode='w')
     writer.writerow([''] + names)
     for i in range(len(contents)):
@@ -89,6 +89,7 @@ def plot_dendrogram(X):
         # method='single'
         # method='centroid'
         dendrogram = sch.dendrogram(sch.linkage(X, method='single'))
+        # print(len(set(dendrogram['color_list'])) - 1)
         plt.show()
 
 
@@ -139,7 +140,11 @@ def get_df(contents):
     for i in range(len(texts)):
         row = []
         for j in range(len(texts)):
-            row.append(distance(texts[i], texts[j]))
+            max_change_length = max(len(texts[i]), len(texts[j]))
+            if max_change_length > 0:
+                row.append(distance(texts[i], texts[j]) / max_change_length)
+            else:
+                row.append(0)
         rows.append(row)
     return pd.DataFrame(rows)
 
@@ -173,7 +178,7 @@ def get_number_of_clusters(X):
         scores = []
         n = 2
         while n <= x_length:
-            model = AgglomerativeClustering(n_clusters=n, metric='euclidean', linkage='single')
+            model = AgglomerativeClustering(n_clusters=n, metric='precomputed', linkage='single')
             model.fit(X)
             if n < x_length:
                 score = silhouette_score(X, model.labels_)
@@ -213,7 +218,7 @@ def get_contents_by_security_policy_repos(contents):
                 docs_contents.extend(contents)
             else:
                 root_contents.extend(contents)
-    return parent_github_contents, github_contents, docs_contents, root_contents
+    return parent_github_contents, root_contents, github_contents, docs_contents
 
 
 def get_distances(parent_github_contents, contents):
@@ -242,15 +247,64 @@ def nearest_range(number):
     return int(''.join(a))
 
 
-def get_distance_dict(contents):
+def get_key(number, max_value):
+    if number == 0:
+        key = '0'
+    elif number <= max_value * 1 / 5:
+        key = '0.2'
+    elif number <= max_value * 1 / 4:
+        key = '0.25'
+    elif number <= max_value * 1 / 3:
+        key = '0.33'
+    elif number <= max_value * 1 / 2:
+        key = '0.5'
+    else:
+        key = '1'
+    return key
+
+
+def get_key_2(percentage):
+    if percentage == 0:
+        key = 0
+    elif percentage < 0.1:
+        key = 0.1
+    elif percentage < 0.2:
+        key = 0.2
+    elif percentage < 0.3:
+        key = 0.3
+    elif percentage < 0.4:
+        key = 0.4
+    elif percentage < 0.5:
+        key = 0.5
+    elif percentage < 0.6:
+        key = 0.6
+    elif percentage < 0.7:
+        key = 0.7
+    elif percentage < 0.8:
+        key = 0.8
+    elif percentage < 0.9:
+        key = 0.9
+    else:
+        key = 1
+    return key
+
+
+def get_bucket(contents):
     distance_dict = dict()
     df = get_df(contents)
     df_length = len(df)
+    # max_value = None
     for i in range(df_length):
+        # for j in range(df_length):
+        #     if i < j:
+        #         value = df[i][j]
+        #         if max_value is None or value > max_value:
+        #             max_value = value
         for j in range(df_length):
-            if i != j:
+            if i < j:
                 value = df[i][j]
-                key = nearest_range(value)
+                key = get_key_2(value)
+                # key = nearest_range(value)
                 if key in distance_dict:
                     distance_dict[key].append(value)
                 else:
@@ -260,10 +314,156 @@ def get_distance_dict(contents):
     return sort_by_ascending_keys(distance_dict)
 
 
+def get_statistics(user, location, contents):
+    same_count = 0
+    same_percentage = 0
+    similar_count = 0
+    similar_percentage = 0
+    other_count = 0
+    other_percentage = 0
+    content_length = len(contents)
+    number_of_combinations = int((content_length * content_length - content_length) / 2)
+    distance_dict = get_bucket(contents)
+
+
+
+    similar_threshold = 0
+    # if len(distance_dict.keys()) > 0:
+    #     max_key = max(distance_dict.keys())
+    #     if max_key >= 100:
+
+    for key in distance_dict:
+        if key == 0:
+        # if key == '0':
+            same_count = same_count + distance_dict[key]
+        # elif key < 300:
+        elif key < 0.2:
+        # elif key == '0.2' or key == '0.25' or key == '0.33':
+            similar_count = similar_count + distance_dict[key]
+        else:
+            other_count = other_count + distance_dict[key]
+    if number_of_combinations > 0:
+        same_percentage = same_count / number_of_combinations
+        similar_percentage = similar_count / number_of_combinations
+        other_percentage = other_count / number_of_combinations
+    if len(distance_dict) > 0:
+        print(f'"{user}","{location}",{content_length},{same_percentage},{similar_percentage},{other_percentage},"{distance_dict}"')
+
+
+def get_by_locations(users):
+    locations = ['root', 'github', 'docs']
+    for i in range(len(locations)):
+        for user in users:
+            names = get_names(user=user)
+            contents = get_contents(names, show_path=show)
+            write_csv(names, contents)
+            t = get_contents_by_security_policy_repos(contents)
+            get_statistics(user, locations[i], t[i + 1])
+
+
+def dum_dum(map):
+    count = 0
+    same_count = 0
+    similar_count = 0
+    other_count = 0
+    for key in map:
+        length = len(map[key])
+        # print(f'{key} {length}')
+        count = count + length
+        if key == 0:
+            same_count = same_count + length
+        elif key < 0.2:
+            similar_count = similar_count + length
+        else:
+            other_count = other_count + length
+    return count, same_count, similar_count, other_count
+
+
+def as5(target_content, contents):
+    my_dict = dict()
+    for content in contents:
+        max_change_length = max(len(target_content[1]), len(content[1]))
+        if max_change_length > 0:
+            key = get_key_2(distance(target_content[1], content[1]) / max_change_length)
+            # print(f'LEV: {distance(target_content[1], content[1])} / {max_change_length}, {key}, {target_content[0]}, {content[0]}')
+            if key in my_dict:
+                my_dict[key].append((target_content[0], content[0]))
+            else:
+                my_dict[key] = [(target_content[0], content[0])]
+    return my_dict
+
+
+def rq2_2_1():
+    print('Hello World')
+
+
+def rl_traversal(node):
+    # skipping leaves
+    if not node.is_leaf():
+        yield node.id
+        yield from rl_traversal(node.right)
+        yield from rl_traversal(node.left)
+
+
+def graph_list(hook, hooks):
+    left_hook = None
+    right_hook = None
+    for h in hooks:
+        if h[1] == hook[0]:
+            left_hook = h
+        if h[1] == hook[3]:
+            right_hook = h
+    if hook[1] > 0:
+        return [graph_list(left_hook, hooks), hook[1], graph_list(right_hook, hooks)]
+    else:
+        return hook[1]
+
+
+def flatten_list(lst):
+    flat_list = []
+    for item in lst:
+        if isinstance(item, list):
+            flat_list.extend(flatten_list(item))
+        else:
+            flat_list.append(item)
+    return flat_list
+
+
+def oncd(X):
+    number_of_cluster = 1
+    ddd = dict()
+    max_index = 0
+    for i in range(len(X)):
+        for j in range(len(X)):
+            if i < j:
+                ddd[f'{[i, j]}'] = X[i][j]
+                if j > max_index:
+                    max_index = j
+    x_length = len(X)
+
+    print(f'LENGTH: {len(ddd)} {max_index}')
+
+    ddata = sch.dendrogram(sch.linkage(X, method='single'))
+
+    hooks = ddata['dcoord']
+    if len(hooks) > 0:
+        root_hook = hooks[0]
+        for hook in hooks:
+            if hook[1] > root_hook[1]:
+                root_hook = hook
+        # hooks.remove(root_hook)
+        aaa = graph_list(root_hook, hooks)
+        print(aaa)
+        print(flatten_list(aaa))
+
+    return 0
+
+
 if __name__ == '__main__':
     users = get_users()
+
     # users = ['socketio']
-    # users = ['google']
+    users = ['google']
     # users = ['opencontainers']
     # users = ['npm']
     # users = ['oracle']
@@ -277,23 +477,152 @@ if __name__ == '__main__':
     # users = ['kubernetes-sigs']
     # users = ['socketio', 'google', 'opencontainers', 'npm', 'oracle', 'microsoft', 'facebook', 'angular', 'thehive-project', 'stripe']
     # users = ['pallets']
-    show = len(users) == 1
-    # show = False
+    # show = len(users) == 1
+    show = False
     total = 0
+    i = 0
+    j = 0
+    k = 0
+
+    # get_by_locations(users)
+    a_count = 0
     for user in users:
         names = get_names(user=user)
         contents = get_contents(names, show_path=show)
-        write_csv(contents)
+        write_csv(names, contents)
         parent_github_contents, github_contents, docs_contents, root_contents = get_contents_by_security_policy_repos(contents)
-        github_distance_dict = get_distance_dict(github_contents)
-        docs_distance_dict = get_distance_dict(docs_contents)
-        root_distance_dict = get_distance_dict(root_contents)
+
+
+        parent_github_distance_dict = get_bucket(parent_github_contents)
+        github_distance_dict = get_bucket(github_contents)
+        docs_distance_dict = get_bucket(docs_contents)
+        root_distance_dict = get_bucket(root_contents)
+
+        global_contents = []
+        # if len(parent_github_contents) > 0:
+        #     global_contents = global_contents + [parent_github_contents[0]]
+        # if len(github_contents) > 0:
+        #     global_contents = global_contents + github_contents
+        # if len(docs_contents) > 0:
+        #     global_contents = global_contents + docs_contents
+        # if len(root_contents) > 0:
+        #     global_contents = global_contents + root_contents
+
+        # number_of_parent_github_contents = len(parent_github_contents)
+        # if number_of_parent_github_contents > 0:
+        #     a_count = a_count + 1
+        #     parent_github_content = parent_github_contents[0]
+        #
+        #     # a = dict()
+        #     # b = dict()
+        #     # c = dict()
+        #     # for root_content in root_contents:
+        #     #     max_change_length = max(len(parent_github_content[1]), len(root_content[1]))
+        #     #     if max_change_length > 0:
+        #     #         key = get_key_2(distance(parent_github_content[1], root_content[1]) / max_change_length)
+        #     #         if key in a:
+        #     #             a[key].append((parent_github_content[0], root_content[0]))
+        #     #         else:
+        #     #             a[key] = [(parent_github_content[0], root_content[0])]
+        #     # for github_content in github_contents:
+        #     #     max_change_length = max(len(parent_github_content[1]), len(github_content[1]))
+        #     #     if max_change_length > 0:
+        #     #         key = get_key_2(distance(parent_github_content[1], github_content[1]) / max_change_length)
+        #     #         if key in b:
+        #     #             b[key].append((parent_github_content[0], github_content[0]) )
+        #     #         else:
+        #     #             b[key] = [(parent_github_content[0], github_content[0])]
+        #     # for docs_content in docs_contents:
+        #     #     max_change_length = max(len(parent_github_content[1]), len(docs_content[1]))
+        #     #     if max_change_length > 0:
+        #     #         key = get_key_2(distance(parent_github_content[1], docs_content[1]) / max_change_length)
+        #     #         if key in c:
+        #     #             c[key].append((parent_github_content[0], docs_content[0]))
+        #     #         else:
+        #     #             c[key] = [(parent_github_content[0], docs_content[0])]
+        #     root_count, root_same_count, root_similar_count, root_other_count = dum_dum(as5(parent_github_content, root_contents))
+        #     github_count, github_same_count, github_similar_count, github_other_count = dum_dum(as5(parent_github_content, github_contents))
+        #     docs_count, docs_same_count, docs_similar_count, docs_other_count = dum_dum(as5(parent_github_content, docs_contents))
+        #
+        #     print(f'\"{user}\",{len(contents)},{number_of_parent_github_contents},{root_count},{root_same_count},{root_similar_count},{root_other_count},{github_count},{github_same_count},{github_similar_count},{github_other_count},{docs_count},{docs_same_count},{docs_similar_count},{docs_other_count}')
+
+
+
+
+        # for row in root_distance_dict:
+        #     print(root_distance_dict[row])
+
+        # print(parent_github_distance_dict)
+        # print(github_distance_dict)
+        # print(docs_distance_dict)
+        # print(root_distance_dict)
+
+
+        # print(len(parent_github_contents))
+        # print(len(github_contents))
+        # print(len(docs_contents))
+        # print(len(root_contents))
+
+        # print(user)
+
+        # if len(github_contents) > 0:
+        #     i = i + len(github_contents)
+        # if len(docs_contents) > 0:
+        #     j = j + len(docs_contents)
+        # if len(root_contents) > 0:
+        #     k = k + len(root_contents)
+
+        # get_statistics(user, 'AAAA', global_contents)
+        # get_statistics(user, 'root', root_contents)
+        # get_statistics(user, 'github', github_contents)
+        # get_statistics(user, 'docs', docs_contents)
+
+
+        # get_segment(user, len(github_contents), github_distance_dict, len(docs_contents), docs_distance_dict, len(root_contents), root_distance_dict)
+
+
+
+        # get_segment(docs_distance_dict, 300)
+        # get_segment(root_distance_dict, 300)
+
+        # i = i + 1
+        # if len(github_distance_dict) > 0 or len(docs_distance_dict) > 0 or len(root_distance_dict) > 0:
+        #
+        #     print(f'{i} {user} {len(github_contents)} {len(docs_contents)} {len(root_contents)} {github_distance_dict} {docs_distance_dict} {root_distance_dict}')
+        #     j = j + 1
+
+
+
+
+        ## 20230803
+
         parent_github_github_distances = f'"{get_distances(parent_github_contents, github_contents)}"'
         parent_github_docs_distances = f'"{get_distances(parent_github_contents, docs_contents)}"'
         parent_github_root_distances = f'"{get_distances(parent_github_contents, root_contents)}"'
+
+        # print(get_df(global_contents))
+        # print(get_bucket(global_contents))
+
         X = read_csv()
-        number_of_clusters = get_number_of_clusters(X)
-        print(f'{user},{len(parent_github_contents)},{len(github_contents)},{len(docs_contents)},{len(root_contents)},{parent_github_github_distances},{parent_github_docs_distances},{parent_github_root_distances},{number_of_clusters},"{github_distance_dict}","{docs_distance_dict}","{root_distance_dict}"')
+
+
+        oncd(X)
+
+        # number_of_clusters = get_number_of_clusters(X)
+
+        # cluster = AgglomerativeClustering(n_clusters=None, affinity='euclidean', linkage='single', compute_full_tree=True,
+        #                                   distance_threshold=1000)
+        # # Cluster the data
+        # cluster.fit_predict(X)
+
+        # print(f"Number of clusters = {1 + np.amax(cluster.labels_)}")
+
+
+
+        #
+        # print(f'NUMBER OF CLUSTERS: {number_of_clusters}')
+
+        # print(f'{user},{len(parent_github_contents)},{len(github_contents)},{len(docs_contents)},{len(root_contents)},{parent_github_github_distances},{parent_github_docs_distances},{parent_github_root_distances},{number_of_clusters},"{githb}","{docs_distance_dict}","{root_distance_dict}"')
 
 
 
@@ -318,5 +647,14 @@ if __name__ == '__main__':
         #     print(mmm[mmm.keys[i]])
         # print(f'{user} {}')
         # print(f'{user},{number_of_clusters}')
+
+        # if len(X) > 1:
+        #     dendrogram = sch.dendrogram(sch.linkage(X, method='centroid'))
+        #     number_of_clusters = len(set(dendrogram['color_list'])) - 1
+        #     print(f'{user} {number_of_clusters}')
+        # else:
+        #     print(f'{user} {1}')
         if show:
             plot_dendrogram(X)
+    # print(a_count)
+    # print(f'{i} {j} {k}')
