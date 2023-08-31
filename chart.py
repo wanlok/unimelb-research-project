@@ -8,6 +8,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator, MultipleLocator
 from scipy.stats import pearsonr
+from wordcloud import WordCloud
 
 import repository
 from repository import get_list
@@ -268,3 +269,12 @@ def dummy(repos, start_date, end_date, title, file_path):
         plt.savefig(file_path, dpi=300, bbox_inches='tight')
     plt.close()
 
+
+def black_color_func(word, font_size, position, orientation, random_state=None, **kwargs):
+    return 'rgb(0, 0, 0)'
+
+
+def word_cloud(word_dict):
+    word_cloud = WordCloud(background_color='white', color_func=black_color_func)
+    word_cloud.generate_from_frequencies(word_dict)
+    word_cloud.to_file('C:\\Files\\output.png')
