@@ -1,5 +1,6 @@
 import os
 import random
+import shutil
 
 import pandas as pd
 import numpy as np
@@ -814,9 +815,19 @@ def rq2_ahc():
     repos(rq2_ahc_results, my_set)
 
 
+def copy_file(file_name):
+    from_directory_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Step 1\\'
+    to_directory_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Default Template\\'
+    shutil.copyfile(f'{from_directory_path}{file_name}', f'{to_directory_path}{file_name}')
+
 def rq2_general():
     my_set = set()
     u_set = set()
+
+    default_template = '# Security Policy\n\n## Supported Versions\n\nUse this section to tell people about which versions of your project are\ncurrently being supported with security updates.\n\n| Version | Supported          |\n| ------- | ------------------ |\n| 5.1.x   | :white_check_mark: |\n| 5.0.x   | :x:                |\n| 4.0.x   | :white_check_mark: |\n| < 4.0   | :x:                |\n\n## Reporting a Vulnerability\n\nUse this section to tell people how to report a vulnerability.\n\nTell them where to go, how often they can expect to get an update on a\nreported vulnerability, what to expect if the vulnerability is accepted or\ndeclined, etc.\n'
+    is_same_as_default_template = lambda x: x.lower().strip() == default_template.lower().strip()
+    is_based_on_default_template = lambda x: 'Use this section to tell'.lower() in x.lower()
+
     for user in get_users():
         # if user == 'google':
         if True:
@@ -824,36 +835,41 @@ def rq2_general():
             contents = get_contents(names, show_path=False)
             parent_github_contents, root_contents, github_contents, docs_contents = get_contents_by_security_policy_repos(contents)
 
-            default_template = '# Security Policy\n\n## Supported Versions\n\nUse this section to tell people about which versions of your project are\ncurrently being supported with security updates.\n\n| Version | Supported          |\n| ------- | ------------------ |\n| 5.1.x   | :white_check_mark: |\n| 5.0.x   | :x:                |\n| 4.0.x   | :white_check_mark: |\n| < 4.0   | :x:                |\n\n## Reporting a Vulnerability\n\nUse this section to tell people how to report a vulnerability.\n\nTell them where to go, how often they can expect to get an update on a\nreported vulnerability, what to expect if the vulnerability is accepted or\ndeclined, etc.\n'
-
             a = len(parent_github_contents)
             b = len(root_contents)
             c = len(github_contents)
             d = len(docs_contents)
 
             for file_name, content in parent_github_contents:
-                # if content.lower().strip() != default_template.lower().strip() and 'Use this section to tell'.lower() in content.lower():
-                if content.lower().strip() == default_template.lower().strip():
-                    print((file_name, 'parent_github', a, b, c, d))
+                # if is_same_as_default_template(content):
+                if not is_same_as_default_template(content) and is_based_on_default_template(content):
+                    print(file_name)
+                    # print((file_name, 'parent_github', a, b, c, d))
+                    # copy_file(file_name)
 
 
             for file_name, content in root_contents:
-                # if content.lower().strip() != default_template.lower().strip() and 'Use this section to tell'.lower() in content.lower():
-                if content.lower().strip() == default_template.lower().strip():
-                    print((file_name, 'root', a, b, c, d))
+                # if is_same_as_default_template(content):
+                if not is_same_as_default_template(content) and is_based_on_default_template(content):
+                    print(file_name)
+                #     print((file_name, 'root', a, b, c, d))
+                #     copy_file(file_name)
 
             for file_name, content in github_contents:
-                # if content.lower().strip() != default_template.lower().strip() and 'Use this section to tell'.lower() in content.lower():
-                if content.lower().strip() == default_template.lower().strip():
+                # if is_same_as_default_template(content):
+                if not is_same_as_default_template(content) and is_based_on_default_template(content):
                     # if a + b + c + d > 1:
-                    print((file_name, 'github', a, b, c, d))
+                    print(file_name)
+                    # print((file_name, 'github', a, b, c, d)
+                    # copy_file(file_name)
 
             for file_name, content in docs_contents:
-                # if content.lower().strip() != default_template.lower().strip() and 'Use this section to tell'.lower() in content.lower():
-                if content.lower().strip() == default_template.lower().strip():
+                # if is_same_as_default_template(content):
+                if not is_same_as_default_template(content) and is_based_on_default_template(content):
                     # if a + b + c + d > 1:
-
-                    print((file_name, 'docs', a, b, c, d))
+                    print(file_name)
+                    # print((file_name, 'docs', a, b, c, d))
+                    # copy_file(file_name)
 
             # if a + b + c + d == 1:
             #     print(f'{user},{a},{b},{c},{d}')
@@ -1057,5 +1073,5 @@ if __name__ == '__main__':
     # rq2_2_same_content()
     # rq2_without_parent_github()
     # rq2_3_3()
-    # rq2_ahc()
-    rq2_general()
+    rq2_ahc()
+    # rq2_general()
