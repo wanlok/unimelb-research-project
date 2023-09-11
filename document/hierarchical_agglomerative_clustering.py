@@ -1,6 +1,8 @@
 import os
 import random
 import shutil
+from collections import Counter
+from datetime import datetime
 
 import pandas as pd
 import numpy as np
@@ -875,6 +877,159 @@ def rq2_general():
             #     print(f'{user},{a},{b},{c},{d}')
 
 
+def get_combined_dict(dict_list):
+    combined_dict = dict()
+    for my_dict in dict_list:
+        for key in my_dict:
+            if key in combined_dict:
+                combined_dict[key] = combined_dict[key] + my_dict[key]
+            else:
+                combined_dict[key] = my_dict[key]
+    return combined_dict
+
+
+def get_combined_values(value_list):
+    my_set = set()
+    for values in value_list:
+        my_set.update(values)
+    return list(my_set)
+
+
+def get_earliest_date_time_string(date_time_string_list):
+    earliest_date_time_string = None
+    earliest_date_time = None
+    date_time_string_list = list(filter(lambda x: len(x) > 0, date_time_string_list))
+    date_time_list = list(map(lambda x: datetime.strptime(x, '%Y-%m-%dT%H:%M:%SZ'), date_time_string_list))
+    for i in range(len(date_time_string_list)):
+        if earliest_date_time_string is None or date_time_list[i] < earliest_date_time:
+            earliest_date_time_string = date_time_string_list[i]
+            earliest_date_time = date_time_list[i]
+    return earliest_date_time_string if earliest_date_time_string is not None else ''
+
+
+def get_average_values(value_list):
+
+    for values in value_list:
+        print(f'AAAAA {values}')
+
+
+def get_cvss(cve_list, cvss_list):
+    cve_dict = dict()
+    for cve_list_2, cvss_list_2 in zip(cve_list, cvss_list):
+        for cve, cvss in zip(cve_list_2, cvss_list_2):
+            if cve in cve_dict:
+                new_cvss = []
+                for x, y in zip(cve_dict[cve], cvss):
+                    # print(f'{cve_dict[cve]} {cvss}')
+                    if len(x) > 0 and len(y) > 0 and float(x) > float(y):
+                        new_cvss.append(x)
+                    else:
+                        new_cvss.append(y)
+                cve_dict[cve] = new_cvss
+            else:
+                cve_dict[cve] = cvss
+    # new_cve_list = []
+    new_cvss_list = []
+    for cve in cve_dict:
+        # new_cve_list.append(cve)
+        new_cvss_list.append(cve_dict[cve])
+    return new_cvss_list
+
+
+
+
+def combine_attribute_rows(user, location, cluster, attribute_rows, writer):
+    # if user != 'google':
+    #     return
+    column_types = [str,None,list,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,str,list,list,list,list,int,int,int,int,int,int,str,str,str,str,int,str,set,str,str,str,list,int,int,int,int,int,int,int,int,list,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int]
+    cve_column_values = None
+    row = []
+    for i in range(len(column_types)):
+        column_type = column_types[i]
+        column_values = []
+        for attribute_row in attribute_rows:
+            column_value = attribute_row[i]
+            if column_type == list:
+                if len(column_value) > 0:
+                    column_value = eval(column_value)
+                else:
+                    column_value = []
+            elif column_type == set:
+                if len(column_value) > 0:
+                    column_value = eval(column_value)
+                else:
+                    column_value = {}
+            elif column_type == int:
+                if len(column_value) > 0:
+                    column_value = int(column_value)
+                else:
+                    column_value = 0
+            column_values.append(column_value)
+        if i == 33:
+            cve_column_values = column_values
+        if i in [0]:
+            row.append(f'{user},{location},{cluster}')
+        elif i in [1]:
+            row.append(f'')
+        elif i in [31, 32, 33, 34]:
+            row.append(f'{get_combined_values(column_values)}')
+        elif i in [2, 47]:
+            row.append(f'{get_combined_dict(column_values)}')
+        elif i in [30, 41, 42, 43, 44, 46, 48, 49]:
+            row.append(f'{Counter(column_values).most_common()[0][0]}')
+        elif i in [50]:
+            row.append(f'{get_earliest_date_time_string(column_values)}')
+        elif i in [51, 60]:
+            row.append(f'{get_cvss(cve_column_values, column_values)}')
+        elif column_type == int:
+            row.append(f'{sum(column_values)}')
+        else:
+            row.append(f'{column_values}')
+    writer.writerow(row)
+
+
+def rq2_combine_clusters():
+    cluster_csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\clusters.csv'
+    attribute_csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Attributes.csv'
+    combined_attribute_csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Combined Attributes.csv'
+    writer = csv_writer(combined_attribute_csv_file_path, mode='w')
+    writer.writerow([])
+    writer.writerow([])
+    user_dict = dict()
+    attribute_dict = dict()
+    i = 0
+    for row in csv_reader(attribute_csv_file_path):
+        if i > 1:
+            attribute_dict[row[0]] = row
+        i = i + 1
+    for repo, user, location, cluster, _ in csv_reader(cluster_csv_file_path):
+        if user in user_dict:
+            location_dict = user_dict[user]
+            if location in location_dict:
+                cluster_dict = location_dict[location]
+                if cluster in cluster_dict:
+                    cluster_dict[cluster].append(repo)
+                else:
+                    cluster_dict[cluster] = [repo]
+            else:
+                cluster_dict = dict()
+                cluster_dict[cluster] = [repo]
+                location_dict[location] = cluster_dict
+        else:
+            cluster_dict = dict()
+            cluster_dict[cluster] = [repo]
+            location_dict = dict()
+            location_dict[location] = cluster_dict
+            user_dict[user] = location_dict
+    for user in user_dict:
+        location_dict = user_dict[user]
+        for location in location_dict:
+            cluster_dict = location_dict[location]
+            for cluster in cluster_dict:
+                attribute_rows = []
+                for repo in cluster_dict[cluster]:
+                    attribute_rows.append(attribute_dict[repo])
+                combine_attribute_rows(user, location, cluster, attribute_rows, writer)
 
 
 
@@ -1073,5 +1228,7 @@ if __name__ == '__main__':
     # rq2_2_same_content()
     # rq2_without_parent_github()
     # rq2_3_3()
-    rq2_ahc()
+    # rq2_ahc()
     # rq2_general()
+
+    rq2_combine_clusters()
