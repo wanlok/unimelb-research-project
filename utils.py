@@ -10,6 +10,7 @@ from urllib.request import Request, urlopen
 from dateutil.relativedelta import relativedelta
 
 attribute_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Attributes.csv'
+dependency_file_path = 'C:\\Files\\Dependencies.csv'
 
 
 def get_file_json(file_path):
@@ -196,6 +197,17 @@ def repos(*params):
     return my_list
 
 
+def repo_2(*params):
+    my_list = []
+    if len(params) > 0 and type(params[0]) is types.FunctionType:
+        function = params[0]
+        params = list(params[1:])
+        _, repo_list = get_column_title_and_values(0)
+        for repo in repo_list:
+            my_list.append(function(*tuple([repo] + params)))
+    return my_list
+
+
 def random_repo(*params):
     data = None
     if len(params) > 0 and type(params[0]) is types.FunctionType:
@@ -214,8 +226,9 @@ def get_file_path(repo):
     return f'C:\\Files\\security policies\\{file_name}.csv'
 
 
-def get_latest_security_policy_repo(file_path):
+def get_repo_and_path(file_path):
     repo = None
+    path = None
     target_row = None
     i = 0
     for row in csv_reader(f'{file_path}'):
@@ -224,7 +237,8 @@ def get_latest_security_policy_repo(file_path):
         i = i + 1
     if target_row is not None:
         repo = target_row[0]
-    return repo
+        path = target_row[1]
+    return repo, path
 
 
 def get_latest_content(file_path):
@@ -240,6 +254,15 @@ def get_latest_content(file_path):
     return content
 
 
+def get_security_policy_repo(repo):
+    directory_path = 'C:\\Files\\security policies\\'
+    file_name = repo.replace('/', '_')
+    file_name = f'{file_name}.csv'
+    security_policy_repo, _ = get_repo_and_path(f'{directory_path}{file_name}')
+    security_policy_repo = security_policy_repo.lower()
+    return security_policy_repo
+
+
 def is_contain_alphanumeric(word):
     contain_alphanumeric = False
     for character in word:
@@ -248,3 +271,94 @@ def is_contain_alphanumeric(word):
             break
     return contain_alphanumeric
 
+
+def get_column_title_and_values(column_index, as_list=False, as_list_count=False):
+    title = ''
+    sub_title = ''
+    values = []
+    i = 0
+    for row in csv_reader(attribute_file_path):
+        if i == 0:
+            title = expand(row)[column_index]
+        elif i == 1:
+            sub_title = row[column_index]
+        else:
+            if as_list:
+                try:
+                    value = eval(row[column_index])
+                    if as_list_count:
+                        value = f'{len(value)}'
+                except:
+                    value = None
+            else:
+                value = row[column_index]
+                # v = row[column_index]
+                # if type(v) == str:
+                #     value = v
+                # else:
+                #     value = int(v) if len(v) > 0 else v
+            values.append(value)
+        i = i + 1
+    return f'{title} {sub_title}'.strip(), values
+
+
+def is_float(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+
+
+def is_int(num):
+    try:
+        int(num)
+        return True
+    except ValueError:
+        return False
+
+
+def combine_values(my_list, as_list, as_list_count):
+    value = None
+    if as_list:
+        for x in my_list:
+            if x is not None:
+                if value is None:
+                    value = set()
+                value.update(x)
+        if value is not None:
+            if as_list_count:
+                value = f'{len(value)}'
+            else:
+                value = list(value)
+    else:
+        for x in my_list:
+            if is_float(x):
+                if value is None:
+                    value = 0.0
+                value = value + float(x)
+            elif is_int(x):
+                if value is None:
+                    value = 0
+                value = value + int(x)
+        if value is not None:
+            value = f'{value}'
+    return value
+
+
+def get_grouped_column_title_and_values(column_index, as_list=False, as_list_count=False):
+    x_values = []
+    y_values = []
+    keys = repos(get_security_policy_repo)
+    y_title, values = get_column_title_and_values(column_index, as_list)
+    my_dict = dict()
+    for key, value in zip(keys, values):
+        if key in my_dict:
+            my_dict[key].append(value)
+        else:
+            my_dict[key] = [value]
+    for key in sort_by_ascending_keys(my_dict):
+        x_values.append(key)
+        # y_values.append(my_dict[key])
+        y_values.append(combine_values(my_dict[key], as_list, as_list_count))
+    return y_title, x_values, y_values

@@ -17,7 +17,7 @@ from document.owasp import get_owasp_cwe_dict, get_owasp_description_dict
 from security_md import get_number_of_characters_words_headers_paragraphs
 from utils import repos, attribute_file_path, csv_reader, expand, get_writer, \
     sort_by_descending_values, get_column_title_and_values, get_grouped_column_title_and_values, \
-    get_security_policy_repo
+    get_security_policy_repo, repo_2
 
 ALPHA = 0.05
 
@@ -304,6 +304,8 @@ def get_aaa(owasp_cwe_dict):
     return owasp_description_dict
 
 
+
+
 def get_indexes():
     package_manager_dict = get_package_manager_dict()
     owasp_cwe_dict = get_owasp_cwe_dict()
@@ -325,10 +327,10 @@ def get_indexes():
         ('Number of languages', 45),
         ('Number of days since document created', [get_number_of_days_since_document_created]),
         ('Number of lines of code', 40),
-        ('Number of dependencies', [repos, get_repo_xx, package_manager_dict])
+        ('Number of dependencies', [repo_2, get_repo_xx, package_manager_dict])
     ])
     for package_manager in package_manager_dict:
-        indexes.append((f'Number of {package_manager} dependencies', [repos, get_package_manager_count, package_manager_dict[package_manager]]))
+        indexes.append((f'Number of {package_manager} dependencies', [repo_2, get_package_manager_count, package_manager_dict[package_manager]]))
     return indexes
 
 
@@ -400,7 +402,7 @@ def get_grouped_x_and_y(x_values, name, index, location_dict):
     return x_values, y_title, y_values
 
 
-def compute_spearman_level_1(grouped):
+def compute_spearman_level_1():
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
@@ -408,19 +410,13 @@ def compute_spearman_level_1(grouped):
     x_indexes = [36, 37, 39]
     y_indexes = get_indexes()
     corrected_alpha = ALPHA / (len(x_indexes) * len(y_indexes))
-    if grouped:
-        location_dict = dict()
-        repos(set_location_dict, location_dict)
     for y_custom_title, y_index in y_indexes:
         p_values = []
         p_value_rejections = []
         rhos = []
         for x_index in x_indexes:
             x_title, x_values = get_column_title_and_values(x_index)
-            if grouped:
-                x_values, y_title, y_values = get_grouped_x_and_y(x_values, y_custom_title, y_index, location_dict)
-            else:
-                x_values, y_title, y_values = get_x_and_y(x_values, y_custom_title, y_index)
+            x_values, y_title, y_values = get_x_and_y(x_values, y_custom_title, y_index)
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
@@ -438,36 +434,29 @@ def compute_spearman_level_1(grouped):
     print_tables(table_1_rows, table_2_rows, table_3_rows, headers)
 
 
-def my_aaa(results, category_name):
-    print(results)
+def get_category_counts(category_set_list, category_name):
+    counts = []
+    for category_set in category_set_list:
+        if category_name in category_set:
+            counts.append(f'{category_set[category_name]}')
+        else:
+            counts.append('0')
+    return counts
 
 
-
-
-
-def compute_spearman_level_2(grouped):
+def compute_spearman_level_2():
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
     indexes = get_indexes()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
-    results = get_repo_categorisation_results()
-    if grouped:
-        location_dict = dict()
-        repos(set_location_dict, location_dict)
+    _, category_set_list = get_column_title_and_values(2, True)
     for y_custom_title, y_index in indexes:
         p_values = []
         p_value_rejections = []
         rhos = []
         for category_name in category_names:
-            x_values = repos(get_dict_value, results, category_name)
-            my_aaa(results, category_name)
-            if grouped:
-                x_values, y_title, y_values = get_grouped_x_and_y(x_values, y_custom_title, y_index, location_dict)
-            else:
-                x_values, y_title, y_values = get_x_and_y(x_values, y_custom_title, y_index)
-            print(f'{len(x_values)} {x_values}')
-            print(f'{len(y_values)} {y_values}')
+            x_values, y_title, y_values = get_x_and_y(get_category_counts(category_set_list, category_name), y_custom_title, y_index)
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
@@ -1178,8 +1167,8 @@ if __name__ == '__main__':
     # q((2, True, True), )
 
     # compute_all_data_normality()
-    # compute_spearman_level_1(True)
-    compute_spearman_level_2(False)
+    # compute_spearman_level_1()
+    compute_spearman_level_2()
     # compute_mann_whitney(True)
     # compute_fisher_exact()
     # compute_chi_squared()
