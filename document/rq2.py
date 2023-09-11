@@ -380,37 +380,69 @@ def get_index_title_and_values(title, index):
     return title, values
 
 
-def compute_spearman_level_1():
+def get_x_and_y(x_values, name, index):
+    y_title, y_values = get_index_title_and_values(name, index)
+    remove_invalid_values(x_values, y_values)
+    x_values = list(map(lambda x: int(x), x_values))
+    y_values = list(map(lambda x: int(x), y_values))
+    return x_values, y_title, y_values
+
+
+def get_grouped_x_and_y(x_values, name, index, location_dict):
+    if type(index) == tuple and len(index) == 3:
+        temp_index = (index[0], index[1], False)
+    else:
+        temp_index = index
+    y_title, y_values = get_index_title_and_values(name, temp_index)
+    _, z_values = get_column_title_and_values(0)
+    remove_invalid_values(x_values, y_values, z_values)
+    x_values, y_values = group_and_filter_values(x_values, y_values, z_values, location_dict, index)
+    return x_values, y_title, y_values
+
+
+def compute_spearman_level_1(grouped):
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
-    headers = ['Number of characters', 'Number of words', 'Number of headers', 'Number of paragraphs']
-    x_indexes = [36, 37, 38, 39]
+    headers = ['Number of characters', 'Number of words', 'Number of paragraphs']
+    x_indexes = [36, 37, 39]
     y_indexes = get_indexes()
     corrected_alpha = ALPHA / (len(x_indexes) * len(y_indexes))
-    for name, y_index in y_indexes:
+    if grouped:
+        location_dict = dict()
+        repos(set_location_dict, location_dict)
+    for y_custom_title, y_index in y_indexes:
         p_values = []
         p_value_rejections = []
         rhos = []
         for x_index in x_indexes:
             x_title, x_values = get_column_title_and_values(x_index)
-            y_title, y_values = get_index_title_and_values(name, y_index)
-            remove_invalid_values(x_values, y_values)
+            if grouped:
+                x_values, y_title, y_values = get_grouped_x_and_y(x_values, y_custom_title, y_index, location_dict)
+            else:
+                x_values, y_title, y_values = get_x_and_y(x_values, y_custom_title, y_index)
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
             rhos.append(f'{rho}')
-            print(f'"{x_title}","{name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'"{x_title}","{y_title}","{y_custom_title}",{p_value},{p_value_rejection}')
             print(f'x_values: {len(x_values)} {x_values}')
             print(f'y_values: {len(y_values)} {y_values}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(rhos)
-        table_1_rows.append(f',"{name}",{table_1_row}')
-        table_2_rows.append(f',"{name}",{table_2_row}')
-        table_3_rows.append(f',"{name}",{table_3_row}')
+        table_1_rows.append(f',"{y_custom_title}",{table_1_row}')
+        table_2_rows.append(f',"{y_custom_title}",{table_2_row}')
+        table_3_rows.append(f',"{y_custom_title}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows, headers)
+
+
+def my_aaa(results, category_name):
+    print(results)
+
+
+
 
 
 def compute_spearman_level_2(grouped):
@@ -423,62 +455,63 @@ def compute_spearman_level_2(grouped):
     if grouped:
         location_dict = dict()
         repos(set_location_dict, location_dict)
-    for name, index in indexes:
+    for y_custom_title, y_index in indexes:
         p_values = []
         p_value_rejections = []
         rhos = []
         for category_name in category_names:
             x_values = repos(get_dict_value, results, category_name)
-            y_title, y_values = get_index_title_and_values(name, index)
+            my_aaa(results, category_name)
             if grouped:
-                _, z_values = get_column_title_and_values(0)
-                remove_invalid_values(x_values, y_values, z_values)
-                x_values, y_values = group_and_filter_values(x_values, y_values, z_values, location_dict)
+                x_values, y_title, y_values = get_grouped_x_and_y(x_values, y_custom_title, y_index, location_dict)
             else:
-                remove_invalid_values(x_values, y_values)
-                x_values, y_values = filter_values(x_values, y_values)
+                x_values, y_title, y_values = get_x_and_y(x_values, y_custom_title, y_index)
+            print(f'{len(x_values)} {x_values}')
+            print(f'{len(y_values)} {y_values}')
             rho, p_value = spearmanr(x_values, y_values)
             p_values.append(f'{p_value}')
             p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
             p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
             rhos.append(f'{rho}')
-            print(f'"{category_name}","{name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'"{category_name}","{y_title}","{y_custom_title}",{p_value},{p_value_rejection}')
             print(f'x_values: {len(x_values)} {x_values}')
             print(f'y_values: {len(y_values)} {y_values}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(rhos)
-        table_1_rows.append(f',"{name}",{table_1_row}')
-        table_2_rows.append(f',"{name}",{table_2_row}')
-        table_3_rows.append(f',"{name}",{table_3_row}')
+        table_1_rows.append(f',"{y_custom_title}",{table_1_row}')
+        table_2_rows.append(f',"{y_custom_title}",{table_2_row}')
+        table_3_rows.append(f',"{y_custom_title}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
 
 
-def filter_values(x_values, y_values):
-    x_values = list(map(lambda x: int(x), x_values))
-    y_values = list(map(lambda x: int(x), y_values))
-    return x_values, y_values
-
-
-def group_and_filter_values(x_values, y_values, z_values, location_dict):
+def group_and_filter_values(x_values, y_values, z_values, location_dict, index):
+    as_list = index[1] if type(index) == tuple and len(index) >= 2 else False
+    as_list_count = index[2] if type(index) == tuple and len(index) >= 3 else False
     z_values = list(map(lambda x: location_dict[x], z_values))
-    # print(f'x_values: {len(x_values)} {x_values}')
-    # print(f'y_values: {len(y_values)} {y_values}')
-    # print(f'z_values: {len(z_values)} {z_values}')
-    #
     my_dict = dict()
     for x, y, z in zip(x_values, y_values, z_values):
         if z in my_dict:
             grouped_x_values, grouped_y_values = my_dict[z]
             grouped_x_values.append(int(x))
-            grouped_y_values.append(int(y))
+            if as_list:
+                grouped_y_values.update(y)
+            else:
+                grouped_y_values.append(int(y))
         else:
-            my_dict[z] = ([int(x)], [int(y)])
+            if as_list:
+                my_dict[z] = ([int(x)], set(y))
+            else:
+                my_dict[z] = ([int(x)], [int(y)])
     new_x_values = []
     new_y_values = []
     for a in my_dict:
-        new_x_values.append(my_dict[a][0][0])
-        new_y_values.append(sum(my_dict[a][1]))
+        # new_x_values.append(my_dict[a][0][0])
+        new_x_values.append(sum(my_dict[a][0]))
+        if as_list_count:
+            new_y_values.append(len(my_dict[a][1]))
+        else:
+            new_y_values.append(sum(my_dict[a][1]))
     return new_x_values, new_y_values
 
 
@@ -486,12 +519,15 @@ def set_location_dict(repo, location_dict):
     location_dict[repo] = get_security_policy_repo(repo)
 
 
-def compute_mann_whitney():
+def compute_mann_whitney(grouped):
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
     indexes = get_indexes()
     corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    if grouped:
+        location_dict = dict()
+        repos(set_location_dict, location_dict)
     for name, index in indexes:
         p_values = []
         p_value_rejections = []
@@ -501,6 +537,13 @@ def compute_mann_whitney():
             y_title, y_values = get_index_title_and_values(name, index)
             remove_invalid_values(x_values, y_values)
             y_values = list(map(lambda x: int(x), y_values))
+
+            # if grouped:
+            #     x_values, y_title, y_values = get_grouped_x_and_y(x_values, name, index, location_dict)
+            # else:
+            #     x_values, y_title, y_values = get_x_and_y(x_values, name, index)
+
+
             y_group = []
             n_group = []
             for i in range(len(x_values)):
@@ -923,7 +966,7 @@ def get_expected_count_greater_than_or_equals_five_percentage(expected_counts):
 
 def get_invalid_index(x_values, y_values):
     x_invalid_indexes = {i for i in range(len(x_values)) if x_values[i] is None or (type(x_values[i]) != list and len(x_values[i]) == 0)}
-    y_invalid_indexes = {i for i in range(len(y_values)) if y_values[i] is None or (type(x_values[i]) != list and len(y_values[i]) == 0)}
+    y_invalid_indexes = {i for i in range(len(y_values)) if y_values[i] is None or (type(y_values[i]) != list and len(y_values[i]) == 0)}
     invalid_indexes = list(x_invalid_indexes.union(y_invalid_indexes))
     if len(invalid_indexes) > 0:
         return invalid_indexes[0]
@@ -934,7 +977,7 @@ def get_invalid_index(x_values, y_values):
 def remove_invalid_values(x_values, y_values, z_values=None):
     invalid_index = get_invalid_index(x_values, y_values)
     while invalid_index is not None:
-        # print(f'invalid index {invalid_index}')
+        print(f'invalid index {invalid_index}')
         del x_values[invalid_index]
         del y_values[invalid_index]
         if z_values is not None:
@@ -1136,8 +1179,8 @@ if __name__ == '__main__':
 
     # compute_all_data_normality()
     # compute_spearman_level_1(True)
-    compute_spearman_level_2(True)
-    # compute_mann_whitney()
+    compute_spearman_level_2(False)
+    # compute_mann_whitney(True)
     # compute_fisher_exact()
     # compute_chi_squared()
     # validation()
