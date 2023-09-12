@@ -888,6 +888,18 @@ def get_combined_dict(dict_list):
     return combined_dict
 
 
+def get_combined_set_dict(dict_list):
+    combined_dict = dict()
+    for my_dict in dict_list:
+        for key in my_dict:
+            if key not in combined_dict:
+                combined_dict[key] = set()
+            # for value in my_dict[key]:
+            #     combined_dict[key].add(value.replace('https://github.com/', ''))
+            combined_dict[key].update(my_dict[key])
+    return combined_dict
+
+
 def get_combined_values(value_list):
     my_set = set()
     for values in value_list:
@@ -936,6 +948,33 @@ def get_cvss(cve_list, cvss_list):
     return new_cvss_list
 
 
+def get_string_as_type(s, value_type):
+    value = None
+    if value_type == list:
+        if len(s) > 0:
+            value = eval(s)
+        else:
+            value = []
+    elif value_type == set:
+        if len(s) > 0:
+            value = eval(s)
+        else:
+            value = {}
+    elif value_type == dict:
+        if len(s) > 0:
+            value = eval(s)
+        else:
+            value = dict()
+    elif value_type == int:
+        if len(s) > 0:
+            value = int(s)
+        else:
+            value = 0
+    elif value_type == str:
+        value = s
+    return value
+
+
 
 
 def combine_attribute_rows(user, location, cluster, attribute_rows, writer):
@@ -948,23 +987,7 @@ def combine_attribute_rows(user, location, cluster, attribute_rows, writer):
         column_type = column_types[i]
         column_values = []
         for attribute_row in attribute_rows:
-            column_value = attribute_row[i]
-            if column_type == list:
-                if len(column_value) > 0:
-                    column_value = eval(column_value)
-                else:
-                    column_value = []
-            elif column_type == set:
-                if len(column_value) > 0:
-                    column_value = eval(column_value)
-                else:
-                    column_value = {}
-            elif column_type == int:
-                if len(column_value) > 0:
-                    column_value = int(column_value)
-                else:
-                    column_value = 0
-            column_values.append(column_value)
+            column_values.append(get_string_as_type(attribute_row[i], column_type))
         if i == 33:
             cve_column_values = column_values
         if i in [0]:
@@ -988,20 +1011,46 @@ def combine_attribute_rows(user, location, cluster, attribute_rows, writer):
     writer.writerow(row)
 
 
+def combine_dependency_rows(user, location, cluster, dependency_rows, writer):
+    # if len(dependency_rows) < 2:
+    #     return
+    # print(f'{user}')
+    # print(f'{location}')
+    # print(f'{cluster}')
+    column_types = [str, dict]
+    row = []
+    for i in range(len(column_types)):
+        column_type = column_types[i]
+        column_values = []
+        for dependency_row in dependency_rows:
+            column_values.append(get_string_as_type(dependency_row[i], column_type))
+        if i in [0]:
+            row.append(f'{user},{location},{cluster}')
+        elif i in [1]:
+            row.append(f'{get_combined_set_dict(column_values)}')
+    writer.writerow(row)
+
+
 def rq2_combine_clusters():
-    cluster_csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\clusters.csv'
-    attribute_csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Attributes.csv'
-    combined_attribute_csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Combined Attributes.csv'
-    writer = csv_writer(combined_attribute_csv_file_path, mode='w')
-    writer.writerow([])
-    writer.writerow([])
+    cluster_csv_file_path = '/Users/wanlok/Desktop/clusters.csv'
+    attribute_csv_file_path = '/Users/wanlok/Desktop/Attributes.csv'
+    dependency_csv_file_path = '/Users/wanlok/Desktop/Dependencies.csv'
     user_dict = dict()
     attribute_dict = dict()
+    dependency_dict = dict()
+    combined_attribute_csv_file_path = '/Users/wanlok/Desktop/Combined Attributes.csv'
+    combined_attribute_csv_writer = csv_writer(combined_attribute_csv_file_path, mode='w')
+    combined_attribute_csv_writer.writerow([])
+    combined_attribute_csv_writer.writerow([])
+    combined_dependency_csv_file_path = '/Users/wanlok/Desktop/Combined Dependencies.csv'
+    combined_dependency_csv_writer = csv_writer(combined_dependency_csv_file_path, mode='w')
     i = 0
     for row in csv_reader(attribute_csv_file_path):
         if i > 1:
             attribute_dict[row[0]] = row
         i = i + 1
+    for row in csv_reader(dependency_csv_file_path):
+        dependency_dict[row[0]] = row
     for repo, user, location, cluster, _ in csv_reader(cluster_csv_file_path):
         if user in user_dict:
             location_dict = user_dict[user]
@@ -1027,9 +1076,12 @@ def rq2_combine_clusters():
             cluster_dict = location_dict[location]
             for cluster in cluster_dict:
                 attribute_rows = []
+                dependency_rows = []
                 for repo in cluster_dict[cluster]:
                     attribute_rows.append(attribute_dict[repo])
-                combine_attribute_rows(user, location, cluster, attribute_rows, writer)
+                    dependency_rows.append(dependency_dict[repo])
+                combine_attribute_rows(user, location, cluster, attribute_rows, combined_attribute_csv_writer)
+                combine_dependency_rows(user, location, cluster, dependency_rows, combined_dependency_csv_writer)
 
 
 
@@ -1232,3 +1284,11 @@ if __name__ == '__main__':
     # rq2_general()
 
     rq2_combine_clusters()
+
+    # dict_1 = {'A': {'A', 'B'}}
+    # dict_2 = {'A': {'A', 'B', 'C', 'D'}}
+    # dict_4 = {'A': {'E'}, 'B': {'A', 'A'}}
+    # dict_3 = get_combined_set_dict([dict_1, dict_2, dict_4])
+    # print(dict_1)
+    # print(dict_2)
+    # print(dict_3)
