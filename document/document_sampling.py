@@ -1,8 +1,10 @@
 import os
 
+from docx import Document
 from docx.enum.section import WD_ORIENTATION
 from docx.shared import Cm
 
+from document.document_utils import get_directory_paths, ignored_file_names
 from utils import csv_reader, csv_writer
 
 
@@ -64,6 +66,20 @@ def save_to_csv(file_paths, save_path):
             print(paragraphs[i])
 
             # writer.writerow([repo, headers[i], paragraphs[i]])
+
+
+
+
+def write_content_to_file_path(content, file_path):
+    document = Document()
+    set_page_style(document)
+    document.add_paragraph(content)
+    # table = document.add_table(rows=1, cols=1)
+    # table.allow_autofit = False
+    # for cell in table.columns[0].cells:
+    #     cell.width = Cm(6)
+    # table.rows[0].cells[0].text = content
+    document.save(file_path)
 
 
 if __name__ == '__main__':

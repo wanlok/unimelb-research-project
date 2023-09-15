@@ -1032,17 +1032,17 @@ def combine_dependency_rows(user, location, cluster, dependency_rows, writer):
 
 
 def rq2_combine_clusters():
-    cluster_csv_file_path = '/Users/wanlok/Desktop/clusters.csv'
-    attribute_csv_file_path = '/Users/wanlok/Desktop/Attributes.csv'
-    dependency_csv_file_path = '/Users/wanlok/Desktop/Dependencies.csv'
+    cluster_csv_file_path = 'C:\\Users\\Robert Wan\\Desktop\\clusters.csv'
+    attribute_csv_file_path = 'C:\\Users\\Robert Wan\\Desktop\\Attributes.csv'
+    dependency_csv_file_path = 'C:\\Users\\Robert Wan\\Desktop\\Dependencies.csv'
     user_dict = dict()
     attribute_dict = dict()
     dependency_dict = dict()
-    combined_attribute_csv_file_path = '/Users/wanlok/Desktop/Combined Attributes.csv'
+    combined_attribute_csv_file_path = 'C:\\Users\\Robert Wan\\Desktop\\Combined Attributes.csv'
     combined_attribute_csv_writer = csv_writer(combined_attribute_csv_file_path, mode='w')
     combined_attribute_csv_writer.writerow([])
     combined_attribute_csv_writer.writerow([])
-    combined_dependency_csv_file_path = '/Users/wanlok/Desktop/Combined Dependencies.csv'
+    combined_dependency_csv_file_path = 'C:\\Users\\Robert Wan\\Desktop\\Combined Dependencies.csv'
     combined_dependency_csv_writer = csv_writer(combined_dependency_csv_file_path, mode='w')
     i = 0
     for row in csv_reader(attribute_csv_file_path):
