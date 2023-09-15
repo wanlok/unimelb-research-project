@@ -335,18 +335,24 @@ def get_indexes():
 
 
 def get_indexes_2():
-
-    # cwes = get_column_title_and_values(34, True)[1]
-    # top_cwes = get_top_25_cwes()
-
+    cwe_list = get_column_title_and_values(34, True)[1]
+    top_cwes = get_top_25_cwes()
+    a_dict = get_aaa(get_owasp_cwe_dict())
 
     indexes = []
-    # for cwe in top_cwes:
-    #     indexes.append((cwe, list(map(lambda x: 'Yes' if x is not None and cwe in x else 'No', cwes))))
+    for top_cwe in top_cwes:
+        values = []
+        for cwes in cwe_list:
+            value = None
+            if cwes is not None:
+                value = 'Yes' if top_cwe in cwes else 'No'
+            values.append(value)
+        indexes.append((top_cwe, values))
 
     language_dict = one_hot_encoding(get_column_title_and_values(46)[1], percentage=0.8)
     for language in language_dict:
-        indexes.append((language, language_dict[language]))
+        key = f'{language.upper()} language'
+        indexes.append((key, language_dict[language]))
 
     indexes.extend([
         ('Object-oriented language', get_language_values(9)),
@@ -363,10 +369,9 @@ def get_indexes_2():
 
     package_manager_dict = get_package_manager_dict()
     for package_manager in package_manager_dict:
-        indexes.append((package_manager, repos(is_package_manager_used, package_manager_dict[package_manager])))
+        key = f'{package_manager} dependency'
+        indexes.append((key, repo_2(is_package_manager_used, package_manager_dict[package_manager])))
 
-    owasp_cwe_dict = get_owasp_cwe_dict()
-    a_dict = get_aaa(owasp_cwe_dict)
     for a in a_dict:
         indexes.append((a, a_dict[a]))
     return indexes
@@ -402,6 +407,20 @@ def get_grouped_x_and_y(x_values, name, index, location_dict):
     return x_values, y_title, y_values
 
 
+def insert_in_descending_order(row, column_index, rows):
+    if len(rows) == 0:
+        rows.append(row)
+    else:
+        inserted = False
+        for i in range(len(rows)):
+            if row[column_index] > rows[i][column_index]:
+                rows.insert(i, row)
+                inserted = True
+                break
+        if not inserted:
+            rows.append(row)
+
+
 def compute_spearman_level_1():
     table_1_rows = []
     table_2_rows = []
@@ -409,7 +428,9 @@ def compute_spearman_level_1():
     headers = ['Number of characters', 'Number of words', 'Number of paragraphs']
     x_indexes = [36, 37, 39]
     y_indexes = get_indexes()
-    corrected_alpha = ALPHA / (len(x_indexes) * len(y_indexes))
+    number_of_tests = (len(x_indexes) * len(y_indexes))
+    corrected_alpha = ALPHA / number_of_tests
+    ordered_rows = []
     for y_custom_title, y_index in y_indexes:
         p_values = []
         p_value_rejections = []
@@ -418,11 +439,16 @@ def compute_spearman_level_1():
             x_title, x_values = get_column_title_and_values(x_index)
             x_values, y_title, y_values = get_x_and_y(x_values, y_custom_title, y_index)
             rho, p_value = spearmanr(x_values, y_values)
+            sign = compute_spearman_sign(rho)
             p_values.append(f'{p_value}')
-            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
-            p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
+            if p_value < corrected_alpha:
+                p_value_rejection = 'Y'
+                row = [y_custom_title, x_title, sign, len(y_values), p_value, rho]
+                insert_in_descending_order(row, 5, ordered_rows)
+            else:
+                p_value_rejection = 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             rhos.append(f'{rho}')
-            print(f'"{x_title}","{y_title}","{y_custom_title}",{p_value},{p_value_rejection}')
             print(f'x_values: {len(x_values)} {x_values}')
             print(f'y_values: {len(y_values)} {y_values}')
         table_1_row = ','.join(p_values)
@@ -432,6 +458,8 @@ def compute_spearman_level_1():
         table_2_rows.append(f',"{y_custom_title}",{table_2_row}')
         table_3_rows.append(f',"{y_custom_title}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows, headers)
+    title_row = ['Repository Characteristic', 'Security Policy Category', 'Sign', 'Size', 'p-value', 'rho']
+    print_ordered_rows(ordered_rows, number_of_tests, title_row)
 
 
 def get_category_counts(category_set_list, category_name):
@@ -448,8 +476,10 @@ def compute_spearman_level_2():
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
+    table_4_rows = []
     indexes = get_indexes()
-    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    number_of_tests = len(indexes) * len(category_names)
+    corrected_alpha = ALPHA / number_of_tests
     _, category_set_list = get_column_title_and_values(2, True)
     for y_custom_title, y_index in indexes:
         p_values = []
@@ -458,9 +488,15 @@ def compute_spearman_level_2():
         for category_name in category_names:
             x_values, y_title, y_values = get_x_and_y(get_category_counts(category_set_list, category_name), y_custom_title, y_index)
             rho, p_value = spearmanr(x_values, y_values)
+            sign = compute_spearman_sign(rho)
             p_values.append(f'{p_value}')
-            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
-            p_value_rejections.append(f'"{p_value_rejection},{compute_spearman_sign(rho)}"')
+            if p_value < corrected_alpha:
+                p_value_rejection = 'Y'
+                row = [y_custom_title, category_name, sign, len(y_values), p_value, rho]
+                insert_in_descending_order(row, 5, table_4_rows)
+            else:
+                p_value_rejection = 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             rhos.append(f'{rho}')
             print(f'"{category_name}","{y_title}","{y_custom_title}",{p_value},{p_value_rejection}')
             print(f'x_values: {len(x_values)} {x_values}')
@@ -472,6 +508,8 @@ def compute_spearman_level_2():
         table_2_rows.append(f',"{y_custom_title}",{table_2_row}')
         table_3_rows.append(f',"{y_custom_title}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
+    title_row = ['Repository Characteristic', 'Security Policy Category', 'Sign', 'Size', 'p-value', 'rho']
+    print_ordered_rows(table_4_rows, number_of_tests, title_row)
 
 
 def group_and_filter_values(x_values, y_values, z_values, location_dict, index):
@@ -508,55 +546,6 @@ def set_location_dict(repo, location_dict):
     location_dict[repo] = get_security_policy_repo(repo)
 
 
-def compute_mann_whitney(grouped):
-    table_1_rows = []
-    table_2_rows = []
-    table_3_rows = []
-    indexes = get_indexes()
-    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
-    if grouped:
-        location_dict = dict()
-        repos(set_location_dict, location_dict)
-    for name, index in indexes:
-        p_values = []
-        p_value_rejections = []
-        effect_sizes = []
-        for category_name in category_names:
-            _, x_values = get_column_title_and_values(2, True)
-            y_title, y_values = get_index_title_and_values(name, index)
-            remove_invalid_values(x_values, y_values)
-            y_values = list(map(lambda x: int(x), y_values))
-
-            # if grouped:
-            #     x_values, y_title, y_values = get_grouped_x_and_y(x_values, name, index, location_dict)
-            # else:
-            #     x_values, y_title, y_values = get_x_and_y(x_values, name, index)
-
-
-            y_group = []
-            n_group = []
-            for i in range(len(x_values)):
-                if category_name in x_values[i]:
-                    y_group.append(y_values[i])
-                else:
-                    n_group.append(y_values[i])
-            p_value = stats.mannwhitneyu(y_group, n_group).pvalue
-            p_values.append(f'{p_value}')
-            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
-            p_value_rejections.append(f'"{p_value_rejection},{compute_group_sign(ALPHA, y_group, n_group)}"')
-            effect_sizes.append(f'{compute_mann_whitney_effect_size(y_group, n_group)}')
-            print(f'"{category_name}","{y_title}",{p_value},{p_value_rejection}')
-            print(f'YES: {len(y_group)} {y_group}')
-            print(f'NO: {len(n_group)} {n_group}')
-        table_1_row = ','.join(p_values)
-        table_2_row = ','.join(p_value_rejections)
-        table_3_row = ','.join(effect_sizes)
-        table_1_rows.append(f',"{name}",{table_1_row}')
-        table_2_rows.append(f',"{name}",{table_2_row}')
-        table_3_rows.append(f',"{name}",{table_3_row}')
-    print_tables(table_1_rows, table_2_rows, table_3_rows)
-
-
 def get_df(x_title, x_values, y_title, y_values):
     value_dict = dict()
     value_dict[('Yes', 'Yes')] = 0
@@ -588,65 +577,46 @@ def compute_odds_ratio_and_sign(df, x_title, y_title):
     return odds_ratio, sign
 
 
-def compute_fisher_exact():
+def compute_mann_whitney():
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
-    indexes = get_indexes_2()
-    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
-    ccc = 0
-    for name, y_values in indexes:
+    table_4_rows = []
+    indexes = get_indexes()
+    number_of_tests = len(indexes) * len(category_names)
+    corrected_alpha = ALPHA / number_of_tests
+    for name, index in indexes:
         p_values = []
         p_value_rejections = []
         effect_sizes = []
-        _, x_values = get_column_title_and_values(2, True)
-        remove_invalid_values(x_values, y_values)
         for category_name in category_names:
-            categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
-
-            # print(categories)
-            # print(y_values)
-
-            df = get_df(category_name, categories, name, y_values)
-            print(df)
-            a = fisher_exact(df.to_numpy())
-            b = compute_odds_ratio_and_sign(df, category_name, name)
-
-            print(f'AAAAA {a} BBBBB {b}')
-
-            p_value = a.pvalue
-            sign = b[1]
-            # # print(f'{category_name}')
-            # # if category_name == 'Reporting procedure':
-            # # print(expected_frequencies)
-            # # print(compute_chi_square_value(table, expected_frequencies, True))
-            # if table.shape == (2,2):
-            #     a = table['Yes']['Yes']
-            #     b = table['Yes']['No']
-            #     c = table['No']['Yes']
-            #     d = table['No']['No']
-            #     odds_ratio = (a * d) / (b * c)
-            #     if odds_ratio > 1:
-            #         sign = '+'
-            #     elif odds_ratio < 1:
-            #         sign = '-'
-            #     else:
-            #         sign = '='
-            # else:
-            #     sign = ''
-            # critical_value = chi2.ppf(1 - ALPHA, degrees_of_freedom)
-            # # print(chi2_value)
-            # cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
-            # expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
-            # chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
-            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
-            # print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
-            # # print(table.to_string())
-            # if expected_count_percentage < 0.8:
-            #     ccc = ccc + 1
+            _, x_values = get_column_title_and_values(2, True)
+            x_values = list(map(lambda x: list(x.keys()), x_values))
+            y_title, y_values = get_index_title_and_values(name, index)
+            remove_invalid_values(x_values, y_values)
+            y_values = list(map(lambda x: int(x), y_values))
+            y_group = []
+            n_group = []
+            for i in range(len(x_values)):
+                if category_name in x_values[i]:
+                    y_group.append(y_values[i])
+                else:
+                    n_group.append(y_values[i])
+            p_value = stats.mannwhitneyu(y_group, n_group).pvalue
+            sign = compute_group_sign(ALPHA, y_group, n_group)
+            effect_size = compute_mann_whitney_effect_size(y_group, n_group)
             p_values.append(f'{p_value}')
+            if p_value < corrected_alpha:
+                p_value_rejection = 'Y'
+                row = [name, category_name, sign, len(y_values), p_value, effect_size]
+                insert_in_descending_order(row, 5, table_4_rows)
+            else:
+                p_value_rejection = 'N'
             p_value_rejections.append(f'"{p_value_rejection},{sign}"')
-            effect_sizes.append(f'{b[0]}')
+            effect_sizes.append(f'{effect_size}')
+            print(f'"{category_name}","{y_title}",{p_value},{p_value_rejection}')
+            print(f'YES: {len(y_group)} {y_group}')
+            print(f'NO: {len(n_group)} {n_group}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(effect_sizes)
@@ -654,31 +624,37 @@ def compute_fisher_exact():
         table_2_rows.append(f',"{name}",{table_2_row}')
         table_3_rows.append(f',"{name}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
-    print(ccc)
+    title_row = ['Repository characteristic', 'Security policy category', 'Sign', 'Size', 'p-value', 'Effect size']
+    print_ordered_rows(table_4_rows, number_of_tests, title_row)
 
 
 def compute_chi_squared():
     table_1_rows = []
     table_2_rows = []
     table_3_rows = []
+    table_4_rows = []
     indexes = get_indexes_2()
-    corrected_alpha = ALPHA / (len(indexes) * len(category_names))
+    number_of_tests = len(indexes) * len(category_names)
+    corrected_alpha = ALPHA / number_of_tests
     ccc = 0
-    for name, y_values in indexes:
+
+    for name, values in indexes:
         p_values = []
         p_value_rejections = []
         effect_sizes = []
-        _, x_values = get_column_title_and_values(2, True)
-        remove_invalid_values(x_values, y_values)
-        for category_name in category_names:
-            categories = list(map(lambda x: 'Yes' if category_name in x else 'No', x_values))
-            table = pd.crosstab(categories, y_values)
+        for x_title in category_names:
+            _, x_values = get_column_title_and_values(2, True)
+            x_values = list(map(lambda x: 'Yes' if x_title in x else 'No', list(map(lambda x: list(x.keys()), x_values))))
+            y_title = name
+            y_values = [] + values
+            remove_invalid_values(x_values, y_values)
+            table = pd.crosstab(x_values, y_values)
 
             chi2_value, p_value, degrees_of_freedom, expected_frequencies = chi2_contingency(table, correction=True)
-            # print(f'{category_name}')
-            # if category_name == 'Reporting procedure':
-            # print(expected_frequencies)
-            # print(compute_chi_square_value(table, expected_frequencies, True))
+    #         # print(f'{category_name}')
+    #         # if category_name == 'Reporting procedure':
+    #         # print(expected_frequencies)
+    #         # print(compute_chi_square_value(table, expected_frequencies, True))
             if table.shape == (2,2):
                 a = table['Yes']['Yes']
                 b = table['Yes']['No']
@@ -694,18 +670,27 @@ def compute_chi_squared():
             else:
                 sign = ''
             critical_value = chi2.ppf(1 - ALPHA, degrees_of_freedom)
-            # print(chi2_value)
+    #         # print(chi2_value)
             cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
-            expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
-            chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
-            p_value_rejection = 'Y' if p_value < corrected_alpha else 'N'
-            print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
-            print(table.to_string())
-            if expected_count_percentage < 0.8:
-                ccc = ccc + 1
+            # expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
+            # chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
+            # print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
+    #         print(table.to_string())
+    #         if expected_count_percentage < 0.8:
+    #             ccc = ccc + 1
             p_values.append(f'{p_value}')
+            if p_value < corrected_alpha:
+                p_value_rejection = 'Y'
+                row = [y_title, x_title, sign, len(y_values), p_value, cramer_v]
+                insert_in_descending_order(row, 5, table_4_rows)
+            else:
+                p_value_rejection = 'N'
             p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             effect_sizes.append(f'{cramer_v}')
+            print(f'{x_title} {y_title}')
+            # print(table)
+            print(f'{len(x_values)} {x_values}')
+            print(f'{len(y_values)} {y_values}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(effect_sizes)
@@ -713,7 +698,54 @@ def compute_chi_squared():
         table_2_rows.append(f',"{name}",{table_2_row}')
         table_3_rows.append(f',"{name}",{table_3_row}')
     print_tables(table_1_rows, table_2_rows, table_3_rows)
-    print(ccc)
+    title_row = ['Repository characteristic', 'Security policy category', 'Sign', 'Size', 'p-value', 'Cramer\'s V']
+    print_ordered_rows(table_4_rows, number_of_tests, title_row)
+    # print(ccc)
+
+
+def compute_fisher_exact():
+    table_1_rows = []
+    table_2_rows = []
+    table_3_rows = []
+    table_4_rows = []
+    indexes = get_indexes_2()
+    number_of_tests = len(indexes) * len(category_names)
+    corrected_alpha = ALPHA / number_of_tests
+    for name, values in indexes:
+        p_values = []
+        p_value_rejections = []
+        effect_sizes = []
+        for x_title in category_names:
+            _, x_values = get_column_title_and_values(2, True)
+            x_values = list(map(lambda x: 'Yes' if x_title in x else 'No', list(map(lambda x: list(x.keys()), x_values))))
+            y_title = name
+            y_values = [] + values
+            remove_invalid_values(x_values, y_values)
+            df = get_df(x_title, x_values, y_title, y_values)
+            odds_ratio, sign = compute_odds_ratio_and_sign(df, x_title, y_title)
+            p_value = fisher_exact(df.to_numpy()).pvalue
+            p_values.append(f'{p_value}')
+            if p_value < corrected_alpha:
+                p_value_rejection = 'Y'
+                row = [y_title, x_title, sign, len(y_values), p_value, odds_ratio]
+                insert_in_descending_order(row, 5, table_4_rows)
+            else:
+                p_value_rejection = 'N'
+            p_value_rejections.append(f'"{p_value_rejection},{sign}"')
+            effect_sizes.append(f'{odds_ratio}')
+            # print(f'{x_title} {y_title}')
+            # print(f'{len(x_values)} {x_values}')
+            # print(f'{len(y_values)} {y_values}')
+            print(df)
+        table_1_row = ','.join(p_values)
+        table_2_row = ','.join(p_value_rejections)
+        table_3_row = ','.join(effect_sizes)
+        table_1_rows.append(f',"{name}",{table_1_row}')
+        table_2_rows.append(f',"{name}",{table_2_row}')
+        table_3_rows.append(f',"{name}",{table_3_row}')
+    print_tables(table_1_rows, table_2_rows, table_3_rows)
+    title_row = ['Repository characteristic', 'Security policy category', 'Sign', 'Size', 'p-value', 'Odds ratio']
+    print_ordered_rows(table_4_rows, number_of_tests, title_row)
 
 
 def print_tables(table_1_rows, table_2_rows, table_3_rows, headers=category_names):
@@ -733,13 +765,88 @@ def print_tables(table_1_rows, table_2_rows, table_3_rows, headers=category_name
         print(line)
 
 
+def abcde(value):
+    ccc = []
+    decimal_index = -1
+    non_zero_started = False
+    non_zero_count = 0
+    count = 0
+    aaa = '{:f}'.format(value)
+    for i in range(len(aaa)):
+        c = aaa[i]
+        if decimal_index > -1:
+            ccc.append(c)
+        if c == '.':
+            decimal_index = i
+        elif decimal_index > -1 and c != '0':
+            non_zero_started = True
+        if non_zero_started:
+            count = count + 1
+            if c != '0':
+                non_zero_count = non_zero_count + 1
+                if count >= 3:
+                    break
+    if non_zero_count < 2:
+        if 'e-' in f'{value}':
+            slices = f'{value}'.split('e-')
+            ccc = f'{slices[0][:5]}e-{slices[1]}'
+        else:
+            ccc = f'{value}'
+    else:
+        count = 0
+        for c in reversed(ccc):
+            if c == '0':
+                count = count + 1
+            else:
+                break
+        if count > 0:
+            ccc = ccc[:-count]
+        ccc = f''.join(ccc)
+        before_decimal = aaa[:decimal_index]
+        if before_decimal == '0':
+            ccc = f'.{ccc}'
+        else:
+            ccc = f'{before_decimal}.{ccc}'
+    return ccc
+
+
+def print_ordered_rows(ordered_rows, number_of_tests, title_row=None):
+    print()
+    print(f'{len(ordered_rows)} {number_of_tests}')
+    print()
+    if title_row is not None:
+        title_row = list(map(lambda x: f'"{x}"', title_row))
+        title_row = ','.join(title_row)
+        print(f',"#",{title_row}')
+    count = 0
+    for i in range(len(ordered_rows)):
+        category = ordered_rows[i][1].lower()
+        if category != '':
+            values = ','.join([
+                f'"{ordered_rows[i][0]}"',
+                f'"{ordered_rows[i][1]}"',
+                f'"{ordered_rows[i][2]}"',
+                f'"{ordered_rows[i][3]}"',
+                f'"{abcde(ordered_rows[i][4])}"',
+                f'"{abcde(ordered_rows[i][5])}"'
+            ])
+            count = count + 1
+            print(f',"{count}",{values}')
+            # if count == 10:
+            #     break
+
+
+def filter_invalid_repos(repo, value):
+    invalid_repos = ['iofinnet/tss-lib', 'iofinnet,root,0']
+    return None if repo in invalid_repos else value
+
+
 def get_dict_value(repo, repo_dict, key):
     value = f'0'
     category_dict = repo_dict[repo]
     if key in category_dict:
         value = f'{category_dict[key]}'
-    invalid_repos = ['iofinnet/tss-lib']
-    return None if repo in invalid_repos else value
+    return filter_invalid_repos(repo, value)
 
 
 def get_name_vector(names):
@@ -978,7 +1085,7 @@ def get_top_25_cwes():
     top_25_cwes = set()
     for column_index in range(1,5):
         i = 0
-        for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\CWE Rankings.csv'):
+        for row in csv_reader('/Users/wanlok/Desktop/CWE Rankings.csv'):
             if i > 0:
                 top_25_cwes.add(row[column_index])
             i = i + 1
@@ -1006,10 +1113,13 @@ def one_hot_encoding(item_list, as_list=False, percentage=1):
     for column in columns:
         values = []
         for items in item_list:
-            if column in items:
-                values.append('Yes')
+            if len(items) > 0:
+                if column in items:
+                    values.append('Yes')
+                else:
+                    values.append('No')
             else:
-                values.append('No')
+                values.append(None)
         column_dict[column] = values
     return column_dict
 
@@ -1018,7 +1128,7 @@ def get_language_values(column_index):
     values = []
     value_dict = dict()
     i = 0
-    file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\language_paradigm.csv'
+    file_path = '/Users/wanlok/Desktop/language_paradigm.csv'
     for row in csv_reader(file_path):
         if i > 0:
             language = row[0].lower()
@@ -1123,21 +1233,41 @@ def validation():
 
 
 def is_package_manager_used(repo, b):
-    exists = 'No'
+    value = 'No'
     for bb in b:
         if bb[0] == repo:
-            exists = 'Yes'
+            value = 'Yes'
             break
-    return exists
+    return filter_invalid_repos(repo, value)
 
 
 def get_package_manager_count(repo, b):
-    count = f'0'
+    value = f'0'
     for bb in b:
         if bb[0] == repo:
-            count = f'{len(bb[1])}'
+            value = f'{len(bb[1])}'
             break
-    return count
+    return filter_invalid_repos(repo, value)
+
+
+def extract_top():
+    l = [
+        ('Spearman', '/Users/wanlok/Desktop/20230914/Completed/Spearman.csv'),
+        ('Spearman', '/Users/wanlok/Desktop/20230914/Completed/Spearman Grouped.csv'),
+        ('Mann', '/Users/wanlok/Desktop/20230914/Completed/Mann.csv'),
+        ('Mann', '/Users/wanlok/Desktop/20230914/Completed/Mann Grouped.csv'),
+        ('Chi', '/Users/wanlok/Desktop/20230914/Completed/Chi.csv'),
+        ('Chi', '/Users/wanlok/Desktop/20230914/Completed/Chi Grouped.csv'),
+        ('Fisher', '/Users/wanlok/Desktop/20230914/Completed/Fisher.csv'),
+        ('Fisher', '/Users/wanlok/Desktop/20230914/Completed/Fisher Grouped.csv')
+    ]
+    for category_name in category_names:
+        for test_name, csv_file_path in l:
+            for row in csv_reader(csv_file_path):
+                if len(row) >= 4 and row[3] == category_name and row[3].lower() != 'empty':
+                    line = ','.join(row[4:])
+                    print(f'{test_name},{row[2]},{row[3]},{line}')
+        # print()
 
 
 if __name__ == '__main__':
@@ -1168,17 +1298,29 @@ if __name__ == '__main__':
 
     # compute_all_data_normality()
     # compute_spearman_level_1()
-    compute_spearman_level_2()
-    # compute_mann_whitney(True)
-    # compute_fisher_exact()
+    # compute_spearman_level_2()
+    # compute_mann_whitney()
     # compute_chi_squared()
+    # compute_fisher_exact()
+
     # validation()
 
-    # package_manager_dict = get_package_manager_dict()
-    # for package_manager in package_manager_dict:
-    #     a = repos(get_package_manager_count, package_manager_dict[package_manager])
-        # print(a)
+    extract_top()
 
+    # list = []
+    # row_1 = [3, 1, 4, 6]
+    # row_2 = [2, 8, 2, 2]
+    # row_3 = [1, 2, 6, 7]
+    # row_4 = [7, 4, 3, 8]
+    # row_5 = [6, 8, 9, 8]
+    # column_index = 0
+    # insert_in_descending_order(row_1, column_index, list)
+    # insert_in_descending_order(row_2, column_index, list)
+    # insert_in_descending_order(row_3, column_index, list)
+    # insert_in_descending_order(row_4, column_index, list)
+    # insert_in_descending_order(row_5, column_index, list)
+    # for item in list:
+    #     print(item)
 
 
 
