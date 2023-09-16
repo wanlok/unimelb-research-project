@@ -182,9 +182,18 @@ path_issue_count = '/data/repository/issues/totalCount'
 path_issue_next_page = '/data/repository/issues/pageInfo/hasNextPage'
 path_issue_cursor = '/data/repository/issues/pageInfo/endCursor'
 
+path_pull_request_list = '/data/repository/pullRequests/edges'
+path_pull_request_count = '/data/repository/pullRequests/totalCount'
+path_pull_request_next_page = '/data/repository/pullRequests/pageInfo/hasNextPage'
+path_pull_request_cursor = '/data/repository/pullRequests/pageInfo/endCursor'
+
 
 def post_graphql(graphql):
-    return requests.post('https://api.github.com/graphql', json={'query': graphql}, headers=headers).json()
+    try:
+        return requests.post('https://api.github.com/graphql', json={'query': graphql}, headers=headers).json()
+    except requests.exceptions.RequestException as e:
+        print('retry')
+        return post_graphql(graphql)
 
 
 def parse_result_dict(all_set, current_depth, path, data, result_dict):
@@ -572,6 +581,44 @@ def combine_aaa():
     file.close()
 
 
+pull_request_graphql = '''
+query {
+    repository(owner: "{1}", name: "{2}") {
+        pullRequests(first: 100{AFTER}) {
+            totalCount
+            edges {
+                node {
+                    createdAt
+                }
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+            }
+        }
+    }
+}
+'''
+
+
+def download_pull_requests(repo):
+    slices = repo.split('/')
+    owner = slices[0]
+    project = slices[1]
+    directory_path = f'C:\\Files\\Projects\\Pull Requests\\'
+    file_name = repo.replace('/', '_')
+    file_name = f'{file_name}.txt'
+    if file_name not in os.listdir(directory_path):
+        print(repo)
+        pull_request_list, cursor = get_list(
+                                        pull_request_graphql.replace('{1}', owner).replace('{2}', project),
+                                        path_pull_request_list,
+                                        path_pull_request_next_page,
+                                        path_pull_request_cursor,
+                                        path_pull_request_count
+                                    )
+        with open(f'{directory_path}{file_name}', 'w', encoding='utf-8') as f:
+            f.write(f'{pull_request_list}')
 
 
 if __name__ == '__main__':
@@ -593,4 +640,5 @@ if __name__ == '__main__':
     #
     # text_file.close()
     # dumm('iofinnet/tss-lib')
-    combine_aaa()
+    # combine_aaa()
+    repos(download_pull_requests)
