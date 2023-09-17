@@ -608,7 +608,13 @@ def download_pull_requests(repo):
     directory_path = f'C:\\Files\\Projects\\Pull Requests\\'
     file_name = repo.replace('/', '_')
     file_name = f'{file_name}.txt'
-    if file_name not in os.listdir(directory_path):
+    if file_name in os.listdir(directory_path):
+        with open(f'{directory_path}{file_name}') as f:
+            lines = f.readlines()
+            download_needed = len(lines) > 0 and lines[0] == '[]'
+    else:
+        download_needed = True
+    if download_needed:
         print(repo)
         pull_request_list, cursor = get_list(
                                         pull_request_graphql.replace('{1}', owner).replace('{2}', project),
