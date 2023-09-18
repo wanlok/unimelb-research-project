@@ -187,6 +187,11 @@ path_pull_request_count = '/data/repository/pullRequests/totalCount'
 path_pull_request_next_page = '/data/repository/pullRequests/pageInfo/hasNextPage'
 path_pull_request_cursor = '/data/repository/pullRequests/pageInfo/endCursor'
 
+path_commit_list = '/data/repository/defaultBranchRef/target/history/edges'
+path_commit_count = '/data/repository/defaultBranchRef/target/history/totalCount'
+path_commit_next_page = '/data/repository/defaultBranchRef/target/history/pageInfo/hasNextPage'
+path_commit_cursor = '/data/repository/defaultBranchRef/target/history/pageInfo/endCursor'
+
 
 def post_graphql(graphql):
     try:
@@ -601,11 +606,36 @@ query {
 '''
 
 
-def download_pull_requests(repo):
-    slices = repo.split('/')
-    owner = slices[0]
-    project = slices[1]
-    directory_path = f'C:\\Files\\Projects\\Pull Requests\\'
+commit_graphql = '''
+query {
+    repository(owner: "{1}", name: "{2}") {
+        defaultBranchRef {
+            target {
+                ... on Commit {
+                    history(first: 100{AFTER}) {
+                        totalCount
+                        edges {
+                            node {
+                                committedDate
+                                author {
+                                    email
+                                }
+                            }
+                        }
+                        pageInfo {
+                            endCursor
+                            hasNextPage
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+'''
+
+
+def download(repo, directory_path, graphql, path_list, path_next_page, path_cursor, path_count):
     file_name = repo.replace('/', '_')
     file_name = f'{file_name}.txt'
     if file_name in os.listdir(directory_path):
@@ -615,16 +645,19 @@ def download_pull_requests(repo):
     else:
         download_needed = True
     if download_needed:
+        slices = repo.split('/')
+        owner = slices[0]
+        project = slices[1]
         print(repo)
-        pull_request_list, cursor = get_list(
-                                        pull_request_graphql.replace('{1}', owner).replace('{2}', project),
-                                        path_pull_request_list,
-                                        path_pull_request_next_page,
-                                        path_pull_request_cursor,
-                                        path_pull_request_count
-                                    )
+        data, cursor = get_list(
+            graphql.replace('{1}', owner).replace('{2}', project),
+            path_list,
+            path_next_page,
+            path_cursor,
+            path_count
+        )
         with open(f'{directory_path}{file_name}', 'w', encoding='utf-8') as f:
-            f.write(f'{pull_request_list}')
+            f.write(f'{data}')
 
 
 if __name__ == '__main__':
@@ -647,4 +680,14 @@ if __name__ == '__main__':
     # text_file.close()
     # dumm('iofinnet/tss-lib')
     # combine_aaa()
-    repos(download_pull_requests)
+    # repos(download_pull_requests, 'C:\\Files\\Commits\\')
+
+    repos(
+        download,
+        'C:\\Files\\Projects\\Commits\\',
+        commit_graphql,
+        path_commit_list,
+        path_commit_next_page,
+        path_commit_cursor,
+        path_commit_count
+    )
