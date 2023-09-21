@@ -2,6 +2,7 @@ import os
 
 import requests
 
+from document.rq3 import get_user_dict
 from repository import headers
 from utils import csv_reader, csv_writer, repos
 
@@ -191,6 +192,11 @@ path_commit_list = '/data/repository/defaultBranchRef/target/history/edges'
 path_commit_count = '/data/repository/defaultBranchRef/target/history/totalCount'
 path_commit_next_page = '/data/repository/defaultBranchRef/target/history/pageInfo/hasNextPage'
 path_commit_cursor = '/data/repository/defaultBranchRef/target/history/pageInfo/endCursor'
+
+path_user_repo_list = '/data/organization/repositories/edges'
+path_user_repo_count = '/data/organization/repositories/totalCount'
+path_user_repo_next_page = '/data/organization/repositories/pageInfo/hasNextPage'
+path_user_repo_cursor = '/data/organization/repositories/pageInfo/endCursor'
 
 
 def post_graphql(graphql):
@@ -634,12 +640,32 @@ query {
 }
 '''
 
+user_repo_graphql = '''
+query {
+    organization(login: "{1}") {
+        repositories(first: 100{AFTER}) {
+            totalCount
+            edges {
+                node {
+                    name
+                    createdAt
+                }
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+            }
+        }
+    }
+}
+'''
+
 
 def download(repo, directory_path, graphql, path_list, path_next_page, path_cursor, path_count):
     file_name = repo.replace('/', '_')
     file_name = f'{file_name}.txt'
     if file_name in os.listdir(directory_path):
-        with open(f'{directory_path}{file_name}') as f:
+        with open(f'{directory_path}{file_name}', encoding='utf-8') as f:
             lines = f.readlines()
             download_needed = len(lines) > 0 and lines[0] == '[]'
     else:
@@ -658,6 +684,34 @@ def download(repo, directory_path, graphql, path_list, path_next_page, path_curs
         )
         with open(f'{directory_path}{file_name}', 'w', encoding='utf-8') as f:
             f.write(f'{data}')
+
+
+def user_download(user, directory_path, graphql, path_list, path_next_page, path_cursor, path_count):
+    print(user)
+    file_name = f'{user}.txt'
+    if file_name in os.listdir(directory_path):
+        with open(f'{directory_path}{file_name}', encoding='utf-8') as f:
+            lines = f.readlines()
+            download_needed = len(lines) > 0 and lines[0] == '[]'
+    else:
+        download_needed = True
+    if download_needed:
+        data, cursor = get_list(
+            graphql.replace('{1}', user),
+            path_list,
+            path_next_page,
+            path_cursor,
+            path_count
+        )
+        with open(f'{directory_path}{file_name}', 'w', encoding='utf-8') as f:
+            f.write(f'{data}')
+
+
+def print_paths(graphql):
+    graphql = graphql.replace('{AFTER}', '')
+    result_dict = get_result_dict(graphql, post_graphql(graphql))
+    for path in result_dict:
+        print(path)
 
 
 if __name__ == '__main__':
@@ -691,3 +745,15 @@ if __name__ == '__main__':
         path_commit_cursor,
         path_commit_count
     )
+
+    # user_dict = get_user_dict()
+    # for user in user_dict:
+    #     user_download(
+    #         user,
+    #         'C:\\Files\\Projects\\User Repositories\\',
+    #         user_repo_graphql,
+    #         path_user_repo_list,
+    #         path_user_repo_next_page,
+    #         path_user_repo_cursor,
+    #         path_user_repo_count
+    #     )
