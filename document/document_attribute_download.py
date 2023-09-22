@@ -2,7 +2,7 @@ import os
 
 import requests
 
-from document.rq3 import get_user_dict
+from document.rq3 import get_user_dict, get_relevant_repos
 from repository import headers
 from utils import csv_reader, csv_writer, repos
 
@@ -660,6 +660,115 @@ query {
 }
 '''
 
+security_md_graphql = '''
+query {
+    parent: repository(owner:"{1}", name:".github") {
+        defaultBranchRef {
+            target {
+                ... on Commit {
+                    root: history(path: "SECURITY.md") {
+                        edges {
+                            node {
+                                oid
+                                committedDate
+                                committedViaWeb
+                                author {
+                                    email
+                                    user {
+                                        login
+                                    }
+                                }
+                                file(path: "SECURITY.md") {
+                                   object {
+                                       ... on Blob {
+                                           text
+                                       }
+                                   }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    self: repository(owner:"{1}", name:"{2}") {
+        defaultBranchRef {
+            target {
+                ... on Commit {
+                    root: history(path: "SECURITY.md") {
+                        edges {
+                            node {
+                                oid
+                                committedDate
+                                committedViaWeb
+                                author {
+                                    email
+                                    user {
+                                        login
+                                    }
+                                }
+                                file(path: "SECURITY.md") {
+                                   object {
+                                       ... on Blob {
+                                           text
+                                       }
+                                   }
+                                }
+                            }
+                        }
+                    },
+                    github: history(path: ".github/SECURITY.md") {
+                        edges {
+                            node {
+                                oid
+                                committedDate
+                                committedViaWeb
+                                author {
+                                    email
+                                    user {
+                                        login
+                                    }
+                                }
+                                file(path: ".github/SECURITY.md") {
+                                   object {
+                                       ... on Blob {
+                                           text
+                                       }
+                                   }
+                                }
+                            }
+                        }
+                    },
+                    docs: history(path: "docs/SECURITY.md") {
+                        edges {
+                            node {
+                                oid
+                                committedDate
+                                author {
+                                    email
+                                    user {
+                                        login
+                                    }
+                                }
+                                file(path: "docs/SECURITY.md") {
+                                   object {
+                                       ... on Blob {
+                                           text
+                                       }
+                                   }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+'''
+
+
 
 def download(repo, directory_path, graphql, path_list, path_next_page, path_cursor, path_count):
     file_name = repo.replace('/', '_')
@@ -707,11 +816,34 @@ def user_download(user, directory_path, graphql, path_list, path_next_page, path
             f.write(f'{data}')
 
 
-def print_paths(graphql):
+def download_3(repo, directory_path):
+    file_name = repo.replace('/', '_')
+    file_name = f'{file_name}.txt'
+    if file_name in os.listdir(directory_path):
+        with open(f'{directory_path}{file_name}', encoding='utf-8') as f:
+            lines = f.readlines()
+            download_needed = len(lines) > 0 and lines[0] == '[]'
+    else:
+        download_needed = True
+    if download_needed:
+        slices = repo.split('/')
+        owner = slices[0]
+        project = slices[1]
+        graphql = security_md_graphql.replace('{1}', owner).replace('{2}', project)
+        data = get_result_dict(graphql, post_graphql(graphql))
+        print(f'{repo} {data}')
+        with open(f'{directory_path}{file_name}', 'w', encoding='utf-8') as f:
+            f.write(f'{data}')
+
+
+def print_paths(graphql, show_details=False):
     graphql = graphql.replace('{AFTER}', '')
     result_dict = get_result_dict(graphql, post_graphql(graphql))
     for path in result_dict:
-        print(path)
+        if show_details:
+            print(f'{path} {result_dict[path]}')
+        else:
+            print(f'{path}')
 
 
 if __name__ == '__main__':
@@ -736,15 +868,15 @@ if __name__ == '__main__':
     # combine_aaa()
     # repos(download_pull_requests, 'C:\\Files\\Commits\\')
 
-    repos(
-        download,
-        'C:\\Files\\Projects\\Commits\\',
-        commit_graphql,
-        path_commit_list,
-        path_commit_next_page,
-        path_commit_cursor,
-        path_commit_count
-    )
+    # repos(
+    #     download,
+    #     'C:\\Files\\Projects\\Commits\\',
+    #     commit_graphql,
+    #     path_commit_list,
+    #     path_commit_next_page,
+    #     path_commit_cursor,
+    #     path_commit_count
+    # )
 
     # user_dict = get_user_dict()
     # for user in user_dict:
@@ -757,3 +889,8 @@ if __name__ == '__main__':
     #         path_user_repo_cursor,
     #         path_user_repo_count
     #     )
+
+    # print_paths(security_md_graphql.replace('{1}','tensorflow').replace('{2}','tensorflow'))
+
+    for repo in get_relevant_repos():
+        download_3(repo, 'C:\\Files\\Projects\\Other Security Policies\\')
