@@ -8,13 +8,16 @@ import pandas as pd
 import numpy as np
 from Levenshtein import distance
 from matplotlib import pyplot as plt
+from numpy import average, median
 from scipy.spatial.distance import squareform
 from sklearn.cluster import AgglomerativeClustering
 import scipy.cluster.hierarchy as sch
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import silhouette_score
 
+from chart import box_plot
 from document.document_utils import get_docx_content, get_headers_and_paragraphs
-from utils import csv_writer, csv_reader, get_repo_and_path, sort_by_ascending_keys, repos
+from utils import csv_writer, csv_reader, get_repo_and_path, sort_by_ascending_keys, repos, get_latest_content
 
 from scipy.cluster.hierarchy import ClusterWarning
 from warnings import simplefilter
@@ -22,7 +25,7 @@ simplefilter("ignore", ClusterWarning)
 
 csv_file_path = f'C:\\Files\\zzz.csv'
 
-directory_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Step 1\\'
+directory_path = 'C:\\Users\\Robert Wan\\Desktop\\Step 1\\'
 # directory_path_2 = 'C:\\Users\\WAN Tung Lok\\Desktop\\Step 2\\'
 
 
@@ -785,20 +788,28 @@ def get_clusters(user, location, contents):
     return clusters
 
 
-def rq2_ahc_results(repo, my_set):
+def rq2_ahc_results(repo, my_set, my_dict):
     file_name = repo.replace('/', '_')
     file_name = f'{file_name}.docx'
     for m in my_set:
         if m[0] == file_name:
-            # print(m)
-            print(f'{repo},{m[1]},{m[2]},{m[3]},{m[4]}')
+    #         #             # print(m)
+            user = m[1]
+
+            cluster = m[3] + 1
+            print(f'"{repo}","{user},{m[2]},{cluster}",{m[4]}')
+            if cluster in my_dict:
+                my_dict[cluster].add(user)
+            else:
+                my_dict[cluster] = {user}
             break
 
 
 def rq2_ahc():
     my_set = set()
+    my_dict = dict()
     for user in get_users():
-        # if user == 'google':
+        # if user in ['alibaba', 'microsoft', 'google']:
         if True:
             names = get_names(user=user)
             contents = get_contents(names, show_path=False)
@@ -814,7 +825,9 @@ def rq2_ahc():
             my_set.update(root_clusters)
             my_set.update(github_clusters)
             my_set.update(docs_clusters)
-    repos(rq2_ahc_results, my_set)
+    repos(rq2_ahc_results, my_set, my_dict)
+    for user in my_dict:
+        print(f'{user} {len(my_dict[user])}')
 
 
 def copy_file(file_name):
@@ -1274,6 +1287,152 @@ def rq2_2():
 #     # print('DONE')
 
 
+
+
+
+
+def ahc_eval(documents):
+    # Example text data
+    print(f'LENGTH: {len(documents)}')
+    # documents = [
+    #     "This is document 1.",
+    #     "The second document is here.",
+    #     "Document number three is short.",
+    #     "A longer document for clustering example.",
+    #     "Fifth document with some content.",
+    #     "The sixth document has text data.",
+    #     "Document 7 is part of the dataset.",
+    #     "Eighth document with varying text.",
+    #     "Ninth document in the collection.",
+    #     "The tenth and final document."
+    # ]
+
+    # Convert text data to TF-IDF features
+    tfidf_vectorizer = TfidfVectorizer()
+    tfidf_matrix = tfidf_vectorizer.fit_transform(documents)
+
+    # Perform hierarchical clustering
+    Z = sch.linkage(tfidf_matrix.toarray(), method='ward')
+
+    # Determine the number of clusters by cutting the dendrogram
+    k = 2
+    cluster_labels = sch.fcluster(Z, k, criterion='maxclust')
+
+    # Calculate the Silhouette Score
+    silhouette_avg = silhouette_score(tfidf_matrix, cluster_labels)
+
+    print("Silhouette Score:", silhouette_avg)
+
+    # Visualize the dendrogram (optional)
+    # plt.figure(figsize=(10, 6))
+    # dendrogram(Z)
+    # plt.show()
+
+
+
+def ahc_evaluation():
+    i = 0
+    user_dict = dict()
+    user_location_cluster_dict = dict()
+    for row in csv_reader('C:\\Users\\Robert Wan\\Desktop\\clusters.csv'):
+        repo, user, location, cluster, _ = row
+        t = (location, cluster)
+        u = (user, location, cluster)
+        if user in user_dict:
+            user_dict[user].add(t)
+        else:
+            user_dict[user] = {t}
+        if u in user_location_cluster_dict:
+            user_location_cluster_dict[u].append(repo)
+        else:
+            user_location_cluster_dict[u] = [repo]
+    data = []
+    user_dict_2 = dict()
+    for u in user_location_cluster_dict:
+        if len(user_location_cluster_dict[u]) > 1:
+            # print(f'{u} {len(user_location_cluster_dict[u])}')
+            data.append(len(user_location_cluster_dict[u]))
+        user = u[0]
+        if user in user_dict_2:
+            user_dict_2[user] = user_dict_2[user] + 1
+        else:
+            user_dict_2[user] = 1
+    # print(f'{data}')
+    # print(f'{average(data)} {median(data)}')
+    # box_plot([data], 'W:\\My Drive\\UniMelb\\Research Project\\Diagrams\\RQ2\\Number of security policies in clusters.png')
+    # j = 0
+    # for user in user_dict_2:
+    #     key = user_dict_2[user]
+    #     if key == 1:
+    #         count = 0
+    #         for key_1 in user_location_cluster_dict:
+    #             if user == key_1[0]:
+    #                 count = count + len(user_location_cluster_dict[key_1])
+    #         if count > 1:
+    #             j = j + 1
+    # print(j)
+    count_dict = dict()
+    for user in user_dict:
+        key = len(user_dict[user])
+        t = (user, user_dict[user])
+        # print(f'{user} |{key}| {user_dict[user]}')
+        if key in count_dict:
+            count_dict[key].append(t)
+        else:
+            count_dict[key] = [t]
+    aaa_count = dict()
+    for count in count_dict:
+        for aaa in count_dict[count]:
+            for i in aaa[1]:
+                if i in aaa_count:
+                    aaa_count[i].append(aaa)
+                else:
+                    aaa_count[i] = [aaa]
+    # for i in aaa_count:
+    #     print(f'{i} {len(aaa_count[i])} {aaa_count[i]}')
+    #     print(f'{i[0]},{i[1]},{len(aaa_count[i])}')
+    i = 0
+    # for user in user_dict:
+    #     # if len(user_dict[user]) == 2:
+    #     #     all_zero = True
+    #         # for j in user_dict[user]:
+    #         #     if j[1] != '0':
+    #         #         all_zero = False
+    #         #     if j[0] not in ['root', 'github']:
+    #         #         all_zero = False
+    #         # if all_zero:
+    #     i = i + 1
+    #     print(f'{i} {user} {user_dict[user]}')
+    # for count in count_dict:
+    #     print(f'{count},{count_dict[count]}')
+    results = []
+    for location_cluster in aaa_count:
+        bbb = []
+        for c in aaa_count[location_cluster]:
+            user, location_cluster_list = c
+            location, cluster = list(filter(lambda x: x == location_cluster, location_cluster_list))[0]
+            bbb.append((user, location, cluster))
+        results.append((location_cluster, bbb))
+    # my_dict = dict()
+    # repos(hihi, my_dict)
+    # i = 0
+    # for user in my_dict:
+    #     if len(my_dict[user]) == 1:
+    #         print(my_dict[user])
+    #         i = i + 1
+    # print(i)
+    return user_location_cluster_dict, results
+
+
+def hihi(repo, my_dict):
+    slices = repo.split('/')
+    user = slices[0].lower()
+    if user in my_dict:
+        my_dict[user].append(repo)
+    else:
+        my_dict[user] = [repo]
+
+
 if __name__ == '__main__':
 
     # rq2_2()
@@ -1283,7 +1442,31 @@ if __name__ == '__main__':
     # rq2_ahc()
     # rq2_general()
 
-    rq2_combine_clusters()
+    # rq2_combine_clusters()
+
+    user_location_cluster_dict, location_cluster_list = ahc_evaluation()
+
+    for a in location_cluster_list:
+        print(f'{a[0]} {len(a[1])} {a[1]}')
+        should_break = False
+        for b in a[1]:
+            repo_list = user_location_cluster_dict[b]
+            content_dict = dict()
+            for repo in repo_list:
+                file_name = repo.replace('/', '_')
+                file_path = f'C:\\Files\\security policies\\{file_name}.csv'
+                content = get_latest_content(file_path)
+                if content in content_dict:
+                    content_dict[content].append(file_name)
+                else:
+                    content_dict[content] = [file_name]
+
+
+            # print(contents)
+            # ahc_eval(contents)
+        # if should_break:
+        #     break
+
 
     # dict_1 = {'A': {'A', 'B'}}
     # dict_2 = {'A': {'A', 'B', 'C', 'D'}}

@@ -5,10 +5,14 @@ import os
 import statistics
 import sys
 
+import numpy as np
+import statsmodels.api as sm
 import pandas as pd
 from scipy import stats
+from scipy.constants import pt
 from scipy.stats import spearmanr, skew, pointbiserialr, chi2_contingency, chi2, fisher_exact
 
+from chart import ci_plot
 from dependency import get_package_manager_dict, get_repo_xx
 from document.document_categorisation_all import get_repo_categorisation_results
 from document.document_utils import category_names
@@ -153,12 +157,86 @@ def q(x, y, file_path):
     return spearmanr(x_values, y_values)
 
 
-def compute_data_normality(x):
-    if type(x) == tuple:
-        title, values = get_column_title_and_values(*x)
+def aaa(column_index):
+    title, values = get_column_title_and_values(column_index)
+    values = list(map(lambda x: int(x) if x is not None and len(x) > 0 else 0, values))
+    compute_data_normality(title, values)
+
+
+def bbb(column_index):
+    title, values = get_column_title_and_values(column_index, True, True)
+    values = list(map(lambda x: int(x) if x is not None and len(x) > 0 else 0, values))
+    # print((title, len(values), values))
+    compute_data_normality(title, values)
+
+
+def ccc():
+    title, values = get_column_title_and_values(50)
+    today = datetime.datetime.now()
+    days = []
+    for value in values:
+        if len(value) > 0:
+            date_time = datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M:%SZ')
+            days.append((today - date_time).days)
+        else:
+            days.append(0)
+    # print((title, len(days), days))
+    compute_data_normality(title, days)
+
+
+def ddd():
+    counts = []
+    for row in csv_reader('C:\\Users\\Robert Wan\\Desktop\\Dependencies.csv'):
+        if len(row[1]) > 0:
+            dependency_dict = eval(row[1])
+            count = 0
+            for manager in dependency_dict:
+                if manager != 'ACTIONS':
+                    count = count + len(dependency_dict[manager])
+            counts.append(count)
+        else:
+            counts.append(0)
+    compute_data_normality('Dependency', counts)
+
+
+def eee():
+    my_dict = get_owasp_cwe_dict()
+    title, repo_cwes = get_column_title_and_values(34, True, False)
+    values = []
+    for cwes in repo_cwes:
+        my_set = set()
+        if cwes is not None:
+            for cwe in cwes:
+                if cwe in my_dict:
+                    for owasp in my_dict[cwe]:
+                        my_set.add(owasp)
+        values.append(len(my_set))
+    compute_data_normality('OWASP top ten', values)
+
+
+
+def fff_2(repo, security_advisory_dict):
+    if repo in security_advisory_dict:
+        count = len(security_advisory_dict[repo])
     else:
-        title, values = get_column_title_and_values(x)
-    values = list(filter(lambda x: type(x) == int, values))
+        count = 0
+    return count
+
+
+def fff():
+    security_advisory_dict = dict()
+    for row in csv_reader('C:\\Files\\Projects\\unimelb-research-project\\security_advisory.csv'):
+        repo = row[1]
+        date_time = row[2]
+        if repo in security_advisory_dict:
+            security_advisory_dict[repo].append(date_time)
+        else:
+            security_advisory_dict[repo] = [date_time]
+    counts = repos(fff_2, security_advisory_dict)
+    compute_data_normality('Security advisory', counts)
+
+
+def compute_data_normality(title, values):
     number_of_values = len(values)
     if number_of_values > 0:
         mean = statistics.mean(values)
@@ -186,18 +264,26 @@ def compute_data_normality(x):
 
 
 def compute_all_data_normality():
-    compute_data_normality(36)  # Number of words
-    compute_data_normality(37)  # Number of headers
-    compute_data_normality(38)  # Number of paragraphs
-    compute_data_normality((2, True, True))  # Number of categories
-    compute_data_normality(3)  # Number of stars
-    compute_data_normality(15)  # Number of committers
-    compute_data_normality(22)  # Number of issues
-    compute_data_normality(29)  # Number of security-related issues
-    compute_data_normality((33, True, True))  # Number of CVEs
-    compute_data_normality((34, True, True))  # Number of CWEs
-    compute_data_normality(35)  # Number of forks
-    compute_data_normality(39) # Lines of code
+    aaa(36) # Number of characters
+    aaa(37) # Number of words
+    aaa(39) # Number of paragraphs
+    bbb(2) # Number of categories
+    ccc() # Number of age
+    aaa(3)  # Number of stars
+    aaa(78) # Number of commits
+    aaa(79) # Number of pull requests
+    aaa(15)  # Number of committers
+    bbb(47) # Number of languages
+    aaa(40) # Lines of code
+    aaa(22)  # Number of issues
+    aaa(29)  # Number of security-related issues
+    ddd() # Number of dependency
+    bbb(33) #Number of CVEs
+    bbb(34) #Number of CWEs
+    # # Number of CVSS
+    eee() # Number of OWASP top ten
+    fff() # Number of security advisorie
+    aaa(35)  # Number of forks
 
 
 def dummy(column_index):
@@ -347,33 +433,33 @@ def get_indexes_2():
             if cwes is not None:
                 value = 'Yes' if top_cwe in cwes else 'No'
             values.append(value)
-        indexes.append((top_cwe, values))
+        indexes.append((top_cwe, values, 'CWE'))
 
     language_dict = one_hot_encoding(get_column_title_and_values(46)[1], percentage=0.8)
     for language in language_dict:
         key = f'{language.upper()} language'
-        indexes.append((key, language_dict[language]))
+        indexes.append((key, language_dict[language], 'Language'))
 
     indexes.extend([
-        ('Object-oriented language', get_language_values(9)),
-        ('Web development language', get_language_values(20)),
-        ('Mobile development language', get_language_values(26)),
-        ('Backend development language', get_language_values(32))
+        ('Object-oriented language', get_language_values(9), 'Language'),
+        ('Web development language', get_language_values(20), 'Language'),
+        ('Mobile development language', get_language_values(26), 'Language'),
+        ('Backend development language', get_language_values(32), 'Language')
     ])
 
     application_domain_dict = one_hot_encoding(get_column_title_and_values(30)[1])
     for application_domain in application_domain_dict:
-        indexes.append((application_domain, application_domain_dict[application_domain]))
+        indexes.append((application_domain, application_domain_dict[application_domain], 'Application Domain'))
 
-    indexes.append(('README.md', get_column_title_and_values(48)[1]))
+    indexes.append(('README.md', get_column_title_and_values(48)[1], 'Documentation'))
 
     package_manager_dict = get_package_manager_dict()
     for package_manager in package_manager_dict:
         key = f'{package_manager} dependency'
-        indexes.append((key, repo_2(is_package_manager_used, package_manager_dict[package_manager])))
+        indexes.append((key, repo_2(is_package_manager_used, package_manager_dict[package_manager]), 'Dependency'))
 
     for a in a_dict:
-        indexes.append((a, a_dict[a]))
+        indexes.append((a, a_dict[a], 'OWASP'))
     return indexes
 
 
@@ -498,9 +584,15 @@ def compute_spearman_level_2():
                 p_value_rejection = 'N'
             p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             rhos.append(f'{rho}')
-            print(f'"{category_name}","{y_title}","{y_custom_title}",{p_value},{p_value_rejection}')
-            print(f'x_values: {len(x_values)} {x_values}')
-            print(f'y_values: {len(y_values)} {y_values}')
+
+            df = len(x_values) - 2
+            t = rho * math.sqrt(df/(1 - rho * rho))
+            aaa = stats.t.sf(abs(t), df=df) * 2
+
+            if aaa != p_value:
+                print(f'"{category_name}","{y_title}","{y_custom_title}",{rho},{t},|||{aaa}|||,{p_value},{p_value_rejection}')
+                print(f'x_values: {len(x_values)} {x_values}')
+                print(f'y_values: {len(y_values)} {y_values}')
         table_1_row = ','.join(p_values)
         table_2_row = ','.join(p_value_rejections)
         table_3_row = ','.join(rhos)
@@ -577,6 +669,15 @@ def compute_odds_ratio_and_sign(df, x_title, y_title):
     return odds_ratio, sign
 
 
+def compute_confidence_interval(df):
+    a = df.iloc[0, 0]
+    c = df.iloc[1, 0]
+    b = df.iloc[0, 1]
+    d = df.iloc[1, 1]
+    contingency_table = np.array([[a, b], [c, d]])
+    return sm.stats.Table2x2(contingency_table).oddsratio_confint()
+
+
 def compute_mann_whitney():
     table_1_rows = []
     table_2_rows = []
@@ -638,7 +739,10 @@ def compute_chi_squared():
     corrected_alpha = ALPHA / number_of_tests
     ccc = 0
 
-    for name, values in indexes:
+
+    less_list = []
+
+    for name, values, type in indexes:
         p_values = []
         p_value_rejections = []
         effect_sizes = []
@@ -655,6 +759,8 @@ def compute_chi_squared():
     #         # if category_name == 'Reporting procedure':
     #         # print(expected_frequencies)
     #         # print(compute_chi_square_value(table, expected_frequencies, True))
+
+
             if table.shape == (2,2):
                 a = table['Yes']['Yes']
                 b = table['Yes']['No']
@@ -672,7 +778,7 @@ def compute_chi_squared():
             critical_value = chi2.ppf(1 - ALPHA, degrees_of_freedom)
     #         # print(chi2_value)
             cramer_v = math.sqrt(chi2_value / (table.sum().sum() * (min(table.shape) - 1)))
-            # expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
+            expected_count_percentage = get_expected_count_greater_than_or_equals_five_percentage(expected_frequencies)
             # chi2_rejection = 'Y' if chi2_value >= critical_value else 'N'
             # print(f',{category_name},{name},{chi2_value},{cramer_v},{p_value},{chi2_rejection},{p_value_rejection},{degrees_of_freedom},{expected_count_percentage}')
     #         print(table.to_string())
@@ -682,12 +788,15 @@ def compute_chi_squared():
             if p_value < corrected_alpha:
                 p_value_rejection = 'Y'
                 row = [y_title, x_title, sign, len(y_values), p_value, cramer_v]
-                insert_in_descending_order(row, 5, table_4_rows)
+                if expected_count_percentage >= 0.8:
+                    insert_in_descending_order(row, 5, table_4_rows)
             else:
                 p_value_rejection = 'N'
             p_value_rejections.append(f'"{p_value_rejection},{sign}"')
             effect_sizes.append(f'{cramer_v}')
             print(f'{x_title} {y_title}')
+            if expected_count_percentage < 0.8:
+                less_list.append((type, x_title, y_title, expected_count_percentage))
             # print(table)
             print(f'{len(x_values)} {x_values}')
             print(f'{len(y_values)} {y_values}')
@@ -700,7 +809,10 @@ def compute_chi_squared():
     print_tables(table_1_rows, table_2_rows, table_3_rows)
     title_row = ['Repository characteristic', 'Security policy category', 'Sign', 'Size', 'p-value', 'Cramer\'s V']
     print_ordered_rows(table_4_rows, number_of_tests, title_row)
-    # print(ccc)
+
+    # for a in less_list:
+    #     print(f'"{a[0]}","{a[1]}","{a[2]}",{a[3]}')
+
 
 
 def compute_fisher_exact():
@@ -711,7 +823,7 @@ def compute_fisher_exact():
     indexes = get_indexes_2()
     number_of_tests = len(indexes) * len(category_names)
     corrected_alpha = ALPHA / number_of_tests
-    for name, values in indexes:
+    for name, values, _ in indexes:
         p_values = []
         p_value_rejections = []
         effect_sizes = []
@@ -723,11 +835,12 @@ def compute_fisher_exact():
             remove_invalid_values(x_values, y_values)
             df = get_df(x_title, x_values, y_title, y_values)
             odds_ratio, sign = compute_odds_ratio_and_sign(df, x_title, y_title)
+            confidence_interval = compute_confidence_interval(df)
             p_value = fisher_exact(df.to_numpy()).pvalue
             p_values.append(f'{p_value}')
             if p_value < corrected_alpha:
                 p_value_rejection = 'Y'
-                row = [y_title, x_title, sign, len(y_values), p_value, odds_ratio]
+                row = [y_title, x_title, sign, len(y_values), p_value, odds_ratio, confidence_interval]
                 insert_in_descending_order(row, 5, table_4_rows)
             else:
                 p_value_rejection = 'N'
@@ -746,6 +859,30 @@ def compute_fisher_exact():
     print_tables(table_1_rows, table_2_rows, table_3_rows)
     title_row = ['Repository characteristic', 'Security policy category', 'Sign', 'Size', 'p-value', 'Odds ratio']
     print_ordered_rows(table_4_rows, number_of_tests, title_row)
+    my_plot(table_4_rows)
+
+
+def my_plot(rows):
+    for category in category_names:
+        a = []
+        b = []
+        c = []
+        d = []
+        for data in rows:
+            if data[1] == category:
+                a.append(data[0])
+                b.append(data[5])
+                c.append(data[6][0])
+                d.append(data[6][1])
+        if len(a) > 0:
+            print(f'{category}')
+            print(f'{a}')
+            print(f'{b}')
+            print(f'{c}')
+            print(f'{d}')
+
+            ci_plot(category, a, b, c, d)
+
 
 
 def print_tables(table_1_rows, table_2_rows, table_3_rows, headers=category_names):
@@ -803,7 +940,7 @@ def abcde(value):
             ccc = ccc[:-count]
         ccc = f''.join(ccc)
         before_decimal = aaa[:decimal_index]
-        if before_decimal == '0':
+        if before_decimal in ['0', '-0']:
             ccc = f'.{ccc}'
         else:
             ccc = f'{before_decimal}.{ccc}'
@@ -819,6 +956,8 @@ def print_ordered_rows(ordered_rows, number_of_tests, title_row=None):
         title_row = ','.join(title_row)
         print(f',"#",{title_row}')
     count = 0
+    category_dict = dict()
+    characteristic_dict = dict()
     for i in range(len(ordered_rows)):
         category = ordered_rows[i][1].lower()
         if category != '':
@@ -829,11 +968,109 @@ def print_ordered_rows(ordered_rows, number_of_tests, title_row=None):
                 f'"{ordered_rows[i][3]}"',
                 f'"{abcde(ordered_rows[i][4])}"',
                 f'"{abcde(ordered_rows[i][5])}"'
+                # f'{ordered_rows[i][5]}',
+                # f'{ordered_rows[i][6][0]}',
+                # f'{ordered_rows[i][6][1]}',
             ])
+            category = ordered_rows[i][1]
+            characteristic = ordered_rows[i][0]
+            sign = ordered_rows[i][2]
+            effect_size = ordered_rows[i][5]
+            if category in category_dict:
+                sign_dict = category_dict[category]
+                if sign in sign_dict:
+                    sign_dict[sign].append(effect_size)
+                else:
+                    sign_dict[sign] = [effect_size]
+            else:
+                sign_dict = dict()
+                sign_dict[sign] = [effect_size]
+                category_dict[category] = sign_dict
+            if characteristic in characteristic_dict:
+                sign_dict = characteristic_dict[characteristic]
+                if sign in sign_dict:
+                    sign_dict[sign].append((category, effect_size))
+                else:
+                    sign_dict[sign] = [(category, effect_size)]
+            else:
+                sign_dict = dict()
+                sign_dict[sign] = [(category, effect_size)]
+                characteristic_dict[characteristic] = sign_dict
             count = count + 1
             print(f',"{count}",{values}')
             # if count == 10:
             #     break
+    # rq2_results(category_dict)
+    rq2_results_2(characteristic_dict)
+
+
+def rq2_results_2(characteristic_dict):
+    max_total = None
+    max_characteristic = []
+    for characteristic in characteristic_dict:
+        total = 0
+        if '+' in characteristic_dict[characteristic]:
+            total = total + len(characteristic_dict[characteristic]['+'])
+        if '=' in characteristic_dict[characteristic]:
+            total = total + len(characteristic_dict[characteristic]['='])
+        if '-' in characteristic_dict[characteristic]:
+            total = total + len(characteristic_dict[characteristic]['-'])
+        if max_total is None or total > max_total:
+            max_total = total
+    for characteristic in characteristic_dict:
+        total = 0
+        if '+' in characteristic_dict[characteristic]:
+            total = total + len(characteristic_dict[characteristic]['+'])
+        if '=' in characteristic_dict[characteristic]:
+            total = total + len(characteristic_dict[characteristic]['='])
+        if '-' in characteristic_dict[characteristic]:
+            total = total + len(characteristic_dict[characteristic]['-'])
+        if total == max_total:
+            max_characteristic.append(characteristic)
+    for characteristic in max_characteristic:
+        print(f'{characteristic} {max_total} {characteristic_dict[characteristic]}')
+
+
+def rq2_results(category_dict):
+    my_list = []
+    for category in category_dict:
+        sign_dict = category_dict[category]
+        positive_count = '0'
+        positive_min = ''
+        positive_max = ''
+        equal_count = '0'
+        equal_min = ''
+        equal_max = ''
+        negative_count = '0'
+        negative_min = ''
+        negative_max = ''
+        if '+' in sign_dict:
+            effect_sizes = sign_dict['+']
+            positive_count = len(effect_sizes)
+            positive_min = f'{abcde(min(effect_sizes))}'
+            positive_max = f'{abcde(max(effect_sizes))}'
+        if '=' in sign_dict:
+            effect_sizes = sign_dict['=']
+            equal_count = len(effect_sizes)
+            equal_min = f'{abcde(min(effect_sizes))}'
+            equal_max = f'{abcde(max(effect_sizes))}'
+        if '-' in sign_dict:
+            effect_sizes = sign_dict['-']
+            negative_count = len(effect_sizes)
+            negative_min = f'{abcde(min(effect_sizes))}'
+            negative_max = f'{abcde(max(effect_sizes))}'
+        my_list.append((category, positive_count, positive_min, positive_max, equal_count, equal_min, equal_max,
+                        negative_count, negative_min, negative_max))
+    print()
+    print(f'"","Positive","Effect size",,,"Negative","Effect size",')
+    print(f'"","Count","Min","Max",,"Count","Min","Max"')
+    # category_names = ['Number of characters', 'Number of words', 'Number of paragraphs']
+    for target_category in category_names:
+        for category, positive_count, positive_min, positive_max, equal_count, equal_min, equal_max, negative_count, negative_min, negative_max in my_list:
+            if category == target_category:
+                # print(f'"{category}","{positive_count}","=""{positive_min}""","=""{positive_max}""",,"{equal_count}","=""{equal_min}""","=""{equal_max}""",,"{negative_count}","=""{negative_min}""","=""{negative_max}"""')
+                print(
+                    f'"{category}","{positive_count}","=""{positive_min}""","=""{positive_max}""",,"{negative_count}","=""{negative_min}""","=""{negative_max}"""')
 
 
 def filter_invalid_repos(repo, value):
@@ -1085,7 +1322,7 @@ def get_top_25_cwes():
     top_25_cwes = set()
     for column_index in range(1,5):
         i = 0
-        for row in csv_reader('/Users/wanlok/Desktop/CWE Rankings.csv'):
+        for row in csv_reader('C:\\Users\\Robert Wan\\Desktop\\CWE Rankings.csv'):
             if i > 0:
                 top_25_cwes.add(row[column_index])
             i = i + 1
@@ -1128,7 +1365,7 @@ def get_language_values(column_index):
     values = []
     value_dict = dict()
     i = 0
-    file_path = '/Users/wanlok/Desktop/language_paradigm.csv'
+    file_path = 'C:\\Users\\Robert Wan\\Desktop\\language_paradigm.csv'
     for row in csv_reader(file_path):
         if i > 0:
             language = row[0].lower()
@@ -1252,14 +1489,14 @@ def get_package_manager_count(repo, b):
 
 def extract_top():
     l = [
-        ('Spearman', '/Users/wanlok/Desktop/20230914/Completed/Spearman.csv'),
-        ('Spearman', '/Users/wanlok/Desktop/20230914/Completed/Spearman Grouped.csv'),
-        ('Mann', '/Users/wanlok/Desktop/20230914/Completed/Mann.csv'),
-        ('Mann', '/Users/wanlok/Desktop/20230914/Completed/Mann Grouped.csv'),
-        ('Chi', '/Users/wanlok/Desktop/20230914/Completed/Chi.csv'),
-        ('Chi', '/Users/wanlok/Desktop/20230914/Completed/Chi Grouped.csv'),
-        ('Fisher', '/Users/wanlok/Desktop/20230914/Completed/Fisher.csv'),
-        ('Fisher', '/Users/wanlok/Desktop/20230914/Completed/Fisher Grouped.csv')
+        ('Spearman', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Spearman.csv'),
+        ('Spearman', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Spearman Grouped.csv'),
+        ('Mann', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Mann.csv'),
+        ('Mann', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Mann Grouped.csv'),
+        ('Chi', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Chi.csv'),
+        ('Chi', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Chi Grouped.csv'),
+        ('Fisher', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Fisher.csv'),
+        ('Fisher', 'C:\\Users\\Robert Wan\\Desktop\\20230914\\Completed\\Fisher Grouped.csv')
     ]
     for category_name in category_names:
         for test_name, csv_file_path in l:
@@ -1296,16 +1533,15 @@ if __name__ == '__main__':
     # q((2, True, True), 18, '11')
     # q((2, True, True), )
 
-    # compute_all_data_normality()
+    compute_all_data_normality()
     # compute_spearman_level_1()
     # compute_spearman_level_2()
     # compute_mann_whitney()
     # compute_chi_squared()
     # compute_fisher_exact()
-
     # validation()
 
-    extract_top()
+    # extract_top()
 
     # list = []
     # row_1 = [3, 1, 4, 6]

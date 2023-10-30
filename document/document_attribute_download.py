@@ -2,7 +2,7 @@ import os
 
 import requests
 
-from document.rq3 import get_user_dict, get_relevant_repos
+from document.rq3 import get_user_dict, get_relevant_repos, get_parent_github_security_policy_commit_sha
 from repository import headers
 from utils import csv_reader, csv_writer, repos
 
@@ -768,6 +768,22 @@ query {
 }
 '''
 
+security_md_commit_graphql = '''
+query {
+    repository(owner:"{1}", name:"{2}") {
+        object(oid:"{3}") {
+            ... on Commit {
+                message
+                author {
+                    name
+                    email
+                    date
+                }
+            }
+        }
+    }
+}
+'''
 
 
 def download(repo, directory_path, graphql, path_list, path_next_page, path_cursor, path_count):
@@ -846,6 +862,20 @@ def print_paths(graphql, show_details=False):
             print(f'{path}')
 
 
+def my_dummy(repo):
+    return repo.split('/')[0].lower()
+
+
+def download_pull_requests(repo):
+    slices = repo.split('/')
+    owner = slices[0]
+    project = slices[1]
+    graphql = pull_request_graphql.replace('{1}', owner).replace('{2}', project).replace('{3}', repo)
+    graphql = graphql.replace('{AFTER}', '')
+    result_dict = get_result_dict(graphql, post_graphql(graphql))
+    print(f'"{repo}",{result_dict[path_pull_request_count]}')
+
+
 if __name__ == '__main__':
     # repos(download_attributes)
     # prepare_count_dict()
@@ -879,10 +909,21 @@ if __name__ == '__main__':
     # )
 
     # user_dict = get_user_dict()
-    # for user in user_dict:
+
+    # username_set_1 = set()
+    # directory_path = 'C:\\Files\\Projects\\User Repositories\\'
+    # for file_name in os.listdir(directory_path):
+    #     username = file_name.replace('.txt', '').lower()
+    #     username_set_1.add(username)
+    #
+    # username_set_2 = set(repos(my_dummy))
+    # for user in username_set_2 - username_set_1:
+    # # i = 0
+    # # for user in user_dict:
+    #     print(user)
     #     user_download(
     #         user,
-    #         'C:\\Files\\Projects\\User Repositories\\',
+    #         'C:\\Files\\Projects\\User repositories 2\\',
     #         user_repo_graphql,
     #         path_user_repo_list,
     #         path_user_repo_next_page,
@@ -890,7 +931,25 @@ if __name__ == '__main__':
     #         path_user_repo_count
     #     )
 
+    repos(download_pull_requests)
+
+
     # print_paths(security_md_graphql.replace('{1}','tensorflow').replace('{2}','tensorflow'))
 
-    for repo in get_relevant_repos():
-        download_3(repo, 'C:\\Files\\Projects\\Other Security Policies\\')
+    # for repo in get_relevant_repos():
+    #     download_3(repo, 'C:\\Files\\Projects\\Other Security Policies\\')
+
+    # repo_set = set()
+    # for repo, sha in get_parent_github_security_policy_commit_sha():
+    #     slices = repo.split('/')
+    #     owner = slices[0]
+    #     project = slices[1]
+    #     graphql = security_md_commit_graphql.replace('{1}', owner).replace('{2}', project).replace('{3}', sha)
+    #     result_dict = get_result_dict(graphql, post_graphql(graphql))
+    #     message = result_dict['/data/repository/object/message']
+    #     email = result_dict['/data/repository/object/author/email']
+    #     name = result_dict['/data/repository/object/author/name']
+    #     date_time_string = result_dict['/data/repository/object/author/date']
+    #     print((repo, email, name, date_time_string, message))
+    #     # print(f'"{repo}","{email}","{name}","{date_time_string}","{message}"')
+

@@ -34,7 +34,7 @@ def get_categorised_file_paths():
 def get_remaining_and_categorised_file_paths():
     remaining_file_paths = []
     categorised_file_paths = get_categorised_file_paths()
-    directory_path = 'C:\\Files\\a1\\'
+    directory_path = 'C:\\Files\\security policies\\'
     for file_name in os.listdir(directory_path):
         categorised = False
         for file_path in categorised_file_paths:

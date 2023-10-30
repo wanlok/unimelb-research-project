@@ -285,8 +285,8 @@ if __name__ == '__main__':
     # text_file.close()
 
 
-    from_date_time = datetime.strptime('2007-02-01 00:00:00', '%Y-%m-%d %H:%M:%S')
-    to_date_time = datetime.strptime('2016-08-31 23:59:59', '%Y-%m-%d %H:%M:%S')
+    from_date_time = datetime.strptime('1990-02-01 00:00:00', '%Y-%m-%d %H:%M:%S')
+    to_date_time = datetime.strptime('2025-08-31 23:59:59', '%Y-%m-%d %H:%M:%S')
 
     llll = []
     my_dict = dict()

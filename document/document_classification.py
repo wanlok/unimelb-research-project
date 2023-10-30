@@ -6,11 +6,11 @@ import numpy as np
 import pandas as pd
 from Levenshtein import distance
 
-from document.document_utils import write_content_to_file_path, get_docx_content, category_names
-from utils import get_latest_content, repos, attribute_file_path, csv_reader, get_latest_security_policy_repo
+from document.document_utils import get_docx_content, category_names
+from utils import get_latest_content, repos, attribute_file_path, csv_reader
 
 csv_directory_path = 'C:\\Files\\security policies\\'
-classification_directory_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Security Policy Manual Classification 2\\'
+classification_directory_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Step 2\\'
 
 
 def get_content(repo, directory_path):
@@ -346,4 +346,5 @@ if __name__ == '__main__':
     # dummy_dummy(100, 'microsoft', print_groups=True)
 
     print('Hello World')
+
 

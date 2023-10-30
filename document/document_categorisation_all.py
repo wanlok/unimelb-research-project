@@ -100,15 +100,76 @@ def count_number_of_words(titles, contents, count_title):
     return number_of_word_list
 
 
-def update_repo_category_dict_1(repo, category_list, word_counts, repo_dict):
+def count_number_of_characters(titles, contents, count_title):
+    number_of_character_list = []
+    for title, content in zip(titles, contents):
+        print(f'AAAAAAAAAA {title} {content}')
+        number_of_characters = 0
+        if count_title:
+            number_of_characters = number_of_characters + len(title)
+        number_of_characters = number_of_characters + len(content)
+        number_of_character_list.append(number_of_characters)
+    return number_of_character_list
+
+
+def get_number_of_words(s):
+    return len(list(filter(lambda x: is_contain_alphanumeric(x), s.replace('\n', ' ').split(' '))))
+
+
+def compute_statistics(x_list):
+    x_min = min(x_list)
+    x_max = max(x_list)
+    x_sd = np.std(x_list)
+    x_mean = np.mean(x_list)
+    x_cv = x_sd / x_mean * 100
+    return x_min, x_max, x_sd, x_mean, x_cv
+
+
+def get_category_character_word_paragraph_counts():
     category_dict = dict()
-    for categories, word_count in zip(category_list, word_counts):
+    repo_dict = get_repo_header_paragraph_categories()
+    for repo in repo_dict:
+        for header_paragraph, categories in repo_dict[repo]:
+            character_count = len(header_paragraph)
+            word_count = get_number_of_words(header_paragraph)
+            t = (repo, character_count, word_count)
+            for category in categories:
+                if category in category_dict:
+                    category_dict[category].append(t)
+                else:
+                    category_dict[category] = [t]
+                # if repo == 'kubernetes/kubernetes':
+                #     print(f'{category} {character_count} {word_count}')
+    for category in category_dict:
+        character_counts = []
+        word_counts = []
+        repo_category_dict = dict()
+        i = 0
+        for repo, character_count, word_count in category_dict[category]:
+            character_counts.append(character_count)
+            word_counts.append(word_count)
+            if repo in repo_category_dict:
+                repo_category_dict[repo] = repo_category_dict[repo] + 1
+            else:
+                repo_category_dict[repo] = 1
+            i = i + 1
+        aaa = [repo_category_dict[repo] for repo in repo_category_dict]
+        x_min, x_max, x_sd, x_mean, x_cv = compute_statistics(character_counts)
+        y_min, y_max, y_sd, y_mean, y_cv = compute_statistics(word_counts)
+        z_min, z_max, z_sd, z_mean, z_cv = compute_statistics(aaa)
+        print(f'"{category}",{x_cv},{y_cv},{z_cv},{i}')
+
+
+def update_repo_category_dict_1(repo, category_list, counts, repo_dict):
+    category_dict = dict()
+    for categories, count in zip(category_list, counts):
         for category in categories:
             if len(category) > 0:
                 if category in category_dict:
-                    category_dict[category] = category_dict[category] + word_count
+                    category_dict[category] = category_dict[category] + count
                 else:
-                    category_dict[category] = word_count
+                    category_dict[category] = count
+    # print(f'{repo} {category_dict}')
     repo_dict[repo] = category_dict
 
 
@@ -135,6 +196,7 @@ def get_repo_categorisation_results():
         elif file_extension == 'csv':
             file_tuple = get_csv_file_tuple(file_path)
         # update_repo_category_dict_1(repo, file_tuple[2], count_number_of_words(file_tuple[0], file_tuple[1], False), repo_dict)
+        # update_repo_category_dict_1(repo, file_tuple[2], count_number_of_characters(file_tuple[0], file_tuple[1], False), repo_dict)
         update_repo_category_dict_2(repo, file_tuple[2], repo_dict)
     for file_name in os.listdir(sample_directory_path):
         file_path = f'{sample_directory_path}{file_name}'
@@ -147,8 +209,43 @@ def get_repo_categorisation_results():
             contents.append(row[1])
             categories.append(row[2].split(','))
         # update_repo_category_dict_1(repo, categories, count_number_of_words(titles, contents, True), repo_dict)
+        # update_repo_category_dict_1(repo, categories, count_number_of_characters(titles, contents, True), repo_dict)
         update_repo_category_dict_2(repo, categories, repo_dict)
     return repo_dict
+
+
+def get_repo_header_paragraph_categories():
+    repo_dict = dict()
+    _, categorised_file_paths = get_remaining_and_categorised_file_paths()
+    for file_path in categorised_file_paths:
+        file_name = file_path.split('\\')[-1]
+        file_extension = file_name.split('.')[-1]
+        repo = file_name.replace('.docx', '').replace('.csv', '').replace('_', '/', 1)
+        if file_extension == 'docx':
+            file_tuple = get_docx_file_tuple(file_path)
+        elif file_extension == 'csv':
+            file_tuple = get_csv_file_tuple(file_path)
+        for i in range(len(file_tuple[1])):
+            header_paragraph = file_tuple[1][i]
+            categories = file_tuple[2][i]
+            if repo in repo_dict:
+                repo_dict[repo].append((header_paragraph, categories))
+            else:
+                repo_dict[repo] = [(header_paragraph, categories)]
+    for file_name in os.listdir(sample_directory_path):
+        file_path = f'{sample_directory_path}{file_name}'
+        repo = file_name.replace('.docx', '').replace('.csv', '').replace('_', '/', 1)
+        for row in csv_reader(file_path):
+            header_paragraph = f'{row[0]} {row[1]}'.strip()
+            categories = row[2].split(',')
+            if repo in repo_dict:
+                repo_dict[repo].append((header_paragraph, categories))
+            else:
+                repo_dict[repo] = [(header_paragraph, categories)]
+    return repo_dict
+
+
+
 
 
 def value_function(value, ranges):
@@ -567,6 +664,9 @@ def show_categorisation(repo, repo_dict):
     print(f'{repo},{counts},{category_dict}')
 
 
+def aaa(repo, results):
+    print(f'{repo},"{results[repo]}"')
+
 
 if __name__ == '__main__':
     # predictions, distributions = get_predictions_and_distributions()
@@ -574,7 +674,13 @@ if __name__ == '__main__':
     # print_distributions(distributions, distinct=True)
     # # save_predictions(predictions)
 
-    repos(show_categorisation, get_repo_categorisation_results())
+    # repos(show_categorisation, get_repo_categorisation_results())
+
+    # 20230911
+    # get_category_character_word_paragraph_counts()
+
+    results = get_repo_categorisation_results()
+    repos(aaa, results)
 
     #
     # dummy_dummy(7, number_of_segments=5)

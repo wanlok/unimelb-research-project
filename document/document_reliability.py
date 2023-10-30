@@ -222,7 +222,8 @@ if __name__ == '__main__':
     #     i = i + 1
 
 
-    csv_file_path = 'C:\\Users\\WAN Tung Lok\\Desktop\\Round 4.csv'
+    # csv_file_path = 'C:\\Users\\Robert Wan\\Desktop\\Round 4.csv'
+    csv_file_path = 'C:\\Files\\Projects\\Header Categorisation Clean.csv'
 
     categories = [
         'Introduction',
@@ -245,7 +246,8 @@ if __name__ == '__main__':
     for row in csv_reader(csv_file_path, encoding='utf-8'):
         if i > 0:
             # repository = row[0]
-            rates = [row[3], row[4], row[5]]
+            # rates = [row[3], row[4], row[5]]
+            rates = [row[1], row[2]] #header_rates
             # reduce(map(lambda x: len(x), rates))
             a = len(set(map(lambda x: len(x), rates)))
             if a > 1:

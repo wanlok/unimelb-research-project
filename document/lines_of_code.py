@@ -2,15 +2,14 @@ import os
 import shutil
 import subprocess
 
+from utils import repos
+
 cloc_directory_path = 'C:\\Files\\Projects\\cloc\\'
 temp_directory_path = 'C:\\Files\\Projects\\cloc\\temp-linecount-repo'
 os.chdir(cloc_directory_path)
 
 
-from utils import repos
-
-
-def do_something(repo):
+def cloc_git(repo):
     if os.path.exists(temp_directory_path):
         shutil.rmtree(temp_directory_path)
     file_name = repo.replace('/', '_')
@@ -24,6 +23,22 @@ def do_something(repo):
             f.write(content.decode())
 
 
+def get_counts(repo):
+    file_name = repo.replace('/', '_')
+    file_name = f'{file_name}.txt'
+    file_path = f'{cloc_directory_path}{file_name}'
+    lines_of_code = None
+    if os.path.exists(file_path):
+        file = open(file_path, 'r')
+        for line in file.readlines():
+            if 'SUM:' in line:
+                lines_of_code = int(list(filter(lambda x: len(x) > 0, line.strip().split(' ')))[1:][3])
+                break
+    if lines_of_code is None:
+        print(f'{repo},')
+    else:
+        print(f'{repo},{lines_of_code}')
+
+
 if __name__ == '__main__':
-    repos(do_something)
-    # do_something('wanlok/dummy')
+    repos(get_counts)

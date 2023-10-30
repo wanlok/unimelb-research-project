@@ -2,6 +2,7 @@ from Levenshtein import distance
 
 from document.hierarchical_agglomerative_clustering import get_users, get_names, get_contents, write_csv, \
     get_contents_by_security_policy_repos, dum_dum, as5, directory_path
+from utils import csv_reader
 
 
 def get_content_match_lists(user, directory, target_content, contents):
@@ -259,11 +260,61 @@ def rq2_2_3():
     print(f'HELLO WORLD {a_count} {b_count} {b_match_count} {c_count} {c_match_count} {d_count} {d_match_count}')
     print(f'USER {len(user_set)}')
 
+
+def print_number_of_users_per_location_and_template_number():
+    location_dict = dict()
+    user_dict = dict()
+    for row in csv_reader('C:\\Users\\Robert Wan\\Desktop\\clusters.csv'):
+        _, user, location, template_number, _ = row
+        if user in user_dict:
+            if location in user_dict[user]:
+                user_dict[user][location].append(template_number)
+            else:
+                user_dict[user][location] = [template_number]
+        else:
+            user_dict[user] = dict()
+            user_dict[user][location] = [template_number]
+
+    one_location_dict = dict()
+    for user in user_dict:
+        location = list(user_dict[user].keys())[0]
+        if len(user_dict[user]) == 1 and len(user_dict[user][location]) == 1:
+            if location in one_location_dict:
+                one_location_dict[location] = one_location_dict[location] + 1
+            else:
+                one_location_dict[location] = 1
+    for location in one_location_dict:
+        print(f'{location} {one_location_dict[location]}')
+    print()
+
+    for row in csv_reader('C:\\Users\\Robert Wan\\Desktop\\clusters.csv'):
+        _, user, location, template_number, _ = row
+        if location in location_dict:
+            if template_number in location_dict[location]:
+                location_dict[location][template_number].add(user)
+            else:
+                location_dict[location][template_number] = {user}
+        else:
+            location_dict[location] = dict()
+            location_dict[location][template_number] = {user}
+    for location in location_dict:
+        template_number_dict = location_dict[location]
+        for template_number in template_number_dict:
+            print(f'{location},{template_number},{len(template_number_dict[template_number])}')
+
+
+
+
+
+
 if __name__ == '__main__':
     # rq2_2_1()
     # rq2_2_2()
-    rq2_2_2_grouping()
+    # rq2_2_2_grouping()
     # rq2_2_3()
+
+    print_number_of_users_per_location_and_template_number()
+
 
     # for user in users:
     #     names = get_names(user=user)

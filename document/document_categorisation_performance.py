@@ -3,6 +3,7 @@ from datetime import datetime
 
 import numpy as np
 import pandas as pd
+from numpy import average
 
 from document_utils import get_dataset, get_fasttext_model, test_path, k_fold, model_save_path, label_prefix
 
@@ -108,7 +109,7 @@ def compute_label_confusion_matrix(true_labels, predicted_labels, all_labels):
     return label_dict
 
 
-def output(start, end, all_labels, true_labels, predicted_labels, predicted_results, save_path):
+def output(start, end, all_labels, true_labels, predicted_labels, predicted_results, save_path, lll, aaa, bbb ,ccc):
     confusion_matrices = np.empty((0, 4))
     for i in range(len(true_labels)):
         confusion_matrix = compute_confusion_matrix(true_labels[i], predicted_labels[i])
@@ -122,14 +123,34 @@ def output(start, end, all_labels, true_labels, predicted_labels, predicted_resu
     print()
     print(f'{label_place_holder}  TRUE POSITIVE  FALSE POSITIVE  FALSE NEGATIVE  TRUE NEGATIVE')
     print(f'{hyphen_place_holder}  -------------  --------------  --------------  -------------')
+    label_list = []
+    precision_list = []
+    recall_list = []
+    f1_score_list = []
     for key in label_dict:
         label = key.replace(label_prefix, '').ljust(label_max_length)
         true_positive, false_positive, false_negative, true_negative = label_dict[key]
+        confusion_matrix = np.array([true_positive, false_positive, false_negative, true_negative])
+        precision, recall, f1_score = compute_precision_recall_f1_score(confusion_matrix)
+        label_list.append(label)
+        precision_list.append(precision)
+        recall_list.append(recall)
+        f1_score_list.append(f1_score)
         true_positive = f'{true_positive}'.rjust(13)
         false_positive = f'{false_positive}'.rjust(14)
         false_negative = f'{false_negative}'.rjust(14)
         true_negative = f'{true_negative}'.rjust(13)
-        print(f'{label}  {true_positive}  {false_positive}  {false_negative}  {true_negative}')
+        print(f'{label}  {true_positive}  {false_positive}  {false_negative}  {true_negative} {f1_score}')
+    print(label_list)
+    print(precision_list)
+    print(recall_list)
+    print(f1_score_list)
+    print(f'AVG: {average(precision_list)} {average(recall_list)} {average(f1_score)}')
+    lll.append(label_list)
+    aaa.append(precision_list)
+    bbb.append(recall_list)
+    ccc.append(f1_score_list)
+
     sum = np.sum(confusion_matrices, axis=0)
     true_positive = f'{int(sum[0])}'.rjust(13)
     false_positive = f'{int(sum[1])}'.rjust(14)
@@ -141,6 +162,7 @@ def output(start, end, all_labels, true_labels, predicted_labels, predicted_resu
     # print(f'RANGE     : {start} - {end}')
     # print(f'ACTUAL    : {np.sum(true_labels, axis=0)}')
     # print(f'PREDICTED : {np.sum(predicted_labels, axis=0)}')
+    print(np.sum(confusion_matrices, axis=0))
     precision, recall, f1_score = compute_precision_recall_f1_score(np.sum(confusion_matrices, axis=0))
     # print(f'PRECISION : {precision}')
     # print(f'RECALL    : {recall}')
@@ -181,6 +203,10 @@ if __name__ == '__main__':
     segment_size = math.ceil(dataset_size / k_fold)
     predicted_results = []
     current_date_time = datetime.now().strftime("%Y%m%d%H%M%S")
+    lll = []
+    aaa = []
+    bbb = []
+    ccc = []
     for i in range(k_fold):
         start = i * segment_size
         if dataset_size - start >= segment_size:
@@ -192,5 +218,16 @@ if __name__ == '__main__':
         save_path = f'{i + 1}'.rjust(2, '0')
         save_path = f'{model_save_path}{current_date_time}{save_path}.bin'
         _, all_labels, true_labels, predicted_labels = start_prediction(training_set, test_set, save_path)
-        output(start, end, all_labels, true_labels, predicted_labels, predicted_results, save_path)
+        output(start, end, all_labels, true_labels, predicted_labels, predicted_results, save_path, lll, aaa, bbb, ccc)
     output_2(predicted_results)
+    print()
+
+    labels = lll[0]
+    for i in range(len(labels)):
+        s = []
+        for c in ccc:
+            s.append(f'{c[i]}')
+        s = ','.join(s)
+        print(f'{labels[i].strip()},{s}')
+    a = list(map(lambda x: average(x), ccc))
+    print(f'F1: {average(a)} {a}')

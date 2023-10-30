@@ -278,11 +278,12 @@ def get_categories(content):
 
 def get_directory_paths():
     directory_paths = []
-    parent_directory_path = 'M:\\我的雲端硬碟\\UniMelb\\Research Project\\Open Coding\\'
+    parent_directory_path = 'W:\\My Drive\\UniMelb\\Research Project\\Open Coding\\'
     for path in os.listdir(parent_directory_path):
         path = f'{parent_directory_path}{path}\\'
         if os.path.isdir(path) and 'security-related issues' not in path:
             directory_paths.append(path)
+            print(path)
     return directory_paths
 
 

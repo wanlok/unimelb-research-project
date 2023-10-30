@@ -5,7 +5,7 @@ from utils import csv_reader, sort_by_descending_values
 def get_attribute_rows():
     rows = []
     i = 0
-    for row in csv_reader('C:\\Users\\WAN Tung Lok\\Desktop\\Attributes.csv'):
+    for row in csv_reader('C:\\Users\\Robert Wan\\Desktop\\Attributes.csv'):
         if i > 1:
             rows.append(row)
         i = i + 1
@@ -46,6 +46,19 @@ def get_top_10_security_policy_category_and_primary_language_distribution():
     #     print(','.join(row))
 
 
+def get_application_domain_distribution():
+    application_domain_dict = dict()
+    for row in get_attribute_rows():
+        application_domain = row[30]
+        if application_domain in application_domain_dict:
+            application_domain_dict[application_domain] = application_domain_dict[application_domain] + 1
+        else:
+            application_domain_dict[application_domain] = 1
+    for application_domain in application_domain_dict:
+        print(f'"{application_domain}",{application_domain_dict[application_domain]}')
+
+
+
 def get_application_domains_and_security_policy_category():
     my_dict = dict()
     application_domains = set()
@@ -76,6 +89,10 @@ def get_application_domains_and_security_policy_category():
 
 
 
+
+
+
 if __name__ == '__main__':
     # get_top_10_security_policy_category_and_primary_language_distribution()
-    get_application_domains_and_security_policy_category()
+    get_application_domain_distribution()
+    # get_application_domains_and_security_policy_category()

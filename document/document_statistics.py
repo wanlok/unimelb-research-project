@@ -1,6 +1,9 @@
-from document_utils import get_df_list, get_fasttext_mappings
+from collections import Counter
 
-from utils import sort_by_descending_keys, csv_reader
+from document_utils import get_df_list, get_fasttext_mappings
+from dummy import get_header_paragraph_dict
+
+from utils import sort_by_descending_keys, csv_reader, repos, sort_by_descending_values
 
 fasttext_mappings = get_fasttext_mappings()
 
@@ -180,11 +183,84 @@ def get_header_paragraph_category_statistics(df_list):
         print(f'{key} {count_dict[key]}')
 
 
+
+
+
+def get_top_ten_headers():
+    header_dict = dict()
+    for a in repos(get_header_paragraph_dict):
+        headers = a[1].keys()
+        for header in headers:
+            if header in header_dict:
+                header_dict[header] = header_dict[header] + 1
+            else:
+                header_dict[header] = 1
+    header_dict = sort_by_descending_values(header_dict)
+    i = 0
+    for header in header_dict:
+        print(f'"{header}",{header_dict[header]}')
+
+
+
+def hello_world():
+    print('Hello World')
+    aaa = repos(get_header_paragraph_dict)
+    header_dict = dict()
+    total = 0
+    num = 0
+    for a in aaa:
+        # print(a)
+        repo = a[0]
+        headers = a[1].keys()
+        for header in headers:
+            if header == 'security policy':
+                num = num + 1
+                number_of_paragraphs = len(a[1][header])
+                print(f'{repo} {header} {number_of_paragraphs}')
+                total = total + number_of_paragraphs
+            # if header in header_dict:
+            #     header_dict[header] = header_dict[header] + 1
+            # else:
+            #     header_dict[header] = 1
+    print(f'{total} {num}')
+    # header_dict = sort_by_descending_values(header_dict)
+    # for header in header_dict:
+    #     print(f'{header} {header_dict[header]}')
+
+
+
+
+
+def get_security_policy_location(repo):
+    file_name = repo.replace('/', '_')
+    file_name = f'{file_name}.csv'
+    file_path = f'C:\\Files\\security policies\\{file_name}'
+    a = None
+    i = 0
+    for row in csv_reader(file_path):
+        if i > 0:
+            a = (repo.lower(), row[0].lower(),row[1].lower())
+        i = i + 1
+    if a[0] != a[1]:
+        b = 'parent .github'
+    else:
+        if a[2] == '.github/security.md':
+            b = '\'.github\' directory'
+        elif a[2] == 'docs/security.md':
+            b = '\'docs\' directory'
+        else:
+            b = 'root directory'
+    return b
+
+
+
+
+
 if __name__ == '__main__':
-    df_list = get_df_list()
-    category_distribution(df_list)
-    print()
-    get_header_paragraph_category_statistics(df_list)
+    # df_list = get_df_list()
+    # category_distribution(df_list)
+    # print()
+    # get_header_paragraph_category_statistics(df_list)
 
     # print()
     # header_document_distribution(df_list)
@@ -196,6 +272,9 @@ if __name__ == '__main__':
     # distinct_code_header_distribution(document_contents)
     # distinct_header_distribution(document_contents)
 
-
+    get_top_ten_headers()
+    # hello_world()
+    # aaa = repos(get_security_policy_location)
+    # print(Counter(aaa))
 
 
